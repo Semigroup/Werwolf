@@ -33,8 +33,8 @@ aaaaaa");
 
             Weg y = x => new PointF();//new PointF((float)Math.Cos(x * Math.PI * 10) * 20, 25 + 25 * (float)Math.Sin(x * Math.PI * 2 * 30));
 
-            Titel tt = new Titel(t, 50, y, Pens.Black, Brushes.Red);
-            DrawBox d = tt.Geometry(0);
+            Titel tt = new Titel(t.Geometry(50, 0, 50, 0), 50, y, Pens.Black, Brushes.Red);
+            DrawBox d = tt;
 
             CString cs = new CString();
             cs.add(d);
