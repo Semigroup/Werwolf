@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Xml;
+
+using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
@@ -26,6 +29,13 @@ namespace Werwolf.Inhalt
             : base(XmlName, Klein)
         {
 
+        }
+
+        protected override void ReadIntern(Loader Loader)
+        {
+            Name = Loader.XmlReader.getString("Name");
+            Desc = Loader.XmlReader.getString("Desc");
+            Bild = Loader.GetBild("Bild");
         }
     }
 }

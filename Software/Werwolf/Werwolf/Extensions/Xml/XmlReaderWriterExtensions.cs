@@ -10,10 +10,6 @@ namespace Werwolf.Extensions.Xml
 {
     public static class XmlReaderWriterExtensions
     {
-        public static Bild GetBild(string AttributeName)
-        {
-            Image im;
-            throw new NotImplementedException();
-        }
+      
     }
 }

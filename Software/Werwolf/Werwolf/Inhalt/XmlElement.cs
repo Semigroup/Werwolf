@@ -21,15 +21,15 @@ namespace Werwolf.Inhalt
             this.Klein = Klein;
         }
 
-        protected virtual void ReadIntern(XmlReader XmlReader)
+        protected virtual void ReadIntern(Loader Loader)
         {
         }
-        public void Read(XmlReader XmlReader)
+        public void Read(Loader Loader)
         {
-            if (!XmlReader.Name.Equals(XmlName))
+            if (!Loader.XmlReader.Name.Equals(XmlName))
                 throw new NotImplementedException();
-            ReadIntern(XmlReader);
-            XmlReader.Next();
+            ReadIntern(Loader);
+            Loader.XmlReader.Next();
         }
         protected virtual void WriteIntern(XmlWriter XmlWriter)
         {
