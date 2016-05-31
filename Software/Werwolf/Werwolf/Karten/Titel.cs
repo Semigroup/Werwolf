@@ -126,7 +126,8 @@ namespace Werwolf.Karten
             {
                 float t0 = t * n;
                 int i = t0.Floor();
-                float y = RandHohe * (1 + 2 * (i - t0));
+                float y = (1 + 2 * (i - t0));
+                y *= y * RandHohe;
                 return new PointF(0, y);
             };
         }
@@ -170,7 +171,7 @@ namespace Werwolf.Karten
 
         public override Weg GetVerlauf(float units)
         {
-            int stachel = units.Ceil();
+            int stachel = (units / 2).Ceil();
             return
                 t =>
                 {
@@ -246,7 +247,7 @@ namespace Werwolf.Karten
 
         public override Weg GetVerlauf(float units)
         {
-            int stachel = units.Ceil();
+            int stachel = (units / 2).Ceil();
             return
                 t =>
                 {
@@ -286,9 +287,60 @@ namespace Werwolf.Karten
             return
                 t =>
                 {
-                   
+                    float T = t * werte.Length;
+                    int lower = T.Floor();
+                    int higher = (lower + 1) % werte.Length;
+                    float y;
+                    if (higher > lower)
+                        y = werte[lower] * (T - lower) + werte[higher] * (higher - T);
+                    else
+                        y = werte[lower] * (T - lower) + werte[higher] * (werte.Length - T);
                     return new PointF(0, y);
                 };
+        }
+
+        public override DrawBox clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class KreuzTitel : Titel
+    {
+        public KreuzTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+
+        public override Weg GetVerlauf(float units)
+        {
+            //Weglänge
+            float L = units * RandHohe;
+            int stachel = (units / 2).Ceil();
+            //Kleines Wegstück
+            float l = L / stachel;
+            //Ganz kleines Wegstück
+            float ll = RandHohe / 3;
+            OrientierbarerWeg w = OrientierbarerWeg.HartPolygon(
+                new PointF(),
+                new PointF(ll, 0),
+                new PointF(ll, ll),
+                new PointF(0, ll),
+                new PointF(0, 2 * ll),
+                new PointF(ll, 2 * ll),
+                new PointF(ll, 3 * ll),
+                new PointF(2 * ll, 3 * ll),
+                new PointF(2 * ll, 2 * ll),
+                new PointF(3 * ll, 2 * ll),
+                new PointF(3 * ll, ll),
+                new PointF(2 * ll, ll),
+                new PointF(2 * ll, 0),
+                new PointF(6 * ll, 0));
+            w = w ^ stachel;
+            //w.invertier();
+            (w + new PointF(0, 500)).print(1000, 1000, 10);
+            //System.Windows.Forms.MessageBox.Show("Test");
+            return w.weg;
         }
 
         public override DrawBox clone()

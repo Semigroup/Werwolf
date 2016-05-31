@@ -22,27 +22,29 @@ namespace Werwolf
             Text t = new Text();
             t.preferedFont = new FontMeasurer("Calibri", 11);
             #region Text
-            t.addRegex(@"aaaaaa
-aaaaaa
-aaaaaa
-aaaaaa");
+            t.addRegex(@"This is the Golden Age of Grotesque,
+Be prepared for what you may find.");
             #endregion
             t.alignment = 0.5f;
-            t.addWhitespace(0, 0, true);
+            t.addWhitespace(400, 0, true);
             t.addWhitespace(0, 0, false);
 
             Weg y = x => new PointF();//new PointF((float)Math.Cos(x * Math.PI * 10) * 20, 25 + 25 * (float)Math.Sin(x * Math.PI * 2 * 30));
 
-            Titel tt = new Titel(t.Geometry(50, 0, 50, 0), 50, y, Pens.Black, Brushes.Red);
-            DrawBox d = tt;
+            float RandHohe = 50;
 
             CString cs = new CString();
-            cs.add(d);
-            cs.add(d.clone());
-            cs.add(d.clone());
-            cs.add(d.clone());
-
-            cs.createImage("test", 1000, 1000);
+            cs.add(new RunderTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new StachelTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new ZahnTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new WellenTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new SagezahnTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new VierStufenTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new KonigTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new ChaosTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
+            cs.add(new KreuzTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red)); 
+            
+            cs.createImage("test", 1000, float.MaxValue);
             cs.createPDF("test");
         }
 
