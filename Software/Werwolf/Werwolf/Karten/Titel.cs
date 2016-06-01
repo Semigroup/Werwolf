@@ -102,7 +102,7 @@ namespace Werwolf.Karten
 
         public override Weg GetVerlauf(float units)
         {
-            return t => new PointF();
+            return t => new PointF(t, 0);
         }
 
         public override DrawBox clone()
@@ -128,7 +128,7 @@ namespace Werwolf.Karten
                 int i = t0.Floor();
                 float y = (1 + 2 * (i - t0));
                 y *= y * RandHohe;
-                return new PointF(0, y);
+                return new PointF(t, y);
             };
         }
 
@@ -147,13 +147,24 @@ namespace Werwolf.Karten
 
         public override Weg GetVerlauf(float units)
         {
-            int stachel = units.Ceil();
-            return
-                t =>
-                {
-                    if ((int)(stachel * t) % 2 == 0) return new PointF(0, RandHohe);
-                    else return new PointF();
-                };
+            int stachel = (units / 2).Ceil();
+
+            OrientierbarerWeg ow = OrientierbarerWeg.HartPolygon(new PointF(),
+                new PointF(0, RandHohe),
+                new PointF(RandHohe, RandHohe),
+                new PointF(RandHohe, 0),
+                new PointF(2 * RandHohe, 0));
+
+            ow ^= stachel;
+
+            return ow.weg;
+
+            //return
+            //    t =>
+            //    {
+            //        if ((int)(stachel * t) % 2 == 0) return new PointF(t, RandHohe);
+            //        else return new PointF(t,0);
+            //    };
         }
 
         public override DrawBox clone()
@@ -176,7 +187,7 @@ namespace Werwolf.Karten
                 t =>
                 {
                     double y = RandHohe * (1 + Math.Sin(stachel * t * Math.PI * 2)) / 2;
-                    return new PointF(0, (float)y);
+                    return new PointF(t, (float)y);
                 };
         }
 
@@ -200,7 +211,7 @@ namespace Werwolf.Karten
                 t =>
                 {
                     double y = RandHohe * ((stachel * (1 - t)) % 1);
-                    return new PointF(0, (float)y);
+                    return new PointF(t, (float)y);
                 };
         }
 
@@ -219,17 +230,24 @@ namespace Werwolf.Karten
 
         public override Weg GetVerlauf(float units)
         {
-            int stachel = units.Ceil();
-            return
-                t =>
-                {
-                    float y;
-                    if ((int)(stachel * t) % 4 == 0) y = RandHohe / 2;
-                    else if ((int)(stachel * t) % 4 == 1) y = RandHohe;
-                    else if ((int)(stachel * t) % 4 == 2) y = RandHohe / 2;
-                    else y = 0;
-                    return new PointF(0, y);
-                };
+            int stachel = (units / 4).Ceil();
+
+            float lx = RandHohe;
+            float ly = RandHohe / 2;
+            OrientierbarerWeg oy = OrientierbarerWeg.HartPolygon(
+                new PointF(),
+                new PointF(0, ly),
+                new PointF(lx, ly),
+                new PointF(lx, 2 * ly),
+                new PointF(2 * lx, 2 * ly),
+                new PointF(2 * lx, ly),
+                new PointF(3 * lx, ly),
+                new PointF(3 * lx, 0),
+                new PointF(4 * lx, 0));
+
+            oy ^= stachel;
+
+            return oy.weg;
         }
 
         public override DrawBox clone()
@@ -259,7 +277,7 @@ namespace Werwolf.Karten
                     else if ((int)T == 2) y = 0;
                     else y = RandHohe * (T - 4) * (T - 4);
 
-                    return new PointF(0, y);
+                    return new PointF(t, y);
                 };
         }
 
@@ -288,14 +306,14 @@ namespace Werwolf.Karten
                 t =>
                 {
                     float T = t * werte.Length;
-                    int lower = T.Floor();
+                    int lower = T.Floor() % werte.Length;
                     int higher = (lower + 1) % werte.Length;
                     float y;
                     if (higher > lower)
                         y = werte[lower] * (T - lower) + werte[higher] * (higher - T);
                     else
                         y = werte[lower] * (T - lower) + werte[higher] * (werte.Length - T);
-                    return new PointF(0, y);
+                    return new PointF(t, y);
                 };
         }
 
@@ -338,8 +356,118 @@ namespace Werwolf.Karten
                 new PointF(6 * ll, 0));
             w = w ^ stachel;
             //w.invertier();
-            (w + new PointF(0, 500)).print(1000, 1000, 10);
+            //(w + new PointF(0, 500)).print(1000, 1000, 10);
             //System.Windows.Forms.MessageBox.Show("Test");
+            return w.weg;
+        }
+        //public override Weg GetVerlauf(float units)
+        //{
+        //    //Weglänge
+        //    float L = units * RandHohe;
+        //    int stachel = (units / 2).Ceil();
+        //    //Kleines Wegstück
+        //    float l = L / stachel;
+        //    //Ganz kleines Wegstück
+        //    float ll = RandHohe / 3;
+
+        //    Weg links = t =>
+        //    {
+        //        float T = 3 * t;
+        //        if (T <= 1)
+        //            return new PointF(T * ll, 0);
+        //        else if (T <= 2)
+        //            return new PointF((2 - T) * ll, ll);
+        //        else
+        //            return new PointF((T - 2) * ll, 2 * ll);
+        //    };
+        //    Weg mitte = t => new PointF(0, RandHohe);
+        //    Weg rechts = t =>
+        //    {
+        //        float T = 3 * t;
+        //        if (T <= 1)
+        //            return new PointF(T * ll, 2 * ll);
+        //        else if (T <= 2)
+        //            return new PointF((2 - T) * ll, ll);
+        //        else
+        //            return new PointF((T - 2) * ll, 0);
+        //    };
+        //    Weg rest = t => new PointF();
+
+        //    Weg stuck = links.Concat(mitte.Concat(rechts.Concat(rest.Concat(rest.Concat(rest)))));
+        //    Weg a = stuck;
+        //    for (int i = 1; i < stachel; i++)
+        //        a = a.Concat(stuck);
+        //    return a;
+        //}
+        public override DrawBox clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class TriskelenTitel : Titel
+    {
+        public TriskelenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+
+        public override Weg GetVerlauf(float units)
+        {
+            //Weglänge
+            float L = units * RandHohe;
+            int stachel = (units / 2).Ceil();
+            //Kleines Wegstück
+            float l = L / stachel;
+            //Ganz kleines Wegstück
+            float ll = RandHohe / 2;
+
+            OrientierbarerWeg T = (OrientierbarerWeg.Triskele(RandHohe / 4, 1, RandHohe / 6).Trim(0.01f, 0.99f) ^ Math.PI) + new PointF(ll, RandHohe - RandHohe / 4 * (float)(1 + 2 / Math.Sqrt(3)));
+
+            OrientierbarerWeg w =
+                OrientierbarerWeg.HartPolygon(new PointF(), T.weg(0))
+                * T
+                * OrientierbarerWeg.HartPolygon(T.weg(1), new PointF(ll * 4, 0));
+
+
+            w = w ^ stachel;
+
+            return w.weg;
+        }
+
+        public override DrawBox clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class PikTitel : Titel
+    {
+        public PikTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+
+        public override Weg GetVerlauf(float units)
+        {
+            //Weglänge
+            float L = units * RandHohe;
+            int stachel = (units / 1.5f).Ceil();
+            //Kleines Wegstück
+            float l = L / stachel;
+            //Ganz kleines Wegstück
+            float ll = RandHohe / 2;
+
+            OrientierbarerWeg T = (OrientierbarerWeg.Pike(RandHohe).Trim(0.05f, 0.95f)) + new PointF(ll, 0);
+
+            OrientierbarerWeg w =
+                OrientierbarerWeg.HartPolygon(new PointF(), T.weg(0))
+                * T
+                * OrientierbarerWeg.HartPolygon(T.weg(1), new PointF(ll * 4, 0));
+
+
+            w = w ^ stachel;
+
             return w.weg;
         }
 

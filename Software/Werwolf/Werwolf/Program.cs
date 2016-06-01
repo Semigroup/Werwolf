@@ -9,6 +9,8 @@ using System.IO;
 using Assistment.Extensions;
 using Assistment.Texts;
 using Assistment.Drawing.Geometries;
+using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing;
 
 using Werwolf.Karten;
 
@@ -19,31 +21,53 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
+            //int n = 5;
+            //float Radius = 500;
+            //int Breite = 2500;
+            //float Dicke = 100;
+            //OrientierbarerWeg end;
+            //PointF M = new PointF(Breite / 2, Breite / 2);
+
+            //end = OrientierbarerWeg.Triskele(Radius, n, Dicke);
+
+            //end += M;
+            //end.Trim(0.01f, 0.99f).print(Breite, Breite, 10);
+            TestTitel();
+
+        }
+
+        public static void TestTitel()
+        {
             Text t = new Text();
-            t.preferedFont = new FontMeasurer("Calibri", 11);
+            t.preferedFont = new FontMeasurer("Exocet", 56);
             #region Text
-            t.addRegex(@"This is the Golden Age of Grotesque,
-Be prepared for what you may find.");
+            t.addRegex(@"Can you see me going down
+I am screaming out loud");
             #endregion
             t.alignment = 0.5f;
-            t.addWhitespace(400, 0, true);
+            t.addWhitespace(1600, 0, true);
             t.addWhitespace(0, 0, false);
 
             Weg y = x => new PointF();//new PointF((float)Math.Cos(x * Math.PI * 10) * 20, 25 + 25 * (float)Math.Sin(x * Math.PI * 2 * 30));
 
             float RandHohe = 50;
 
+            Pen p = new Pen(Color.Black, 4);
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
             CString cs = new CString();
-            cs.add(new RunderTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new StachelTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new ZahnTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new WellenTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new SagezahnTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new VierStufenTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new KonigTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new ChaosTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red));
-            cs.add(new KreuzTitel(t.clone(), RandHohe, Pens.Black, Brushes.Red)); 
-            
+            cs.add(new RunderTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new StachelTitel(t.clone(), RandHohe,p, Brushes.Red));
+            cs.add(new ZahnTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new WellenTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new SagezahnTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new VierStufenTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new KonigTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new ChaosTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new KreuzTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new TriskelenTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new PikTitel(t.clone(), RandHohe, p, Brushes.Red));
+
             cs.createImage("test", 1000, float.MaxValue);
             cs.createPDF("test");
         }
