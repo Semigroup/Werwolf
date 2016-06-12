@@ -476,4 +476,45 @@ namespace Werwolf.Karten
             throw new NotImplementedException();
         }
     }
+    public class BlitzTitel : Titel
+    {
+        public BlitzTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+
+        public override Weg GetVerlauf(float units)
+        {
+            //Weglänge
+            int stachel = (units / 1.2f).Ceil();
+
+            float ratio = 1;//0.5f;//b/a
+            float a = RandHohe / (3 + ratio);
+            float b = ratio * a;
+
+            OrientierbarerWeg w = OrientierbarerWeg.HartPolygon(new PointF(),
+                new PointF(a, 0),
+                new PointF(0, a),
+                new PointF(a, 2 * a),
+            new PointF(0, 3 * a),
+            new PointF(b, 3 * a + b),
+            new PointF(2 * b + a, 2 * a),
+            new PointF(2 * b, a),
+            new PointF(2 * b + a, 0),
+            new PointF(2 * b + a + a, 0));
+
+            //((w * 10) + new PointF(100, 100)).print(1000, 1000, 10);
+            //System.Windows.Forms.MessageBox.Show("Test");
+
+            w = w ^ stachel;
+
+            return w.weg;
+        }
+
+        public override DrawBox clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

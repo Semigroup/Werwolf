@@ -32,10 +32,79 @@ namespace Werwolf
 
             //end += M;
             //end.Trim(0.01f, 0.99f).print(Breite, Breite, 10);
-            TestTitel();
+            //TestTitel();
+            TestLayer();
 
         }
+        public static void TestLayer()
+        {
+            //int c = 100;
+            //Bitmap b = new Bitmap(c * 20, c * 28);
+            //Graphics g = b.GetHighGraphics();
+            //g.Clear(Color.Black);
 
+            //PointF Mittelpunkt = new PointF(10 * c, 14 * c);
+            //OrientierbarerWeg ow = OrientierbarerWeg.Spirale(c * 10, 10);
+            //ow += Mittelpunkt;
+
+
+            //Schema s = Schema.WithTeeth(1);
+            //s.sampleRate = 10;
+            //s.strings *= 10;
+            //s.hohe = t => 100;
+            //s.burst = c;
+
+            //Shadex.chaosWeg(g, ow, s);
+
+            //g.FillRectangle(new SolidBrush(Color.FromArgb(50, 255, 255, 255)), 0, 0, 20 * c, 28 * c);
+
+            //b.Save("test.png");
+
+
+            LayerBox lb = new LayerBox();
+            float w = 1000;
+            lb.addImage(Image.FromFile("test.png"), w, w * 1.4f);
+
+            Text te = new Text();
+            te.preferedFont = new FontMeasurer("Exocet", 30);
+            te.alignment = 0.5f;
+            te.addRegex(@"Gutschein für eine Rollenspielrunde");
+            te.addAbsatz();
+            te.addWhitespace(1000, 100, true);
+
+            te.preferedFont = new FontMeasurer("Calibri", 20) ;
+            te.addRegex(@"Hey, David! Alles Gute zum Geburtstag. Als Geschenk erhätst Du von mir einen Gutschein für ein Rollenspielszenario, das wir in den Semesterferien spielen können, sobald die Klausurenphase bei allen Beteiligten vorbei ist.
+Ich kann jetzt noch nicht sagen, wie das Szenario genau ausschauen wird, weil das alles top secret ist, aber hier ein paar Eckdaten:");
+            te.addAbsatz();
+
+            DrawList dl = new DrawList();
+            dl.preferedFont = new FontMeasurer("Calibri", 20);
+            dl.add(new Text(@"- Ausgelegt soll das ganze auf einen Abend sein.
+Eventuell sogar, falls sich genügend Menschenmaterial findet, einen Indoor-Abend und einen LARP-Teil an einem anderen Tag, oder vielleicht sogar nur eine LARP-Session.", dl.preferedFont));
+            dl.addWhitespace(0, 10, false);
+            dl.add(new Text(@"- Die Spieler werden voraussichtlich aus Dir und vier weiteren Mitspielern bestehen.", dl.preferedFont));
+            dl.addWhitespace(0, 10, false);
+            dl.add(new Text(@"- Es soll möglichst surreal und Mistery mit ganz viel Pseudo-Kafka- und Pseudo-Lynch-Shit und deutlich weniger Logik sein.", dl.preferedFont));
+            dl.addWhitespace(0, 10, false);
+            dl.add(new Text(@"- Es soll (nahezu) keine Kämpfe oder spieltechnische Regeln geben.", dl.preferedFont));
+            dl.addWhitespace(0, 10, false);
+            dl.add(new Text(@"- Es wird vermutlich in dieser Zeit in Karlsruhe spielen, in einer Welt, in der es (nahezu) keine Magie oder Ähnliches gibt.", dl.preferedFont));
+            dl.addWhitespace(0, 10, false);
+            dl.addWhitespace(800f);
+
+            te.add(dl.Geometry(100, 10, 100, 10));
+            te.addAbsatz();
+            te.addRegex(@"Alles Gute auf Deinem weiteren Lebensweg und Deinen Welteroberungsplänen wünscht");
+            te.addAbsatz();
+            te.addWhitespace(10, 20, true);
+            te.addWhitespace(10, 20, true);
+            te.preferedFont = new FontMeasurer("PlainGermanica", 30);
+            te.addWort("Dein Ruestue");
+
+            lb.add(te.Geometry(30));
+            lb.createPDF("Karte");
+
+        }
         public static void TestTitel()
         {
             Text t = new Text();
@@ -57,7 +126,7 @@ I am screaming out loud");
 
             CString cs = new CString();
             cs.add(new RunderTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new StachelTitel(t.clone(), RandHohe,p, Brushes.Red));
+            cs.add(new StachelTitel(t.clone(), RandHohe, p, Brushes.Red));
             cs.add(new ZahnTitel(t.clone(), RandHohe, p, Brushes.Red));
             cs.add(new WellenTitel(t.clone(), RandHohe, p, Brushes.Red));
             cs.add(new SagezahnTitel(t.clone(), RandHohe, p, Brushes.Red));
@@ -67,6 +136,7 @@ I am screaming out loud");
             cs.add(new KreuzTitel(t.clone(), RandHohe, p, Brushes.Red));
             cs.add(new TriskelenTitel(t.clone(), RandHohe, p, Brushes.Red));
             cs.add(new PikTitel(t.clone(), RandHohe, p, Brushes.Red));
+            cs.add(new BlitzTitel(t.clone(), RandHohe, p, Brushes.Red));
 
             cs.createImage("test", 1000, float.MaxValue);
             cs.createPDF("test");
