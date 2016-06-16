@@ -13,55 +13,149 @@ namespace Werwolf.Inhalt
 {
     public class Darstellung : XmlElement
     {
-        public bool KeinBild { get; private set; }
+        public HintergrundDarstellung Hintergrund { get; private set; }
+        public TitelDarstellung Titel { get; private set; }
+        public BildDarstellung Bild { get; private set; }
+        public TextDarstellung Text { get; private set; }
+        public InfoDarstellung Info { get; private set; }
 
-        public bool KeinTitel { get; private set; }
-        public bool KeinTitelRand { get; private set; }
-        
-        public bool KeinText { get; private set; }
-        public bool KeinTextRand { get; set; }
-        public bool KeinBalkenProAbsatz { get; set; }
+        public UnterDarstellung[] UnterDarstellungen { get { return new UnterDarstellung[] { Hintergrund, Titel, Bild, Text, Info }; } }
 
-        public bool KeinHintergrund { get; private set; }
-        
-        public bool KeineGesinnung { get; private set; }
-        
-        public bool KeinRand { get; private set; }
+        /// <summary>
+        /// Größe in Millimeter
+        /// </summary>
+        public SizeF Size { get; private set; }
 
-        public xFont TitelFont { get; private set; }
-        public xFont TextFont { get; private set; }
-        public xFont InfoFont { get; private set; }
+        public Darstellung()
+            : base("Darstellung", false)
+        {
+            this.Hintergrund = new HintergrundDarstellung();
+            this.Titel = new TitelDarstellung();
+            this.Bild = new BildDarstellung();
+            this.Text = new TextDarstellung();
+            this.Info = new InfoDarstellung();
+        }
 
-        public Darstellung() : base("Darstellung", true)
+        protected override void ReadIntern(Loader Loader)
+        {
+            Size = Loader.XmlReader.getSizeF("Size");
+            while (Loader.XmlReader.Next())
+                switch (Loader.XmlReader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        bool Found = false;
+                        foreach (var item in UnterDarstellungen)
+                            if (item.XmlName.Equals(Loader.XmlReader.Name))
+                            {
+                                item.Read(Loader);
+                                Found = true;
+                            }
+                        if (!Found)
+                            throw new NotImplementedException();
+                        break;
+
+                    case XmlNodeType.EndElement:
+                        if (this.XmlName.Equals(Loader.XmlReader.Name))
+                            return;
+                        else
+                            throw new NotImplementedException();
+
+                    default:
+                        throw new NotImplementedException();
+                }
+        }
+    }
+
+    public abstract class UnterDarstellung : XmlElement
+    {
+        /// <summary>
+        /// in Millimeter
+        /// </summary>
+        public SizeF Rand { get; private set; }
+        public xFont Font { get; private set; }
+        public bool Existiert { get; private set; }
+        public bool HatRand { get; private set; }
+
+        public UnterDarstellung(string XmlName)
+            : base(XmlName, true)
         {
 
         }
 
         protected override void ReadIntern(Loader Loader)
         {
-            KeinBild = Loader.XmlReader.getBoolean("KeinBild");
-            KeinTitel = Loader.XmlReader.getBoolean("KeinTitel");
-            KeinText = Loader.XmlReader.getBoolean("KeinText");
-            KeinHintergrund = Loader.XmlReader.getBoolean("KeinHintergrund");
-            KeineGesinnung = Loader.XmlReader.getBoolean("KeineGesinnung");
-            KeinRand = Loader.XmlReader.getBoolean("KeinRand");
-            KeinTitelRand = Loader.XmlReader.getBoolean("KeinTitelRand");
-            KeinTextRand = Loader.XmlReader.getBoolean("KeinTextRand");
-            KeinBalkenProAbsatz = Loader.XmlReader.getBoolean("KeinBalkenProAbsatz");
-
-            TitelFont = Loader.GetFont("TitelFont");
-            TextFont = Loader.GetFont("TextFont");
-            InfoFont = Loader.GetFont("InfoFont");
+            Existiert = Loader.XmlReader.getBoolean("Existiert");
+            HatRand = Loader.XmlReader.getBoolean("HatRand");
+            Font = Loader.GetFont("Font");
+            Rand = Loader.XmlReader.getSizeF("Rand");
         }
 
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
-            XmlWriter.writeBoolean("KeinBild", KeinBild);
-            XmlWriter.writeBoolean("KeinTitel", KeinTitel);
-            XmlWriter.writeBoolean("KeinText", KeinText);
-            XmlWriter.writeBoolean("KeinHintergrund", KeinHintergrund);
-            XmlWriter.writeBoolean("KeineGesinnung", KeineGesinnung);
-            XmlWriter.writeBoolean("KeinRand", KeinRand);
+            XmlWriter.writeBoolean("Existiert", Existiert);
         }
     }
+    public class HintergrundDarstellung : UnterDarstellung
+    {
+        public HintergrundDarstellung()
+            : base("Hintergrund")
+        {
+
+        }
+    }
+    public class TitelDarstellung : UnterDarstellung
+    {
+        public Color HintergrundFarbe { get; private set; }
+
+        public TitelDarstellung()
+            : base("Titel")
+        {
+        }
+
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
+            HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
+        }
+    }
+    public class BildDarstellung : UnterDarstellung
+    {
+        public SizeF Alignment { get; private set; }
+
+        public BildDarstellung()
+            : base("Bild")
+        {
+
+        }
+
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
+            Alignment = Loader.XmlReader.getSizeF("Alignment");
+        }
+    }
+    public class TextDarstellung : UnterDarstellung
+    {
+        public Color HintergrundFarbe { get; private set; }
+        public bool BalkenProBlock { get; private set; }
+
+        public TextDarstellung()
+            : base("Text")
+        {
+        }
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
+            HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
+            BalkenProBlock = Loader.XmlReader.getBoolean("BalkenProBlock");
+        }
+    }
+    public class InfoDarstellung : UnterDarstellung
+    {
+        public InfoDarstellung()
+            : base("Info")
+        {
+        }
+    }
+
 }

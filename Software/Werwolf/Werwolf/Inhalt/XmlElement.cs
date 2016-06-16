@@ -26,9 +26,14 @@ namespace Werwolf.Inhalt
         }
         public void Read(Loader Loader)
         {
+            int d = Loader.XmlReader.Depth;
             if (!Loader.XmlReader.Name.Equals(XmlName))
                 throw new NotImplementedException();
+
             ReadIntern(Loader);
+
+            while (Loader.XmlReader.Depth > d)
+                Loader.XmlReader.Next();
             Loader.XmlReader.Next();
         }
         protected virtual void WriteIntern(XmlWriter XmlWriter)
