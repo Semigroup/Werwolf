@@ -13,7 +13,6 @@ namespace Werwolf.Inhalt
 {
     public class Loader
     {
-
         public Universe Universe { get; private set; }
         public XmlReader XmlReader { get; private set; }
 
@@ -37,7 +36,7 @@ namespace Werwolf.Inhalt
 
         public FontMeasurer GetFont(string AttributeName)
         {
-            return new FontMeasurer(XmlReader.getString(AttributeName), Universe.ppm * XmlReader.getFloat(AttributeName + "_Size"));
+            return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
         }
 
         public Aufgabe GetAufgabe(string AttributeName)

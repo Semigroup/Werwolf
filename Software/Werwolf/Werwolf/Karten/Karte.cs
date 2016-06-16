@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Werwolf.Inhalt;
 
 namespace Werwolf.Karten
 {
@@ -13,6 +14,6 @@ namespace Werwolf.Karten
         /// </summary>
         public SizeF Size { get; private set; }
 
-
+        public Rolle Rolle { get; private set; }
     }
 }
