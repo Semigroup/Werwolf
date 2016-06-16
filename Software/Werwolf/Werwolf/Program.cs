@@ -21,19 +21,7 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
-            //int n = 5;
-            //float Radius = 500;
-            //int Breite = 2500;
-            //float Dicke = 100;
-            //OrientierbarerWeg end;
-            //PointF M = new PointF(Breite / 2, Breite / 2);
-
-            //end = OrientierbarerWeg.Triskele(Radius, n, Dicke);
-
-            //end += M;
-            //end.Trim(0.01f, 0.99f).print(Breite, Breite, 10);
-            //TestTitel();
-            TestLayer();
+            TestTitel();
 
         }
         public static void TestLayer()
@@ -72,7 +60,7 @@ namespace Werwolf
             te.addAbsatz();
             te.addWhitespace(1000, 100, true);
 
-            te.preferedFont = new FontMeasurer("Calibri", 20) ;
+            te.preferedFont = new FontMeasurer("Calibri", 20);
             te.addRegex(@"Hey, David! Alles Gute zum Geburtstag. Als Geschenk erhätst Du von mir einen Gutschein für ein Rollenspielszenario, das wir in den Semesterferien spielen können, sobald die Klausurenphase bei allen Beteiligten vorbei ist.
 Ich kann jetzt noch nicht sagen, wie das Szenario genau ausschauen wird, weil das alles top secret ist, aber hier ein paar Eckdaten:");
             te.addAbsatz();
@@ -108,38 +96,48 @@ Eventuell sogar, falls sich genügend Menschenmaterial findet, einen Indoor-Aben
         public static void TestTitel()
         {
             Text t = new Text();
-            t.preferedFont = new FontMeasurer("Exocet", 56);
+            t.preferedFont = new FontMeasurer("Exocet", 12);
             #region Text
-            t.addRegex(@"Can you see me going down
-I am screaming out loud");
+            t.addWort(@"Test  -- Dankeschön");
             #endregion
             t.alignment = 0.5f;
-            t.addWhitespace(1600, 0, true);
-            t.addWhitespace(0, 0, false);
 
-            Weg y = x => new PointF();//new PointF((float)Math.Cos(x * Math.PI * 10) * 20, 25 + 25 * (float)Math.Sin(x * Math.PI * 2 * 30));
+            FontMeasurer f = new FontMeasurer("Exocet", 12);
 
-            float RandHohe = 50;
+            float RandHohe = 10;
 
-            Pen p = new Pen(Color.Black, 4);
+            Pen p = new Pen(Color.Black, 1);
             p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
 
+            Titel[] ts = new Titel[] {
+            new RunderTitel(new Text("RunderTitel",f), RandHohe, p, Brushes.Red),
+            new StachelTitel(new Text("StachelTitel",f), RandHohe, p, Brushes.Red),
+            new ZahnTitel(new Text("ZahnTitel",f), RandHohe, p, Brushes.Red),
+            new WellenTitel(new Text("WellenTitel",f), RandHohe, p, Brushes.Red),
+            new SagezahnTitel(new Text("SagezahnTitel",f), RandHohe, p, Brushes.Red),
+            new VierStufenTitel(new Text("VierStufenTitel",f), RandHohe, p, Brushes.Red),
+            new KonigTitel(new Text("KonigTitel",f), RandHohe, p, Brushes.Red),
+            new ChaosTitel(new Text("ChaosTitel",f), RandHohe, p, Brushes.Red),
+            new KreuzTitel(new Text("KreuzTitel",f), RandHohe, p, Brushes.Red),
+            new TriskelenTitel(new Text("TriskelenTitel",f), RandHohe, p, Brushes.Red),
+            new PikTitel(new Text("PikTitel",f), RandHohe, p, Brushes.Red),
+            new BlitzTitel(new Text("BlitzTitel",f), RandHohe, p, Brushes.Red)
+            };
             CString cs = new CString();
-            cs.add(new RunderTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new StachelTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new ZahnTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new WellenTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new SagezahnTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new VierStufenTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new KonigTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new ChaosTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new KreuzTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new TriskelenTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new PikTitel(t.clone(), RandHohe, p, Brushes.Red));
-            cs.add(new BlitzTitel(t.clone(), RandHohe, p, Brushes.Red));
+            foreach (Titel tit in ts)
+            {
+                DrawList l = new DrawList();
+                for (int i = 1; i <= 10; i++)
+                {
+                    Titel tt = (Titel)tit.clone();
+                    tt.Scaling = i;
+                    l.add(tt);
+                }
+                cs.add(l);
+            }
 
-            cs.createImage("test", 1000, float.MaxValue);
-            cs.createPDF("test");
+            //cs.createImage("test", 1000, float.MaxValue);
+            cs.Geometry(50).createPDF("test");
         }
 
         public static void MakeArtist(string directory)

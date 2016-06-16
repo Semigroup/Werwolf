@@ -20,18 +20,22 @@ namespace Werwolf.Karten
     {
         public Brush HintergrundFarbe { get; private set; }
         public Pen RandFarbe { get; private set; }
-        //public Weg RandVerlauf { get; private set; }
         public float RandHohe { get; private set; }
         public DrawBox Inhalt { get; private set; }
+        public float Scaling { get; set; }
 
         public Titel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
+            : this(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, 1)
+        {
+        }
+        public Titel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
         {
             this.Inhalt = Inhalt.Geometry(RandHohe, 0, RandHohe, 0);
             this.RandHohe = RandHohe;
-            ////this.RandVerlauf = RandVerlauf;
             this.RandFarbe = RandFarbe;
             this.HintergrundFarbe = HintergrundFarbe;
-        } //Weg RandVerlauf,
+            this.Scaling = Scaling;
+        }
 
         public override float getSpace()
         {
@@ -41,12 +45,10 @@ namespace Werwolf.Karten
 
             return (breite + ab) * (hohe + ab);
         }
-
         public override float getMin()
         {
             return Inhalt.getMin() + 2 * RandHohe;
         }
-
         public override float getMax()
         {
             return Inhalt.getMax() + 2 * RandHohe;
@@ -56,7 +58,6 @@ namespace Werwolf.Karten
         {
             Inhalt.update();
         }
-
         public override void setup(RectangleF box)
         {
             float ab = RandHohe * 2;
@@ -74,17 +75,20 @@ namespace Werwolf.Karten
 
         public override void draw(DrawContext con)
         {
-            Bitmap b = new Bitmap(box.Width.Ceil(), box.Height.Ceil());
+            Bitmap b = new Bitmap((box.Width * Scaling).Ceil(), (box.Height * Scaling).Ceil());
             Graphics g = b.GetHighGraphics();
-            RectangleF pseudoBox = new RectangleF(RandHohe, RandHohe, Inhalt.box.Width, Inhalt.box.Height);
+            RectangleF pseudoBox = new RectangleF(RandHohe, RandHohe, Inhalt.box.Width, Inhalt.box.Height).Scale(Scaling);
             OrientierbarerWeg ow = OrientierbarerWeg.RundesRechteck(pseudoBox);
             int samples = 10000;
-            g.FillDrawWegAufOrientierbarerWeg(HintergrundFarbe, RandFarbe, GetVerlauf(ow.L / RandHohe), ow, samples);
+            Weg y = GetVerlauf(ow.L / (RandHohe * Scaling));
+            Weg z = t => y(t).mul(1, Scaling);
+            Pen RandFarbe = (Pen)this.RandFarbe.Clone();
+            RandFarbe.Width *= Scaling;
+            g.FillDrawWegAufOrientierbarerWeg(HintergrundFarbe, RandFarbe, z, ow, samples);
             g.Dispose();
-            con.drawImage(b, box.Location);
+            con.drawImage(b, box);
             Inhalt.draw(con);
         }
-
         public override void InStringBuilder(StringBuilder sb, string tabs)
         {
             throw new NotImplementedException();
@@ -94,8 +98,12 @@ namespace Werwolf.Karten
     public class RunderTitel : Titel
     {
         public RunderTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
-            : base(Inhalt, RandHohe,
-            RandFarbe, HintergrundFarbe)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public RunderTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -107,7 +115,7 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new RunderTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class StachelTitel : Titel
@@ -115,6 +123,11 @@ namespace Werwolf.Karten
         public StachelTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe,
             RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public StachelTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -134,13 +147,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new StachelTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class ZahnTitel : Titel
     {
         public ZahnTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public ZahnTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -158,24 +176,22 @@ namespace Werwolf.Karten
             ow ^= stachel;
 
             return ow.weg;
-
-            //return
-            //    t =>
-            //    {
-            //        if ((int)(stachel * t) % 2 == 0) return new PointF(t, RandHohe);
-            //        else return new PointF(t,0);
-            //    };
         }
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new ZahnTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class WellenTitel : Titel
     {
         public WellenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public WellenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -193,13 +209,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new WellenTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class SagezahnTitel : Titel
     {
         public SagezahnTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public SagezahnTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -217,13 +238,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new SagezahnTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class VierStufenTitel : Titel
     {
         public VierStufenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public VierStufenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -252,13 +278,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new VierStufenTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class KonigTitel : Titel
     {
         public KonigTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public KonigTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -283,13 +314,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new KonigTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class ChaosTitel : Titel
     {
         public ChaosTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public ChaosTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -319,13 +355,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new ChaosTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class KreuzTitel : Titel
     {
         public KreuzTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public KreuzTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -355,59 +396,24 @@ namespace Werwolf.Karten
                 new PointF(2 * ll, 0),
                 new PointF(6 * ll, 0));
             w = w ^ stachel;
-            //w.invertier();
-            //(w + new PointF(0, 500)).print(1000, 1000, 10);
-            //System.Windows.Forms.MessageBox.Show("Test");
+
             return w.weg;
         }
-        //public override Weg GetVerlauf(float units)
-        //{
-        //    //Weglänge
-        //    float L = units * RandHohe;
-        //    int stachel = (units / 2).Ceil();
-        //    //Kleines Wegstück
-        //    float l = L / stachel;
-        //    //Ganz kleines Wegstück
-        //    float ll = RandHohe / 3;
 
-        //    Weg links = t =>
-        //    {
-        //        float T = 3 * t;
-        //        if (T <= 1)
-        //            return new PointF(T * ll, 0);
-        //        else if (T <= 2)
-        //            return new PointF((2 - T) * ll, ll);
-        //        else
-        //            return new PointF((T - 2) * ll, 2 * ll);
-        //    };
-        //    Weg mitte = t => new PointF(0, RandHohe);
-        //    Weg rechts = t =>
-        //    {
-        //        float T = 3 * t;
-        //        if (T <= 1)
-        //            return new PointF(T * ll, 2 * ll);
-        //        else if (T <= 2)
-        //            return new PointF((2 - T) * ll, ll);
-        //        else
-        //            return new PointF((T - 2) * ll, 0);
-        //    };
-        //    Weg rest = t => new PointF();
-
-        //    Weg stuck = links.Concat(mitte.Concat(rechts.Concat(rest.Concat(rest.Concat(rest)))));
-        //    Weg a = stuck;
-        //    for (int i = 1; i < stachel; i++)
-        //        a = a.Concat(stuck);
-        //    return a;
-        //}
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new KreuzTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class TriskelenTitel : Titel
     {
         public TriskelenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public TriskelenTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -437,13 +443,18 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new TriskelenTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class PikTitel : Titel
     {
         public PikTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
             : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe)
+        {
+
+        }
+        public PikTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
         {
 
         }
@@ -473,7 +484,7 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new PikTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
     public class BlitzTitel : Titel
@@ -483,13 +494,18 @@ namespace Werwolf.Karten
         {
 
         }
+        public BlitzTitel(DrawBox Inhalt, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe, float Scaling)
+            : base(Inhalt, RandHohe, RandFarbe, HintergrundFarbe, Scaling)
+        {
+
+        }
 
         public override Weg GetVerlauf(float units)
         {
             //Weglänge
             int stachel = (units / 1.2f).Ceil();
 
-            float ratio = 1;//0.5f;//b/a
+            float ratio = 1;
             float a = RandHohe / (3 + ratio);
             float b = ratio * a;
 
@@ -504,9 +520,6 @@ namespace Werwolf.Karten
             new PointF(2 * b + a, 0),
             new PointF(2 * b + a + a, 0));
 
-            //((w * 10) + new PointF(100, 100)).print(1000, 1000, 10);
-            //System.Windows.Forms.MessageBox.Show("Test");
-
             w = w ^ stachel;
 
             return w.weg;
@@ -514,7 +527,7 @@ namespace Werwolf.Karten
 
         public override DrawBox clone()
         {
-            throw new NotImplementedException();
+            return new BlitzTitel(Inhalt.clone(), RandHohe, RandFarbe, HintergrundFarbe, Scaling);
         }
     }
 }
