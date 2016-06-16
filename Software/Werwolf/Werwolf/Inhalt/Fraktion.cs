@@ -12,7 +12,18 @@ namespace Werwolf.Inhalt
     {
         public enum RandArt
         {
-
+            Rund,
+            Stachel,
+            Zahn,
+            Wellen,
+            Sagezahn,
+            VierStufen,
+            Konig,
+            Chaos,
+            Kreuz,
+            Triskelen,
+            Pik,
+            Blitz
         }
 
         public Bild Hintergrundbild { get; private set; }
@@ -34,11 +45,7 @@ namespace Werwolf.Inhalt
 
         public static RandArt GetRand(string Name)
         {
-            switch (Name)
-            {
-                default:
-                    throw new NotImplementedException();
-            }
+            return (RandArt)Enum.Parse(typeof(RandArt), Name, true);
         }
     }
 }

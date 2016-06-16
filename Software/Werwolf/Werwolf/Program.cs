@@ -21,7 +21,7 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
-            TestTitel();
+            //TestTitel();
 
         }
         public static void TestLayer()
