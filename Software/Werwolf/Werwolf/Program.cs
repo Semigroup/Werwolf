@@ -12,6 +12,7 @@ using Assistment.Drawing.Geometries;
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Drawing;
 
+using Werwolf.Generating;
 using Werwolf.Karten;
 
 namespace Werwolf
@@ -22,7 +23,7 @@ namespace Werwolf
         static void Main()
         {
             //TestTitel();
-
+            HintergrundErsteller he = new HintergrundErsteller();
         }
         public static void TestLayer()
         {
