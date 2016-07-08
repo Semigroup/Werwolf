@@ -22,8 +22,10 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
+
+
             //TestTitel();
-            HintergrundErsteller he = new HintergrundErsteller();
+            //HintergrundErsteller he = new HintergrundErsteller();
         }
         public static void TestLayer()
         {

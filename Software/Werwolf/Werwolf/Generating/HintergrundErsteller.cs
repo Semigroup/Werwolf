@@ -15,7 +15,8 @@ namespace Werwolf.Generating
     {
         public enum Art
         {
-            ChaosRechteck
+            ChaosRechteck,
+            OldSchool
         }
 
         public Art MeineArt { get; set; }
@@ -29,6 +30,22 @@ namespace Werwolf.Generating
         public float ppm { get; set; }
 
         public FlachenSchema Schema { get; set; }
+
+        public Schema ToSchema(float burst)
+        {
+            Schema s = new Schema("Aus HintergrundSchema");
+            s.background = Schema.BackColor.HasValue ? Schema.BackColor.Value : Color.Black;
+            s.burst = burst * 500;
+            s.farben = new Brush[2 * Schema.Boxes.Y];
+            for (int i = 0; i < 2 * Schema.Boxes.Y; i++)
+                s.farben[i] = Schema.Pinsel(0.5f, i / (2 * Schema.Boxes.Y - 1f));
+            s.sampleRate = Schema.Samples.X;
+            s.scale = ppm;
+            if (Schema.Stift != null)
+                s.stift = Schema.Stift(0.5f, 0.5f);
+            s.strings = Schema.Samples.X;
+            return s;
+        }
     }
 
     public class HintergrundErsteller
@@ -64,5 +81,6 @@ namespace Werwolf.Generating
 
             b.Save("Hintergrund.png");
         }
+
     }
 }
