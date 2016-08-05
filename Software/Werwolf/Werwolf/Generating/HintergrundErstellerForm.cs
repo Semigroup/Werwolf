@@ -31,7 +31,7 @@ namespace Werwolf.Generating
 
             this.BoxenBox.UserPoint = new Point(1, 121);// new Point(10, 10);
             this.ThumbBox.UserPoint = new Point(1, 2);//new Point(2, 2);
-            this.SamplesBox.UserPoint = new Point(50, 1);//new Point(100, 100);
+            this.SamplesBox.UserPoint = new Point(label1.Size.Width / 10, label1.Size.Height / 10);//new Point(50, 1);//new Point(100, 100);
 
             this.enumBox1.SetType(typeof(HintergrundSchema.Art));
             this.enumBox1.UserValue = HintergrundSchema.Art.ChaosRechteck;
@@ -90,6 +90,7 @@ namespace Werwolf.Generating
             hs.Schema.Thumb = ThumbBox.UserPoint;
             hs.Schema.Thumb.X = Math.Max(hs.Schema.Thumb.X, 1);
             hs.Schema.Thumb.Y = Math.Max(hs.Schema.Thumb.Y, 1);
+            hs.Schema.DrawingRegion = new RectangleF(0, 0, label1.Size.Width, label1.Size.Height);
 
             Bitmap b = new Bitmap((hs.Size.Width * hs.ppm).Ceil(), (hs.Size.Height * hs.ppm).Ceil());
             Graphics g = b.GetHighGraphics();
@@ -97,14 +98,10 @@ namespace Werwolf.Generating
             switch (hs.MeineArt)
             {
                 case HintergrundSchema.Art.ChaosRechteck:
-                    if (hs.Schema.BackColor.HasValue)
-                        g.Clear(hs.Schema.BackColor.Value);
                     Shadex.ChaosFlache(g, hs.Schema);
                     break;
                 case HintergrundSchema.Art.OldSchool:
-                    if (hs.Schema.BackColor.HasValue)
-                        g.Clear(hs.Schema.BackColor.Value);
-                    Shadex.chaosRect(g, new RectangleF(0, 0, b.Width, b.Height), hs.ToSchema(burst));
+                    Shadex.ChaosFlacheBundig(g, hs.Schema);
                     break;
                 default:
                     throw new NotImplementedException();

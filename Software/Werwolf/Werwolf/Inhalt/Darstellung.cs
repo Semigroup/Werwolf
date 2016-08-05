@@ -75,6 +75,7 @@ namespace Werwolf.Inhalt
         public xFont Font { get; private set; }
         public bool Existiert { get; private set; }
         public bool HatRand { get; private set; }
+        public float ppm { get; private set; }
 
         public UnterDarstellung(string XmlName)
             : base(XmlName, true)
@@ -88,6 +89,7 @@ namespace Werwolf.Inhalt
             HatRand = Loader.XmlReader.getBoolean("HatRand");
             Font = Loader.GetFont("Font");
             Rand = Loader.XmlReader.getSizeF("Rand");
+            ppm = Loader.XmlReader.getFloat("ppm");
         }
 
         protected override void WriteIntern(XmlWriter XmlWriter)
@@ -157,5 +159,4 @@ namespace Werwolf.Inhalt
         {
         }
     }
-
 }
