@@ -34,7 +34,6 @@ namespace Werwolf.Inhalt
 
             while (Loader.XmlReader.Depth > d)
                 Loader.XmlReader.Next();
-            Loader.XmlReader.Next();
         }
         protected virtual void WriteIntern(XmlWriter XmlWriter)
         {

@@ -15,26 +15,37 @@ namespace Werwolf.Inhalt
         /// </summary>
         public string BilderPfad { get; private set; }
 
-        /// <summary>
-        /// Pixel pro Millimeter
-        /// </summary>
-        public float ppm { get; private set; }
+        public string Name { get; private set; }
+        public string Desc { get; private set; }
 
         public Darstellung StandardDarstellung { get;private set; }
+
+        public ElementMenge<Fraktion> Fraktionen { get; private set; }
+        public ElementMenge<Gesinnung> Gesinnungen { get; private set; }
+        public ElementMenge<Karte> Karten { get; private set; }
 
         public Universe()
             : base("Universe", false)
         {
+            Fraktionen = new ElementMenge<Fraktion>("Fraktionen", this);
+            Gesinnungen = new ElementMenge<Gesinnung>("Gesinnungen", this);
+            Karten = new ElementMenge<Karte>("Karten", this);
 
+            StandardDarstellung = new Darstellung();
         }
 
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
+            Name = Loader.XmlReader.getString("Name");
+            Desc = Loader.XmlReader.getString("Desc");
+
             BilderPfad = Loader.XmlReader.getString("BilderPfad");
-            ppm = Loader.XmlReader.getFloat("ppm");
+            Fraktionen.Read(Loader.XmlReader.getString("FraktionenPfad"));
+            Gesinnungen.Read(Loader.XmlReader.getString("GesinnungenPfad"));
+            Karten.Read(Loader.XmlReader.getString("KartenPfad"));
+
             Loader.XmlReader.Next();
-            StandardDarstellung = new Darstellung();
             StandardDarstellung.Read(Loader);
         }
 

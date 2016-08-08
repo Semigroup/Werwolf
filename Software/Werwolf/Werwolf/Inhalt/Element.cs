@@ -24,6 +24,7 @@ namespace Werwolf.Inhalt
         }
         public string Desc { get; private set; }
         public Bild Bild { get; private set; }
+        public Universe Universe;
 
         public Element(string XmlName, bool Klein)
             : base(XmlName, Klein)

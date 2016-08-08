@@ -33,7 +33,6 @@ namespace Werwolf.Generating
             this.ThumbBox.UserPoint = new Point(1, 2);//new Point(2, 2);
             this.SamplesBox.UserPoint = new Point(label1.Size.Width / 10, label1.Size.Height / 10);//new Point(50, 1);//new Point(100, 100);
 
-            this.enumBox1.SetType(typeof(HintergrundSchema.Art));
             this.enumBox1.UserValue = HintergrundSchema.Art.ChaosRechteck;
 
             this.button1.Click += Make;

@@ -21,6 +21,10 @@ namespace Werwolf.Inhalt
             this.Universe = Universe;
             this.XmlReader = XmlReader;
         }
+        public Loader(Universe Universe, string Pfad)
+            : this(Universe, XmlReader.Create(Pfad))
+        {
+        }
 
         public Bild GetBild(string AttributeName)
         {
@@ -46,6 +50,21 @@ namespace Werwolf.Inhalt
             for (int i = 0; i < ss.Length; i++)
                 ss[i] = ss[i].Trim();
             return new Aufgabe(ss);
+        }
+
+        public Fraktion GetFraktion()
+        {
+            string s = XmlReader.GetAttribute("Fraktion");
+            if (s != null && s.Length > 0)
+                return Universe.Fraktionen[s];
+            else return null;
+        }
+        public Gesinnung GetGesinnung()
+        {
+            string s = XmlReader.GetAttribute("Gesinnung");
+            if (s != null && s.Length > 0)
+                return Universe.Gesinnungen[s];
+            else return null;
         }
     }
 }
