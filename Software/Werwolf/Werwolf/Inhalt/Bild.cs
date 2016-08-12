@@ -28,5 +28,10 @@ namespace Werwolf.Inhalt
             this.Artist = Artist;
             this.Size = Size;
         }
+        public Bild(string filePath, SizeF Size)
+            : this(Image.FromFile(filePath), "", Size)
+        {
+
+        }
     }
 }

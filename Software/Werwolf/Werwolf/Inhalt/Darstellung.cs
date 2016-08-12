@@ -8,6 +8,8 @@ using System.Drawing;
 using Assistment.Texts;
 using Assistment.Extensions;
 using Assistment.Xml;
+using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries;
 
 namespace Werwolf.Inhalt
 {
@@ -24,7 +26,7 @@ namespace Werwolf.Inhalt
         /// <summary>
         /// Größe in Millimeter
         /// </summary>
-        public SizeF Size { get; private set; }
+        public SizeF Size { get; set; }
 
         public Darstellung()
             : base("Darstellung", false)
@@ -71,11 +73,13 @@ namespace Werwolf.Inhalt
         /// <summary>
         /// in Millimeter
         /// </summary>
-        public SizeF Rand { get; private set; }
-        public xFont Font { get; private set; }
-        public bool Existiert { get; private set; }
-        public bool HatRand { get; private set; }
-        public float ppm { get; private set; }
+        public SizeF Rand { get; set; }
+        private Font font;
+        public Font Font { get { return font; } set { font = value; FontMeasurer = value != null ? value.GetMeasurer() : null; } }
+        public FontMeasurer FontMeasurer { get; private set; }
+        public bool Existiert { get; set; }
+        public bool HatRand { get; set; }
+        //public float ppm { get; private set; }
 
         public UnterDarstellung(string XmlName)
             : base(XmlName, true)
@@ -89,7 +93,7 @@ namespace Werwolf.Inhalt
             HatRand = Loader.XmlReader.getBoolean("HatRand");
             Font = Loader.GetFont("Font");
             Rand = Loader.XmlReader.getSizeF("Rand");
-            ppm = Loader.XmlReader.getFloat("ppm");
+            //ppm = Loader.XmlReader.getFloat("ppm");
         }
 
         protected override void WriteIntern(XmlWriter XmlWriter)
@@ -99,10 +103,54 @@ namespace Werwolf.Inhalt
     }
     public class HintergrundDarstellung : UnterDarstellung
     {
+        public bool RundeEcken { get; set; }
+        public Image RandBild { get; private set; }
+
         public HintergrundDarstellung()
             : base("Hintergrund")
         {
 
+        }
+
+        public void MakeRandBild(float ppm, Darstellung Darstellung, float Faktor)
+        {
+            Size s = Darstellung.Size.mul(Faktor * ppm).ToSize();
+            RandBild = new Bitmap(s.Width, s.Height);
+            Graphics g = RandBild.GetHighGraphics();
+            g.ScaleTransform(Faktor * ppm, Faktor * ppm);
+            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+            OrientierbarerWeg y;
+
+            if (RundeEcken)
+                y = RunderRand(Darstellung.Size);
+            else
+                y = HarterRand(Darstellung.Size);
+
+            RectangleF innen = new RectangleF(Rand.ToPointF(), Darstellung.Size.sub(Rand.mul(2)));
+
+            g.FillPolygon(Brushes.Black, y.getPolygon((int)(100 * y.L), 0, 1));
+            g.FillRectangle(new SolidBrush(Color.FromArgb(0, 0, 0, 0)), innen);
+        }
+        private OrientierbarerWeg RunderRand(SizeF Size)
+        {
+            Gerade Horizontale = new Gerade(0, Size.Height / 2, 1, 0);
+            Gerade Vertikale = new Gerade(Size.Width / 2, 0, 0, 1);
+
+            float p = (float)(Math.PI / 2);
+            OrientierbarerWeg Sektor1 = new OrientierbarerWeg(t => new PointF(0, 1).rot(t * p).add(1, 1).mul(Rand.ToPointF()), null, (Rand.Width + Rand.Height) * p / 2);
+            OrientierbarerWeg Sektor2 = Sektor1.Spiegel(Horizontale) ^ -1;
+            OrientierbarerWeg Sektor3 = Sektor2.Spiegel(Vertikale) ^ -1;
+            OrientierbarerWeg Sektor4 = Sektor3.Spiegel(Horizontale) ^ -1;
+
+            return Sektor1.ConcatGlatt(Sektor2).ConcatGlatt(Sektor3).ConcatGlatt(Sektor4).Abschluss();
+        }
+        private OrientierbarerWeg HarterRand(SizeF Size)
+        {
+            return OrientierbarerWeg.HartPolygon(new PointF(),
+                new PointF(0, Size.Height),
+                Size.ToPointF(),
+                new PointF(Size.Width, 0),
+                new PointF());
         }
     }
     public class TitelDarstellung : UnterDarstellung
@@ -138,8 +186,9 @@ namespace Werwolf.Inhalt
     }
     public class TextDarstellung : UnterDarstellung
     {
-        public Color HintergrundFarbe { get; private set; }
-        public bool BalkenProBlock { get; private set; }
+        //public Color HintergrundFarbe { get; private set; }
+        public float BalkenDicke { get; set; }
+        public float InnenRadius { get; set; }
 
         public TextDarstellung()
             : base("Text")
@@ -148,8 +197,8 @@ namespace Werwolf.Inhalt
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
-            HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
-            BalkenProBlock = Loader.XmlReader.getBoolean("BalkenProBlock");
+            //HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
+            BalkenDicke = Loader.XmlReader.getFloat("BalkenDicke");
         }
     }
     public class InfoDarstellung : UnterDarstellung

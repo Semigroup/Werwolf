@@ -7,13 +7,10 @@ namespace Werwolf.Inhalt
 {
     public class Karte : Element
     {
-        public Universe Universe { get; private set; }
-
-        public Darstellung Darstellung { get; private set; }
-        public Bild Bild { get; private set; }
-        public Aufgabe Aufgaben { get; private set; }
-        public Fraktion Fraktion { get; private set; }
-        public Gesinnung Gesinnung { get; private set; }
+        public Darstellung Darstellung { get; set; }
+        public Aufgabe Aufgaben { get; set; }
+        public Fraktion Fraktion { get; set; }
+        public Gesinnung Gesinnung { get; set; }
 
         public Karte()
             : base("Karte", false)
@@ -27,7 +24,6 @@ namespace Werwolf.Inhalt
 
             Darstellung = new Darstellung();
             Darstellung.Read(Loader);
-            Bild = Loader.GetBild("Bild");
             Aufgaben = Loader.GetAufgabe("Aufgaben");
             Fraktion = Loader.GetFraktion();
             Gesinnung = Loader.GetGesinnung();

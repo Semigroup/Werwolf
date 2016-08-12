@@ -9,13 +9,28 @@ using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
-    public class Aufgabe
+    public class Aufgabe : IEnumerable<string>
     {
         private string[] roherText;
 
         public Aufgabe(string[] roherText)
         {
             this.roherText = roherText;
+        }
+
+        public int Anzahl()
+        {
+            return roherText.Length;
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return ((IEnumerable<string>)roherText).GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

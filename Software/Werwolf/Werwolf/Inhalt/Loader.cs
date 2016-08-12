@@ -38,9 +38,10 @@ namespace Werwolf.Inhalt
                 return Bild.Leer;
         }
 
-        public FontMeasurer GetFont(string AttributeName)
+        public Font GetFont(string AttributeName)
         {
-            return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
+          //  return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
+            return XmlReader.getFont(AttributeName);
         }
 
         public Aufgabe GetAufgabe(string AttributeName)

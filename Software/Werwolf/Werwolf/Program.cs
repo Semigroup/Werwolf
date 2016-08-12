@@ -14,6 +14,8 @@ using Assistment.Drawing;
 
 using Werwolf.Generating;
 using Werwolf.Karten;
+using Werwolf.Forms;
+using Werwolf.Inhalt;
 
 namespace Werwolf
 {
@@ -23,10 +25,70 @@ namespace Werwolf
         static void Main()
         {
 
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            PreForm<BildDarstellung> p = new UnterDarstellungForm<BildDarstellung>();
+            p.Element = new BildDarstellung();
+
+            Karte Karte = new Inhalt.Karte();
+            Karte.Darstellung = new Darstellung();
+            Karte.Aufgaben = new Aufgabe(new string[] {"adsasdasd","assadad" });
+            Karte.Darstellung.Text.BalkenDicke = 1;
+            Karte.Darstellung.Text.Existiert = true;
+            Karte.Darstellung.Text.Font = new Font("Calibri", 11);
+            Karte.Darstellung.Text.HatRand = true;
+            Karte.Darstellung.Text.InnenRadius = 1;
+            Karte.Darstellung.Text.Rand = new SizeF(5, 5);
+            Karte.Darstellung.Hintergrund.Existiert = true;
+            Karte.Darstellung.Hintergrund.HatRand = true;
+            Karte.Darstellung.Hintergrund.Rand = new SizeF(4, 4);
+            Karte.Darstellung.Size = new SizeF(50, 70);
+
+            Pipeline pp = new Pipeline(Karte);
+            pp.createImage("test");
+
+            Application.Run(p);
 
             //TestTitel();
             //HintergrundErsteller he = new HintergrundErsteller();
         }
+
+        public static Fraktion GetFraktion()
+        {
+            Fraktion f = new Fraktion();
+            //f.Hintergrundbild = new Inhalt.Bild(
+            return f;
+        }
+        public static void Warhammer()
+        {
+            Karte EngelDesImperators = new Karte();
+            Karte MartyrerDesImperators = new Karte();
+            Karte Imperiumstreuer = new Karte();
+            Karte AdeptusMechanicum = new Karte();
+            Karte AnhangerDerPrimordialenWahrheit = new Karte();
+            Karte MartyrerDesChaos = new Karte();
+            Karte ChampionDesChaos = new Karte();
+
+            Karte ImperialerBurger = new Karte();
+            Karte Frater = new Karte();
+            Karte Grenadier = new Karte();
+            Karte Priester = new Karte();
+            Karte Inquisitor = new Karte();
+            Karte Gardist = new Karte();
+            Karte Kommissar = new Karte();
+
+            Karte TechPriester = new Karte();
+
+            Karte Haretiker = new Karte();
+            Karte Psioniker = new Karte();
+            Karte ChaosKultist = new Karte();
+            Karte Hexer = new Karte();
+            Karte Verfuhrer = new Karte();
+            Karte KhorneBerserker = new Karte();
+            Karte DamonenBeschworer = new Karte();
+
+        }
+
         public static void TestLayer()
         {
             //int c = 100;

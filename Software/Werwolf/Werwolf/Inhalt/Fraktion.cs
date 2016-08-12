@@ -5,30 +5,15 @@ using System.Text;
 using System.Drawing;
 
 using Assistment.Xml;
+using Assistment.Texts;
 
 namespace Werwolf.Inhalt
 {
     public class Fraktion : Element
     {
-        public enum RandArt
-        {
-            Rund,
-            Stachel,
-            Zahn,
-            Wellen,
-            Sagezahn,
-            VierStufen,
-            Konig,
-            Chaos,
-            Kreuz,
-            Triskelen,
-            Pik,
-            Blitz
-        }
-
         public Bild Hintergrundbild { get; private set; }
         public Aufgabe StandardAufgaben { get; private set; }
-        public RandArt TitelRand { get; private set; }
+        public Titel.Art TitelArt { get; private set; }
 
         public Fraktion()
             : base("Fraktion", true)
@@ -40,12 +25,7 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             Hintergrundbild = Loader.GetBild("Hintergrundbild");
             StandardAufgaben = Loader.GetAufgabe("StandardAufgaben");
-            TitelRand = GetRand(Loader.XmlReader.getString("TitelRand"));
-        }
-
-        public static RandArt GetRand(string Name)
-        {
-            return (RandArt)Enum.Parse(typeof(RandArt), Name, true);
+            TitelArt = Loader.XmlReader.getEnum<Titel.Art>("TitelArt");
         }
     }
 }

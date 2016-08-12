@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HintergrundErstellerForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +51,11 @@
             this.BoxenBox = new Assistment.form.PointBox();
             this.enumBox1 = new Assistment.form.EnumBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ppm = new Assistment.form.FloatBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.GroseBox = new Assistment.form.PointFBox();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +78,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(418, 335);
+            this.label3.Location = new System.Drawing.Point(418, 316);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 17);
             this.label3.TabIndex = 12;
@@ -81,7 +87,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(418, 372);
+            this.label7.Location = new System.Drawing.Point(418, 353);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 17);
             this.label7.TabIndex = 14;
@@ -90,7 +96,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(418, 409);
+            this.label8.Location = new System.Drawing.Point(418, 390);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 17);
             this.label8.TabIndex = 16;
@@ -98,7 +104,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(462, 464);
+            this.button1.Location = new System.Drawing.Point(432, 464);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 45);
             this.button1.TabIndex = 17;
@@ -152,6 +158,7 @@
             // 
             // BoxRU
             // 
+            this.BoxRU.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BoxRU.Location = new System.Drawing.Point(544, 178);
             this.BoxRU.Name = "BoxRU";
             this.BoxRU.Size = new System.Drawing.Size(221, 30);
@@ -159,6 +166,7 @@
             // 
             // BoxLU
             // 
+            this.BoxLU.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BoxLU.Location = new System.Drawing.Point(544, 141);
             this.BoxLU.Name = "BoxLU";
             this.BoxLU.Size = new System.Drawing.Size(221, 31);
@@ -166,6 +174,7 @@
             // 
             // BackColorBox
             // 
+            this.BackColorBox.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BackColorBox.Location = new System.Drawing.Point(544, 224);
             this.BackColorBox.Name = "BackColorBox";
             this.BackColorBox.Size = new System.Drawing.Size(221, 27);
@@ -173,6 +182,7 @@
             // 
             // BoxRO
             // 
+            this.BoxRO.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BoxRO.Location = new System.Drawing.Point(544, 105);
             this.BoxRO.Name = "BoxRO";
             this.BoxRO.Size = new System.Drawing.Size(221, 30);
@@ -180,6 +190,7 @@
             // 
             // BoxLO
             // 
+            this.BoxLO.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BoxLO.Location = new System.Drawing.Point(544, 68);
             this.BoxLO.Name = "BoxLO";
             this.BoxLO.Size = new System.Drawing.Size(221, 31);
@@ -191,34 +202,51 @@
             this.BurstBox.Name = "BurstBox";
             this.BurstBox.Size = new System.Drawing.Size(51, 22);
             this.BurstBox.TabIndex = 18;
+            this.BurstBox.UserValue = 0F;
+            this.BurstBox.UserValueMaximum = 3.402823E+38F;
+            this.BurstBox.UserValueMinimum = -3.402823E+38F;
             // 
             // SamplesBox
             // 
-            this.SamplesBox.Location = new System.Drawing.Point(544, 409);
+            this.SamplesBox.Location = new System.Drawing.Point(544, 390);
             this.SamplesBox.Name = "SamplesBox";
             this.SamplesBox.Size = new System.Drawing.Size(100, 31);
             this.SamplesBox.TabIndex = 15;
+            this.SamplesBox.UserPoint = new System.Drawing.Point(0, 0);
+            this.SamplesBox.UserSize = new System.Drawing.Size(0, 0);
+            this.SamplesBox.UserX = 0;
+            this.SamplesBox.UserY = 0;
             // 
             // ThumbBox
             // 
-            this.ThumbBox.Location = new System.Drawing.Point(544, 372);
+            this.ThumbBox.Location = new System.Drawing.Point(544, 353);
             this.ThumbBox.Name = "ThumbBox";
             this.ThumbBox.Size = new System.Drawing.Size(100, 31);
             this.ThumbBox.TabIndex = 13;
+            this.ThumbBox.UserPoint = new System.Drawing.Point(0, 0);
+            this.ThumbBox.UserSize = new System.Drawing.Size(0, 0);
+            this.ThumbBox.UserX = 0;
+            this.ThumbBox.UserY = 0;
             // 
             // BoxenBox
             // 
-            this.BoxenBox.Location = new System.Drawing.Point(544, 335);
+            this.BoxenBox.Location = new System.Drawing.Point(544, 316);
             this.BoxenBox.Name = "BoxenBox";
             this.BoxenBox.Size = new System.Drawing.Size(100, 31);
             this.BoxenBox.TabIndex = 11;
+            this.BoxenBox.UserPoint = new System.Drawing.Point(0, 0);
+            this.BoxenBox.UserSize = new System.Drawing.Size(0, 0);
+            this.BoxenBox.UserX = 0;
+            this.BoxenBox.UserY = 0;
             // 
             // enumBox1
             // 
+            this.enumBox1.EnumType = null;
             this.enumBox1.Location = new System.Drawing.Point(544, 283);
             this.enumBox1.Name = "enumBox1";
             this.enumBox1.Size = new System.Drawing.Size(206, 24);
             this.enumBox1.TabIndex = 31;
+            this.enumBox1.UserValue = null;
             // 
             // label5
             // 
@@ -229,11 +257,65 @@
             this.label5.TabIndex = 32;
             this.label5.Text = "Art";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(537, 464);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(107, 45);
+            this.button2.TabIndex = 33;
+            this.button2.Text = "Speichern";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(418, 427);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 17);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Größe in mm";
+            // 
+            // ppm
+            // 
+            this.ppm.Location = new System.Drawing.Point(732, 464);
+            this.ppm.Name = "ppm";
+            this.ppm.Size = new System.Drawing.Size(51, 22);
+            this.ppm.TabIndex = 36;
+            this.ppm.UserValue = 1F;
+            this.ppm.UserValueMaximum = 3.402823E+38F;
+            this.ppm.UserValueMinimum = 1E-06F;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(691, 469);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 17);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "ppm";
+            // 
+            // GroseBox
+            // 
+            this.GroseBox.Location = new System.Drawing.Point(544, 427);
+            this.GroseBox.Name = "GroseBox";
+            this.GroseBox.Size = new System.Drawing.Size(108, 22);
+            this.GroseBox.TabIndex = 38;
+            this.GroseBox.UserPoint = ((System.Drawing.PointF)(resources.GetObject("GroseBox.UserPoint")));
+            this.GroseBox.UserSize = new System.Drawing.SizeF(6.3F, 8.91F);
+            this.GroseBox.UserX = 6.3F;
+            this.GroseBox.UserY = 8.91F;
+            // 
             // HintergrundErstellerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 546);
+            this.Controls.Add(this.GroseBox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.ppm);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.enumBox1);
             this.Controls.Add(this.FarbeRU);
@@ -287,6 +369,11 @@
         private Assistment.form.ColorBox BoxLU;
         private Assistment.form.EnumBox enumBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label6;
+        private Assistment.form.FloatBox ppm;
+        private System.Windows.Forms.Label label9;
+        private Assistment.form.PointFBox GroseBox;
 
     }
 }
