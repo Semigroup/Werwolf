@@ -12,14 +12,20 @@ using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
 using Assistment.Drawing;
 using Assistment.Mathematik;
+using Assistment.form;
 
 namespace Werwolf.Generating
 {
-    public partial class HintergrundErstellerForm : Form
+    public partial class HintergrundErstellerForm : Form, IDrawer
     {
+
+        private PDFDialog pdf;
+
         public HintergrundErstellerForm()
         {
             InitializeComponent();
+
+            pdf = new PDFDialog(this);
 
             this.BurstBox.UserValue = 0.02f;
 
@@ -31,11 +37,9 @@ namespace Werwolf.Generating
 
             this.BoxenBox.UserPoint = new Point(1, 121);// new Point(10, 10);
             this.ThumbBox.UserPoint = new Point(1, 2);//new Point(2, 2);
-            this.SamplesBox.UserPoint = new Point(label1.Size.Width / 10, label1.Size.Height / 10);//new Point(50, 1);//new Point(100, 100);
+            this.SamplesBox.UserPoint = new Point(40,50);//new Point(50, 1);//new Point(100, 100);
 
             this.enumBox1.UserValue = HintergrundSchema.Art.ChaosRechteck;
-
-            this.button1.Click += Make;
 
             this.BurstBox.UserValueChanged += Make;
 
@@ -50,22 +54,32 @@ namespace Werwolf.Generating
             this.ThumbBox.PointChanged += Make;
 
             this.enumBox1.UserValueChanged += Make;
+            this.GroseBox.PointChanged += Make;
 
             Make(this, new EventArgs());
         }
 
         public void Make(object sender, EventArgs e)
         {
+            this.pictureBox1.Image = Draw(true, 1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pdf.ShowDialog();
+        }
+
+        public Image Draw(bool Hoch, float ppm)
+        {
             Random d = new Random();
             float burst = BurstBox.UserValue;
 
             HintergrundSchema hs = new HintergrundSchema();
             hs.MeineArt = (HintergrundSchema.Art)this.enumBox1.UserValue;
-            hs.Size = label1.Size;
-            hs.ppm = 1;
+            hs.Size = GroseBox.UserSize.mul(5).ToSize();
             hs.Schema = new FlachenSchema();
             hs.Schema.BackColor = BackColorBox.Color;
-            hs.Schema.Flache = (u, v) => hs.Size.mul(hs.ppm).mul(u + burst * d.NextCenterd(), v + burst * d.NextCenterd()).ToPointF();
+            hs.Schema.Flache = (u, v) => hs.Size.mul(u + burst * d.NextCenterd(), v + burst * d.NextCenterd()).ToPointF();
 
             Color lo = BoxLO.Color;
             Color lu = BoxLU.Color;
@@ -89,10 +103,11 @@ namespace Werwolf.Generating
             hs.Schema.Thumb = ThumbBox.UserPoint;
             hs.Schema.Thumb.X = Math.Max(hs.Schema.Thumb.X, 1);
             hs.Schema.Thumb.Y = Math.Max(hs.Schema.Thumb.Y, 1);
-            hs.Schema.DrawingRegion = new RectangleF(0, 0, label1.Size.Width, label1.Size.Height);
+            hs.Schema.DrawingRegion = new RectangleF(new PointF(), hs.Size);
 
-            Bitmap b = new Bitmap((hs.Size.Width * hs.ppm).Ceil(), (hs.Size.Height * hs.ppm).Ceil());
+            Bitmap b = new Bitmap((hs.Size.Width * ppm).Ceil(), (hs.Size.Height * ppm).Ceil());
             Graphics g = b.GetHighGraphics();
+            g.ScaleTransform(ppm, ppm);
 
             switch (hs.MeineArt)
             {
@@ -105,18 +120,12 @@ namespace Werwolf.Generating
                 default:
                     throw new NotImplementedException();
             }
-
-
-
-            label1.Image = b;
-
-            //b.Save("Hintergrund.png");
-
+            return b;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public int GetDInA()
         {
-
+            return 4;
         }
     }
 }

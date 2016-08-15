@@ -8,6 +8,7 @@ using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
 using Assistment.Drawing;
 using Assistment.Mathematik;
+using Assistment.form;
 
 namespace Werwolf.Generating
 {
@@ -24,10 +25,6 @@ namespace Werwolf.Generating
         /// in Millimeter
         /// </summary>
         public SizeF Size { get; set; }
-        /// <summary>
-        /// Pixel pro Millimeter
-        /// </summary>
-        public float ppm { get; set; }
 
         public FlachenSchema Schema { get; set; }
 
@@ -40,7 +37,7 @@ namespace Werwolf.Generating
             for (int i = 0; i < 2 * Schema.Boxes.Y; i++)
                 s.farben[i] = Schema.Pinsel(0.5f, i / (2 * Schema.Boxes.Y - 1f));
             s.sampleRate = Schema.Samples.X;
-            s.scale = ppm;
+            s.scale = 1;
             if (Schema.Stift != null)
                 s.stift = Schema.Stift(0.5f, 0.5f);
             s.strings = Schema.Samples.X;
@@ -58,21 +55,20 @@ namespace Werwolf.Generating
             HintergrundSchema hs = new HintergrundSchema();
             hs.MeineArt = HintergrundSchema.Art.ChaosRechteck;
             hs.Size = new SizeF(100, 141);
-            hs.ppm = 10;
             hs.Schema = new FlachenSchema();
             hs.Schema.BackColor = Color.White;
             hs.Schema.Boxes = new Point(1, 50);
-            hs.Schema.Flache = (u, v) => hs.Size.mul(hs.ppm).mul(u, v + burst * d.NextCenterd()).ToPointF();
+            hs.Schema.Flache = (u, v) => hs.Size.mul(u, v + burst * d.NextCenterd()).ToPointF();
             hs.Schema.Pinsel = (u, v) => new SolidBrush(Color.Blue.tween(Color.Yellow, v).flat(100));
             hs.Schema.Samples = new Point(20, 50).mul(1);
             hs.Schema.Thumb = new Point(1, 2);
 
-            Make(hs);
+            //Make(hs);
         }
 
-        public void Make(HintergrundSchema Schema)
+        public void Make(HintergrundSchema Schema, float ppm)
         {
-            Bitmap b = new Bitmap((Schema.Size.Width * Schema.ppm).Ceil(), (Schema.Size.Height * Schema.ppm).Ceil());
+            Bitmap b = new Bitmap((Schema.Size.Width).Ceil(), (Schema.Size.Height).Ceil());
             Graphics g = b.GetHighGraphics();
             if (Schema.Schema.BackColor.HasValue)
                 g.Clear(Schema.Schema.BackColor.Value);

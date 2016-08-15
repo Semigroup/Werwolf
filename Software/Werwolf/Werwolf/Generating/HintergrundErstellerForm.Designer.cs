@@ -29,17 +29,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HintergrundErstellerForm));
-            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.ColorRO = new System.Windows.Forms.Label();
             this.ColorLO = new System.Windows.Forms.Label();
             this.FarbeRU = new System.Windows.Forms.Label();
             this.FarbeLU = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.GroseBox = new Assistment.form.PointFBox();
+            this.enumBox1 = new Assistment.form.EnumBox();
             this.BoxRU = new Assistment.form.ColorBox();
             this.BoxLU = new Assistment.form.ColorBox();
             this.BackColorBox = new Assistment.form.ColorBox();
@@ -49,22 +52,9 @@
             this.SamplesBox = new Assistment.form.PointBox();
             this.ThumbBox = new Assistment.form.PointBox();
             this.BoxenBox = new Assistment.form.PointBox();
-            this.enumBox1 = new Assistment.form.EnumBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ppm = new Assistment.form.FloatBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.GroseBox = new Assistment.form.PointFBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(400, 500);
-            this.label1.TabIndex = 1;
             // 
             // label4
             // 
@@ -101,15 +91,6 @@
             this.label8.Size = new System.Drawing.Size(62, 17);
             this.label8.TabIndex = 16;
             this.label8.Text = "Samples";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(432, 464);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 45);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Neu";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -155,6 +136,54 @@
             this.FarbeLU.Size = new System.Drawing.Size(116, 17);
             this.FarbeLU.TabIndex = 28;
             this.FarbeLU.Text = "FarbeLinksUnten";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(418, 283);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 17);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Art";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(537, 464);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(107, 45);
+            this.button2.TabIndex = 33;
+            this.button2.Text = "Speichern";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(418, 427);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 17);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Größe in mm";
+            // 
+            // GroseBox
+            // 
+            this.GroseBox.Location = new System.Drawing.Point(544, 427);
+            this.GroseBox.Name = "GroseBox";
+            this.GroseBox.Size = new System.Drawing.Size(108, 22);
+            this.GroseBox.TabIndex = 38;
+            this.GroseBox.UserPoint = ((System.Drawing.PointF)(resources.GetObject("GroseBox.UserPoint")));
+            this.GroseBox.UserSize = new System.Drawing.SizeF(63F, 89.1F);
+            this.GroseBox.UserX = 63F;
+            this.GroseBox.UserY = 89.1F;
+            // 
+            // enumBox1
+            // 
+            this.enumBox1.EnumType = null;
+            this.enumBox1.Location = new System.Drawing.Point(544, 283);
+            this.enumBox1.Name = "enumBox1";
+            this.enumBox1.Size = new System.Drawing.Size(206, 24);
+            this.enumBox1.TabIndex = 31;
+            this.enumBox1.UserValue = null;
             // 
             // BoxRU
             // 
@@ -239,81 +268,22 @@
             this.BoxenBox.UserX = 0;
             this.BoxenBox.UserY = 0;
             // 
-            // enumBox1
+            // pictureBox1
             // 
-            this.enumBox1.EnumType = null;
-            this.enumBox1.Location = new System.Drawing.Point(544, 283);
-            this.enumBox1.Name = "enumBox1";
-            this.enumBox1.Size = new System.Drawing.Size(206, 24);
-            this.enumBox1.TabIndex = 31;
-            this.enumBox1.UserValue = null;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(418, 283);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 17);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "Art";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(537, 464);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 45);
-            this.button2.TabIndex = 33;
-            this.button2.Text = "Speichern";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(418, 427);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 17);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Größe in mm";
-            // 
-            // ppm
-            // 
-            this.ppm.Location = new System.Drawing.Point(732, 464);
-            this.ppm.Name = "ppm";
-            this.ppm.Size = new System.Drawing.Size(51, 22);
-            this.ppm.TabIndex = 36;
-            this.ppm.UserValue = 1F;
-            this.ppm.UserValueMaximum = 3.402823E+38F;
-            this.ppm.UserValueMinimum = 1E-06F;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(691, 469);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 17);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "ppm";
-            // 
-            // GroseBox
-            // 
-            this.GroseBox.Location = new System.Drawing.Point(544, 427);
-            this.GroseBox.Name = "GroseBox";
-            this.GroseBox.Size = new System.Drawing.Size(108, 22);
-            this.GroseBox.TabIndex = 38;
-            this.GroseBox.UserPoint = ((System.Drawing.PointF)(resources.GetObject("GroseBox.UserPoint")));
-            this.GroseBox.UserSize = new System.Drawing.SizeF(6.3F, 8.91F);
-            this.GroseBox.UserX = 6.3F;
-            this.GroseBox.UserY = 8.91F;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(400, 522);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 39;
+            this.pictureBox1.TabStop = false;
             // 
             // HintergrundErstellerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 546);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.GroseBox);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.ppm);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
@@ -329,7 +299,6 @@
             this.Controls.Add(this.ColorLO);
             this.Controls.Add(this.BoxLO);
             this.Controls.Add(this.BurstBox);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.SamplesBox);
             this.Controls.Add(this.label7);
@@ -337,9 +306,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.BoxenBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label1);
             this.Name = "HintergrundErstellerForm";
             this.Text = "HintergrundErstellerForm";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,7 +316,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private Assistment.form.PointBox BoxenBox;
@@ -355,7 +323,6 @@
         private Assistment.form.PointBox ThumbBox;
         private System.Windows.Forms.Label label8;
         private Assistment.form.PointBox SamplesBox;
-        private System.Windows.Forms.Button button1;
         private Assistment.form.FloatBox BurstBox;
         private System.Windows.Forms.Label label2;
         private Assistment.form.ColorBox BackColorBox;
@@ -371,9 +338,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label6;
-        private Assistment.form.FloatBox ppm;
-        private System.Windows.Forms.Label label9;
         private Assistment.form.PointFBox GroseBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
     }
 }

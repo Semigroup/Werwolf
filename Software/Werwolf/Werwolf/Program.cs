@@ -30,7 +30,7 @@ namespace Werwolf
             PreForm<BildDarstellung> p = new UnterDarstellungForm<BildDarstellung>();
             p.Element = new BildDarstellung();
 
-            Karte Karte = new Inhalt.Karte();
+            Karte Karte = new Karte();
             Karte.Darstellung = new Darstellung();
             Karte.Aufgaben = new Aufgabe(new string[] {"adsasdasd","assadad" });
             Karte.Darstellung.Text.BalkenDicke = 1;
@@ -58,35 +58,6 @@ namespace Werwolf
             Fraktion f = new Fraktion();
             //f.Hintergrundbild = new Inhalt.Bild(
             return f;
-        }
-        public static void Warhammer()
-        {
-            Karte EngelDesImperators = new Karte();
-            Karte MartyrerDesImperators = new Karte();
-            Karte Imperiumstreuer = new Karte();
-            Karte AdeptusMechanicum = new Karte();
-            Karte AnhangerDerPrimordialenWahrheit = new Karte();
-            Karte MartyrerDesChaos = new Karte();
-            Karte ChampionDesChaos = new Karte();
-
-            Karte ImperialerBurger = new Karte();
-            Karte Frater = new Karte();
-            Karte Grenadier = new Karte();
-            Karte Priester = new Karte();
-            Karte Inquisitor = new Karte();
-            Karte Gardist = new Karte();
-            Karte Kommissar = new Karte();
-
-            Karte TechPriester = new Karte();
-
-            Karte Haretiker = new Karte();
-            Karte Psioniker = new Karte();
-            Karte ChaosKultist = new Karte();
-            Karte Hexer = new Karte();
-            Karte Verfuhrer = new Karte();
-            Karte KhorneBerserker = new Karte();
-            Karte DamonenBeschworer = new Karte();
-
         }
 
         public static void TestLayer()
