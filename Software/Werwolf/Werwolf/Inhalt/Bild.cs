@@ -3,35 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Xml;
+using System.IO;
+
+using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
-    public class Bild
+    public class Bild : XmlElement
     {
-        public static Bild Leer { get; private set; }
-
-        static Bild()
+        public string FilePath
         {
-            Leer = new Bild(new Bitmap(0, 0), "", new SizeF());
+            get { return filePath; }
+            set
+            {
+                filePath = value;
+                if (value == null || value.Length == 0)
+                    Image = new Bitmap(1, 1);
+                else if (File.Exists(filePath))
+                    Image = Image.FromFile(value);
+                else
+                    Image = Image.FromFile(Path.Combine(Universe.rootBilder, value));
+            }
         }
+        public string Artist { get; private set; }
+        public SizeF Size { get; set; }
+        public PointF Zentrum { get; set; }
 
         public Image Image { get; private set; }
-        public string Artist { get; private set; }
-        /// <summary>
-        /// Größe in Millimeter
-        /// </summary>
-        public SizeF Size { get; private set; }
+        private string filePath;
 
-        public Bild(Image Image, string Artist, SizeF Size)
+        public Bild()
+            : base("Bild", true)
         {
-            this.Image = Image;
-            this.Artist = Artist;
-            this.Size = Size;
+
         }
-        public Bild(string filePath, SizeF Size)
-            : this(Image.FromFile(filePath), "", Size)
+        public Bild(string Name, string FilePath, string Artist, Universe Universe)
+            : base("Bild", true)
         {
+            this.Universe = Universe;
+            this.Name = Name;
+            this.FilePath = FilePath;
+            this.Artist = Artist;
+        }
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
 
+            this.FilePath = Loader.XmlReader.getString("FilePath");
+            this.Artist = Loader.XmlReader.getString("Artist");
+            this.Zentrum = Loader.XmlReader.getPointF("Zentrum");
+            this.Size = Loader.XmlReader.getSizeF("Size");
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            XmlWriter.writeAttribute("FilePath", FilePath);
+            XmlWriter.writeAttribute("Artist", Artist);
+            XmlWriter.writeSize("Size", Size);
+            XmlWriter.writePoint("Zentrum", Zentrum);
         }
     }
 }

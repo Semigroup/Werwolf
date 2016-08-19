@@ -13,9 +13,9 @@ namespace Werwolf.Inhalt
     {
         private string[] roherText;
 
-        public Aufgabe(string[] roherText)
+        public Aufgabe(string roherText)
         {
-            this.roherText = roherText;
+            this.roherText = roherText.Split(new string[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public int Anzahl()
@@ -31,6 +31,11 @@ namespace Werwolf.Inhalt
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            return roherText.SumText("\r\n\r\n");
         }
     }
 }

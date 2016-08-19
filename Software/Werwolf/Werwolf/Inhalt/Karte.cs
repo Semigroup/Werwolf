@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+
+using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
@@ -21,12 +24,28 @@ namespace Werwolf.Inhalt
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
-
-            Darstellung = new Darstellung();
-            Darstellung.Read(Loader);
+            
             Aufgaben = Loader.GetAufgabe("Aufgaben");
             Fraktion = Loader.GetFraktion();
             Gesinnung = Loader.GetGesinnung();
+            Loader.XmlReader.Next();
+            if (Loader.XmlReader.Name.Equals("Darstellung"))
+            {
+                Darstellung = new Darstellung();
+                Darstellung.Read(Loader);
+            }
+            else
+                Darstellung = Loader.StandardDarstellung;
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+
+            XmlWriter.writeAttribute("Fraktion", Fraktion.Name);
+            XmlWriter.writeAttribute("Gesinnung", Gesinnung.Name);
+            XmlWriter.writeAttribute("Aufgaben", Aufgaben.ToString());
+            if (!Darstellung.IstStandard())
+                Darstellung.Write(XmlWriter);
         }
     }
 }

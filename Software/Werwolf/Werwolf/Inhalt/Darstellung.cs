@@ -15,6 +15,8 @@ namespace Werwolf.Inhalt
 {
     public class Darstellung : XmlElement
     {
+        public Darstellung Standard { get; private set; }
+
         public HintergrundDarstellung Hintergrund { get; private set; }
         public TitelDarstellung Titel { get; private set; }
         public BildDarstellung Bild { get; private set; }
@@ -38,33 +40,56 @@ namespace Werwolf.Inhalt
             this.Info = new InfoDarstellung();
         }
 
+        private void setStandard(Darstellung Standard)
+        {
+            if (Standard != null)
+            {
+                this.Standard = Standard;
+                Hintergrund = Standard.Hintergrund;
+                Titel = Standard.Titel;
+                Bild = Standard.Bild;
+                Text = Standard.Text;
+                Info = Standard.Info;
+            }
+        }
         protected override void ReadIntern(Loader Loader)
         {
+            base.ReadIntern(Loader);
+
             Size = Loader.XmlReader.getSizeF("Size");
+            setStandard(Loader.StandardDarstellung);
             while (Loader.XmlReader.Next())
-                switch (Loader.XmlReader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        bool Found = false;
-                        foreach (var item in UnterDarstellungen)
-                            if (item.XmlName.Equals(Loader.XmlReader.Name))
-                            {
-                                item.Read(Loader);
-                                Found = true;
-                            }
-                        if (!Found)
-                            throw new NotImplementedException();
+            {
+                bool found = false;
+                foreach (var item in UnterDarstellungen)
+                    if (item.XmlName.Equals(Loader.XmlReader.Name))
+                    {
+                        item.Read(Loader);
+                        found = true;
                         break;
+                    }
+                if (!found)
+                    return;
+            }
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            if (Standard != null && Hintergrund != Standard.Hintergrund)
+                Hintergrund.Write(XmlWriter);
+            if (Standard != null && Titel != Standard.Titel)
+                Titel.Write(XmlWriter);
+            if (Standard != null && Bild != Standard.Bild)
+                Bild.Write(XmlWriter);
+            if (Standard != null && Text != Standard.Text)
+                Text.Write(XmlWriter);
+            if (Standard != null && Info != Standard.Info)
+                Info.Write(XmlWriter);
+        }
 
-                    case XmlNodeType.EndElement:
-                        if (this.XmlName.Equals(Loader.XmlReader.Name))
-                            return;
-                        else
-                            throw new NotImplementedException();
-
-                    default:
-                        throw new NotImplementedException();
-                }
+        public bool IstStandard()
+        {
+            return Standard == null;
         }
     }
 
@@ -79,7 +104,8 @@ namespace Werwolf.Inhalt
         public FontMeasurer FontMeasurer { get; private set; }
         public bool Existiert { get; set; }
         public bool HatRand { get; set; }
-        //public float ppm { get; private set; }
+        public Color Farbe { get; set; }
+        public Color RandFarbe { get; set; }
 
         public UnterDarstellung(string XmlName)
             : base(XmlName, true)
@@ -89,16 +115,24 @@ namespace Werwolf.Inhalt
 
         protected override void ReadIntern(Loader Loader)
         {
+            base.ReadIntern(Loader);
+
             Existiert = Loader.XmlReader.getBoolean("Existiert");
             HatRand = Loader.XmlReader.getBoolean("HatRand");
             Font = Loader.GetFont("Font");
             Rand = Loader.XmlReader.getSizeF("Rand");
-            //ppm = Loader.XmlReader.getFloat("ppm");
+            Farbe = Loader.XmlReader.getColorHexARGB("Farbe");
+            RandFarbe = Loader.XmlReader.getColorHexARGB("RandFarbe");
         }
 
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
+            base.WriteIntern(XmlWriter);
+
             XmlWriter.writeBoolean("Existiert", Existiert);
+            XmlWriter.writeBoolean("HatRand", HatRand);
+            XmlWriter.writeFont("Font", Font);
+            XmlWriter.writeSize("Rand", Rand);
         }
     }
     public class HintergrundDarstellung : UnterDarstellung
@@ -110,6 +144,17 @@ namespace Werwolf.Inhalt
             : base("Hintergrund")
         {
 
+        }
+
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
+            RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            XmlWriter.writeBoolean("RundeEcken", RundeEcken);
         }
 
         public void MakeRandBild(float ppm, Darstellung Darstellung, float Faktor)
@@ -155,22 +200,15 @@ namespace Werwolf.Inhalt
     }
     public class TitelDarstellung : UnterDarstellung
     {
-        public Color HintergrundFarbe { get; private set; }
-
         public TitelDarstellung()
             : base("Titel")
         {
         }
-
-        protected override void ReadIntern(Loader Loader)
-        {
-            base.ReadIntern(Loader);
-            HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
-        }
     }
     public class BildDarstellung : UnterDarstellung
     {
-        public SizeF Alignment { get; private set; }
+        //public PointF Point { get; private set; }
+        //public SizeF Size { get; private set; }
 
         public BildDarstellung()
             : base("Bild")
@@ -178,15 +216,23 @@ namespace Werwolf.Inhalt
 
         }
 
-        protected override void ReadIntern(Loader Loader)
-        {
-            base.ReadIntern(Loader);
-            Alignment = Loader.XmlReader.getSizeF("Alignment");
-        }
+        //protected override void ReadIntern(Loader Loader)
+        //{
+        //    base.ReadIntern(Loader);
+
+        //    Point = Loader.XmlReader.getPointF("Point");
+        //    Size = Loader.XmlReader.getSizeF("Size");
+        //}
+        //protected override void WriteIntern(XmlWriter XmlWriter)
+        //{
+        //    base.WriteIntern(XmlWriter);
+
+        //    XmlWriter.writeSize("Size", Size);
+        //    XmlWriter.writePoint("Point", Point);
+        //}
     }
     public class TextDarstellung : UnterDarstellung
     {
-        //public Color HintergrundFarbe { get; private set; }
         public float BalkenDicke { get; set; }
         public float InnenRadius { get; set; }
 
@@ -197,8 +243,14 @@ namespace Werwolf.Inhalt
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
-            //HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
             BalkenDicke = Loader.XmlReader.getFloat("BalkenDicke");
+            InnenRadius = Loader.XmlReader.getFloat("InnenRadius");
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            XmlWriter.writeFloat("BalkenDicke", BalkenDicke);
+            XmlWriter.writeFloat("InnenRadius", InnenRadius);
         }
     }
     public class InfoDarstellung : UnterDarstellung

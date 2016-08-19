@@ -10,7 +10,7 @@ using Assistment.Extensions;
 using Assistment.Texts;
 using Assistment.Drawing.Geometries;
 using Assistment.Drawing.LinearAlgebra;
-using Assistment.Drawing;
+//using Assistment.Drawing;
 
 using Werwolf.Generating;
 using Werwolf.Karten;
@@ -24,15 +24,56 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
+            Universe Universe = new Universe(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
 
+            foreach (var item in Universe.Bilder.Values)
+            {
+                item.Zentrum = new PointF(0.5f, 0.5f);
+                item.Size = new SizeF(10, item.Image.Height * 10f / item.Image.Width);
+            }
+            Universe.Save(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
+
+            //IKartenmacher kk = new KartenEinzelbildMacher();
+            //kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 3);
+
+        }
+        public static void MakeUniverser()
+        {
+            Universe Universe = new Universe();
+            Universe.Name = "Warhammer40K,_Kampf_der_Götter";
+            Universe.MakePfade(@"D:\CSArbeiten\Github\Werwolf\WH40K\");
+
+            Universe.Bilder.Add(new Bild("Imperialer_Bürger", "Imperialer Bürger.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Grenadier", "Grenadier.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Gardist", "Gardist.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Kommissar", "Kommissar.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Frater", "Frater.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Priester", "Priester.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Inquisitor", "Inquisitor.jpg", "", Universe));
+
+            Universe.Bilder.Add(new Bild("Tech-Priester", "Tech-Priester.jpg", "", Universe));
+
+            Universe.Bilder.Add(new Bild("Häretiker", "Häretiker.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Chaos-Kultist", "Chaos-Kultist.png", "", Universe));
+            Universe.Bilder.Add(new Bild("Khorne-Berserker", "Khorne-Berserker.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Verführer", "Verführer.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Psioniker", "Psioniker.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Dämonenbeschwörer", "Dämonenbeschwörer.jpg", "", Universe));
+            Universe.Bilder.Add(new Bild("Hexer", "Hexer.jpg", "", Universe));
+
+            Universe.Save(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
+        }
+        public static void MakeKarte()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             PreForm<BildDarstellung> p = new UnterDarstellungForm<BildDarstellung>();
             p.Element = new BildDarstellung();
 
             Karte Karte = new Karte();
             Karte.Darstellung = new Darstellung();
-            Karte.Aufgaben = new Aufgabe(new string[] {"adsasdasd","assadad" });
+            Karte.Aufgaben = new Aufgabe("adsasdasd\r\n\r\nassadad");
             Karte.Darstellung.Text.BalkenDicke = 1;
             Karte.Darstellung.Text.Existiert = true;
             Karte.Darstellung.Text.Font = new Font("Calibri", 11);
@@ -52,14 +93,17 @@ namespace Werwolf
             //TestTitel();
             //HintergrundErsteller he = new HintergrundErsteller();
         }
-
+        public static void MakeFraktionen()
+        {
+            ElementMenge<Fraktion> Fraktionen = new ElementMenge<Fraktion>("Fraktionen", null);
+            //Fraktionen.Add(new Fraktion(
+        }
         public static Fraktion GetFraktion()
         {
             Fraktion f = new Fraktion();
             //f.Hintergrundbild = new Inhalt.Bild(
             return f;
         }
-
         public static void TestLayer()
         {
             //int c = 100;
@@ -175,7 +219,6 @@ Eventuell sogar, falls sich genügend Menschenmaterial findet, einen Indoor-Aben
             //cs.createImage("test", 1000, float.MaxValue);
             cs.Geometry(50).createPDF("test");
         }
-
         public static void MakeArtist(string directory)
         {
             //Image img = Image.FromFile("C:/Users/msi/Desktop/Bild.jpg");

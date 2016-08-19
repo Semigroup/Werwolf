@@ -14,17 +14,8 @@ namespace Werwolf.Inhalt
         /// <summary>
         /// Mit Underlines statt Whitespaces
         /// </summary>
-        public string Name { get; private set; }
-        public string Schreibname
-        {
-            get
-            {
-                return Name.Replace('_', ' ');
-            }
-        }
         public string Desc { get; private set; }
-        public Bild Bild { get; private set; }
-        public Universe Universe;
+        public Bild Bild { get; set; }
 
         public Element(string XmlName, bool Klein)
             : base(XmlName, Klein)
@@ -34,9 +25,16 @@ namespace Werwolf.Inhalt
 
         protected override void ReadIntern(Loader Loader)
         {
-            Name = Loader.XmlReader.getString("Name");
+            base.ReadIntern(Loader);
             Desc = Loader.XmlReader.getString("Desc");
             Bild = Loader.GetBild("Bild");
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            XmlWriter.writeAttribute("Desc", Desc);
+            if (Bild != null)
+                XmlWriter.writeAttribute("Bild", Bild.Name);
         }
     }
 }

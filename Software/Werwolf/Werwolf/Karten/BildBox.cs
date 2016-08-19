@@ -23,8 +23,10 @@ namespace Werwolf.Karten
 
         public Bild Bild { get; private set; }
 
-        public BildBox(Bild Bild, Modus MyModus) :base(null)
+        public BildBox(Karte Karte, Bild Bild, Modus MyModus)
+            : base(null)
         {
+            this.Karte = Karte;
             this.Bild = Bild;
             this.MyModus = MyModus;
             this.update();
@@ -45,8 +47,8 @@ namespace Werwolf.Karten
 
         public override void update()
         {
-            if (MyModus == Modus.Hauptbild)
-                this.box.Size = Bild.Size.mul(ppm);
+            //if (MyModus == Modus.Hauptbild)
+            //    this.box = new RectangleF(Darstellung.Bild.Point.mul(Faktor), Darstellung.Bild.Size.mul(Faktor));
         }
         public override void OnPpmChanged()
         {
@@ -55,18 +57,27 @@ namespace Werwolf.Karten
 
         public override void setup(RectangleF box)
         {
-            this.box.Location = box.Location;
-            if (MyModus == Modus.Hintergrund)
-                this.box.Size = box.Size;
+            switch (MyModus)
+            {
+                case Modus.Hintergrund:
+                    this.box = box;
+                    break;
+                case Modus.Hauptbild:
+                    //this.box = new RectangleF(Darstellung.Bild.Point.mul(Faktor), Darstellung.Bild.Size.mul(Faktor));
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
         public override void draw(DrawContext con)
         {
-            con.drawImage(Bild.Image, box);
+            if (Bild != null)
+                con.drawImage(Bild.Image, box);
         }
 
         public override DrawBox clone()
         {
-            BildBox bb = new BildBox(Bild, MyModus);
+            BildBox bb = new BildBox(Karte, Bild, MyModus);
             bb.box = box;
             return bb;
         }

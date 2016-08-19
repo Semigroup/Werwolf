@@ -14,6 +14,15 @@ namespace Werwolf.Inhalt
         /// Ist dieses XML-Element ein Oneliner oder besitzt es eine eigene Hierarchie?
         /// </summary>
         public bool Klein { get; private set; }
+        public string Name { get; set; }
+        public string Schreibname
+        {
+            get
+            {
+                return Name.Replace('_', ' ');
+            }
+        }
+        public Universe Universe { get; set; }
 
         public XmlElement(string XmlName, bool Klein)
         {
@@ -23,6 +32,8 @@ namespace Werwolf.Inhalt
 
         protected virtual void ReadIntern(Loader Loader)
         {
+            this.Name = Loader.XmlReader.getString("Name");
+            this.Universe = Loader.Universe;
         }
         public void Read(Loader Loader)
         {
@@ -32,11 +43,12 @@ namespace Werwolf.Inhalt
 
             ReadIntern(Loader);
 
-            while (Loader.XmlReader.Depth > d)
-                Loader.XmlReader.Next();
+            //while (Loader.XmlReader.Depth > d)
+            //    Loader.XmlReader.Next();
         }
         protected virtual void WriteIntern(XmlWriter XmlWriter)
         {
+            XmlWriter.writeAttribute("Name", Name);
         }
         public void Write(XmlWriter XmlWriter)
         {

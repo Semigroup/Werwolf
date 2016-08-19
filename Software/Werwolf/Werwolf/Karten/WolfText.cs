@@ -28,9 +28,10 @@ namespace Werwolf.Karten
 
         private Image Back;
 
-        public WolfText(Karte Karte) : base(Karte)
+        public WolfText(Karte Karte)
+            : base(Karte)
         {
-
+            OnKarteChanged();
         }
 
         public override void OnKarteChanged()
@@ -158,14 +159,12 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             //System.Windows.Forms.MessageBox.Show(box + ", " + Back.Size);
-            con.drawImage(Back, box);
-            foreach (var item in Texts)
-                item.draw(con);
-        }
-
-        public override DrawBox clone()
-        {
-            throw new NotImplementedException();
+            if (Karte.Aufgaben.Anzahl() > 0)
+            {
+                con.drawImage(Back, box);
+                foreach (var item in Texts)
+                    item.draw(con);
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Werwolf.Inhalt
     {
         public Universe Universe { get; private set; }
         public XmlReader XmlReader { get; private set; }
+        public Darstellung StandardDarstellung { get { return Universe.StandardDarstellung; } }
 
         public Loader(Universe Universe, XmlReader XmlReader)
         {
@@ -26,18 +27,6 @@ namespace Werwolf.Inhalt
         {
         }
 
-        public Bild GetBild(string AttributeName)
-        {
-            string s = XmlReader.getString(AttributeName);
-            if (s.Length > 0)
-            {
-                Image img = Image.FromFile(Universe.BilderPfad + s);
-                return new Bild(img, s.Ordner(), XmlReader.getSizeF(AttributeName + "Size"));
-            }
-            else
-                return Bild.Leer;
-        }
-
         public Font GetFont(string AttributeName)
         {
           //  return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
@@ -47,10 +36,7 @@ namespace Werwolf.Inhalt
         public Aufgabe GetAufgabe(string AttributeName)
         {
             string s = XmlReader.getString(AttributeName);
-            string[] ss = s.Split(new string[] { "\r", "\n", "\\r", "\\n" }, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < ss.Length; i++)
-                ss[i] = ss[i].Trim();
-            return new Aufgabe(ss);
+            return new Aufgabe(s);
         }
 
         public Fraktion GetFraktion()
@@ -65,6 +51,13 @@ namespace Werwolf.Inhalt
             string s = XmlReader.GetAttribute("Gesinnung");
             if (s != null && s.Length > 0)
                 return Universe.Gesinnungen[s];
+            else return null;
+        }
+        public Bild GetBild(string AttributeName)
+        {
+            string s = XmlReader.GetAttribute("Bild");
+            if (s != null && s.Length > 0)
+                return Universe.Bilder[s];
             else return null;
         }
     }

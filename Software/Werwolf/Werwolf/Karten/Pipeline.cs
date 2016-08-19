@@ -57,8 +57,8 @@ namespace Werwolf.Karten
         public Pipeline(Karte Karte)
             : base(Karte)
         {
-            this.Hintergrund = new BildBox(Karte.Fraktion.Hintergrundbild, BildBox.Modus.Hintergrund);
-            this.Bild = new BildBox(Karte.Bild, BildBox.Modus.Hauptbild);
+            this.Hintergrund = new BildBox(Karte, Karte.Fraktion.Bild, BildBox.Modus.Hintergrund);
+            this.Bild = new BildBox(Karte, Karte.Bild, BildBox.Modus.Hauptbild);
             this.Text = new WolfText(Karte);
             this.Titel = new WolfTitel(Karte);
             this.Gesinnung = new InfoBox(Karte);
@@ -103,8 +103,7 @@ namespace Werwolf.Karten
         }
         public void SetupBild()
         {
-            Bild.box.Location = InnenboxFaktor.Location
-                .add(Darstellung.Size.mul(Faktor).sub(Bild.box.Size).mul(Darstellung.Bild.Alignment).ToPointF());
+            Bild.setup(InnenboxFaktor);
         }
         public void SetupText()
         {
@@ -129,8 +128,8 @@ namespace Werwolf.Karten
 
         public override void draw(DrawContext con)
         {
-            foreach (var item in Layers)
-                item.draw(con);
+            for (int i = 0; i < Layers.Length; i++)
+                Layers[i].draw(con);
         }
 
         public override void OnKarteChanged()

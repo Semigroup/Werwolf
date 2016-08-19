@@ -22,10 +22,13 @@ namespace Werwolf.Karten
         public override void OnKarteChanged()
         {
             Text t = new Text();
-            t.preferedFont = Darstellung.Titel.FontMeasurer;
+            t.preferedFont = TitelDarstellung.FontMeasurer;
             t.addRegex(Karte.Schreibname);
-            this.Titel = Titel.GetTitel(Karte.Fraktion.TitelArt, t, Darstellung.Titel.Rand.Height, Pens.Black,
-                Darstellung.Titel.HintergrundFarbe.ToBrush());
+            this.Titel = Titel.GetTitel(Karte.Fraktion.TitelArt, 
+                t, 
+                TitelDarstellung.Rand.Height,
+                TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
+                TitelDarstellung.Farbe.ToBrush());
             this.Titel.Scaling = Ppm;
         }
         public override void OnPpmChanged()
@@ -63,11 +66,6 @@ namespace Werwolf.Karten
         public override void draw(Assistment.Texts.DrawContext con)
         {
             Titel.draw(con);
-        }
-
-        public override Assistment.Texts.DrawBox clone()
-        {
-            throw new NotImplementedException();
         }
     }
 }

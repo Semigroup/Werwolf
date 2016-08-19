@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using Assistment.Extensions;
 using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
-    public class ElementMenge<T> : XmlElement, IDictionary<string, T> where T : Element, new()
+    public class ElementMenge<T> : XmlElement, IDictionary<string, T> where T : XmlElement, new()
     {
         private SortedDictionary<string, T> dictionary = new SortedDictionary<string, T>();
-        public Universe Universe { get; private set; }
-        public string Pfad { get; private set; }
+        public string Pfad { get; set; }
 
         public ElementMenge(string XmlName, Universe Universe)
             : base(XmlName, false)
@@ -22,19 +22,45 @@ namespace Werwolf.Inhalt
         public void Read(string Pfad)
         {
             this.Pfad = Pfad;
-            this.Read(new Loader(Universe, Pfad));
+            Loader l = Universe.CreateLoader(Pfad);
+            this.Read(l);
+            l.XmlReader.Close();
         }
 
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
+
             while (Loader.XmlReader.Next())
             {
                 T NeuesElement = new T();
-                NeuesElement.Universe = Universe;
                 NeuesElement.Read(Loader);
                 dictionary.Add(NeuesElement.Name, NeuesElement);
             }
+        }
+        protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+
+            foreach (var item in dictionary.Values)
+                item.Write(XmlWriter);
+        }
+        public void Save()
+        {
+            XmlWriterSettings s = new XmlWriterSettings();
+            s.NewLineOnAttributes = true;
+            s.Indent = true;
+            s.IndentChars = new string(' ', 4);
+            XmlWriter writer = XmlWriter.Create(Pfad, s);
+            writer.WriteStartDocument();
+            Write(writer);
+            writer.WriteEndDocument();
+            writer.Close();
+        }
+
+        public void Add(T value)
+        {
+            Add(value.Name, value);
         }
 
         public void Add(string key, T value)
