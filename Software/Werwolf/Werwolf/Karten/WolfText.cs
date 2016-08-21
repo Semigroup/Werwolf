@@ -16,8 +16,8 @@ namespace Werwolf.Karten
 {
     public class WolfText : WolfBox
     {
-        private RectangleF AussenBox;
-        private RectangleF InnenBox;
+        private RectangleF OuterBox;
+        private RectangleF InnerBox;
         private RectangleF TextBox;
 
         private Text[] Texts;
@@ -36,26 +36,13 @@ namespace Werwolf.Karten
 
         public override void OnKarteChanged()
         {
+            base.OnKarteChanged();
             update();
         }
         public override void OnPpmChanged()
         {
+            base.OnPpmChanged();
             update();
-        }
-
-        public override float getSpace()
-        {
-            return AussenBox.Size.Inhalt();
-        }
-
-        public override float getMin()
-        {
-            return AussenBox.Width;
-        }
-
-        public override float getMax()
-        {
-            return AussenBox.Width;
         }
 
         public override void update()
@@ -63,18 +50,17 @@ namespace Werwolf.Karten
             if (Karte == null || Darstellung == null || Karte.Aufgaben.Anzahl() == 0)
                 return;
 
-            AussenBox.Location = Darstellung.Hintergrund.Rand.ToPointF();
-            AussenBox.Size = Darstellung.Size.sub(Darstellung.Hintergrund.Rand.mul(2));
+            OuterBox = InnenBox;
 
-            InnenBox.Location = AussenBox.Location.add(Rand.ToPointF());
-            InnenBox.Location = InnenBox.Location.add(new PointF(1, 1).mul(BalkenDicke));
-            InnenBox.Size = AussenBox.Size.sub(InnenBox.Location.sub(AussenBox.Location).ToSize().mul(2));
+            InnerBox.Location = OuterBox.Location.add(Rand.ToPointF());
+            InnerBox.Location = InnerBox.Location.add(new PointF(1, 1).mul(BalkenDicke));
+            InnerBox.Size = OuterBox.Size.sub(InnerBox.Location.sub(OuterBox.Location).ToSize().mul(2));
 
-            TextBox.Location = InnenBox.Location.add(new PointF(1, 1).mul(InnenRadius));
-            TextBox.Size = InnenBox.Size.sub(TextBox.Location.sub(InnenBox.Location).mul(2).ToSize());
+            TextBox.Location = InnerBox.Location.add(new PointF(1, 1).mul(InnenRadius));
+            TextBox.Size = InnerBox.Size.sub(TextBox.Location.sub(InnerBox.Location).mul(2).ToSize());
 
-            AussenBox = AussenBox.mul(Faktor);
-            InnenBox = InnenBox.mul(Faktor);
+            OuterBox = OuterBox.mul(Faktor);
+            InnerBox = InnerBox.mul(Faktor);
             TextBox = TextBox.mul(Faktor);
 
             Texts = new Text[Karte.Aufgaben.Anzahl()];
@@ -96,10 +82,10 @@ namespace Werwolf.Karten
 
             TextBox.Height = TextBox.Bottom - Texts[0].Top;
             TextBox.Y = Texts[0].Top;
-            InnenBox.Height = InnenBox.Bottom - (TextBox.Top - InnenRadius * Faktor);
-            InnenBox.Y = TextBox.Top - InnenRadius * Faktor;
-            AussenBox.Height = AussenBox.Bottom - (InnenBox.Top - Faktor * (BalkenDicke + Rand.Height));
-            AussenBox.Y = InnenBox.Top - Faktor * (BalkenDicke + Rand.Height);
+            InnerBox.Height = InnerBox.Bottom - (TextBox.Top - InnenRadius * Faktor);
+            InnerBox.Y = TextBox.Top - InnenRadius * Faktor;
+            OuterBox.Height = OuterBox.Bottom - (InnerBox.Top - Faktor * (BalkenDicke + Rand.Height));
+            OuterBox.Y = InnerBox.Top - Faktor * (BalkenDicke + Rand.Height);
 
             Mal();
         }
@@ -114,12 +100,12 @@ namespace Werwolf.Karten
 
         private void Mal()
         {
-            PointF Offset = AussenBox.Location.mul(-1);
-            Size s = AussenBox.Size.mul(ppm).ToSize();
+            PointF Offset = OuterBox.Location.mul(-1);
+            Size s = OuterBox.Size.mul(ppm).ToSize();
             Back = new Bitmap(s.Width, s.Height);
             Graphics g = Back.GetHighGraphics();
             g.ScaleTransform(ppm, ppm);
-            OrientierbarerWeg OrientierbarerWeg = Rund(InnenBox.move(Offset), BalkenDicke * Faktor);
+            OrientierbarerWeg OrientierbarerWeg = Rund(InnerBox.move(Offset), BalkenDicke * Faktor);
             Hohe h = t =>
                 OrientierbarerWeg.normale(t).SKP(Rand.ToPointF())
                 * Faktor
@@ -149,7 +135,7 @@ namespace Werwolf.Karten
 
         public override void setup(RectangleF box)
         {
-            this.box = AussenBox;
+            this.box = OuterBox;
             //this.box.Size = AussenBox.Size;
             //PointF Diff = box.Location.sub(AussenBox.Location);
             //foreach (var item in Texts)

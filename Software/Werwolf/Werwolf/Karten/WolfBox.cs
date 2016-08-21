@@ -56,5 +56,18 @@ namespace Werwolf.Karten
         {
             throw new NotImplementedException();
         }
+
+        public override float getMax()
+        {
+            throw new NotImplementedException();
+        }
+        public override float getMin()
+        {
+            throw new NotImplementedException();
+        }
+        public override float getSpace()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
