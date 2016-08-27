@@ -15,14 +15,8 @@ namespace Werwolf.Inhalt
         /// </summary>
         public bool Klein { get; private set; }
         public string Name { get; set; }
-        public string Schreibname
-        {
-            get
-            {
-                return Name.Replace('_', ' ');
-            }
-        }
-        public Universe Universe { get; set; }
+        public string Schreibname { get; set; }
+        public Universe Universe { get; private set; }
 
         public XmlElement(string XmlName, bool Klein)
         {
@@ -30,17 +24,27 @@ namespace Werwolf.Inhalt
             this.Klein = Klein;
         }
 
+        public virtual void Init(Universe Universe)
+        {
+            this.Universe = Universe;
+            this.Name = "Standard";
+            this.Schreibname = "Standard-" + XmlName;
+        }
+
         protected virtual void ReadIntern(Loader Loader)
         {
             this.Name = Loader.XmlReader.getString("Name");
+            this.Schreibname = Loader.XmlReader.getString("Schreibname");
+            if (Schreibname.Length == 0)
+                Schreibname = Name.Replace('_', ' ');
+
             this.Universe = Loader.Universe;
         }
         public void Read(Loader Loader)
         {
-            int d = Loader.XmlReader.Depth;
+            //int d = Loader.XmlReader.Depth;
             if (!Loader.XmlReader.Name.Equals(XmlName))
                 throw new NotImplementedException();
-
             ReadIntern(Loader);
 
             //while (Loader.XmlReader.Depth > d)

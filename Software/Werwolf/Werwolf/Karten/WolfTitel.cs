@@ -15,37 +15,30 @@ namespace Werwolf.Karten
     {
         public Titel Titel { get; private set; }
 
-        public WolfTitel(Karte Karte) : base(Karte)
+        public WolfTitel(Karte Karte,float Ppm)
+            : base(Karte, Ppm)
         {
         }
 
         public override void OnKarteChanged()
         {
-            Text t = new Text();
-            t.preferedFont = TitelDarstellung.FontMeasurer;
-            t.addRegex(Karte.Schreibname);
-            this.Titel = Titel.GetTitel(Karte.Fraktion.TitelArt, 
-                t, 
-                TitelDarstellung.Rand.Height,
-                TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
-                TitelDarstellung.Farbe.ToBrush());
-            this.Titel.Scaling = Ppm;
+            base.OnKarteChanged();
+            update();
         }
         public override void OnPpmChanged()
         {
-            this.Titel.Scaling = Ppm;
+            base.OnKarteChanged();
+            update();
         }
 
         public override float getSpace()
         {
             return Titel.getSpace();
         }
-
         public override float getMin()
         {
             return Titel.getMin();
         }
-
         public override float getMax()
         {
             return Titel.getMax();
@@ -53,17 +46,27 @@ namespace Werwolf.Karten
 
         public override void update()
         {
-            OnKarteChanged();
-            OnPpmChanged();
+            Text t = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer);
+            t.alignment = 0.5f;
+            this.Titel = Titel.GetTitel(Karte.Fraktion.TitelArt,
+                t,
+                TitelDarstellung.Rand.Height * Faktor,
+                TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
+                TitelDarstellung.Farbe.ToBrush());
+            this.Titel.Scaling = Ppm / Faktor;
             Titel.update();
         }
-
-        public override void setup(System.Drawing.RectangleF box)
+        public override bool Visible()
         {
-            Titel.setup(box);
+            return base.Visible() && TitelDarstellung.Existiert && Karte.Name.Length > 0;
+        }
+        public override void setup(RectangleF box)
+        {
+            this.box = box;
+            Titel.setup(InnenBox.move(box.Location).Inner(Faktor, Faktor));
         }
 
-        public override void draw(Assistment.Texts.DrawContext con)
+        public override void draw(DrawContext con)
         {
             Titel.draw(con);
         }

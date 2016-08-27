@@ -9,60 +9,75 @@ using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
-    public class Universe : Element
+    public class Universe : XmlElement
     {
-        public Darstellung StandardDarstellung { get; private set; }
+        public ElementMenge<HintergrundDarstellung> HintergrundDarstellungen { get; private set; }
+        public ElementMenge<TitelDarstellung> TitelDarstellungen { get; private set; }
+        public ElementMenge<BildDarstellung> BildDarstellungen { get; private set; }
+        public ElementMenge<TextDarstellung> TextDarstellungen { get; private set; }
+        public ElementMenge<InfoDarstellung> InfoDarstellungen { get; private set; }
 
         public ElementMenge<Bild> Bilder { get; private set; }
         public ElementMenge<Fraktion> Fraktionen { get; private set; }
         public ElementMenge<Gesinnung> Gesinnungen { get; private set; }
         public ElementMenge<Karte> Karten { get; private set; }
 
-        public string rootBilder { get; set; }
+        public string RootBilder { get; set; }
+        public string Pfad { get; set; }
+
+        public Menge[] ElementMengen
+        {
+            get
+            {
+                return new Menge[] { HintergrundDarstellungen, TitelDarstellungen, 
+                    BildDarstellungen, TextDarstellungen, InfoDarstellungen,
+                    Bilder, Fraktionen, Gesinnungen, Karten };
+            }
+        }
 
         public Universe()
             : base("Universe", false)
         {
+            HintergrundDarstellungen = new ElementMenge<HintergrundDarstellung>("HintergrundDarstellungen", this);
+            TitelDarstellungen = new ElementMenge<TitelDarstellung>("TitelDarstellungen", this);
+            BildDarstellungen = new ElementMenge<BildDarstellung>("BildDarstellungen", this);
+            TextDarstellungen = new ElementMenge<TextDarstellung>("TextDarstellungen", this);
+            InfoDarstellungen = new ElementMenge<InfoDarstellung>("InfoDarstellungen", this);
+
             Bilder = new ElementMenge<Bild>("Bilder", this);
             Fraktionen = new ElementMenge<Fraktion>("Fraktionen", this);
             Gesinnungen = new ElementMenge<Gesinnung>("Gesinnungen", this);
             Karten = new ElementMenge<Karte>("Karten", this);
-
-            StandardDarstellung = new Darstellung();
         }
         public Universe(string Pfad)
             : this()
         {
-            this.rootBilder = Path.GetDirectoryName(Pfad) + "\\Bilder";
-            Loader l = CreateLoader(Pfad);
-            Read(l);
-            l.XmlReader.Close();
+            Open(Pfad);
         }
 
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
-            
-            Bilder.Read(Loader.XmlReader.getString("BilderPfad"));
-            Fraktionen.Read(Loader.XmlReader.getString("FraktionenPfad"));
-            Gesinnungen.Read(Loader.XmlReader.getString("GesinnungenPfad"));
-            Karten.Read(Loader.XmlReader.getString("KartenPfad"));
+            RootBilder = Loader.XmlReader.getString("RootBilder");
 
-            Loader.XmlReader.Next();
-            StandardDarstellung.Read(Loader);
+            foreach (var item in ElementMengen)
+                item.Open(Loader.XmlReader.getString(item.XmlName + "Pfad"));
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
+            XmlWriter.writeAttribute("RootBilder", RootBilder);
 
-            XmlWriter.writeAttribute("BilderPfad", Bilder.Pfad);
-            XmlWriter.writeAttribute("FraktionenPfad", Fraktionen.Pfad);
-            XmlWriter.writeAttribute("GesinnungenPfad", Gesinnungen.Pfad);
-            XmlWriter.writeAttribute("KartenPfad", Karten.Pfad);
-
-            StandardDarstellung.Write(XmlWriter);
+            foreach (var item in ElementMengen)
+                XmlWriter.writeAttribute(item.XmlName + "itemPfad", item.Pfad);
         }
-
+        public void Open(string Pfad)
+        {
+            this.Pfad = Pfad;
+            Loader l = CreateLoader(Pfad);
+            Read(l);
+            l.XmlReader.Close();
+        }
         public Loader CreateLoader(string Pfad)
         {
             XmlReader reader = XmlReader.Create(Pfad);
@@ -73,31 +88,28 @@ namespace Werwolf.Inhalt
         {
             return new Loader(this, XmlReader);
         }
-        public void MakePfade(string root)
+        public void Root(string root)
         {
-            Bilder.Pfad = root + "Bilder.xml";
-            Fraktionen.Pfad = root + "Fraktionen.xml";
-            Gesinnungen.Pfad = root + "Gesinnungen.xml";
-            Karten.Pfad = root + "Karten.xml";
+            this.Pfad = Path.Combine(root, "Universe.xml");
+            foreach (var item in ElementMengen)
+                item.Pfad = Path.Combine(root, item.XmlName + ".xml");
 
-            this.rootBilder = root + "\\Bilder\\";
+            this.RootBilder = Path.Combine(root, "\\Bilder\\");
         }
-        public void Save(string FileName)
+        public void Save()
         {
             XmlWriterSettings s = new XmlWriterSettings();
             s.NewLineOnAttributes = true;
             s.Indent = true;
             s.IndentChars = new string(' ', 4);
-            XmlWriter writer = XmlWriter.Create(FileName, s);
+            XmlWriter writer = XmlWriter.Create(Pfad, s);
             writer.WriteStartDocument();
             this.Write(writer);
             writer.WriteEndDocument();
             writer.Close();
 
-            Bilder.Save();
-            Fraktionen.Save();
-            Gesinnungen.Save();
-            Karten.Save();
+            foreach (var item in ElementMengen)
+                item.Save();
         }
     }
 }

@@ -8,42 +8,21 @@ using Assistment.Xml;
 
 namespace Werwolf.Inhalt
 {
-    public class ElementMenge<T> : XmlElement, IDictionary<string, T> where T : XmlElement, new()
+    public abstract class Menge : XmlElement
     {
-        private SortedDictionary<string, T> dictionary = new SortedDictionary<string, T>();
         public string Pfad { get; set; }
 
-        public ElementMenge(string XmlName, Universe Universe)
+        public Menge(string XmlName)
             : base(XmlName, false)
         {
-            this.Universe = Universe;
-        }
 
-        public void Read(string Pfad)
+        }
+        public void Open(string Pfad)
         {
             this.Pfad = Pfad;
             Loader l = Universe.CreateLoader(Pfad);
             this.Read(l);
             l.XmlReader.Close();
-        }
-
-        protected override void ReadIntern(Loader Loader)
-        {
-            base.ReadIntern(Loader);
-
-            while (Loader.XmlReader.Next())
-            {
-                T NeuesElement = new T();
-                NeuesElement.Read(Loader);
-                dictionary.Add(NeuesElement.Name, NeuesElement);
-            }
-        }
-        protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
-        {
-            base.WriteIntern(XmlWriter);
-
-            foreach (var item in dictionary.Values)
-                item.Write(XmlWriter);
         }
         public void Save()
         {
@@ -56,6 +35,55 @@ namespace Werwolf.Inhalt
             Write(writer);
             writer.WriteEndDocument();
             writer.Close();
+        }
+    }
+
+    public class ElementMenge<T> : Menge, IDictionary<string, T> where T : XmlElement, new()
+    {
+        private SortedDictionary<string, T> dictionary = new SortedDictionary<string, T>();
+
+        public T Standard { get; private set; }
+
+        public ElementMenge(string XmlName, Universe Universe)
+            : base(XmlName)
+        {
+            this.Init(Universe);
+        }
+
+        public override void Init(Universe Universe)
+        {
+            base.Init(Universe);
+            Standard = new T();
+            Standard.Init(Universe);
+            Add(Standard);
+        }
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
+            string standardName = Loader.XmlReader.getString("Standard");
+
+            Loader.XmlReader.Next();
+            Clear();
+            while (!Loader.XmlReader.EOF)
+            {
+                T NeuesElement = new T();
+                NeuesElement.Read(Loader);
+                dictionary.Add(NeuesElement.Name, NeuesElement);
+            }
+
+            T standard = new T();
+            if (!TryGetValue(standardName, out standard))
+                this.Add(Standard);
+            else
+                Standard = standard;
+        }
+        protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            XmlWriter.writeAttribute("Standard", Standard.Name);
+
+            foreach (var item in dictionary.Values)
+                item.Write(XmlWriter);
         }
 
         public void Add(T value)
@@ -91,7 +119,10 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                return dictionary[key];
+                T value;
+                if (!dictionary.TryGetValue(key, out value))
+                    value = Standard;
+                return value;
             }
             set
             {

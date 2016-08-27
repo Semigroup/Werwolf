@@ -15,7 +15,6 @@ namespace Werwolf.Inhalt
     {
         public Universe Universe { get; private set; }
         public XmlReader XmlReader { get; private set; }
-        public Darstellung StandardDarstellung { get { return Universe.StandardDarstellung; } }
 
         public Loader(Universe Universe, XmlReader XmlReader)
         {
@@ -29,7 +28,7 @@ namespace Werwolf.Inhalt
 
         public Font GetFont(string AttributeName)
         {
-          //  return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
+            //  return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
             return XmlReader.getFont(AttributeName);
         }
 
@@ -42,23 +41,43 @@ namespace Werwolf.Inhalt
         public Fraktion GetFraktion()
         {
             string s = XmlReader.GetAttribute("Fraktion");
-            if (s != null && s.Length > 0)
-                return Universe.Fraktionen[s];
-            else return null;
+            return Universe.Fraktionen[s];
         }
         public Gesinnung GetGesinnung()
         {
             string s = XmlReader.GetAttribute("Gesinnung");
-            if (s != null && s.Length > 0)
-                return Universe.Gesinnungen[s];
-            else return null;
+            return Universe.Gesinnungen[s];
         }
+        public HintergrundDarstellung GetHintergrundDarstellung()
+        {
+            string s = XmlReader.GetAttribute("HintergrundDarstellung");
+            return Universe.HintergrundDarstellungen[s];
+        }
+        public TextDarstellung GetTextDarstellung()
+        {
+            string s = XmlReader.GetAttribute("TextDarstellung");
+            return Universe.TextDarstellungen[s];
+        }
+        public TitelDarstellung GetTitelDarstellung()
+        {
+            string s = XmlReader.GetAttribute("TitelDarstellung");
+            return Universe.TitelDarstellungen[s];
+        }
+        public BildDarstellung GetBildDarstellung()
+        {
+            string s = XmlReader.GetAttribute("BildDarstellung");
+            return Universe.BildDarstellungen[s];
+        }
+        public InfoDarstellung GetInfoDarstellung()
+        {
+            string s = XmlReader.GetAttribute("InfoDarstellung");
+            return Universe.InfoDarstellungen[s];
+        }
+
         public Bild GetBild(string AttributeName)
         {
             string s = XmlReader.GetAttribute("Bild");
-            if (s != null && s.Length > 0)
-                return Universe.Bilder[s];
-            else return null;
+            return Universe.Bilder[s];
         }
     }
 }

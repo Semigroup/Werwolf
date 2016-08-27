@@ -24,86 +24,53 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
-            Universe Universe = new Universe(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
-
-            foreach (var item in Universe.Bilder.Values)
-            {
-                item.Zentrum = new PointF(0.5f, 0.5f);
-                item.Size = new SizeF(10, item.Image.Height * 10f / item.Image.Width);
-            }
-            Universe.Save(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
-
-            //IKartenmacher kk = new KartenEinzelbildMacher();
-            //kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 3);
-
-        }
-        public static void MakeUniverser()
-        {
             Universe Universe = new Universe();
-            Universe.Name = "Warhammer40K,_Kampf_der_Götter";
-            Universe.MakePfade(@"D:\CSArbeiten\Github\Werwolf\WH40K\");
+            Universe.Root(@"D:\CSArbeiten\Github\Werwolf\WH40K\");
+            Universe.Save();
 
-            Universe.Bilder.Add(new Bild("Imperialer_Bürger", "Imperialer Bürger.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Grenadier", "Grenadier.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Gardist", "Gardist.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Kommissar", "Kommissar.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Frater", "Frater.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Priester", "Priester.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Inquisitor", "Inquisitor.jpg", "", Universe));
-
-            Universe.Bilder.Add(new Bild("Tech-Priester", "Tech-Priester.jpg", "", Universe));
-
-            Universe.Bilder.Add(new Bild("Häretiker", "Häretiker.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Chaos-Kultist", "Chaos-Kultist.png", "", Universe));
-            Universe.Bilder.Add(new Bild("Khorne-Berserker", "Khorne-Berserker.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Verführer", "Verführer.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Psioniker", "Psioniker.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Dämonenbeschwörer", "Dämonenbeschwörer.jpg", "", Universe));
-            Universe.Bilder.Add(new Bild("Hexer", "Hexer.jpg", "", Universe));
-
-            Universe.Save(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
+            //IKartenmacher kk = new KartenPDFMacher();
+            //kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 10);
+            //PDF();
+            //CollectBilder(@"D:\CSArbeiten\Github\Werwolf\WH40K\Bilder\", @"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
         }
-        public static void MakeKarte()
+
+        public static void PDF()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            iTextSharp.text.Document document = new iTextSharp.text.Document();
+            iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, new FileStream("test.pdf", FileMode.Create));
+            document.Open();
+            iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance("asdad.png");
+            float w = img.ScaledWidth;
+            float h = img.ScaledHeight;
+            iTextSharp.text.pdf.PdfContentByte cb = writer.DirectContent;
+            cb.SaveState();
+            //cb.Circle(260, 700, 70);
+            cb.Rectangle(0, 700, 1000, 100);
+            cb.Clip();
+            cb.NewPath();
+            cb.AddImage(img, w, 0, 0, h, 36, 620);
+            cb.RestoreState();
 
-            PreForm<BildDarstellung> p = new UnterDarstellungForm<BildDarstellung>();
-            p.Element = new BildDarstellung();
-
-            Karte Karte = new Karte();
-            Karte.Darstellung = new Darstellung();
-            Karte.Aufgaben = new Aufgabe("adsasdasd\r\n\r\nassadad");
-            Karte.Darstellung.Text.BalkenDicke = 1;
-            Karte.Darstellung.Text.Existiert = true;
-            Karte.Darstellung.Text.Font = new Font("Calibri", 11);
-            Karte.Darstellung.Text.HatRand = true;
-            Karte.Darstellung.Text.InnenRadius = 1;
-            Karte.Darstellung.Text.Rand = new SizeF(5, 5);
-            Karte.Darstellung.Hintergrund.Existiert = true;
-            Karte.Darstellung.Hintergrund.HatRand = true;
-            Karte.Darstellung.Hintergrund.Rand = new SizeF(4, 4);
-            Karte.Darstellung.Size = new SizeF(50, 70);
-
-            Pipeline pp = new Pipeline(Karte);
-            pp.createImage("test");
-
-            Application.Run(p);
-
-            //TestTitel();
-            //HintergrundErsteller he = new HintergrundErsteller();
+            document.Close();
         }
-        public static void MakeFraktionen()
+
+        public static void CollectBilder(string path, string UniversePath)
         {
-            ElementMenge<Fraktion> Fraktionen = new ElementMenge<Fraktion>("Fraktionen", null);
-            //Fraktionen.Add(new Fraktion(
+            Universe Universe = new Universe(UniversePath);
+            ElementMenge<Bild> Bilder = Universe.Bilder;
+            float width = Universe.HintergrundDarstellungen.Standard.Size.Width;
+            foreach (var item in Directory.EnumerateFiles(path, "*.jpg").Concat(Directory.EnumerateFiles(path, "*.png")))
+            {
+                Bild b = new Bild();
+                b.FilePath = item;
+                b.Name = Path.GetFileNameWithoutExtension(item);
+                b.Size = new SizeF(width, width / ((SizeF)b.Image.Size).ratio());
+                b.Zentrum = new PointF(0.5f, 0.5f);
+                Bilder.Add(b);
+            }
+            Bilder.Save();
         }
-        public static Fraktion GetFraktion()
-        {
-            Fraktion f = new Fraktion();
-            //f.Hintergrundbild = new Inhalt.Bild(
-            return f;
-        }
+
         public static void TestLayer()
         {
             //int c = 100;

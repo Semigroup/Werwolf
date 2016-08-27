@@ -15,7 +15,7 @@ namespace Werwolf.Karten
     {
         protected static Random Random = new Random();
 
-        public const float Faktor = 5;
+        public const float Faktor = 4.83f;
 
         protected Karte karte;
         public Karte Karte { get { return karte; } set { karte = value; OnKarteChanged(); } }
@@ -23,12 +23,11 @@ namespace Werwolf.Karten
         protected float ppm = 1;
         public float Ppm { get { return ppm; } set { ppm = value; OnPpmChanged(); } }
 
-        public Darstellung Darstellung { get { return karte.Darstellung; } }
-        public TitelDarstellung TitelDarstellung { get { return karte.Darstellung.Titel; } }
-        public HintergrundDarstellung HintergrundDarstellung { get { return karte.Darstellung.Hintergrund; } }
-        public TextDarstellung TextDarstellung { get { return karte.Darstellung.Text; } }
-        public BildDarstellung BildDarstellung { get { return karte.Darstellung.Bild; } }
-        public InfoDarstellung InfoDarstellung { get { return karte.Darstellung.Info; } }
+        public TitelDarstellung TitelDarstellung { get { return karte.TitelDarstellung; } }
+        public HintergrundDarstellung HintergrundDarstellung { get { return karte.HintergrundDarstellung; } }
+        public TextDarstellung TextDarstellung { get { return karte.TextDarstellung; } }
+        public BildDarstellung BildDarstellung { get { return karte.BildDarstellung; } }
+        public InfoDarstellung InfoDarstellung { get { return karte.InfoDarstellung; } }
 
         public RectangleF AussenBox { get; private set; }
         public RectangleF InnenBox { get; private set; }
@@ -37,15 +36,23 @@ namespace Werwolf.Karten
         {
             this.Karte = Karte;
         }
+        public WolfBox(Karte Karte, float Ppm)
+        {
+            this.ppm = Ppm;
+            this.Karte = Karte;
+        }
 
         public virtual void OnKarteChanged()
         {
-            AussenBox = new RectangleF(new PointF(), Darstellung.Size).mul(Faktor);
-            InnenBox = new RectangleF(HintergrundDarstellung.Rand.ToPointF(), 
-                AussenBox.Size.sub(HintergrundDarstellung.Rand.mul(2))).mul(Faktor);
+            AussenBox = new RectangleF(new PointF(), HintergrundDarstellung.Size).mul(Faktor);
+            InnenBox = AussenBox.Inner(HintergrundDarstellung.Rand.mul(Faktor));
         }
         public virtual void OnPpmChanged()
         {
+        }
+        public virtual bool Visible()
+        {
+            return Karte != null && ppm > 0;
         }
 
         public override void InStringBuilder(StringBuilder sb, string tabs)

@@ -7,17 +7,18 @@ using System.Drawing;
 using Assistment.Texts;
 
 using Werwolf.Inhalt;
+using Assistment.Drawing.LinearAlgebra;
 
 namespace Werwolf.Karten
 {
     public class WolfInfo : WolfBox
     {
-        private Text Gesinnung;
-        private Text Artist;
-        private CString Kompositum;
+        private DrawBox Gesinnung;
+        private DrawBox Artist;
+        public CString Kompositum;
 
-        public WolfInfo(Karte Karte)
-            : base(Karte)
+        public WolfInfo(Karte Karte, float Ppm)
+            : base(Karte, Ppm)
         {
 
         }
@@ -25,12 +26,16 @@ namespace Werwolf.Karten
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
-            update();
+
+            SizeF Rand = InfoDarstellung.Rand.mul(Faktor);
+
+            Gesinnung = new Text(Karte.Gesinnung.Schreibname, InfoDarstellung.FontMeasurer).Geometry(Rand);
+            Artist = new Text(Karte.Bild.Artist, InfoDarstellung.FontMeasurer).Geometry(Rand);
+            Kompositum = new CString(Gesinnung, Artist);
         }
         public override void OnPpmChanged()
         {
             base.OnPpmChanged();
-            update();
         }
 
         public override float getSpace()
@@ -48,9 +53,7 @@ namespace Werwolf.Karten
 
         public override void update()
         {
-            Gesinnung = new Text(Karte.Gesinnung.Schreibname, InfoDarstellung.FontMeasurer);
-            Artist = new Text(Karte.Bild.Artist, InfoDarstellung.FontMeasurer);
-            Kompositum = new CString(Gesinnung, Artist);
+            
         }
         public override void setup(RectangleF box)
         {

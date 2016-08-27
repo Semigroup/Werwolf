@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Drawing;
 
 using Werwolf.Inhalt;
 
@@ -20,9 +21,8 @@ namespace Werwolf.Karten
             string path = Path.GetDirectoryName(Speicherort);
             foreach (var item in Universe.Karten.Values)
             {
-                Pipeline pp = new Pipeline(item);
-                pp.Ppm = ppm;
-                pp.createImage(path + "\\" + item.Name);
+                StandardKarte sk = new StandardKarte(item, ppm);
+                sk.createImage(path + "\\" + item.Name, ppm / WolfBox.Faktor, Color.White);
             }
         }
     }

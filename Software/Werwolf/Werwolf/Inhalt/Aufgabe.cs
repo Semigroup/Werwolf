@@ -15,7 +15,15 @@ namespace Werwolf.Inhalt
 
         public Aufgabe(string roherText)
         {
-            this.roherText = roherText.Split(new string[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+            this.roherText = roherText.Split(new string[] { @"\+" }, StringSplitOptions.RemoveEmptyEntries);
+        }
+        public Aufgabe(params string[] roherText)
+        {
+            this.roherText = roherText;
+        }
+        public Aufgabe(IEnumerable<string> roherText)
+        {
+            this.roherText = roherText.ToArray();
         }
 
         public int Anzahl()
@@ -36,6 +44,11 @@ namespace Werwolf.Inhalt
         public override string ToString()
         {
             return roherText.SumText("\r\n\r\n");
+        }
+
+        public static Aufgabe operator +(Aufgabe Aufgabe1, Aufgabe Aufgabe2)
+        {
+            return new Aufgabe(Aufgabe1.roherText.Concat(Aufgabe2.roherText));
         }
     }
 }
