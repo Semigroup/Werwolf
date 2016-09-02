@@ -108,9 +108,10 @@ namespace Werwolf.Forms
             if (pf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 ElementMenge.Change(b.Element.Name, pf.Element);
-                b.Refresh();
                 Auswahlen(b.Element);
             }
+            foreach (var item in List.ControlList)
+                item.Refresh();
         }
         private PreForm<T> GetPreform(T Element)
         {

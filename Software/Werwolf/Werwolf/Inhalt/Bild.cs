@@ -129,7 +129,10 @@ namespace Werwolf.Inhalt
         public SizeF StandardSize(Image image)
         {
             float w = Universe.HintergrundDarstellungen.Standard.Size.Width;
-            return new SizeF(w, w / ((SizeF)image.Size).ratio());
+            if (image != null)
+                return new SizeF(w, w / ((SizeF)image.Size).ratio());
+            else
+                return new SizeF(1, 1);
         }
     }
 }
