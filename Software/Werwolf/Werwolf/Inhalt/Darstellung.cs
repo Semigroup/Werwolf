@@ -88,6 +88,7 @@ namespace Werwolf.Inhalt
         public Image RandBild { get; private set; }
         private Size LastSize = new Size();
         private SizeF LastRand = new SizeF();
+        private bool LastRundeEcken = true;
      
         public HintergrundDarstellung()
             : base("HintergrundDarstellung")
@@ -118,10 +119,11 @@ namespace Werwolf.Inhalt
         public void MakeRandBild(float ppm)
         {
             Size s = Size.mul(ppm).Max(1,1).ToSize();
-            if (LastSize.Equals(s) && LastRand.sub(Rand).norm() < 1)
+            if (LastSize.Equals(s) && LastRand.sub(Rand).norm() < 1 && LastRundeEcken == RundeEcken)
                 return;
             LastSize = s;
             LastRand = Rand;
+            LastRundeEcken = RundeEcken;
 
             RandBild = new Bitmap(s.Width, s.Height);
             using (Graphics g = RandBild.GetHighGraphics())

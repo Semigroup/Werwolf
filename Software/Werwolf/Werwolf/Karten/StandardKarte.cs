@@ -87,7 +87,7 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(box.Location);
-            RectangleF MovedInnenBox = InnenBox.move(box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
             float top = Titel.Visible() ? Titel.Titel.Bottom : MovedInnenBox.Top;
@@ -100,7 +100,10 @@ namespace Werwolf.Karten
             PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
 
             if (HintergrundDarstellung.Existiert)
+            {
+                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.Bild, MovedAussenBoxCenter, MovedInnenBox);
+            }
             if (BildDarstellung.Existiert)
                 con.DrawCenteredImage(Karte.Bild, PointOfInterest, MovedInnenBox);
 
@@ -108,8 +111,11 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.draw(con);
 
-            HintergrundDarstellung.MakeRandBild(ppm);
-            con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
         }
     }
 }

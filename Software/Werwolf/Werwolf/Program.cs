@@ -29,16 +29,16 @@ namespace Werwolf
 
             Universe Universe = new Universe(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
 
-            IKartenmacher kk = new KartenPDFMacher();
-            kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 10);
+            //IKartenmacher kk = new KartenPDFMacher();
+            //kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 10);
 
-            //Karte k = new Karte();
-            //k.Init(Universe);
+            Karte k = new Karte();
+            k.Init(Universe);
 
-            //ElementAuswahlForm<Karte> ek = new ElementAuswahlForm<Karte>(k, Universe.Karten);
+            ElementAuswahlForm<Karte> ek = new ElementAuswahlForm<Karte>(k, Universe.Karten);
 
-            //Application.Run(ek);
-            //Universe.Save();
+            Application.Run(ek);
+            Universe.Save();
         }
 
         public static void PDF()
