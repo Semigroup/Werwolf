@@ -28,9 +28,13 @@ namespace Werwolf.Karten
             base.OnKarteChanged();
 
             SizeF Rand = InfoDarstellung.Rand.mul(Faktor);
+            Color HintergrundFarbe = InfoDarstellung.Farbe;
+            //System.Windows.Forms.MessageBox.Show(HintergrundFarbe + ", " + HintergrundFarbe.ToBrush().Color);
 
-            Gesinnung = new Text(Karte.Gesinnung.Schreibname, InfoDarstellung.FontMeasurer).Geometry(Rand);
-            Artist = new Text(Karte.Bild.Artist, InfoDarstellung.FontMeasurer).Geometry(Rand);
+            Gesinnung = new Text(Karte.Gesinnung.Aufgabe.ToString(), InfoDarstellung.FontMeasurer)
+                .Colorize(HintergrundFarbe).Geometry(Rand);
+            Artist = new Text(Karte.Bild.Artist, InfoDarstellung.FontMeasurer)
+                .Colorize(HintergrundFarbe).Geometry(Rand);
             Kompositum = new CString(Gesinnung, Artist);
         }
         public override void OnPpmChanged()
@@ -53,7 +57,7 @@ namespace Werwolf.Karten
 
         public override void update()
         {
-            
+
         }
         public override void setup(RectangleF box)
         {

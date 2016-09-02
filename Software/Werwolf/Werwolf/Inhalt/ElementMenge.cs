@@ -13,7 +13,7 @@ namespace Werwolf.Inhalt
         public string Pfad { get; set; }
 
         public Menge(string XmlName)
-            : base(XmlName, false)
+            : base(XmlName)
         {
 
         }
@@ -35,6 +35,16 @@ namespace Werwolf.Inhalt
             Write(writer);
             writer.WriteEndDocument();
             writer.Close();
+        }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object Clone()
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -62,22 +72,22 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             string standardName = Loader.XmlReader.getString("Standard");
 
-            Loader.XmlReader.Next();
             Clear();
-            while (!Loader.XmlReader.EOF)
+            while (Loader.XmlReader.Next())
             {
                 T NeuesElement = new T();
                 NeuesElement.Read(Loader);
                 dictionary.Add(NeuesElement.Name, NeuesElement);
             }
 
-            T standard = new T();
-            if (!TryGetValue(standardName, out standard))
-                this.Add(Standard);
+            if (ContainsKey(standardName))
+                Standard = this[standardName];
+            else if (ContainsKey(Standard.Name))
+                Standard = this[Standard.Name];
             else
-                Standard = standard;
+                this.Add(Standard);
         }
-        protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
+        protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
             XmlWriter.writeAttribute("Standard", Standard.Name);
@@ -86,11 +96,29 @@ namespace Werwolf.Inhalt
                 item.Write(XmlWriter);
         }
 
+        public void Change(string oldElement, T NewValues)
+        {
+            T Element = this[oldElement];
+            NewValues.Assimilate(Element);
+            Remove(oldElement);
+            AddPolymorph(Element);
+        }
         public void Add(T value)
         {
             Add(value.Name, value);
         }
-
+        public void AddPolymorph(T value)
+        {
+            string name = value.Name;
+            int i = 2;
+            while (ContainsKey(name))
+            {
+                name = value.Name + "_" + i;
+                i++;
+            }
+            value.Name = name;
+            Add(value);
+        }
         public void Add(string key, T value)
         {
             dictionary.Add(key, value);

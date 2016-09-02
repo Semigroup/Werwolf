@@ -29,7 +29,7 @@ namespace Werwolf.Inhalt
         public FontMeasurer FontMeasurer { get; private set; }
 
         public Darstellung(string XmlName)
-            : base(XmlName, true)
+            : base(XmlName)
         {
         }
         public override void Init(Universe Universe)
@@ -65,6 +65,17 @@ namespace Werwolf.Inhalt
             XmlWriter.writeColorHexARGB("RandFarbe", RandFarbe);
             XmlWriter.writeColorHexARGB("TextFarbe", TextFarbe);
         }
+        public override void Assimilate(XmlElement Element)
+        {
+            base.Assimilate(Element);
+            Darstellung Darstellung = Element as Darstellung;
+            Darstellung.Rand = Rand;
+            Darstellung.Font = Font.Clone() as Font;
+            Darstellung.Existiert = Existiert;
+            Darstellung.Farbe = Farbe;
+            Darstellung.RandFarbe = RandFarbe;
+            Darstellung.TextFarbe = TextFarbe;
+        }
     }
     public class HintergrundDarstellung : Darstellung
     {
@@ -78,9 +89,8 @@ namespace Werwolf.Inhalt
         private Size LastSize = new Size();
         private SizeF LastRand = new SizeF();
      
-
         public HintergrundDarstellung()
-            : base("Hintergrund")
+            : base("HintergrundDarstellung")
         {
      
         }
@@ -107,7 +117,7 @@ namespace Werwolf.Inhalt
 
         public void MakeRandBild(float ppm)
         {
-            Size s = Size.mul(ppm).ToSize();
+            Size s = Size.mul(ppm).Max(1,1).ToSize();
             if (LastSize.Equals(s) && LastRand.sub(Rand).norm() < 1)
                 return;
             LastSize = s;
@@ -162,17 +172,49 @@ namespace Werwolf.Inhalt
                 new PointF(Size.Width, 0),
                 new PointF());
         }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.HintergrundDarstellung = this;
+        }
+        public override object Clone()
+        {
+            HintergrundDarstellung hg = new HintergrundDarstellung();
+            Assimilate(hg);
+            return hg;
+        }
+        public override void Assimilate(XmlElement Darstellung)
+        {
+            base.Assimilate(Darstellung);
+            HintergrundDarstellung hg = Darstellung as HintergrundDarstellung;
+            hg.RundeEcken = RundeEcken;
+            hg.Size = Size;
+            hg.RandBild = RandBild;
+            hg.LastRand = LastRand;
+            hg.LastSize = LastSize;
+        }
     }
     public class TitelDarstellung : Darstellung
     {
         public TitelDarstellung()
-            : base("Titel")
+            : base("TitelDarstellung")
         {
         }
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
             Farbe = Color.White;
+            Font = new Font("Exocet", 14);
+        }
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.TitelDarstellung = this;
+        }
+        public override object Clone()
+        {
+            TitelDarstellung hg = new TitelDarstellung();
+            Assimilate(hg);
+            return hg;
         }
     }
     public class BildDarstellung : Darstellung
@@ -181,7 +223,7 @@ namespace Werwolf.Inhalt
         public SizeF KorrekturSkalierung { get; private set; }
 
         public BildDarstellung()
-            : base("Bild")
+            : base("BildDarstellung")
         {
 
         }
@@ -204,6 +246,23 @@ namespace Werwolf.Inhalt
             XmlWriter.writeSize("KorrekturSkalierung", KorrekturSkalierung);
             XmlWriter.writePoint("KorrekturPosition", KorrekturPosition);
         }
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.BildDarstellung = this;
+        }
+        public override object Clone()
+        {
+            BildDarstellung hg = new BildDarstellung();
+            Assimilate(hg);
+            return hg;
+        }
+        public override void Assimilate(XmlElement Element)
+        {
+            base.Assimilate(Element);
+            BildDarstellung hg = Element as BildDarstellung;
+            hg.KorrekturPosition = KorrekturPosition;
+            hg.KorrekturSkalierung = KorrekturSkalierung;
+        }
     }
     public class TextDarstellung : Darstellung
     {
@@ -211,7 +270,7 @@ namespace Werwolf.Inhalt
         public float InnenRadius { get; set; }
 
         public TextDarstellung()
-            : base("Text")
+            : base("TextDarstellung")
         {
           
         }
@@ -234,16 +293,43 @@ namespace Werwolf.Inhalt
             XmlWriter.writeFloat("BalkenDicke", BalkenDicke);
             XmlWriter.writeFloat("InnenRadius", InnenRadius);
         }
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.TextDarstellung = this;
+        }
+        public override object Clone()
+        {
+            TextDarstellung hg = new TextDarstellung();
+            Assimilate(hg);
+            return hg;
+        }
+        public override void Assimilate(XmlElement Element)
+        {
+            base.Assimilate(Element);
+            TextDarstellung hg = Element as TextDarstellung;
+            hg.BalkenDicke = BalkenDicke;
+            hg.InnenRadius = InnenRadius;
+        }
     }
     public class InfoDarstellung : Darstellung
     {
         public InfoDarstellung()
-            : base("Info")
+            : base("InfoDarstellung")
         {
         }
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
+        }
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.InfoDarstellung = this;
+        }
+        public override object Clone()
+        {
+            InfoDarstellung hg = new InfoDarstellung();
+            Assimilate(hg);
+            return hg;
         }
     }
 }

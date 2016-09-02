@@ -16,21 +16,25 @@ using Werwolf.Karten;
 
 namespace Werwolf.Forms
 {
-    public class BildForm : PreForm<Bild>
+    public class BildDarstellungForm : DarstellungForm<BildDarstellung>
     {
-        public override void UpdateWerteListe()
+        public BildDarstellungForm( Karte Karte)
+            : base( Karte)
         {
-            throw new NotImplementedException();
-        }
 
-        public override void UpdateElement()
-        {
-            throw new NotImplementedException();
         }
 
         public override void BuildWerteListe()
         {
-            throw new NotImplementedException();
+            base.BuildWerteListe();
+        }
+        public override void UpdateWerteListe()
+        {
+            base.UpdateWerteListe();
+        }
+        public override void UpdateElement()
+        {
+            base.UpdateElement();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Werwolf.Karten
 
         public void MakeKarten(Universe Universe, string Speicherort, float ppm)
         {
-            MakeAt(0, Universe, Speicherort, ppm);
+            MakeAt(2, Universe, Speicherort, ppm);
             //GC.Collect();
             //MakeAt(1, Universe, Speicherort, ppm);
             //GC.Collect();

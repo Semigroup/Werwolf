@@ -54,6 +54,13 @@ namespace Werwolf.Karten
         {
             return Karte != null && ppm > 0;
         }
+        public virtual void DrawRessources()
+        {
+        }
+        public override void draw(DrawContext con)
+        {
+            DrawRessources();
+        }
 
         public override void InStringBuilder(StringBuilder sb, string tabs)
         {

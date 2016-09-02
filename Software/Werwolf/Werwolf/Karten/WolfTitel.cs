@@ -15,7 +15,15 @@ namespace Werwolf.Karten
     {
         public Titel Titel { get; private set; }
 
-        public WolfTitel(Karte Karte,float Ppm)
+        private string LastSchreibname;
+        private Font LastFont;
+        private Titel.Art LastTitelArt;
+        private float LastRandHeight;
+        private Color LastRandFarbe;
+        private Color LastFarbe;
+        private float LastPpm;
+
+        public WolfTitel(Karte Karte, float Ppm)
             : base(Karte, Ppm)
         {
         }
@@ -46,6 +54,23 @@ namespace Werwolf.Karten
 
         public override void update()
         {
+            if (Karte.Schreibname.Equals(LastSchreibname)
+                && TitelDarstellung.Font.Equals(LastFont)
+                && Karte.Fraktion.TitelArt.Equals(LastTitelArt)
+                && TitelDarstellung.Rand.Height.Equals(LastRandHeight)
+                && TitelDarstellung.RandFarbe.Equals(LastRandFarbe)
+                && TitelDarstellung.Farbe.Equals(LastFarbe)
+                && Ppm.Equals(LastPpm))
+                return;
+
+            LastSchreibname = Karte.Schreibname;
+            LastFont = TitelDarstellung.Font;
+            LastTitelArt = Karte.Fraktion.TitelArt;
+            LastRandHeight = TitelDarstellung.Rand.Height;
+            LastFarbe = TitelDarstellung.Farbe;
+            LastRandFarbe = TitelDarstellung.RandFarbe;
+            LastPpm = ppm;
+
             Text t = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer);
             t.alignment = 0.5f;
             this.Titel = Titel.GetTitel(Karte.Fraktion.TitelArt,
@@ -58,7 +83,7 @@ namespace Werwolf.Karten
         }
         public override bool Visible()
         {
-            return base.Visible() && TitelDarstellung.Existiert && Karte.Name.Length > 0;
+            return base.Visible() && TitelDarstellung.Existiert && Karte.Schreibname.Length > 0;
         }
         public override void setup(RectangleF box)
         {
@@ -69,6 +94,10 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             Titel.draw(con);
+
+            //con.fillRectangle(Brushes.Blue, box);
+            //con.fillRectangle(Brushes.Red, Titel.box);
+            //con.fillRectangle(Brushes.Green, Titel.Inhalt.box);
         }
     }
 }

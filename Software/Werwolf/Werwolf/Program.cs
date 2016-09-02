@@ -24,14 +24,21 @@ namespace Werwolf
         [STAThread]
         static void Main()
         {
-            Universe Universe = new Universe();
-            Universe.Root(@"D:\CSArbeiten\Github\Werwolf\WH40K\");
-            Universe.Save();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-            //IKartenmacher kk = new KartenPDFMacher();
-            //kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 10);
-            //PDF();
-            //CollectBilder(@"D:\CSArbeiten\Github\Werwolf\WH40K\Bilder\", @"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
+            Universe Universe = new Universe(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
+
+            IKartenmacher kk = new KartenPDFMacher();
+            kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 10);
+
+            //Karte k = new Karte();
+            //k.Init(Universe);
+
+            //ElementAuswahlForm<Karte> ek = new ElementAuswahlForm<Karte>(k, Universe.Karten);
+
+            //Application.Run(ek);
+            //Universe.Save();
         }
 
         public static void PDF()

@@ -24,7 +24,7 @@ namespace Werwolf.Inhalt
                 image = null;
             }
         }
-        public string Artist { get; private set; }
+        public string Artist { get; set; }
         public SizeF Size { get; set; }
         /// <summary>
         /// Relativ
@@ -59,15 +59,25 @@ namespace Werwolf.Inhalt
                     else if (File.Exists(filePath))
                         image = Image.FromFile(filePath);
                     else
-                        image = Image.FromFile(Path.Combine(Universe.RootBilder, filePath));  
+                        image = Image.FromFile(Path.Combine(Universe.RootBilder, filePath));
                 }
                 return image;
             }
         }
         private string filePath;
+        public string TotalFilePath
+        {
+            get
+            {
+                if (File.Exists(filePath))
+                    return filePath;
+                else
+                    return Path.Combine(Universe.RootBilder, filePath);
+            }
+        }
 
         public Bild()
-            : base("Bild", true)
+            : base("Bild")
         {
         }
         public override void Init(Universe Universe)
@@ -86,8 +96,6 @@ namespace Werwolf.Inhalt
             this.Artist = Loader.XmlReader.getString("Artist");
             this.Zentrum = Loader.XmlReader.getPointF("Zentrum");
             this.Size = Loader.XmlReader.getSizeF("Size");
-
-            Loader.XmlReader.Next();
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -96,6 +104,32 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("Artist", Artist);
             XmlWriter.writeSize("Size", Size);
             XmlWriter.writePoint("Zentrum", Zentrum);
+        }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.Bild = this;
+        }
+        public override void Assimilate(XmlElement Element)
+        {
+            base.Assimilate(Element);
+            Bild b = Element as Bild;
+            b.FilePath = FilePath;
+            b.Artist = Artist;
+            b.Size = Size;
+            b.Zentrum = Zentrum;
+            b.image = image;
+        }
+        public override object Clone()
+        {
+            Bild b = new Bild();
+            Assimilate(b);
+            return b;
+        }
+        public SizeF StandardSize(Image image)
+        {
+            float w = Universe.HintergrundDarstellungen.Standard.Size.Width;
+            return new SizeF(w, w / ((SizeF)image.Size).ratio());
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Xml;
 
 using Assistment.Extensions;
 using Assistment.Xml;
+using Assistment.Texts;
 
 namespace Werwolf.Inhalt
 {
@@ -31,6 +32,11 @@ namespace Werwolf.Inhalt
             return roherText.Length;
         }
 
+        public IEnumerable<Text> GetTexts(xFont Font)
+        {
+            return roherText.Map(x => new Text(x, Font));
+        }
+
         public IEnumerator<string> GetEnumerator()
         {
             return ((IEnumerable<string>)roherText).GetEnumerator();
@@ -43,7 +49,7 @@ namespace Werwolf.Inhalt
 
         public override string ToString()
         {
-            return roherText.SumText("\r\n\r\n");
+            return roherText.SumText("\r\n\\+\r\n");
         }
 
         public static Aufgabe operator +(Aufgabe Aufgabe1, Aufgabe Aufgabe2)

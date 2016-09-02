@@ -20,13 +20,20 @@ namespace Werwolf.Karten
         public RectangleF InnerBox;
         public RectangleF TextBox;
 
-        private Text[] Texts;
+        private DrawBox[] Texts;
 
         public float InnenRadius { get { return TextDarstellung.InnenRadius; } }
         public float BalkenDicke { get { return TextDarstellung.BalkenDicke; } }
         public SizeF Rand { get { return TextDarstellung.Rand; } }
 
         private Image Back;
+        private Size LastSize;
+        private RectangleF LastoutBox;
+        private RectangleF LastinnBox;
+        private float LastBalkenDicke;
+        private float LastInnenRadius;
+        private float LastPpm;
+        private SizeF LastRand;
 
         public WolfText(Karte Karte, float Ppm)
             : base(Karte, Ppm)
@@ -58,11 +65,11 @@ namespace Werwolf.Karten
             InnerBox = OuterBox.Inner(Rand.add(BalkenDicke, BalkenDicke).mul(Faktor));
             TextBox = InnerBox.Inner(InnenRadius * Faktor, InnenRadius * Faktor);
 
-            Texts = new Text[Aufgaben.Anzahl()];
+            Texts = new DrawBox[Aufgaben.Anzahl()];
             int i = 0;
-            foreach (var item in Aufgaben)
+            foreach (var item in Aufgaben.GetTexts(TextDarstellung.FontMeasurer))
             {
-                Texts[i] = new Text(item, TextDarstellung.FontMeasurer);
+                Texts[i] = item; // new FixedBox(TextBox.Size, true, false, item);
                 Texts[i++].setup(TextBox);
             }
 
@@ -80,7 +87,7 @@ namespace Werwolf.Karten
             OuterBox.Height = OuterBox.Bottom - (InnerBox.Top - Faktor * (BalkenDicke + Rand.Height));
             OuterBox.Y = InnerBox.Top - Faktor * (BalkenDicke + Rand.Height);
 
-            Mal();
+            DrawRessources();
         }
 
         private Brush[] GetBrushes()
@@ -91,28 +98,52 @@ namespace Werwolf.Karten
             return br;
         }
 
-        private void Mal()
+        public override void DrawRessources()
         {
-            //PointF Offset = OuterBox.Location.mul(-1);
-            //Size s = OuterBox.Size.mul(ppm / Faktor).ToSize();
             RectangleF outBox = OuterBox.mul(1 / Faktor);
-            PointF Offset = outBox.Location.mul(-1);
             RectangleF innBox = InnerBox.mul(1 / Faktor);
-            Size s = outBox.Size.mul(ppm).ToSize();
-            Back = new Bitmap(s.Width, s.Height);
+            Size Size = outBox.Size.mul(ppm).Max(new SizeF(1, 1)).ToSize();
+
+            float BalkenDicke = this.BalkenDicke;
+            float InnenRadius = this.InnenRadius;
+
+            if (LastSize == Size
+                && LastoutBox.Equal(outBox)
+                && LastinnBox.Equal(innBox)
+                && LastBalkenDicke.Equal(BalkenDicke)
+                && LastInnenRadius.Equal(InnenRadius)
+                && LastPpm.Equal(ppm)
+                && LastRand.Equal(Rand))
+                return;
+
+            LastoutBox = outBox;
+            LastinnBox = innBox;
+            LastSize = Size;
+            LastBalkenDicke = BalkenDicke;
+            LastInnenRadius = InnenRadius;
+            LastPpm = ppm;
+            LastRand = Rand;
+
+            PointF Offset = outBox.Location.mul(-1);
+            Back = new Bitmap(Size.Width, Size.Height);
 
             using (Graphics g = Back.GetHighGraphics(ppm))
             {
+                //g.FillRectangle(Brushes.Red, outBox.move(Offset));
+                //g.FillRectangle(Color.Green.flat().ToBrush(), innBox.move(Offset));
+
                 OrientierbarerWeg OrientierbarerWeg = Rund(innBox.move(Offset), BalkenDicke);
                 Hohe h = t => OrientierbarerWeg.normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
 
                 int L = (int)OrientierbarerWeg.L;
-                Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L );
+                Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
                 g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                 Brush Brush = TextDarstellung.Farbe.ToBrush();
                 foreach (var item in Texts)
                 {
-                    OrientierbarerWeg = Rund(item.box.mul(1 / Faktor).move(Offset), InnenRadius);
+                    RectangleF box = item.box.mul(1 / Faktor).move(Offset);
+                    box.Width = innBox.Width - 2 * InnenRadius;
+                    OrientierbarerWeg = Rund(box, InnenRadius);
                     L = (int)OrientierbarerWeg.L;
                     g.FillPolygon(Brush, OrientierbarerWeg.getPolygon(L, 0, 1));
                 }
@@ -143,6 +174,8 @@ namespace Werwolf.Karten
         }
         public override void draw(DrawContext con)
         {
+            //base.draw(con);
+
             con.drawImage(Back, OuterBox.move(box.Location));
             foreach (var item in Texts)
                 item.draw(con);

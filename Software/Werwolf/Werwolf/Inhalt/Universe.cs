@@ -36,7 +36,7 @@ namespace Werwolf.Inhalt
         }
 
         public Universe()
-            : base("Universe", false)
+            : base("Universe")
         {
             HintergrundDarstellungen = new ElementMenge<HintergrundDarstellung>("HintergrundDarstellungen", this);
             TitelDarstellungen = new ElementMenge<TitelDarstellung>("TitelDarstellungen", this);
@@ -69,7 +69,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("RootBilder", RootBilder);
 
             foreach (var item in ElementMengen)
-                XmlWriter.writeAttribute(item.XmlName + "itemPfad", item.Pfad);
+                XmlWriter.writeAttribute(item.XmlName + "Pfad", item.Pfad);
         }
         public void Open(string Pfad)
         {
@@ -110,6 +110,23 @@ namespace Werwolf.Inhalt
 
             foreach (var item in ElementMengen)
                 item.Save();
+        }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            throw new NotImplementedException();
+        }
+        public override object Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ElementMenge<T> GetElementMenge<T>() where T : XmlElement, new()
+        {
+            foreach (var item in ElementMengen)
+                if (item is ElementMenge<T>)
+                    return item as ElementMenge<T>;
+            throw new NotImplementedException();
         }
     }
 }
