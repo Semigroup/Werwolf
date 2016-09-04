@@ -15,6 +15,11 @@ namespace Werwolf.Inhalt
         {
             Aufgabe = new Aufgabe();
         }
+        public override void Init(Universe Universe)
+        {
+            base.Init(Universe);
+            Aufgabe = new Aufgabe("Gesinnung");
+        }
         
         public override void AdaptToCard(Karte Karte)
         {

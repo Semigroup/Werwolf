@@ -19,7 +19,7 @@ namespace Werwolf.Forms
     public class KartenForm : PreForm<Karte>
     {
         public KartenForm(Karte Karte)
-            : base( Karte)
+            : base(Karte, new ViewKarte())
         {
 
         }
@@ -29,7 +29,7 @@ namespace Werwolf.Forms
             base.BuildWerteListe();
             UpdatingWerteListe = true;
 
-            BuildWertBox("Bild", Universe.Bilder);
+            BuildWertBox("Bild", Universe.HauptBilder);
             BuildWertBox("Fraktion", Universe.Fraktionen);
             BuildWertBox("Gesinnung", Universe.Gesinnungen);
             WerteListe.AddBigStringBox("", "Text");
@@ -52,7 +52,7 @@ namespace Werwolf.Forms
                 return;
             UpdatingWerteListe = true;
 
-            WerteListe.SetValue("Bild", element.Bild);
+            WerteListe.SetValue("Bild", element.HauptBild);
             WerteListe.SetValue("Fraktion", element.Fraktion);
             WerteListe.SetValue("Gesinnung", element.Gesinnung);
             WerteListe.SetValue("Text", element.Aufgaben.ToString());
@@ -71,7 +71,7 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
 
-            element.Bild = WerteListe.GetValue<Bild>("Bild");
+            element.HauptBild = WerteListe.GetValue<HauptBild>("Bild");
             element.Fraktion = WerteListe.GetValue<Fraktion>("Fraktion");
             element.Gesinnung = WerteListe.GetValue<Gesinnung>("Gesinnung");
             element.Aufgaben = new Aufgabe(WerteListe.GetValue<string>("Text"));

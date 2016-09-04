@@ -19,7 +19,7 @@ namespace Werwolf.Forms
     public class DarstellungForm<T> : PreForm<T> where T : Darstellung, new()
     {
         public DarstellungForm(Karte Karte)
-            : base(Karte)
+            : base(Karte, new ViewKarte())
         {
 
         }

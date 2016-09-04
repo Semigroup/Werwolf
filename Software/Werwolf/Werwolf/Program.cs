@@ -27,7 +27,8 @@ namespace Werwolf
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Universe Universe = new Universe(@"D:\CSArbeiten\Github\Werwolf\WH40K\Universe.xml");
+            Universe Universe = new Universe();
+            Universe.Root(@"D:\CSArbeiten\Github\Werwolf\Karlsruher Werwolf\");
 
             //IKartenmacher kk = new KartenPDFMacher();
             //kk.MakeKarten(Universe, @"D:\CSArbeiten\Github\Werwolf\WH40K\Karten\", 10);
@@ -61,22 +62,22 @@ namespace Werwolf
             document.Close();
         }
 
-        public static void CollectBilder(string path, string UniversePath)
-        {
-            Universe Universe = new Universe(UniversePath);
-            ElementMenge<Bild> Bilder = Universe.Bilder;
-            float width = Universe.HintergrundDarstellungen.Standard.Size.Width;
-            foreach (var item in Directory.EnumerateFiles(path, "*.jpg").Concat(Directory.EnumerateFiles(path, "*.png")))
-            {
-                Bild b = new Bild();
-                b.FilePath = item;
-                b.Name = Path.GetFileNameWithoutExtension(item);
-                b.Size = new SizeF(width, width / ((SizeF)b.Image.Size).ratio());
-                b.Zentrum = new PointF(0.5f, 0.5f);
-                Bilder.Add(b);
-            }
-            Bilder.Save();
-        }
+        //public static void CollectBilder(string path, string UniversePath)
+        //{
+        //    Universe Universe = new Universe(UniversePath);
+        //    ElementMenge<HauptBild> Bilder = Universe.HauptBilder;
+        //    float width = Universe.HintergrundDarstellungen.Standard.Size.Width;
+        //    foreach (var item in Directory.EnumerateFiles(path, "*.jpg").Concat(Directory.EnumerateFiles(path, "*.png")))
+        //    {
+        //        HauptBild b = new HauptBild();
+        //        b.FilePath = item;
+        //        b.Name = Path.GetFileNameWithoutExtension(item);
+        //        b.Size = new SizeF(width, width / ((SizeF)b.Image.Size).ratio());
+        //        b.Zentrum = new PointF(0.5f, 0.5f);
+        //        Bilder.Add(b);
+        //    }
+        //    Bilder.Save();
+        //}
 
         public static void TestLayer()
         {

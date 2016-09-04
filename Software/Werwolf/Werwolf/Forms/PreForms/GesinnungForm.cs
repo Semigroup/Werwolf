@@ -19,7 +19,7 @@ namespace Werwolf.Forms
     public class GesinnungForm : PreForm<Gesinnung>
     {
         public GesinnungForm(Karte Karte)
-            : base( Karte)
+            : base(Karte, new ViewKarte())
         {
 
         }

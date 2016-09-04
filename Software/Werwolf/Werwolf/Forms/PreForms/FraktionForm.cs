@@ -19,7 +19,7 @@ namespace Werwolf.Forms
     public class FraktionForm : PreForm<Fraktion>
     {
         public FraktionForm(Karte Karte)
-            : base(Karte)
+            : base(Karte, new ViewKarte())
         {
 
         }
@@ -29,9 +29,9 @@ namespace Werwolf.Forms
             base.BuildWerteListe();
             UpdatingWerteListe = true;
 
-            BuildWertBox("Bild Hintergrund", Universe.Bilder);
+            BuildWertBox("Bild Hintergrund", Universe.HintergrundBilder);
             WerteListe.AddEnumBox(Titel.Art.Rund, "Titel Art");
-            BuildWertBox("Bild Rückseite", Universe.Bilder);
+            BuildWertBox("Bild Rückseite", Universe.RuckseitenBilder);
             WerteListe.AddBigStringBox("", "Fraktionstext");
 
             UpdatingWerteListe = false;
@@ -44,7 +44,7 @@ namespace Werwolf.Forms
                 return;
             UpdatingWerteListe = true;
 
-            WerteListe.SetValue("Bild Hintergrund", element.Bild);
+            WerteListe.SetValue("Bild Hintergrund", element.HintergrundBild);
             WerteListe.SetValue("Titel Art", element.TitelArt as object);
             WerteListe.SetValue("Bild Rückseite", element.RuckseitenBild);
             WerteListe.SetValue("Fraktionstext", element.StandardAufgaben.ToString());
@@ -57,9 +57,9 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
 
-            element.Bild = WerteListe.GetValue<Bild>("Bild Hintergrund");
+            element.HintergrundBild = WerteListe.GetValue<HintergrundBild>("Bild Hintergrund");
             element.TitelArt = (Titel.Art)WerteListe.GetValue<object>("Titel Art");
-            element.RuckseitenBild = WerteListe.GetValue<Bild>("Bild Rückseite");
+            element.RuckseitenBild = WerteListe.GetValue<RuckseitenBild>("Bild Rückseite");
             element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"));
         }
     }

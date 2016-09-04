@@ -17,10 +17,16 @@ namespace Werwolf.Inhalt
         public ElementMenge<TextDarstellung> TextDarstellungen { get; private set; }
         public ElementMenge<InfoDarstellung> InfoDarstellungen { get; private set; }
 
-        public ElementMenge<Bild> Bilder { get; private set; }
+        public ElementMenge<HauptBild> HauptBilder { get; private set; }
+        public ElementMenge<HintergrundBild> HintergrundBilder { get; private set; }
+        public ElementMenge<RuckseitenBild> RuckseitenBilder { get; private set; }
+        public ElementMenge<TextBild> TextBilder { get; private set; }
+
         public ElementMenge<Fraktion> Fraktionen { get; private set; }
         public ElementMenge<Gesinnung> Gesinnungen { get; private set; }
         public ElementMenge<Karte> Karten { get; private set; }
+
+        public ElementMenge<Deck> Decks { get; private set; }
 
         public string RootBilder { get; set; }
         public string Pfad { get; set; }
@@ -29,9 +35,11 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                return new Menge[] { HintergrundDarstellungen, TitelDarstellungen, 
+                return new Menge[] { HintergrundDarstellungen, TitelDarstellungen,
                     BildDarstellungen, TextDarstellungen, InfoDarstellungen,
-                    Bilder, Fraktionen, Gesinnungen, Karten };
+                    HauptBilder, HintergrundBilder, RuckseitenBilder, TextBilder,
+                    Fraktionen, Gesinnungen, Karten,
+                    Decks };
             }
         }
 
@@ -44,10 +52,16 @@ namespace Werwolf.Inhalt
             TextDarstellungen = new ElementMenge<TextDarstellung>("TextDarstellungen", this);
             InfoDarstellungen = new ElementMenge<InfoDarstellung>("InfoDarstellungen", this);
 
-            Bilder = new ElementMenge<Bild>("Bilder", this);
+            HauptBilder = new ElementMenge<HauptBild>("HauptBilder", this);
+            HintergrundBilder = new ElementMenge<HintergrundBild>("HintergrundBilder", this);
+            RuckseitenBilder = new ElementMenge<RuckseitenBild>("RuckseitenBilder", this);
+            TextBilder = new ElementMenge<TextBild>("TextBilder", this);
+
             Fraktionen = new ElementMenge<Fraktion>("Fraktionen", this);
             Gesinnungen = new ElementMenge<Gesinnung>("Gesinnungen", this);
             Karten = new ElementMenge<Karte>("Karten", this);
+
+            Decks = new ElementMenge<Deck>("Decks", this);
         }
         public Universe(string Pfad)
             : this()
@@ -60,8 +74,9 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             RootBilder = Loader.XmlReader.getString("RootBilder");
 
+            Loader.XmlReader.Next();
             foreach (var item in ElementMengen)
-                item.Open(Loader.XmlReader.getString(item.XmlName + "Pfad"));
+                item.Read(Loader);
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -69,7 +84,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("RootBilder", RootBilder);
 
             foreach (var item in ElementMengen)
-                XmlWriter.writeAttribute(item.XmlName + "Pfad", item.Pfad);
+                item.Write(XmlWriter);
         }
         public void Open(string Pfad)
         {
@@ -91,9 +106,6 @@ namespace Werwolf.Inhalt
         public void Root(string root)
         {
             this.Pfad = Path.Combine(root, "Universe.xml");
-            foreach (var item in ElementMengen)
-                item.Pfad = Path.Combine(root, item.XmlName + ".xml");
-
             this.RootBilder = Path.Combine(root, "\\Bilder\\");
         }
         public void Save()
@@ -107,9 +119,6 @@ namespace Werwolf.Inhalt
             this.Write(writer);
             writer.WriteEndDocument();
             writer.Close();
-
-            foreach (var item in ElementMengen)
-                item.Save();
         }
 
         public override void AdaptToCard(Karte Karte)

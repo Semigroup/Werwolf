@@ -49,7 +49,7 @@ namespace Werwolf.Inhalt
 
         public override string ToString()
         {
-            return roherText.SumText("\r\n\\+\r\n");
+            return roherText.SumText("\\+");
         }
 
         public static Aufgabe operator +(Aufgabe Aufgabe1, Aufgabe Aufgabe2)

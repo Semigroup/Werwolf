@@ -74,10 +74,25 @@ namespace Werwolf.Inhalt
             return Universe.InfoDarstellungen[s];
         }
 
-        public Bild GetBild(string AttributeName)
+        public HauptBild GetHauptBild()
         {
-            string s = XmlReader.GetAttribute("Bild");
-            return Universe.Bilder[s];
+            string s = XmlReader.GetAttribute("HauptBild");
+            return Universe.HauptBilder[s];
+        }
+        public HintergrundBild GetHintergrundBild()
+        {
+            string s = XmlReader.GetAttribute("HintergrundBild");
+            return Universe.HintergrundBilder[s];
+        }
+        public TextBild GetTextBild()
+        {
+            string s = XmlReader.GetAttribute("TextBild");
+            return Universe.TextBilder[s];
+        }
+        public RuckseitenBild GetRuckseitenBild()
+        {
+            string s = XmlReader.GetAttribute("RuckseitenBild");
+            return Universe.RuckseitenBilder[s];
         }
     }
 }

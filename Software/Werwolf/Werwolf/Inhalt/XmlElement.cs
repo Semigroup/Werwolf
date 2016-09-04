@@ -13,6 +13,7 @@ namespace Werwolf.Inhalt
         public string Name { get; set; }
         public string Schreibname { get; set; }
         public Universe Universe { get; private set; }
+        public bool Unzerstorbar { get; set; }
 
         public XmlElement(string XmlName)
         {
@@ -24,6 +25,7 @@ namespace Werwolf.Inhalt
             this.Universe = Universe;
             this.Name = "Standard";
             this.Schreibname = "Standard";
+            this.Unzerstorbar = false;
         }
 
         protected virtual void ReadIntern(Loader Loader)
@@ -32,6 +34,7 @@ namespace Werwolf.Inhalt
 
             this.Name = Loader.XmlReader.getString("Name");
             this.Schreibname = Loader.XmlReader.getString("Schreibname");
+            this.Unzerstorbar = Loader.XmlReader.getBoolean("Unzerstorbar");
         }
         public void Read(Loader Loader)
         {
@@ -43,6 +46,7 @@ namespace Werwolf.Inhalt
         {
             XmlWriter.writeAttribute("Name", Name);
             XmlWriter.writeAttribute("Schreibname", Schreibname);
+            XmlWriter.writeBoolean("Unzerstorbar", Unzerstorbar);
         }
         public void Write(XmlWriter XmlWriter)
         {

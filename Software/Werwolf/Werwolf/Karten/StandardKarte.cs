@@ -102,10 +102,10 @@ namespace Werwolf.Karten
             if (HintergrundDarstellung.Existiert)
             {
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
-                con.DrawCenteredImage(Karte.Fraktion.Bild, MovedAussenBoxCenter, MovedInnenBox);
+                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
             if (BildDarstellung.Existiert)
-                con.DrawCenteredImage(Karte.Bild, PointOfInterest, MovedInnenBox);
+                con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())

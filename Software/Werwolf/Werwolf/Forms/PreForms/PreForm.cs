@@ -30,22 +30,24 @@ namespace Werwolf.Forms
         public Button OkButton = new Button();
         public Button AbbrechenButton = new Button();
 
-        public ViewCard ViewCard = new ViewCard();
+        public ViewBox ViewBox;
         private Karte Karte;
 
         public event EventHandler UserValueChanged = delegate { };
 
-        public PreForm(Karte Karte)
+        public PreForm(Karte Karte, ViewBox ViewBox)
+            : base()
         {
             this.Karte = Karte;
+            this.ViewBox = ViewBox;
             this.Menge = Universe.GetElementMenge<T>();
             BuildUp();
         }
         private void BuildUp()
         {
-            ViewCard.Dock = DockStyle.Left;
-            ViewCard.Karte = Karte;
-            Controls.Add(ViewCard);
+            ViewBox.Dock = DockStyle.Left;
+            ViewBox.Karte = Karte;
+            Controls.Add(ViewBox);
 
             BuildWerteListe();
             WerteListe.UserValueChanged += (sender, e) => OnUserValueChanged(e);
@@ -67,7 +69,7 @@ namespace Werwolf.Forms
         public void SetElement(T Element)
         {
             this.element = Element.Clone() as T;
-            ViewCard.ChangeKarte(element);
+            ViewBox.ChangeKarte(element);
             UpdateWerteListe();
         }
 
@@ -118,12 +120,12 @@ namespace Werwolf.Forms
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-            ViewCard.Width = ClientSize.Width / 2;
+            ViewBox.Width = ClientSize.Width / 2;
 
-            OkButton.Location = new Point(ViewCard.Right + 20, ClientSize.Height - 50);
+            OkButton.Location = new Point(ViewBox.Right + 20, ClientSize.Height - 50);
             AbbrechenButton.Location = new Point(OkButton.Right + 20, OkButton.Top);
 
-            WerteListe.Location = new Point(ViewCard.Right, 0);
+            WerteListe.Location = new Point(ViewBox.Right, 0);
             WerteListe.Size = new Size(ClientSize.Width / 2, ClientSize.Height - 70);
         }
 
@@ -131,7 +133,7 @@ namespace Werwolf.Forms
         {
             UserValueChanged(this, EventArgs.Empty);
             UpdateElement();
-            ViewCard.ChangeKarte(element);
+            ViewBox.ChangeKarte(element);
         }
     }
 }

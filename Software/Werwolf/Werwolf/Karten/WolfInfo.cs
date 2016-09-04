@@ -33,7 +33,7 @@ namespace Werwolf.Karten
 
             Gesinnung = new Text(Karte.Gesinnung.Aufgabe.ToString(), InfoDarstellung.FontMeasurer)
                 .Colorize(HintergrundFarbe).Geometry(Rand);
-            Artist = new Text(Karte.Bild.Artist, InfoDarstellung.FontMeasurer)
+            Artist = new Text(Karte.HauptBild.Artist, InfoDarstellung.FontMeasurer)
                 .Colorize(HintergrundFarbe).Geometry(Rand);
             Kompositum = new CString(Gesinnung, Artist);
         }

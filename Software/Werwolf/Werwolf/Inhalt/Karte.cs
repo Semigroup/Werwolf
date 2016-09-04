@@ -21,12 +21,12 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                return Fraktion.StandardAufgaben+ Aufgaben ;
+                return Fraktion.StandardAufgaben + Aufgaben;
             }
         }
         public Fraktion Fraktion { get; set; }
         public Gesinnung Gesinnung { get; set; }
-        public Bild Bild { get; set; }
+        public HauptBild HauptBild { get; set; }
 
         public HintergrundDarstellung HintergrundDarstellung { get; set; }
         public TextDarstellung TextDarstellung { get; set; }
@@ -46,7 +46,7 @@ namespace Werwolf.Inhalt
             Aufgaben = new Aufgabe("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.");
             Fraktion = Universe.Fraktionen.Standard;
             Gesinnung = Universe.Gesinnungen.Standard;
-            Bild = Universe.Bilder.Standard;
+            HauptBild = Universe.HauptBilder.Standard;
 
             HintergrundDarstellung = Universe.HintergrundDarstellungen.Standard;
             TextDarstellung = Universe.TextDarstellungen.Standard;
@@ -62,7 +62,7 @@ namespace Werwolf.Inhalt
             Aufgaben = Loader.GetAufgabe("Aufgaben");
             Fraktion = Loader.GetFraktion();
             Gesinnung = Loader.GetGesinnung();
-            Bild = Loader.GetBild("Bild");
+            HauptBild = Loader.GetHauptBild();
 
             HintergrundDarstellung = Loader.GetHintergrundDarstellung();
             TextDarstellung = Loader.GetTextDarstellung();
@@ -77,7 +77,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("Fraktion", Fraktion.Name);
             XmlWriter.writeAttribute("Gesinnung", Gesinnung.Name);
             XmlWriter.writeAttribute("Aufgaben", Aufgaben.ToString());
-            XmlWriter.writeAttribute("Bild", Bild.Name);
+            XmlWriter.writeAttribute("HauptBild", HauptBild.Name);
 
             XmlWriter.writeAttribute("HintergrundDarstellung", HintergrundDarstellung.Name);
             XmlWriter.writeAttribute("TextDarstellung", TextDarstellung.Name);
@@ -97,7 +97,7 @@ namespace Werwolf.Inhalt
             Karte.Aufgaben = Aufgaben;
             Karte.Fraktion = Fraktion;
             Karte.Gesinnung = Gesinnung;
-            Karte.Bild = Bild;
+            Karte.HauptBild = HauptBild;
 
             Karte.HintergrundDarstellung = HintergrundDarstellung;
             Karte.TextDarstellung = TextDarstellung;
@@ -114,20 +114,20 @@ namespace Werwolf.Inhalt
 
         public Size GetPictureSize(float ppm)
         {
-            return HintergrundDarstellung.Size.mul(ppm).Max(1,1).ToSize();
+            return HintergrundDarstellung.Size.mul(ppm).Max(1, 1).ToSize();
         }
         public Image GetImage(float ppm, Color BackColor)
         {
             Size s = GetPictureSize(ppm);
             Image img = new Bitmap(s.Width, s.Height);
             using (Graphics g = img.GetHighGraphics(ppm / WolfBox.Faktor))
-                using (DrawContextGraphics dcg = new DrawContextGraphics(g))
-                {
-                    g.Clear(BackColor);
-                    StandardKarte sk = new StandardKarte(this, ppm);
-                    sk.setup(0);
-                    sk.draw(dcg);
-                }
+            using (DrawContextGraphics dcg = new DrawContextGraphics(g))
+            {
+                g.Clear(BackColor);
+                StandardKarte sk = new StandardKarte(this, ppm);
+                sk.setup(0);
+                sk.draw(dcg);
+            }
             return img;
         }
         public Image GetImage(float ppm)

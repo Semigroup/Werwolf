@@ -23,7 +23,7 @@ namespace Werwolf.Forms
         public T Element { get; private set; }
         private ElementMenge<T> ElementMenge;
 
-        private ViewCard ViewCard = new ViewCard();
+        private ViewBox ViewBox;
         private ScrollList List = new ScrollList();
         private ButtonReihe SteuerButton = new ButtonReihe(true, "Übernehmen", "Abbrechen");
 
@@ -32,18 +32,25 @@ namespace Werwolf.Forms
         {
         }
         public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge, T Element)
+            : this(Karte, ElementMenge, Element, new ViewKarte())
+        {
+
+        }
+        public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge, T Element, ViewBox ViewBox)
+            : base()
         {
             this.Karte = Karte.Clone() as Karte;
             this.ElementMenge = ElementMenge;
             this.Element = Element;
+            this.ViewBox = ViewBox;
             BuildUp();
         }
 
         private void BuildUp()
         {
-            ViewCard.Dock = DockStyle.Left;
-            ViewCard.Karte = Karte;
-            Controls.Add(ViewCard);
+            ViewBox.Dock = DockStyle.Left;
+            ViewBox.Karte = Karte;
+            Controls.Add(ViewBox);
 
             List.AddControl(ElementMenge.Values.Map(x => GetButton(x)));
             Controls.Add(List);
@@ -57,11 +64,11 @@ namespace Werwolf.Forms
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-            ViewCard.Width = ClientSize.Width / 2;
+            ViewBox.Width = ClientSize.Width / 2;
 
-            SteuerButton.Location = new Point(ViewCard.Right + 20, ClientSize.Height - 50);
+            SteuerButton.Location = new Point(ViewBox.Right + 20, ClientSize.Height - 50);
 
-            List.Location = new Point(ViewCard.Right, 0);
+            List.Location = new Point(ViewBox.Right, 0);
             List.Size = new Size(ClientSize.Width / 2, ClientSize.Height - 70);
         }
         private void SteuerButton_ButtonClick(object sender, EventArgs e)
@@ -85,7 +92,7 @@ namespace Werwolf.Forms
         private void Auswahlen(T element)
         {
             this.Element = element;
-            ViewCard.ChangeKarte(Element);
+            ViewBox.ChangeKarte(Element);
             foreach (var item in List.ControlList)
             {
                 ElementAuswahlButton<T> b = item as ElementAuswahlButton<T>;
@@ -123,8 +130,15 @@ namespace Werwolf.Forms
         {
             switch (typeof(T).Name)
             {
-                case "Bild":
-                    return new BildForm(Karte) as PreForm<T>;
+                case "HauptBild":
+                    return new HauptBildForm(Karte) as PreForm<T>;
+                case "HintergrundBild":
+                    return new HintergrundBildForm(Karte) as PreForm<T>;
+                case "RuckseitenBild":
+                    return new RuckseitenBildForm(Karte) as PreForm<T>;
+                case "TextBildForm":
+                    return new TextBildForm(Karte) as PreForm<T>;
+
                 case "Karte":
                     return new KartenForm(Karte) as PreForm<T>;
                 case "Gesinnung":

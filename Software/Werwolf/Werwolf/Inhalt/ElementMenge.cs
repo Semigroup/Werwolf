@@ -10,38 +10,15 @@ namespace Werwolf.Inhalt
 {
     public abstract class Menge : XmlElement
     {
-        public string Pfad { get; set; }
-
         public Menge(string XmlName)
             : base(XmlName)
         {
 
         }
-        public void Open(string Pfad)
-        {
-            this.Pfad = Pfad;
-            Loader l = Universe.CreateLoader(Pfad);
-            this.Read(l);
-            l.XmlReader.Close();
-        }
-        public void Save()
-        {
-            XmlWriterSettings s = new XmlWriterSettings();
-            s.NewLineOnAttributes = true;
-            s.Indent = true;
-            s.IndentChars = new string(' ', 4);
-            XmlWriter writer = XmlWriter.Create(Pfad, s);
-            writer.WriteStartDocument();
-            Write(writer);
-            writer.WriteEndDocument();
-            writer.Close();
-        }
-
         public override void AdaptToCard(Karte Karte)
         {
             throw new NotImplementedException();
         }
-
         public override object Clone()
         {
             throw new NotImplementedException();
@@ -65,6 +42,7 @@ namespace Werwolf.Inhalt
             base.Init(Universe);
             Standard = new T();
             Standard.Init(Universe);
+            Standard.Unzerstorbar = true;
             Add(Standard);
         }
         protected override void ReadIntern(Loader Loader)
@@ -73,11 +51,14 @@ namespace Werwolf.Inhalt
             string standardName = Loader.XmlReader.getString("Standard");
 
             Clear();
-            while (Loader.XmlReader.Next())
+            int depth = Loader.XmlReader.Depth;
+            Loader.XmlReader.Next();
+            while (Loader.XmlReader.Depth > depth)
             {
                 T NeuesElement = new T();
                 NeuesElement.Read(Loader);
                 dictionary.Add(NeuesElement.Name, NeuesElement);
+                Loader.XmlReader.Next();
             }
 
             if (ContainsKey(standardName))

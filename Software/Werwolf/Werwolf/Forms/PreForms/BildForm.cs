@@ -16,13 +16,13 @@ using Werwolf.Karten;
 
 namespace Werwolf.Forms
 {
-    public class BildForm : PreForm<Bild>
+    public class BildForm<T> : PreForm<T> where T : Bild, new()
     {
-        private BallPointFBox ball;
-        private ImageSelectBox image;
+        protected BallPointFBox ball;
+        protected ImageSelectBox image;
 
-        public BildForm(Karte Karte)
-            : base(Karte)
+        public BildForm(Karte Karte, ViewBox ViewBox)
+            : base(Karte, ViewBox)
         {
         }
 
@@ -58,7 +58,7 @@ namespace Werwolf.Forms
                 return;
             UpdatingWerteListe = true;
             this.Text = element.XmlName + " namens " + element.Schreibname + " bearbeiten...";
-            WerteListe.SetValue("Name", element.Name);
+            WerteListe.SetValue("Name", element.Schreibname);
             WerteListe.SetValue("Datei", element.TotalFilePath);
             WerteListe.SetValue("Artist", element.Artist);
             WerteListe.SetValue("Größe in mm", element.Size);
@@ -70,11 +70,77 @@ namespace Werwolf.Forms
         {
             if (element == null || UpdatingWerteListe)
                 return;
-            element.Schreibname = element.Name = WerteListe.GetValue<string>("Name");
+            element.Schreibname = WerteListe.GetValue<string>("Name");
             element.FilePath = WerteListe.GetValue<string>("Datei");
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             element.Zentrum = WerteListe.GetValue<PointF>("Point of Interest");
+        }
+    }
+
+    public class HauptBildForm : BildForm<HauptBild>
+    {
+        public HauptBildForm(Karte Karte)
+            : base(Karte, new ViewKarte())
+        {
+        }
+    }
+    public class HintergrundBildForm : BildForm<HintergrundBild>
+    {
+        public HintergrundBildForm(Karte Karte)
+            : base(Karte, new ViewKarte())
+        {
+        }
+    }
+    public class RuckseitenBildForm : BildForm<RuckseitenBild>
+    {
+        public RuckseitenBildForm(Karte Karte)
+            : base(Karte, new ViewRuckseitenBild())
+        {
+        }
+    }
+    public class TextBildForm : BildForm<TextBild>
+    {
+        public TextBildForm(Karte Karte)
+            : base(Karte, new ViewTextBild())
+        {
+        }
+        public override void BuildWerteListe()
+        {
+            UpdatingWerteListe = true;
+
+            image = new ImageSelectBox();
+
+            WerteListe.AddWerteBox<string>(
+                new WertPaar<string>("Name", new TextBildNameBox(Universe.TextBilder)), "Name"); 
+            image.ShowImage = false;
+            WerteListe.AddWertePaar<string>(image, "", "Datei");
+            WerteListe.AddStringBox("", "Artist");
+
+            UpdatingWerteListe = false;
+            WerteListe.Setup();
+        }
+
+    
+        public override void UpdateWerteListe()
+        {
+            if (element == null)
+                return;
+            UpdatingWerteListe = true;
+            this.Text = element.XmlName + " namens " + element.Name + " bearbeiten...";
+            WerteListe.SetValue("Name", element.Name);
+            WerteListe.SetValue("Datei", element.TotalFilePath);
+            WerteListe.SetValue("Artist", element.Artist);
+            ball.Image = element.Image;
+            UpdatingWerteListe = false;
+        }
+        public override void UpdateElement()
+        {
+            if (element == null || UpdatingWerteListe)
+                return;
+            element.Name = WerteListe.GetValue<string>("Name");
+            element.FilePath = WerteListe.GetValue<string>("Datei");
+            element.Artist = WerteListe.GetValue<string>("Artist");
         }
     }
 }

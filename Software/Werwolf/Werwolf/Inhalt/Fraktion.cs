@@ -13,8 +13,8 @@ namespace Werwolf.Inhalt
     {
         public Aufgabe StandardAufgaben { get;  set; }
         public Titel.Art TitelArt { get;  set; }
-        public Bild Bild { get; set; }
-        public Bild RuckseitenBild { get; set; }
+        public HintergrundBild HintergrundBild { get; set; }
+        public RuckseitenBild RuckseitenBild { get; set; }
 
         public Fraktion()
             : base("Fraktion")
@@ -26,8 +26,8 @@ namespace Werwolf.Inhalt
             base.Init(Universe);
             this.StandardAufgaben = new Aufgabe("");
             this.TitelArt = Titel.Art.Rund;
-            this.Bild = Universe.Bilder.Standard;
-            this.RuckseitenBild = Universe.Bilder.Standard;
+            this.HintergrundBild = Universe.HintergrundBilder.Standard;
+            this.RuckseitenBild = Universe.RuckseitenBilder.Standard;
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -35,8 +35,8 @@ namespace Werwolf.Inhalt
 
             StandardAufgaben = Loader.GetAufgabe("StandardAufgaben");
             TitelArt = Loader.XmlReader.getEnum<Titel.Art>("TitelArt");
-            Bild = Loader.GetBild("Bild");
-            RuckseitenBild = Loader.GetBild("RuckseitenBild");
+            HintergrundBild = Loader.GetHintergrundBild();
+            RuckseitenBild = Loader.GetRuckseitenBild();
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -44,7 +44,7 @@ namespace Werwolf.Inhalt
 
             XmlWriter.writeAttribute("StandardAufgaben", StandardAufgaben.ToString());
             XmlWriter.writeEnum<Titel.Art>("TitelArt", TitelArt);
-            XmlWriter.writeAttribute("Bild", Bild.Name);
+            XmlWriter.writeAttribute("HauptBild", HintergrundBild.Name);
             XmlWriter.writeAttribute("RuckseitenBild", RuckseitenBild.Name);
         }
 
@@ -62,7 +62,7 @@ namespace Werwolf.Inhalt
         {
             base.Assimilate(Element);
             Fraktion f = Element as Fraktion;
-            f.Bild = Bild;
+            f.HintergrundBild = HintergrundBild;
             f.TitelArt = TitelArt;
             f.StandardAufgaben = StandardAufgaben;
             f.RuckseitenBild = RuckseitenBild;
