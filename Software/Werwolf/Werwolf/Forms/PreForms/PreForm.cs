@@ -51,6 +51,7 @@ namespace Werwolf.Forms
 
             BuildWerteListe();
             WerteListe.UserValueChanged += (sender, e) => OnUserValueChanged(e);
+            WerteListe.InvalidChange += (sender, e) => OnInvalidChange(e);
             Controls.Add(WerteListe);
 
             OkButton.Size = new Size(100, 40);
@@ -134,6 +135,11 @@ namespace Werwolf.Forms
             UserValueChanged(this, EventArgs.Empty);
             UpdateElement();
             ViewBox.ChangeKarte(element);
+            OkButton.Enabled = WerteListe.Valid();
+        }
+        protected virtual void OnInvalidChange(EventArgs e)
+        {
+            OkButton.Enabled = WerteListe.Valid();
         }
     }
 }

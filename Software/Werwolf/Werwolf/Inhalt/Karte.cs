@@ -43,7 +43,12 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            Aufgaben = new Aufgabe("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.");
+            Schreibname = "Beispielkarte";
+
+            Aufgaben = new Aufgabe(
+@"\r rot \g grün \b blau \o orange \y gelb \w weiß \v violett \l sattelbraun \e grau \cff0abcde FF0ABCDE \s schwarz
+\+
+\d fett \d \i kursiv \i \u Unterstricht \u \a Oberstrich \a \f Linksstrich \f \j Rechtstrich \j \x Horizontalstrich \x");
             Fraktion = Universe.Fraktionen.Standard;
             Gesinnung = Universe.Gesinnungen.Standard;
             HauptBild = Universe.HauptBilder.Standard;

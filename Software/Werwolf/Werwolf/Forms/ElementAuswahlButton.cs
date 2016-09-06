@@ -32,6 +32,8 @@ namespace Werwolf.Forms
         public event EventHandler Entfernt = delegate { };
         public event EventHandler Geklont = delegate { };
 
+        public bool Dirty { get; set; }
+
         public ElementAuswahlButton(T Element, Karte Karte, ElementMenge<T> ElementMenge)
         {
             this.Element = Element;
@@ -84,15 +86,19 @@ namespace Werwolf.Forms
         }
         public override void Refresh()
         {
-            base.Refresh();
-            this.GroupBox.Text = Element.Schreibname;
+            if (Dirty)
+            {
+                base.Refresh();
+                this.GroupBox.Text = Element.Schreibname;
 
-            Element.AdaptToCard(Karte);
-            this.Label.Image = Karte.GetImageByHeight(140);
-            this.Label.Size = Label.Image.Size;
+                Element.AdaptToCard(Karte);
+                this.Label.Image = Karte.GetImageByHeight(140);
+                this.Label.Size = Label.Image.Size;
 
-            Buttons.Location = new Point(Label.Right + 5, 15);
-            GroupBox.Width = Label.Width + 23 + Buttons.Width;
+                Buttons.Location = new Point(Label.Right + 5, 15);
+                GroupBox.Width = Label.Width + 23 + Buttons.Width;
+                Dirty = false;
+            }
         }
 
         protected virtual void OnAuswahlen(object sender, EventArgs e)

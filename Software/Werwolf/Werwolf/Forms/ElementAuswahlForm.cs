@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Diagnostics;
+using System.Threading;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;
@@ -27,6 +31,10 @@ namespace Werwolf.Forms
         private ScrollList List = new ScrollList();
         private ButtonReihe SteuerButton = new ButtonReihe(true, "Übernehmen", "Abbrechen");
 
+        private BackgroundWorker RefreshThread = new BackgroundWorker();
+        private Queue RefreshJobs;
+        private Queue SynchronizedRefreshJobs;
+
         public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge)
             : this(Karte, ElementMenge, ElementMenge.Standard)
         {
@@ -43,6 +51,8 @@ namespace Werwolf.Forms
             this.ElementMenge = ElementMenge;
             this.Element = Element;
             this.ViewBox = ViewBox;
+            this.RefreshJobs = new Queue();
+            this.SynchronizedRefreshJobs = Queue.Synchronized(RefreshJobs as Queue);
             BuildUp();
         }
 
@@ -53,13 +63,65 @@ namespace Werwolf.Forms
             Controls.Add(ViewBox);
 
             List.AddControl(ElementMenge.Values.Map(x => GetButton(x)));
+            List.Scroll += new ScrollEventHandler(List_Scroll);
             Controls.Add(List);
 
             SteuerButton.ButtonClick += new EventHandler(SteuerButton_ButtonClick);
             Controls.Add(SteuerButton);
 
+            RefreshThread.DoWork += new DoWorkEventHandler(RefreshThread_DoWork);
+
             this.ClientSize = new Size(1000, 800);
             Auswahlen(Element);
+        }
+
+        private void RefreshThread_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //this.Invoke((MethodInvoker)delegate
+            //{
+            //    this.Text = "Running " + RefreshJobs.Count + "Jobs";
+            //});
+            while (true)
+            {
+                lock (SynchronizedRefreshJobs.SyncRoot)
+                {
+                    if (RefreshJobs.Count > 0)
+                    {
+                        ElementAuswahlButton<T> item = RefreshJobs.Dequeue() as ElementAuswahlButton<T>;
+                        if (item.Dirty)
+                            item.Invoke((MethodInvoker)item.Refresh);
+                        //TimeSpan t = new TimeSpan(3000);
+                        Thread.Sleep(100);
+                        //this.Invoke((MethodInvoker)delegate
+                        //{
+                        //    this.Text = "Running " + RefreshJobs.Count + "Jobs";
+                        //});
+                    }
+                    else
+                        return;
+                }
+            }
+        }
+        private void List_Scroll(object sender, ScrollEventArgs e)
+        {
+            Rectangle R = ClientRectangle;
+            R.Location = R.Location.sub(List.Location.add(List.ControlList.Location));
+            foreach (ElementAuswahlButton<T> item in List.ControlList)
+                if (item.Dirty)
+                {
+                    Rectangle r = new Rectangle(item.Location, item.Size);
+                    r.Intersect(R);
+                    if (!r.Size.IsEmpty)
+                        item.Refresh();
+                }
+        }
+        private void SteuerButton_ButtonClick(object sender, EventArgs e)
+        {
+            if (SteuerButton.Message == "Übernehmen")
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+            else
+                DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Close();
         }
         protected override void OnSizeChanged(EventArgs e)
         {
@@ -70,14 +132,6 @@ namespace Werwolf.Forms
 
             List.Location = new Point(ViewBox.Right, 0);
             List.Size = new Size(ClientSize.Width / 2, ClientSize.Height - 70);
-        }
-        private void SteuerButton_ButtonClick(object sender, EventArgs e)
-        {
-            if (SteuerButton.Message == "Übernehmen")
-                DialogResult = System.Windows.Forms.DialogResult.OK;
-            else
-                DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Close();
         }
 
         private Control GetButton(T element)
@@ -117,8 +171,26 @@ namespace Werwolf.Forms
                 ElementMenge.Change(b.Element.Name, pf.Element);
                 Auswahlen(b.Element);
             }
-            foreach (var item in List.ControlList)
-                item.Refresh();
+
+            lock (SynchronizedRefreshJobs.SyncRoot)
+            {
+                RefreshJobs.Clear();
+
+                Rectangle R = ClientRectangle;
+                R.Location = R.Location.sub(List.Location.add(List.ControlList.Location));
+                foreach (ElementAuswahlButton<T> item in List.ControlList)
+                {
+                    item.Dirty = true;
+                    Rectangle r = new Rectangle(item.Location, item.Size);
+                    r.Intersect(R);
+                    if (!r.Size.IsEmpty)
+                        item.Refresh();
+                    else
+                        RefreshJobs.Enqueue(item);
+                }
+                if (!RefreshThread.IsBusy)
+                    RefreshThread.RunWorkerAsync();
+            }
         }
         private PreForm<T> GetPreform(T Element)
         {
@@ -136,7 +208,7 @@ namespace Werwolf.Forms
                     return new HintergrundBildForm(Karte) as PreForm<T>;
                 case "RuckseitenBild":
                     return new RuckseitenBildForm(Karte) as PreForm<T>;
-                case "TextBildForm":
+                case "TextBild":
                     return new TextBildForm(Karte) as PreForm<T>;
 
                 case "Karte":

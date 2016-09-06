@@ -56,6 +56,9 @@ namespace Werwolf.Karten
         }
         public override void update()
         {
+            if (!Visible())
+                return;
+
             Aufgabe Aufgaben = Karte.MeineAufgaben;
 
             if (Karte == null || Aufgaben.Anzahl() == 0)

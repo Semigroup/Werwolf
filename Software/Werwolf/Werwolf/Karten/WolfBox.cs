@@ -44,6 +44,8 @@ namespace Werwolf.Karten
 
         public virtual void OnKarteChanged()
         {
+            if (karte == null)
+                return;
             AussenBox = new RectangleF(new PointF(), HintergrundDarstellung.Size).mul(Faktor);
             InnenBox = AussenBox.Inner(HintergrundDarstellung.Rand.mul(Faktor));
         }

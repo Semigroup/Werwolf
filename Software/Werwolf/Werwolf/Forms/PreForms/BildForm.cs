@@ -131,7 +131,6 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Name", element.Name);
             WerteListe.SetValue("Datei", element.TotalFilePath);
             WerteListe.SetValue("Artist", element.Artist);
-            ball.Image = element.Image;
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()

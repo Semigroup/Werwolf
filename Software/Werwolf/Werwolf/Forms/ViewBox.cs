@@ -37,11 +37,16 @@ namespace Werwolf.Forms
         protected Size LastSize = new Size();
         protected Graphics g;
 
+        protected DrawContextGraphics DrawContext;
+        protected WolfBox WolfBox;
+
         public ViewBox()
+            : base()
         {
             InitializeComponent();
+            WolfBox = GetWolfBox(Karte, ppm);
         }
-        public void ChangeKarte(XmlElement ChangedElement)
+        public virtual void ChangeKarte(XmlElement ChangedElement)
         {
             if (ChangedElement != null)
                 ChangedElement.AdaptToCard(karte);
@@ -55,13 +60,18 @@ namespace Werwolf.Forms
         {
             ChangeSize();
             g.Clear(Color.White);
+            if (karte != null)
+            {
+                WolfBox.Karte = karte;
+                WolfBox.setup(0);
+                WolfBox.draw(DrawContext);
+            }
         }
         public override void Refresh()
         {
             Draw();
             base.Refresh();
         }
-
         protected virtual bool ChangeSize()
         {
             Size Size = karte.GetPictureSize(ppm);
@@ -70,8 +80,10 @@ namespace Werwolf.Forms
             LastSize = Size;
             pictureBox1.Image = new Bitmap(Size.Width, Size.Height);
             g = pictureBox1.Image.GetHighGraphics(ppm / WolfBox.Faktor);
+            DrawContext = new DrawContextGraphics(g, Brushes.White);
             return true;
         }
+        protected abstract WolfBox GetWolfBox(Karte Karte, float Ppm);
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -86,45 +98,31 @@ namespace Werwolf.Forms
     }
     public class ViewKarte : ViewBox
     {
-        private DrawContextGraphics DrawContext;
-        private StandardKarte StandardKarte;
-
-        protected override void Draw()
+        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
         {
-            base.Draw();
-            StandardKarte.OnKarteChanged();
-            StandardKarte.setup(0);
-            StandardKarte.draw(DrawContext);
-        }
-        protected override bool ChangeSize()
-        {
-            if (!base.ChangeSize())
-                return false;
-            DrawContext = new DrawContextGraphics(g, Brushes.White);
-            StandardKarte = new StandardKarte(karte, ppm);
-            return true;
+            return new StandardKarte(Karte, Ppm);
         }
     }
     public class ViewRuckseitenBild : ViewBox
     {
-        protected override void Draw()
+        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
         {
-            base.Draw();
-            g.Clear(Karte.HintergrundDarstellung.Farbe);
-            Bild b = Karte.Fraktion.RuckseitenBild;
-            if (b.Image == null)
-                return;
-            PointF Zentrum = ((SizeF)LastSize).div(2).ToPointF();
-            RectangleF Rectangle = b.Rectangle.mul(ppm / WolfBox.Faktor).move(Zentrum);
-            g.DrawImage(b.Image, Rectangle);
+            return new StandardRuckseite(Karte, Ppm);
         }
     }
     public class ViewTextBild : ViewBox
     {
-        protected override void Draw()
+        private StandardTextBild StandardTextBild;
+        public override void ChangeKarte(XmlElement ChangedElement)
         {
-            base.Draw();
-            
+            base.ChangeKarte(ChangedElement);
+            if (ChangedElement is TextBild)
+                StandardTextBild.TextBild = ChangedElement as TextBild;
+        }
+        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
+        {
+            StandardTextBild = new StandardTextBild(Karte, ppm);
+            return StandardTextBild;
         }
     }
     public class ViewDeck : ViewBox
@@ -133,6 +131,10 @@ namespace Werwolf.Forms
         {
             base.Draw();
 
+        }
+        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
+        {
+            throw new NotImplementedException();
         }
     }
 }

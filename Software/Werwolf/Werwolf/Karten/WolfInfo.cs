@@ -25,6 +25,9 @@ namespace Werwolf.Karten
 
         public override void OnKarteChanged()
         {
+            if (!Visible())
+                return;
+
             base.OnKarteChanged();
 
             SizeF Rand = InfoDarstellung.Rand.mul(Faktor);

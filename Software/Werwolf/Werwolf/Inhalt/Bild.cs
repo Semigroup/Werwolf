@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Xml;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Xml;
@@ -15,15 +16,20 @@ namespace Werwolf.Inhalt
 {
     public abstract class Bild : XmlElement
     {
-        public string FilePath
+        public string FilePath { get; set; }
+        public string TotalFilePath
         {
-            get { return filePath; }
-            set
+            get
             {
-                filePath = value;
-                image = null;
+                if (File.Exists(FilePath))
+                    return FilePath;
+                else if (FilePath != null && Universe.RootBilder != null)
+                    return Path.Combine(Universe.RootBilder, FilePath);
+                else
+                    return "";
             }
         }
+
         public string Artist { get; set; }
         public SizeF Size { get; set; }
         /// <summary>
@@ -47,34 +53,15 @@ namespace Werwolf.Inhalt
             get { return new RectangleF(ZentrumAbsolut.mul(-WolfBox.Faktor), Size.mul(WolfBox.Faktor)); }
         }
 
-        private Image image;
         public Image Image
         {
             get
             {
-                if (image == null)
-                {
-                    if (filePath == null || filePath.Length == 0)
-                        image = new Bitmap(1, 1);
-                    else if (File.Exists(filePath))
-                        image = Image.FromFile(filePath);
-                    else
-                        image = Image.FromFile(Path.Combine(Universe.RootBilder, filePath));
-                }
-                return image;
-            }
-        }
-        private string filePath;
-        public string TotalFilePath
-        {
-            get
-            {
-                if (File.Exists(filePath))
-                    return filePath;
-                else if (filePath != null)
-                    return Path.Combine(Universe.RootBilder, filePath);
+                string tot = TotalFilePath;
+                if (File.Exists(tot))
+                    return Image.FromFile(tot);
                 else
-                    return "";
+                    return new Bitmap(1, 1);
             }
         }
 
@@ -82,7 +69,14 @@ namespace Werwolf.Inhalt
             : base(XmlName)
         {
         }
-      
+
+        public override void Init(Universe Universe)
+        {
+            base.Init(Universe);
+            FilePath = "";
+            Artist = "Artist";
+        }
+
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
@@ -101,7 +95,6 @@ namespace Werwolf.Inhalt
             XmlWriter.writePoint("Zentrum", Zentrum);
         }
 
-       
         public override void Assimilate(XmlElement Element)
         {
             base.Assimilate(Element);
@@ -110,7 +103,6 @@ namespace Werwolf.Inhalt
             b.Artist = Artist;
             b.Size = Size;
             b.Zentrum = Zentrum;
-            b.image = image;
         }
         public SizeF StandardSize(Image image)
         {
@@ -119,6 +111,20 @@ namespace Werwolf.Inhalt
                 return new SizeF(w, w / ((SizeF)image.Size).ratio());
             else
                 return new SizeF(1, 1);
+        }
+        public Size GetImageSize()
+        {
+            string tot = TotalFilePath;
+            if (File.Exists(tot))
+                using (var imageStream = File.OpenRead(TotalFilePath))
+                {
+                    BitmapDecoder decoder = BitmapDecoder.Create(imageStream,
+                        BitmapCreateOptions.IgnoreColorProfile,
+                        BitmapCacheOption.None);
+                    return new Size(decoder.Frames[0].PixelWidth, decoder.Frames[0].PixelHeight);
+                }
+            else
+                return new Size(0, 1);
         }
     }
 
@@ -131,8 +137,6 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            FilePath = "";
-            Artist = "";
             Size = Universe.HintergrundDarstellungen.Standard.Size;
             Zentrum = new PointF(0.5f, 0.25f);
         }
@@ -157,8 +161,6 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            FilePath = "";
-            Artist = "";
             Size = Universe.HintergrundDarstellungen.Standard.Size;
             Zentrum = new PointF(0.5f, 0.5f);
         }
@@ -183,12 +185,10 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            FilePath = "";
-            Artist = "";
             Size = Universe.HintergrundDarstellungen.Standard.Size;
             Zentrum = new PointF(0.5f, 0.5f);
         }
- 
+
         public override void AdaptToCard(Karte Karte)
         {
             Karte.Fraktion.RuckseitenBild = this;
@@ -209,15 +209,12 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            FilePath = "";
-            Artist = "";
             Size = Universe.HintergrundDarstellungen.Standard.Size;
             Zentrum = new PointF(0.5f, 0.5f);
         }
 
         public override void AdaptToCard(Karte Karte)
         {
-            throw new NotImplementedException();
         }
         public override object Clone()
         {

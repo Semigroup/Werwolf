@@ -88,6 +88,7 @@ namespace Werwolf.Inhalt
         public Image RandBild { get; private set; }
         private Size LastSize = new Size();
         private SizeF LastRand = new SizeF();
+        private Color LastRandFarbe = Color.Black;
         private bool LastRundeEcken = true;
      
         public HintergrundDarstellung()
@@ -100,7 +101,8 @@ namespace Werwolf.Inhalt
             base.Init(Universe);
             RundeEcken = true;
             Size = new SizeF(63, 89.1f);
-            Farbe = Color.Black;
+            Farbe = Color.White;
+            Rand = new SizeF(3, 3);
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -119,11 +121,15 @@ namespace Werwolf.Inhalt
         public void MakeRandBild(float ppm)
         {
             Size s = Size.mul(ppm).Max(1,1).ToSize();
-            if (LastSize.Equals(s) && LastRand.sub(Rand).norm() < 1 && LastRundeEcken == RundeEcken)
+            if (LastSize.Equals(s)
+                && LastRand.sub(Rand).norm() < 1
+                && LastRundeEcken == RundeEcken
+                && LastRandFarbe == RandFarbe)
                 return;
             LastSize = s;
             LastRand = Rand;
             LastRundeEcken = RundeEcken;
+            LastRandFarbe = RandFarbe;
 
             RandBild = new Bitmap(s.Width, s.Height);
             using (Graphics g = RandBild.GetHighGraphics())
@@ -142,7 +148,7 @@ namespace Werwolf.Inhalt
                 //Region clip = new Region(innen);
                 //clip.Complement(aussen);
                 //g.Clip = clip;
-                g.FillPolygon(Brushes.Black, y.getPolygon((int)(100 * y.L), 0, 1));
+                g.FillPolygon(RandFarbe.ToBrush(), y.getPolygon((int)(100 * y.L), 0, 1));
                 g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                 g.FillRectangle(Color.FromArgb(1, 255, 255, 255).ToBrush(), innen); //Color.FromArgb(0)
                 //g.FillRectangle(Color.FromArgb(0, 0, 0, 0).ToBrush(), innen); //Color.FromArgb(0)

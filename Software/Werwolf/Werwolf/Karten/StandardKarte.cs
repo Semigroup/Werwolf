@@ -45,8 +45,8 @@ namespace Werwolf.Karten
         {
             base.OnKarteChanged();
             foreach (var item in WolfBoxs)
-                if (item != null && item.Visible())
-                    item.OnKarteChanged();
+                if (item != null)
+                    item.Karte = Karte;
             update();
         }
         public override void OnPpmChanged()

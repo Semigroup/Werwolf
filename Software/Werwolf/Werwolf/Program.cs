@@ -36,7 +36,8 @@ namespace Werwolf
             Karte k = new Karte();
             k.Init(Universe);
 
-            ElementAuswahlForm<Karte> ek = new ElementAuswahlForm<Karte>(k, Universe.Karten);
+            //ElementAuswahlForm<Karte> ek = new ElementAuswahlForm<Karte>(k, Universe.Karten);
+            ElementAuswahlForm<TextBild> ek = new ElementAuswahlForm<TextBild>(k, Universe.TextBilder);
 
             Application.Run(ek);
             Universe.Save();

@@ -54,13 +54,14 @@ namespace Werwolf.Karten
 
         public override void update()
         {
-            if (Karte.Schreibname.Equals(LastSchreibname)
+            if (karte == null ||
+                (Karte.Schreibname.Equals(LastSchreibname)
                 && TitelDarstellung.Font.Equals(LastFont)
                 && Karte.Fraktion.TitelArt.Equals(LastTitelArt)
                 && TitelDarstellung.Rand.Height.Equals(LastRandHeight)
                 && TitelDarstellung.RandFarbe.Equals(LastRandFarbe)
                 && TitelDarstellung.Farbe.Equals(LastFarbe)
-                && Ppm.Equals(LastPpm))
+                && Ppm.Equals(LastPpm)))
                 return;
 
             LastSchreibname = Karte.Schreibname;
