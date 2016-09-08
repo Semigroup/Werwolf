@@ -74,7 +74,7 @@ namespace Werwolf.Forms
             element.HauptBild = WerteListe.GetValue<HauptBild>("Bild");
             element.Fraktion = WerteListe.GetValue<Fraktion>("Fraktion");
             element.Gesinnung = WerteListe.GetValue<Gesinnung>("Gesinnung");
-            element.Aufgaben = new Aufgabe(WerteListe.GetValue<string>("Text"));
+            element.Aufgaben = new Aufgabe(WerteListe.GetValue<string>("Text"), Universe);
 
             element.BildDarstellung = WerteListe.GetValue<BildDarstellung>("Bild Darstellung");
             element.TitelDarstellung = WerteListe.GetValue<TitelDarstellung>("Titel Darstellung");

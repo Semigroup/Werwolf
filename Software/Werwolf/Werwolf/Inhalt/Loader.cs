@@ -11,7 +11,7 @@ using Assistment.Texts;
 
 namespace Werwolf.Inhalt
 {
-    public class Loader
+    public class Loader : IDisposable
     {
         public Universe Universe { get; private set; }
         public XmlReader XmlReader { get; private set; }
@@ -35,64 +35,69 @@ namespace Werwolf.Inhalt
         public Aufgabe GetAufgabe(string AttributeName)
         {
             string s = XmlReader.getString(AttributeName);
-            return new Aufgabe(s);
+            return new Aufgabe(s, Universe);
         }
 
         public Fraktion GetFraktion()
         {
-            string s = XmlReader.GetAttribute("Fraktion");
+            string s = XmlReader.getString("Fraktion");
             return Universe.Fraktionen[s];
         }
         public Gesinnung GetGesinnung()
         {
-            string s = XmlReader.GetAttribute("Gesinnung");
+            string s = XmlReader.getString("Gesinnung");
             return Universe.Gesinnungen[s];
         }
         public HintergrundDarstellung GetHintergrundDarstellung()
         {
-            string s = XmlReader.GetAttribute("HintergrundDarstellung");
+            string s = XmlReader.getString("HintergrundDarstellung");
             return Universe.HintergrundDarstellungen[s];
         }
         public TextDarstellung GetTextDarstellung()
         {
-            string s = XmlReader.GetAttribute("TextDarstellung");
+            string s = XmlReader.getString("TextDarstellung");
             return Universe.TextDarstellungen[s];
         }
         public TitelDarstellung GetTitelDarstellung()
         {
-            string s = XmlReader.GetAttribute("TitelDarstellung");
+            string s = XmlReader.getString("TitelDarstellung");
             return Universe.TitelDarstellungen[s];
         }
         public BildDarstellung GetBildDarstellung()
         {
-            string s = XmlReader.GetAttribute("BildDarstellung");
+            string s = XmlReader.getString("BildDarstellung");
             return Universe.BildDarstellungen[s];
         }
         public InfoDarstellung GetInfoDarstellung()
         {
-            string s = XmlReader.GetAttribute("InfoDarstellung");
+            string s = XmlReader.getString("InfoDarstellung");
             return Universe.InfoDarstellungen[s];
         }
 
         public HauptBild GetHauptBild()
         {
-            string s = XmlReader.GetAttribute("HauptBild");
+            string s = XmlReader.getString("HauptBild");
             return Universe.HauptBilder[s];
         }
         public HintergrundBild GetHintergrundBild()
         {
-            string s = XmlReader.GetAttribute("HintergrundBild");
+            string s = XmlReader.getString("HintergrundBild");
             return Universe.HintergrundBilder[s];
         }
         public TextBild GetTextBild()
         {
-            string s = XmlReader.GetAttribute("TextBild");
+            string s = XmlReader.getString("TextBild");
             return Universe.TextBilder[s];
         }
         public RuckseitenBild GetRuckseitenBild()
         {
-            string s = XmlReader.GetAttribute("RuckseitenBild");
+            string s = XmlReader.getString("RuckseitenBild");
             return Universe.RuckseitenBilder[s];
+        }
+
+        public void Dispose()
+        {
+            XmlReader.Close();
         }
     }
 }

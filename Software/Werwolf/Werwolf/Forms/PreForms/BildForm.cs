@@ -49,8 +49,8 @@ namespace Werwolf.Forms
         {
             if (UpdatingWerteListe)
                 return;
-            ball.Image = image.Image;
-            WerteListe.SetValue("Größe in mm", element.StandardSize(image.Image));
+            ball.SetImage(image.ImagePath);
+            WerteListe.SetValue("Größe in mm", element.StandardSize(ball.Image));
         }
         public override void UpdateWerteListe()
         {
@@ -102,7 +102,7 @@ namespace Werwolf.Forms
     public class TextBildForm : BildForm<TextBild>
     {
         public TextBildForm(Karte Karte)
-            : base(Karte, new ViewTextBild())
+            : base(Karte, new ViewKarte())
         {
         }
         public override void BuildWerteListe()

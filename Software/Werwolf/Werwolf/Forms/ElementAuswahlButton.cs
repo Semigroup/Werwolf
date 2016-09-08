@@ -45,18 +45,20 @@ namespace Werwolf.Forms
         {
             this.GroupBox.Text = Element.Schreibname;
             this.GroupBox.Height = 160;
+            this.GroupBox.AutoSize = true;
 
-            Element.AdaptToCard(Karte);
-            this.Label.Image = Karte.GetImageByHeight(140);
-            this.Label.Size = Label.Image.Size;
+            //Element.AdaptToCard(Karte);
+            //this.Label.Image = GetImage();
+            //this.Label.Size = Label.Image.Size;
 
             this.GroupBox.Controls.Add(Label);
             this.GroupBox.Controls.Add(Buttons);
             this.Controls.Add(GroupBox);
 
             Label.Location = new Point(10, 15);
-            Buttons.Location = new Point(Label.Right + 5, 15);
-            GroupBox.Width = Label.Width + 23 + Buttons.Width;
+            //Buttons.Location = new Point(Label.Right + 5, 15);
+            //GroupBox.Width = Label.Width + 23 + Buttons.Width;
+            this.Dirty = true;
 
             this.AutoSize = true;
 
@@ -92,12 +94,28 @@ namespace Werwolf.Forms
                 this.GroupBox.Text = Element.Schreibname;
 
                 Element.AdaptToCard(Karte);
-                this.Label.Image = Karte.GetImageByHeight(140);
+                this.Label.Image = GetImage();
                 this.Label.Size = Label.Image.Size;
 
                 Buttons.Location = new Point(Label.Right + 5, 15);
                 GroupBox.Width = Label.Width + 23 + Buttons.Width;
                 Dirty = false;
+            }
+        }
+        private Image GetImage()
+        {
+            float height = 140;
+            switch (typeof(T).Name)
+            {
+                case "TextBild":
+                    TextBild b = Element as TextBild;
+                    return b.GetImageByHeight(height); 
+                case "RuckseitenBild":
+                    return Karte.GetBackImageByHeight(height);
+                case "Deck":
+                    throw new NotImplementedException();
+                default:
+                    return Karte.GetImageByHeight(height);
             }
         }
 

@@ -13,15 +13,14 @@ namespace Werwolf.Karten
     public class WolfTextBild : WolfBox
     {
         public TextBild TextBild { get; private set; }
-        public bool Info { get; set; }
-
         private Size ImageSize;
+        private xFont Font;
 
-        public WolfTextBild(TextBild TextBild, Karte Karte, bool Info)
-            : base(Karte, 1)
+        public WolfTextBild(TextBild TextBild, xFont Font)
+            : base(null, 1)
         {
             this.TextBild = TextBild;
-            this.Info = Info;
+            this.Font = Font;
             this.update();
         }
 
@@ -46,8 +45,7 @@ namespace Werwolf.Karten
         public override void update()
         {
             ImageSize = TextBild.GetImageSize();
-            FontMeasurer fm = Info ? Karte.InfoDarstellung.FontMeasurer : Karte.TextDarstellung.FontMeasurer;
-            this.box.Height = fm.yMass('_');
+            this.box.Height = Font.yMass('_');
             this.box.Width = box.Height * ImageSize.Width / ImageSize.Height;
         }
         public override void setup(RectangleF box)

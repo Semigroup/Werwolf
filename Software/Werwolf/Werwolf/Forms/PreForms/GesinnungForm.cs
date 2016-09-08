@@ -51,7 +51,7 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
 
-            element.Aufgabe = new Aufgabe(WerteListe.GetValue<string>("Text"));
+            element.Aufgabe = new Aufgabe(WerteListe.GetValue<string>("Text"), Universe);
         }
     }
 }

@@ -35,12 +35,18 @@ namespace Werwolf.Forms
         private Queue RefreshJobs;
         private Queue SynchronizedRefreshJobs;
 
+        public ElementAuswahlForm(ElementMenge<T> ElementMenge)
+            : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge)
+        {
+
+        }
         public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge)
             : this(Karte, ElementMenge, ElementMenge.Standard)
         {
+
         }
         public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge, T Element)
-            : this(Karte, ElementMenge, Element, new ViewKarte())
+            : this(Karte, ElementMenge, Element, GetViewBox())
         {
 
         }
@@ -59,7 +65,7 @@ namespace Werwolf.Forms
         private void BuildUp()
         {
             ViewBox.Dock = DockStyle.Left;
-            ViewBox.Karte = Karte;
+            ViewBox.Karte = Karte.Clone() as Karte;
             Controls.Add(ViewBox);
 
             List.AddControl(ElementMenge.Values.Map(x => GetButton(x)));
@@ -73,32 +79,25 @@ namespace Werwolf.Forms
 
             this.ClientSize = new Size(1000, 800);
             Auswahlen(Element);
+
+            StartRefreshing();
         }
 
         private void RefreshThread_DoWork(object sender, DoWorkEventArgs e)
         {
-            //this.Invoke((MethodInvoker)delegate
-            //{
-            //    this.Text = "Running " + RefreshJobs.Count + "Jobs";
-            //});
+            ElementAuswahlButton<T> item;
             while (true)
             {
                 lock (SynchronizedRefreshJobs.SyncRoot)
-                {
                     if (RefreshJobs.Count > 0)
-                    {
-                        ElementAuswahlButton<T> item = RefreshJobs.Dequeue() as ElementAuswahlButton<T>;
-                        if (item.Dirty)
-                            item.Invoke((MethodInvoker)item.Refresh);
-                        //TimeSpan t = new TimeSpan(3000);
-                        Thread.Sleep(100);
-                        //this.Invoke((MethodInvoker)delegate
-                        //{
-                        //    this.Text = "Running " + RefreshJobs.Count + "Jobs";
-                        //});
-                    }
+                        item = RefreshJobs.Dequeue() as ElementAuswahlButton<T>;
                     else
                         return;
+                if (item.Dirty)
+                {
+                    if (item.IsHandleCreated)
+                        item.Invoke((MethodInvoker)item.Refresh);
+                    Thread.Sleep(Settings.SleepTime);
                 }
             }
         }
@@ -171,7 +170,17 @@ namespace Werwolf.Forms
                 ElementMenge.Change(b.Element.Name, pf.Element);
                 Auswahlen(b.Element);
             }
+            StartRefreshing();
+        }
+        private void Klonen(T element)
+        {
+            T Neu = element.Clone() as T;
+            ElementMenge.AddPolymorph(Neu);
+            List.AddControl(GetButton(Neu));
+        }
 
+        private void StartRefreshing()
+        {
             lock (SynchronizedRefreshJobs.SyncRoot)
             {
                 RefreshJobs.Clear();
@@ -188,10 +197,11 @@ namespace Werwolf.Forms
                     else
                         RefreshJobs.Enqueue(item);
                 }
-                if (!RefreshThread.IsBusy)
-                    RefreshThread.RunWorkerAsync();
             }
+            if (!RefreshThread.IsBusy)
+                RefreshThread.RunWorkerAsync();
         }
+
         private PreForm<T> GetPreform(T Element)
         {
             PreForm<T> pf = GetPreform();
@@ -232,11 +242,33 @@ namespace Werwolf.Forms
                     throw new NotImplementedException();
             }
         }
-        private void Klonen(T element)
+
+        private static ViewBox GetViewBox()
         {
-            T Neu = element.Clone() as T;
-            ElementMenge.AddPolymorph(Neu);
-            List.AddControl(GetButton(Neu));
+            switch (typeof(T).Name)
+            {
+                case "HauptBild":
+                case "HintergrundBild":
+                case "TextBild":
+                case "Karte":
+                case "Gesinnung":
+                case "Fraktion":
+                case "BildDarstellung":
+                case "HintergrundDarstellung":
+                case "InfoDarstellung":
+                case "TextDarstellung":
+                case "TitelDarstellung":
+                    return new ViewKarte();
+
+                case "RuckseitenBild":
+                    return new ViewRuckseitenBild();
+
+                case "Deck":
+                    return new ViewDeck();
+
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Werwolf.Karten
     {
         protected static Random Random = new Random();
 
-        public const float Faktor = 4.83f;
+        public static float Faktor = Settings.WolfBoxFaktor;
 
         protected Karte karte;
         public Karte Karte { get { return karte; } set { karte = value; OnKarteChanged(); } }

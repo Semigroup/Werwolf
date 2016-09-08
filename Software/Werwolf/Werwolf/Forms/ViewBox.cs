@@ -18,10 +18,10 @@ namespace Werwolf.Forms
 {
     public abstract partial class ViewBox : UserControl
     {
-        private int DelayStep = 10;
+        private int DelayStep { get { return Settings.DelayTime; } }
         private int CurrentDelay = 0;
 
-        protected float ppm = 8;
+        protected float ppm { get { return Settings.ViewPpm; } }
 
         protected Karte karte;
         public Karte Karte
@@ -58,10 +58,10 @@ namespace Werwolf.Forms
         }
         protected virtual void Draw()
         {
-            ChangeSize();
-            g.Clear(Color.White);
             if (karte != null)
             {
+                ChangeSize();
+                g.Clear(Color.White);
                 WolfBox.Karte = karte;
                 WolfBox.setup(0);
                 WolfBox.draw(DrawContext);
@@ -110,28 +110,8 @@ namespace Werwolf.Forms
             return new StandardRuckseite(Karte, Ppm);
         }
     }
-    public class ViewTextBild : ViewBox
-    {
-        private StandardTextBild StandardTextBild;
-        public override void ChangeKarte(XmlElement ChangedElement)
-        {
-            base.ChangeKarte(ChangedElement);
-            if (ChangedElement is TextBild)
-                StandardTextBild.TextBild = ChangedElement as TextBild;
-        }
-        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
-        {
-            StandardTextBild = new StandardTextBild(Karte, ppm);
-            return StandardTextBild;
-        }
-    }
     public class ViewDeck : ViewBox
     {
-        protected override void Draw()
-        {
-            base.Draw();
-
-        }
         protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
         {
             throw new NotImplementedException();

@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Xml;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Drawing.Imaging;
 
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Xml;
+using Assistment.Extensions;
 
 using Werwolf.Karten;
 
@@ -16,6 +18,9 @@ namespace Werwolf.Inhalt
 {
     public abstract class Bild : XmlElement
     {
+        private static Image LeerBild = new Bitmap(1, 1);
+        private static Image FehlerBild = Settings.ErrorImage;
+
         public string FilePath { get; set; }
         public string TotalFilePath
         {
@@ -23,8 +28,16 @@ namespace Werwolf.Inhalt
             {
                 if (File.Exists(FilePath))
                     return FilePath;
-                else if (FilePath != null && Universe.RootBilder != null)
-                    return Path.Combine(Universe.RootBilder, FilePath);
+                else if (FilePath != null && FilePath.Length > 0)
+                {
+                    string fp = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                    if (File.Exists(fp))
+                        return fp;
+                    fp = Path.Combine(Universe.DirectoryName, FilePath);
+                    if (File.Exists(fp))
+                        return fp;
+                    return "";
+                }
                 else
                     return "";
             }
@@ -61,7 +74,7 @@ namespace Werwolf.Inhalt
                 if (File.Exists(tot))
                     return Image.FromFile(tot);
                 else
-                    return new Bitmap(1, 1);
+                    return LeerBild;
             }
         }
 
@@ -125,6 +138,47 @@ namespace Werwolf.Inhalt
                 }
             else
                 return new Size(0, 1);
+        }
+        public void SetAutoSize()
+        {
+            SizeF KartenSize = Universe.HintergrundDarstellungen.Standard.Size;
+            this.Size = GetImageSize();
+            this.Size = new SizeF(KartenSize.Width, KartenSize.Width / Size.ratio());
+        }
+        public Image GetImageByHeight(float Height)
+        {
+            Image Img = this.Image;
+            if (Img == LeerBild)
+                Img = FehlerBild;
+
+            RectangleF r = new RectangleF();
+            r.Size = new SizeF(Img.Size.Width * Height / Img.Size.Height, Height).Max(1, 1).ToSize();
+            Image img = new Bitmap((int)r.Width, (int)r.Height);
+
+            using (Graphics g = img.GetHighGraphics())
+                g.DrawImage(Img, r);
+            return img;
+        }
+
+        public virtual void Lokalisieren(bool jpg)
+        {
+            string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
+            using (Image image = Image)
+            {
+                if (image != LeerBild)
+                {
+                    this.FilePath = "Bilder/" + XmlName + "er/" + Schreibname + extension;
+                    string path = Path.Combine(Universe.DirectoryName, FilePath);
+                    if (jpg)
+                        image.Save(path, ImageFormat.Jpeg);
+                    else
+                        image.Save(path);
+                }
+                else
+                {
+                    this.FilePath = "";
+                }
+            }
         }
     }
 
@@ -215,6 +269,7 @@ namespace Werwolf.Inhalt
 
         public override void AdaptToCard(Karte Karte)
         {
+            Karte.Aufgaben = new Aufgabe(this);
         }
         public override object Clone()
         {

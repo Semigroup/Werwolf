@@ -52,7 +52,7 @@ namespace Werwolf.Karten
         }
         public override bool Visible()
         {
-            return base.Visible() && Karte.MeineAufgaben.Anzahl() > 0;
+            return base.Visible() && Karte.MeineAufgaben.Anzahl > 0;
         }
         public override void update()
         {
@@ -61,16 +61,16 @@ namespace Werwolf.Karten
 
             Aufgabe Aufgaben = Karte.MeineAufgaben;
 
-            if (Karte == null || Aufgaben.Anzahl() == 0)
+            if (Karte == null || Aufgaben.Anzahl == 0)
                 return;
 
             OuterBox = InnenBox;
             InnerBox = OuterBox.Inner(Rand.add(BalkenDicke, BalkenDicke).mul(Faktor));
             TextBox = InnerBox.Inner(InnenRadius * Faktor, InnenRadius * Faktor);
 
-            Texts = new DrawBox[Aufgaben.Anzahl()];
+            Texts = new DrawBox[Aufgaben.Anzahl];
             int i = 0;
-            foreach (var item in Aufgaben.GetTexts(TextDarstellung.FontMeasurer))
+            foreach (var item in Aufgaben.ProduceTexts(TextDarstellung.FontMeasurer))
             {
                 Texts[i] = item; // new FixedBox(TextBox.Size, true, false, item);
                 Texts[i++].setup(TextBox);

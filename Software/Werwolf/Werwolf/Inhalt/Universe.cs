@@ -28,9 +28,6 @@ namespace Werwolf.Inhalt
 
         public ElementMenge<Deck> Decks { get; private set; }
 
-        public string RootBilder { get; set; }
-        public string Pfad { get; set; }
-
         public Menge[] ElementMengen
         {
             get
@@ -43,19 +40,21 @@ namespace Werwolf.Inhalt
             }
         }
 
-        public Universe()
+        public string DirectoryName { get; private set; }
+
+        private Universe()
             : base("Universe")
         {
-            HintergrundDarstellungen = new ElementMenge<HintergrundDarstellung>("HintergrundDarstellungen", this);
-            TitelDarstellungen = new ElementMenge<TitelDarstellung>("TitelDarstellungen", this);
-            BildDarstellungen = new ElementMenge<BildDarstellung>("BildDarstellungen", this);
-            TextDarstellungen = new ElementMenge<TextDarstellung>("TextDarstellungen", this);
-            InfoDarstellungen = new ElementMenge<InfoDarstellung>("InfoDarstellungen", this);
+            HintergrundDarstellungen = new ElementMenge<HintergrundDarstellung>("Hintergrunddarstellungen", this);
+            TitelDarstellungen = new ElementMenge<TitelDarstellung>("Titeldarstellungen", this);
+            BildDarstellungen = new ElementMenge<BildDarstellung>("Bilddarstellungen", this);
+            TextDarstellungen = new ElementMenge<TextDarstellung>("Textdarstellungen", this);
+            InfoDarstellungen = new ElementMenge<InfoDarstellung>("Infodarstellungen", this);
 
-            HauptBilder = new ElementMenge<HauptBild>("HauptBilder", this);
-            HintergrundBilder = new ElementMenge<HintergrundBild>("HintergrundBilder", this);
-            RuckseitenBilder = new ElementMenge<RuckseitenBild>("RuckseitenBilder", this);
-            TextBilder = new ElementMenge<TextBild>("TextBilder", this);
+            HauptBilder = new ElementMenge<HauptBild>("Hauptbilder", this);
+            HintergrundBilder = new ElementMenge<HintergrundBild>("Hintergrundbilder", this);
+            RuckseitenBilder = new ElementMenge<RuckseitenBild>("Rückseitenbilder", this);
+            TextBilder = new ElementMenge<TextBild>("Textbilder", this);
 
             Fraktionen = new ElementMenge<Fraktion>("Fraktionen", this);
             Gesinnungen = new ElementMenge<Gesinnung>("Gesinnungen", this);
@@ -72,7 +71,6 @@ namespace Werwolf.Inhalt
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
-            RootBilder = Loader.XmlReader.getString("RootBilder");
 
             Loader.XmlReader.Next();
             foreach (var item in ElementMengen)
@@ -81,35 +79,36 @@ namespace Werwolf.Inhalt
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
-            XmlWriter.writeAttribute("RootBilder", RootBilder);
 
             foreach (var item in ElementMengen)
                 item.Write(XmlWriter);
         }
-        public void Open(string Pfad)
-        {
-            this.Pfad = Pfad;
-            Loader l = CreateLoader(Pfad);
-            Read(l);
-            l.XmlReader.Close();
-        }
-        public Loader CreateLoader(string Pfad)
+        private Loader CreateLoader(string Pfad)
         {
             XmlReader reader = XmlReader.Create(Pfad);
             reader.Next();
             return CreateLoader(reader);
         }
-        public Loader CreateLoader(XmlReader XmlReader)
+        private Loader CreateLoader(XmlReader XmlReader)
         {
             return new Loader(this, XmlReader);
         }
-        public void Root(string root)
+
+        public void Root(string Pfad)
         {
-            this.Pfad = Path.Combine(root, "Universe.xml");
-            this.RootBilder = Path.Combine(root, "\\Bilder\\");
+            this.DirectoryName = Path.GetDirectoryName(Pfad);
         }
-        public void Save()
+        public void Open(string Pfad)
         {
+            Root(Pfad);
+            using (Loader l = CreateLoader(Pfad))
+                Read(l);
+        }
+        public void Save(string Pfad)
+        {
+            Root(Pfad);
+            this.DirectoryName = Path.GetDirectoryName(Pfad);
+
             XmlWriterSettings s = new XmlWriterSettings();
             s.NewLineOnAttributes = true;
             s.Indent = true;
@@ -119,6 +118,24 @@ namespace Werwolf.Inhalt
             this.Write(writer);
             writer.WriteEndDocument();
             writer.Close();
+        }
+        public void Lokalisieren(bool jpg)
+        {
+            string[] bilder = { "HauptBilder", "HintergrundBilder", "RuckseitenBilder", "TextBilder" };
+            foreach (var item in bilder)
+            {
+                string pfad = Path.Combine(DirectoryName, "Bilder", item);
+                if (!Directory.Exists(pfad))
+                    Directory.CreateDirectory(pfad);
+            }
+            foreach (var item in HauptBilder.Values)
+                item.Lokalisieren(false);
+            foreach (var item in HintergrundBilder.Values)
+                item.Lokalisieren(jpg);
+            foreach (var item in RuckseitenBilder.Values)
+                item.Lokalisieren(jpg);
+            foreach (var item in TextBilder.Values)
+                item.Lokalisieren(false);
         }
 
         public override void AdaptToCard(Karte Karte)

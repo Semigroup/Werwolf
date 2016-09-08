@@ -48,7 +48,8 @@ namespace Werwolf.Inhalt
             Aufgaben = new Aufgabe(
 @"\r rot \g grün \b blau \o orange \y gelb \w weiß \v violett \l sattelbraun \e grau \cff0abcde FF0ABCDE \s schwarz
 \+
-\d fett \d \i kursiv \i \u Unterstricht \u \a Oberstrich \a \f Linksstrich \f \j Rechtstrich \j \x Horizontalstrich \x");
+\d fett \d \i kursiv \i \u Unterstricht \u \a Oberstrich \a \f Linksstrich \f \j Rechtstrich \j \x Horizontalstrich \x"
+,Universe);
             Fraktion = Universe.Fraktionen.Standard;
             Gesinnung = Universe.Gesinnungen.Standard;
             HauptBild = Universe.HauptBilder.Standard;
@@ -121,7 +122,11 @@ namespace Werwolf.Inhalt
         {
             return HintergrundDarstellung.Size.mul(ppm).Max(1, 1).ToSize();
         }
-        public Image GetImage(float ppm, Color BackColor)
+        public Image GetBackImage(float ppm, Color BackColor)
+        {
+            return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm));
+        }
+        public Image GetImage(float ppm, Color BackColor, WolfBox WolfBox)
         {
             Size s = GetPictureSize(ppm);
             Image img = new Bitmap(s.Width, s.Height);
@@ -129,11 +134,14 @@ namespace Werwolf.Inhalt
             using (DrawContextGraphics dcg = new DrawContextGraphics(g))
             {
                 g.Clear(BackColor);
-                StandardKarte sk = new StandardKarte(this, ppm);
-                sk.setup(0);
-                sk.draw(dcg);
+                WolfBox.setup(0);
+                WolfBox.draw(dcg);
             }
             return img;
+        }
+        public Image GetImage(float ppm, Color BackColor)
+        {
+            return GetImage(ppm, BackColor, new StandardKarte(this, ppm));
         }
         public Image GetImage(float ppm)
         {
@@ -143,6 +151,11 @@ namespace Werwolf.Inhalt
         {
             float ppm = Height / HintergrundDarstellung.Size.Height;
             return GetImage(ppm, Color.FromArgb(0));
+        }
+        public Image GetBackImageByHeight(float Height)
+        {
+            float ppm = Height / HintergrundDarstellung.Size.Height;
+            return GetBackImage(ppm, Color.FromArgb(0));
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Werwolf.Forms
         {
             this.OldValue = Value;
             this.Value = Value;
+            this.Text = Value;
         }
         public void AddListener(EventHandler Handler)
         {

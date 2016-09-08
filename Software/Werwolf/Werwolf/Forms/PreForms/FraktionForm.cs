@@ -60,7 +60,7 @@ namespace Werwolf.Forms
             element.HintergrundBild = WerteListe.GetValue<HintergrundBild>("Bild Hintergrund");
             element.TitelArt = (Titel.Art)WerteListe.GetValue<object>("Titel Art");
             element.RuckseitenBild = WerteListe.GetValue<RuckseitenBild>("Bild Rückseite");
-            element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"));
+            element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"),Universe);
         }
     }
 }

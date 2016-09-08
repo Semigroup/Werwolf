@@ -24,7 +24,7 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            this.StandardAufgaben = new Aufgabe("");
+            this.StandardAufgaben = new Aufgabe();
             this.TitelArt = Titel.Art.Rund;
             this.HintergrundBild = Universe.HintergrundBilder.Standard;
             this.RuckseitenBild = Universe.RuckseitenBilder.Standard;

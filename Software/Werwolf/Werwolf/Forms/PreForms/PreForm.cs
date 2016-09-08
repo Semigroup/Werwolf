@@ -24,7 +24,6 @@ namespace Werwolf.Forms
 
         public T Element { get { return element; } set { SetElement(value); } }
         protected T element;
-        protected ElementMenge<T> Menge;
 
         public WerteListe WerteListe = new WerteListe();
         public Button OkButton = new Button();
@@ -40,10 +39,9 @@ namespace Werwolf.Forms
         {
             this.Karte = Karte;
             this.ViewBox = ViewBox;
-            this.Menge = Universe.GetElementMenge<T>();
             BuildUp();
         }
-        private void BuildUp()
+        protected virtual void BuildUp()
         {
             ViewBox.Dock = DockStyle.Left;
             ViewBox.Karte = Karte;
@@ -54,6 +52,12 @@ namespace Werwolf.Forms
             WerteListe.InvalidChange += (sender, e) => OnInvalidChange(e);
             Controls.Add(WerteListe);
 
+            BuildButtons();
+
+            this.ClientSize = new Size(1000, 800);
+        }
+        protected virtual void BuildButtons()
+        {
             OkButton.Size = new Size(100, 40);
             OkButton.Text = "Übernehmen";
             OkButton.Click += OkButton_Click;
@@ -63,8 +67,6 @@ namespace Werwolf.Forms
             AbbrechenButton.Text = "Abbrechen";
             AbbrechenButton.Click += OkButton_Click;
             Controls.Add(AbbrechenButton);
-
-            this.ClientSize = new Size(1000, 800);
         }
 
         public void SetElement(T Element)
@@ -74,7 +76,7 @@ namespace Werwolf.Forms
             UpdateWerteListe();
         }
 
-        void OkButton_Click(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             if (sender == OkButton)
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
