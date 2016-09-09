@@ -120,7 +120,6 @@ namespace Werwolf.Forms
 
             ScrollList.AddControl(textBox1, BilderButtons, ElementMengenButtons,
                 PrintDeck, BildMengenButtons, DarstellungenButtons);
-            ScrollList.SetUp();
             Controls.Add(ScrollList);
 
             SettingsButton.AutoSize = true;
@@ -148,15 +147,19 @@ namespace Werwolf.Forms
             {
                 case "Hauptbilder Bearbeiten":
                     new ElementAuswahlForm<HauptBild>(Universe.HauptBilder).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Hintergrundbilder Bearbeiten":
                     new ElementAuswahlForm<HintergrundBild>(Universe.HintergrundBilder).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Textbilder Bearbeiten":
                     new ElementAuswahlForm<TextBild>(Universe.TextBilder).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Rückseitenbilder Bearbeiten":
                     new ElementAuswahlForm<RuckseitenBild>(Universe.RuckseitenBilder).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 default:
                     throw new NotImplementedException();
@@ -188,18 +191,23 @@ namespace Werwolf.Forms
             {
                 case "Bilddarstellungen Bearbeiten":
                     new ElementAuswahlForm<BildDarstellung>(Universe.BildDarstellungen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Titeldarstellungen Bearbeiten":
                     new ElementAuswahlForm<TitelDarstellung>(Universe.TitelDarstellungen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Textdarstellungen Bearbeiten":
                     new ElementAuswahlForm<TextDarstellung>(Universe.TextDarstellungen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Infodarstellungen Bearbeiten":
                     new ElementAuswahlForm<InfoDarstellung>(Universe.InfoDarstellungen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Hintergrunddarstellungen Bearbeiten":
                     new ElementAuswahlForm<HintergrundDarstellung>(Universe.HintergrundDarstellungen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 default:
                     throw new NotImplementedException();
@@ -227,15 +235,19 @@ namespace Werwolf.Forms
             {
                 case "Gesinnungen Bearbeiten":
                     new ElementAuswahlForm<Gesinnung>(Universe.Gesinnungen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Fraktionen Bearbeiten":
                     new ElementAuswahlForm<Fraktion>(Universe.Fraktionen).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Karten Bearbeiten":
                     new ElementAuswahlForm<Karte>(Universe.Karten).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
                 case "Decks Bearbeiten":
                     new ElementAuswahlForm<Deck>(Universe.Decks).ShowDialog();
+                    ViewKarte.OnKarteChanged();
                     break;
 
                 default:

@@ -176,7 +176,9 @@ namespace Werwolf.Forms
         {
             T Neu = element.Clone() as T;
             ElementMenge.AddPolymorph(Neu);
-            List.AddControl(GetButton(Neu));
+            ElementAuswahlButton<T> b = GetButton(Neu) as ElementAuswahlButton<T>;
+            b.Refresh();
+            List.AddControl(b);
         }
 
         private void StartRefreshing()

@@ -27,7 +27,7 @@ namespace Werwolf.Inhalt
             get
             {
                 if (File.Exists(FilePath))
-                    return FilePath;
+                    return Path.GetFullPath(FilePath);
                 else if (FilePath != null && FilePath.Length > 0)
                 {
                     string fp = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
@@ -40,6 +40,16 @@ namespace Werwolf.Inhalt
                 }
                 else
                     return "";
+            }
+        }
+        public string HiddenFilePath
+        {
+            get
+            {
+                if (FilePath.Length >= 10 && FilePath.Substring(0, 10).Equals("Ressourcen"))
+                    return "";
+                else
+                    return TotalFilePath;
             }
         }
 
@@ -164,7 +174,6 @@ namespace Werwolf.Inhalt
         {
             string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
             using (Image image = Image)
-            {
                 if (image != LeerBild)
                 {
                     this.FilePath = "Bilder/" + XmlName + "er/" + Schreibname + extension;
@@ -175,10 +184,7 @@ namespace Werwolf.Inhalt
                         image.Save(path);
                 }
                 else
-                {
                     this.FilePath = "";
-                }
-            }
         }
     }
 

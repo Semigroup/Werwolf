@@ -48,7 +48,6 @@ namespace Werwolf.Forms
         {
             InvalidChange += Handler;
         }
-
         protected override void OnTextChanged(EventArgs e)
         {
             base.OnTextChanged(e);
@@ -63,6 +62,10 @@ namespace Werwolf.Forms
                 this.ForeColor = Color.Red;
                 InvalidChange(this, e);
             }
+        }
+        public void DDispose()
+        {
+            this.Dispose();
         }
     }
 }

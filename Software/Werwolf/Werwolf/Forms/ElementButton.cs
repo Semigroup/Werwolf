@@ -71,5 +71,9 @@ namespace Werwolf.Forms
             base.Refresh();
             this.Text = Value.Schreibname;
         }
+        public void DDispose()
+        {
+            this.Dispose();
+        }
     }
 }

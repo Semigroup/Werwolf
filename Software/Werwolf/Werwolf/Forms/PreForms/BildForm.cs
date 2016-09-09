@@ -59,7 +59,7 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
             this.Text = element.XmlName + " namens " + element.Schreibname + " bearbeiten...";
             WerteListe.SetValue("Name", element.Schreibname);
-            WerteListe.SetValue("Datei", element.TotalFilePath);
+            WerteListe.SetValue("Datei", element.HiddenFilePath);
             WerteListe.SetValue("Artist", element.Artist);
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Point of Interest", element.Zentrum);
@@ -112,7 +112,7 @@ namespace Werwolf.Forms
             image = new ImageSelectBox();
 
             WerteListe.AddWerteBox<string>(
-                new WertPaar<string>("Name", new TextBildNameBox(Universe.TextBilder)), "Name"); 
+                new WertPaar<string>("Name", new TextBildNameBox(Universe.TextBilder)), "Name");
             image.ShowImage = false;
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
@@ -121,7 +121,7 @@ namespace Werwolf.Forms
             WerteListe.Setup();
         }
 
-    
+
         public override void UpdateWerteListe()
         {
             if (element == null)
@@ -129,7 +129,7 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
             this.Text = element.XmlName + " namens " + element.Name + " bearbeiten...";
             WerteListe.SetValue("Name", element.Name);
-            WerteListe.SetValue("Datei", element.TotalFilePath);
+            WerteListe.SetValue("Datei", element.HiddenFilePath);
             WerteListe.SetValue("Artist", element.Artist);
             UpdatingWerteListe = false;
         }

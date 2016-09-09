@@ -38,14 +38,13 @@ namespace Werwolf.Forms
         {
             this.Element = Element;
             this.ElementMenge = ElementMenge;
-            this.Karte = Karte;
+            this.Karte = Karte.Clone() as Karte;
             BuildUp();
         }
         private void BuildUp()
         {
             this.GroupBox.Text = Element.Schreibname;
             this.GroupBox.Height = 160;
-            this.GroupBox.AutoSize = true;
 
             //Element.AdaptToCard(Karte);
             //this.Label.Image = GetImage();
@@ -59,8 +58,9 @@ namespace Werwolf.Forms
             //Buttons.Location = new Point(Label.Right + 5, 15);
             //GroupBox.Width = Label.Width + 23 + Buttons.Width;
             this.Dirty = true;
+            this.Width = 500;
 
-            this.AutoSize = true;
+            //this.AutoSize = true;
 
             Buttons.Enable(ElementMenge.Standard != Element, "Entfernen");
             Buttons.ButtonClick += new EventHandler(Buttons_ButtonClick);
