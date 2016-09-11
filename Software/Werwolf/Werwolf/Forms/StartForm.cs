@@ -42,7 +42,7 @@ namespace Werwolf.Forms
            "Rückseitenbilder Bearbeiten",
            "Textbilder Bearbeiten");
         private ButtonReihe DarstellungenButtons = new ButtonReihe(false,
-           "Bilddarstellungen Bearbeiten",
+            //"Bilddarstellungen Bearbeiten",
            "Hintergrunddarstellungen Bearbeiten",
            "Textdarstellungen Bearbeiten",
            "Titeldarstellungen Bearbeiten",
@@ -76,7 +76,7 @@ namespace Werwolf.Forms
             checkBox2.Text = "Bilder in Jpeg (90%) abspeichern? (Spart Speicherplatz)";
             checkBox1.AutoSize = checkBox2.AutoSize = true;
             Controls.Add(checkBox1);
-            Controls.Add(checkBox2);
+            //Controls.Add(checkBox2);
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
 
             SteuerBox_NeuClicked(this, EventArgs.Empty);
@@ -107,7 +107,7 @@ namespace Werwolf.Forms
 
             DarstellungenButtons.ButtonClick += new EventHandler(DarstellungenButtons_ButtonClick);
             ToolTip.SetToolTip(DarstellungenButtons, "Ermöglicht es Darstellungen des Spiels bearbeiten zu können.");
-            BildMengenButtons.SetToolTip("Ermöglicht es Bilddarstellungen, diese entscheiden, ob für eine Karte ein Hauptbild angezeigt werden soll, zu bearbeiten.",
+            BildMengenButtons.SetToolTip(//"Ermöglicht es Bilddarstellungen, diese entscheiden, ob für eine Karte ein Hauptbild angezeigt werden soll, zu bearbeiten.",
               "Ermöglicht es Hintergrunddarstellungen, diese legen fest, wie groß eine Karte und ihr Rand ist, zu bearbeiten.",
               "Ermöglicht es Textdarstellungen, diese legen die Schriftart des Textblockes fest, zu bearbeiten.",
               "Ermöglicht es Titeldarstellungen, diese legen die Schriftart des Titels fest, zu bearbeiten.",
@@ -135,6 +135,9 @@ namespace Werwolf.Forms
 
         private void PrintDeck_Click(object sender, EventArgs e)
         {
+            PrintForm pf = new PrintForm();
+            pf.Universe = Universe;
+            pf.ShowDialog();
         }
         private void SettingsButton_Click(object sender, EventArgs e)
         {
@@ -147,19 +150,19 @@ namespace Werwolf.Forms
             {
                 case "Hauptbilder Bearbeiten":
                     new ElementAuswahlForm<HauptBild>(Universe.HauptBilder).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Hintergrundbilder Bearbeiten":
-                    new ElementAuswahlForm<HintergrundBild>(Universe.HintergrundBilder).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    new ElementAuswahlForm<HintergrundBild>(Universe.Karten.Standard.DeepClone(), Universe.HintergrundBilder).ShowDialog();
+                    Changed(true);
                     break;
                 case "Textbilder Bearbeiten":
                     new ElementAuswahlForm<TextBild>(Universe.TextBilder).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Rückseitenbilder Bearbeiten":
-                    new ElementAuswahlForm<RuckseitenBild>(Universe.RuckseitenBilder).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    new ElementAuswahlForm<RuckseitenBild>(Universe.Karten.Standard.DeepClone(), Universe.RuckseitenBilder).ShowDialog();
+                    Changed(true);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -171,15 +174,19 @@ namespace Werwolf.Forms
             {
                 case "Hauptbilder Sammeln":
                     LadeBilder<HauptBild>();
+                    Changed(true);
                     break;
                 case "Hintergrundbilder Sammeln":
                     LadeBilder<HintergrundBild>();
+                    Changed(true);
                     break;
                 case "Textbilder Sammeln":
                     LadeBilder<TextBild>();
+                    Changed(true);
                     break;
                 case "Rückseitenbilder Sammeln":
                     LadeBilder<RuckseitenBild>();
+                    Changed(true);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -191,23 +198,23 @@ namespace Werwolf.Forms
             {
                 case "Bilddarstellungen Bearbeiten":
                     new ElementAuswahlForm<BildDarstellung>(Universe.BildDarstellungen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Titeldarstellungen Bearbeiten":
                     new ElementAuswahlForm<TitelDarstellung>(Universe.TitelDarstellungen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Textdarstellungen Bearbeiten":
                     new ElementAuswahlForm<TextDarstellung>(Universe.TextDarstellungen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Infodarstellungen Bearbeiten":
                     new ElementAuswahlForm<InfoDarstellung>(Universe.InfoDarstellungen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Hintergrunddarstellungen Bearbeiten":
                     new ElementAuswahlForm<HintergrundDarstellung>(Universe.HintergrundDarstellungen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -235,19 +242,19 @@ namespace Werwolf.Forms
             {
                 case "Gesinnungen Bearbeiten":
                     new ElementAuswahlForm<Gesinnung>(Universe.Gesinnungen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Fraktionen Bearbeiten":
                     new ElementAuswahlForm<Fraktion>(Universe.Fraktionen).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Karten Bearbeiten":
                     new ElementAuswahlForm<Karte>(Universe.Karten).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
                 case "Decks Bearbeiten":
                     new ElementAuswahlForm<Deck>(Universe.Decks).ShowDialog();
-                    ViewKarte.OnKarteChanged();
+                    Changed(true);
                     break;
 
                 default:
@@ -262,6 +269,7 @@ namespace Werwolf.Forms
         private void SteuerBox_SpeichernClicked(object sender, EventArgs e)
         {
             Changed(false);
+            Universe.Rescue();
             Universe.Root(SteuerBox.Speicherort);
             if (checkBox1.Checked)
                 Universe.Lokalisieren(checkBox2.Checked);
@@ -270,6 +278,7 @@ namespace Werwolf.Forms
         private void SteuerBox_NeuClicked(object sender, EventArgs e)
         {
             Universe = new Universe(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
+            SteuerBox.Speicherort = null;
         }
 
         private void SetUniverse(Universe Universe)
@@ -280,8 +289,8 @@ namespace Werwolf.Forms
             {
                 ViewKarte = new ViewKarte();
                 Controls.Add(ViewKarte);
-                ViewKarte.Karte = Universe.Karten.Standard;
             }
+            ViewKarte.Karte = Universe.Karten.Standard;
             SteuerBox.Speicherort = textBox1.Text + ".xml";
             Changed(false);
         }
@@ -316,6 +325,7 @@ namespace Werwolf.Forms
         }
         private void Changed(bool changed)
         {
+            ViewKarte.OnKarteChanged();
             SteuerBox.SpeichernNotwendig = changed;
             if (changed)
                 this.Text = Universe.Schreibname + "*";

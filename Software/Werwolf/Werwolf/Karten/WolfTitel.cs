@@ -91,14 +91,15 @@ namespace Werwolf.Karten
             this.box = box;
             Titel.setup(InnenBox.move(box.Location).Inner(Faktor, Faktor));
         }
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            Titel.Move(ToMove);
+        }
 
         public override void draw(DrawContext con)
         {
             Titel.draw(con);
-
-            //con.fillRectangle(Brushes.Blue, box);
-            //con.fillRectangle(Brushes.Red, Titel.box);
-            //con.fillRectangle(Brushes.Green, Titel.Inhalt.box);
         }
     }
 }

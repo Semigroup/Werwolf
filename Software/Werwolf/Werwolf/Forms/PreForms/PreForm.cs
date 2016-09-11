@@ -137,11 +137,11 @@ namespace Werwolf.Forms
             UserValueChanged(this, EventArgs.Empty);
             UpdateElement();
             ViewBox.ChangeKarte(element);
-            OkButton.Enabled = WerteListe.Valid();
+            //OkButton.Enabled = WerteListe.Valid();
         }
         protected virtual void OnInvalidChange(EventArgs e)
         {
-            OkButton.Enabled = WerteListe.Valid();
+            //OkButton.Enabled = WerteListe.Valid();
         }
     }
 }

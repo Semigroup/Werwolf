@@ -40,6 +40,8 @@ namespace Werwolf.Forms
         protected DrawContextGraphics DrawContext;
         protected WolfBox WolfBox;
 
+        protected PictureBox PictureBox { get { return pictureBox1; } }
+
         public ViewBox()
             : base()
         {
@@ -63,7 +65,10 @@ namespace Werwolf.Forms
                 ChangeSize();
                 g.Clear(Color.White);
                 WolfBox.Karte = karte;
-                WolfBox.setup(0);
+                RectangleF r = new RectangleF();
+                r.Size = LastSize;
+                r.Size = r.Size.mul(ppm / WolfBox.Faktor);
+                WolfBox.setup(r);
                 WolfBox.draw(DrawContext);
             }
         }
@@ -112,9 +117,26 @@ namespace Werwolf.Forms
     }
     public class ViewDeck : ViewBox
     {
+        public override void ChangeKarte(XmlElement ChangedElement)
+        {
+            ((StandardDeck)WolfBox).Deck = ChangedElement as Deck;
+            OnKarteChanged();
+        }
         protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
         {
-            throw new NotImplementedException();
+            return new StandardDeck(Karte, Ppm);
+        }
+        protected override bool ChangeSize()
+        {
+            SizeF size = PictureBox.Size;
+            Size Size = size.ToSize();
+            if (Size.Equals(LastSize))
+                return false;
+            LastSize = Size;
+            PictureBox.Image = new Bitmap(Size.Width, Size.Height);
+            g = PictureBox.Image.GetHighGraphics(WolfBox.Faktor / ppm);
+            DrawContext = new DrawContextGraphics(g, Brushes.White);
+            return true;
         }
     }
 }

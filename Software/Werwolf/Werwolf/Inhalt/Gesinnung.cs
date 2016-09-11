@@ -49,5 +49,9 @@ namespace Werwolf.Inhalt
             Gesinnung g = Element as Gesinnung;
             g.Aufgabe = Aufgabe;
         }
+        public override void Rescue()
+        {
+            Aufgabe.Rescue();
+        }
     }
 }

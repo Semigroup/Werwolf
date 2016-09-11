@@ -76,6 +76,18 @@ namespace Werwolf.Inhalt
             Darstellung.RandFarbe = RandFarbe;
             Darstellung.TextFarbe = TextFarbe;
         }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Rescue()
+        {
+        }
+        public override object Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
     public class HintergrundDarstellung : Darstellung
     {

@@ -9,7 +9,7 @@ using Assistment.Texts;
 
 namespace Werwolf.Inhalt
 {
-    public class Fraktion : XmlElement
+    public class Fraktion : XmlElement, IComparable<Fraktion>
     {
         public Aufgabe StandardAufgaben { get;  set; }
         public Titel.Art TitelArt { get;  set; }
@@ -44,7 +44,7 @@ namespace Werwolf.Inhalt
 
             XmlWriter.writeAttribute("StandardAufgaben", StandardAufgaben.ToString());
             XmlWriter.writeEnum<Titel.Art>("TitelArt", TitelArt);
-            XmlWriter.writeAttribute("HauptBild", HintergrundBild.Name);
+            XmlWriter.writeAttribute("HintergrundBild", HintergrundBild.Name);
             XmlWriter.writeAttribute("RuckseitenBild", RuckseitenBild.Name);
         }
 
@@ -66,6 +66,18 @@ namespace Werwolf.Inhalt
             f.TitelArt = TitelArt;
             f.StandardAufgaben = StandardAufgaben;
             f.RuckseitenBild = RuckseitenBild;
+        }
+
+        public int CompareTo(Fraktion other)
+        {
+            return Name.CompareTo(other.Name);
+        }
+
+        public override void Rescue()
+        {
+            Universe.HintergrundBilder.Rescue(HintergrundBild);
+            Universe.RuckseitenBilder.Rescue(RuckseitenBild);
+            StandardAufgaben.Rescue();
         }
     }
 }

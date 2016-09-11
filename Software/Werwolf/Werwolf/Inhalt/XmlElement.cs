@@ -62,6 +62,7 @@ namespace Werwolf.Inhalt
             Element.Universe = Universe;
         }
         public abstract void AdaptToCard(Karte Karte);
+        public abstract void Rescue();
 
         public abstract object Clone();
     }

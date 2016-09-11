@@ -113,11 +113,13 @@ namespace Werwolf.Inhalt
             s.NewLineOnAttributes = true;
             s.Indent = true;
             s.IndentChars = new string(' ', 4);
-            XmlWriter writer = XmlWriter.Create(Pfad, s);
-            writer.WriteStartDocument();
-            this.Write(writer);
-            writer.WriteEndDocument();
-            writer.Close();
+            using (XmlWriter writer = XmlWriter.Create(Pfad, s))
+            {
+                writer.WriteStartDocument();
+                this.Write(writer);
+                writer.WriteEndDocument();
+                writer.Close();
+            }
         }
         public void Lokalisieren(bool jpg)
         {
@@ -136,6 +138,11 @@ namespace Werwolf.Inhalt
                 item.Lokalisieren(jpg);
             foreach (var item in TextBilder.Values)
                 item.Lokalisieren(false);
+        }
+        public override void Rescue()
+        {
+            foreach (var item in new Menge[]{ Decks, Karten, Fraktionen, Gesinnungen })
+                item.Rescue();
         }
 
         public override void AdaptToCard(Karte Karte)

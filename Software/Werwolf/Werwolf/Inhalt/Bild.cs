@@ -97,7 +97,7 @@ namespace Werwolf.Inhalt
         {
             base.Init(Universe);
             FilePath = "";
-            Artist = "Artist";
+            Artist = "";
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -172,19 +172,35 @@ namespace Werwolf.Inhalt
 
         public virtual void Lokalisieren(bool jpg)
         {
-            string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
-            using (Image image = Image)
-                if (image != LeerBild)
+            string source = TotalFilePath;
+            if (File.Exists(source))
+            {
+                string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
+                string filePath = "Bilder/" + XmlName + "er/" + Schreibname + extension;
+                string destiny = Path.Combine(Universe.DirectoryName, filePath);
+                try
                 {
-                    this.FilePath = "Bilder/" + XmlName + "er/" + Schreibname + extension;
-                    string path = Path.Combine(Universe.DirectoryName, FilePath);
-                    if (jpg)
-                        image.Save(path, ImageFormat.Jpeg);
-                    else
-                        image.Save(path);
+                    File.Copy(source, destiny, true);
+                    this.FilePath = filePath;
                 }
-                else
-                    this.FilePath = "";
+                catch (Exception)
+                {
+                }
+            }
+            else
+                this.FilePath = "";
+        }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Rescue()
+        {
+        }
+        public override object Clone()
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -14,7 +14,7 @@ using Werwolf.Karten;
 
 namespace Werwolf.Inhalt
 {
-    public class Karte : XmlElement
+    public class Karte : XmlElement, IComparable<Karte>
     {
         public Aufgabe Aufgaben { get; set; }
         public Aufgabe MeineAufgaben
@@ -117,6 +117,12 @@ namespace Werwolf.Inhalt
             AdaptToCard(k);
             return k;
         }
+        public Karte DeepClone()
+        {
+            Karte k = Clone() as Karte;
+            k.Fraktion = Fraktion.Clone() as Fraktion;
+            return k;
+        }
 
         public Size GetPictureSize(float ppm)
         {
@@ -156,6 +162,26 @@ namespace Werwolf.Inhalt
         {
             float ppm = Height / HintergrundDarstellung.Size.Height;
             return GetBackImage(ppm, Color.FromArgb(0));
+        }
+
+        public int CompareTo(Karte other)
+        {
+            return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10000
+                + this.Name.CompareTo(other.Name);
+        }
+        public override void Rescue()
+        {
+            Universe.BildDarstellungen.Rescue(BildDarstellung);
+            Universe.HintergrundDarstellungen.Rescue(HintergrundDarstellung);
+            Universe.TextDarstellungen.Rescue(TextDarstellung);
+            Universe.TitelDarstellungen.Rescue(TitelDarstellung);
+            Universe.BildDarstellungen.Rescue(BildDarstellung);
+
+            Universe.Fraktionen.Rescue(Fraktion);
+            Universe.Gesinnungen.Rescue(Gesinnung);
+            Universe.HauptBilder.Rescue(HauptBild);
+
+            Aufgaben.Rescue();
         }
     }
 }

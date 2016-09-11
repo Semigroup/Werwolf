@@ -23,6 +23,11 @@ namespace Werwolf.Karten
 
         }
 
+        public override bool Visible()
+        {
+            return base.Visible() && Karte.InfoDarstellung.Existiert;
+        }
+
         public override void OnKarteChanged()
         {
             if (!Visible())
@@ -72,6 +77,11 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             Kompositum.draw(con);
+        }
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            Kompositum.Move(ToMove);
         }
     }
 }

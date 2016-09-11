@@ -229,6 +229,8 @@ namespace Werwolf.Forms
                     return new GesinnungForm(Karte) as PreForm<T>;
                 case "Fraktion":
                     return new FraktionForm(Karte) as PreForm<T>;
+                case "Deck":
+                    return new DeckForm(Karte) as PreForm<T>;
 
                 case "BildDarstellung":
                     return new BildDarstellungForm(Karte) as PreForm<T>;

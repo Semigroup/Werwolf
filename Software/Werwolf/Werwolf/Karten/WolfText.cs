@@ -52,7 +52,7 @@ namespace Werwolf.Karten
         }
         public override bool Visible()
         {
-            return base.Visible() && Karte.MeineAufgaben.Anzahl > 0;
+            return base.Visible() && Karte.MeineAufgaben.Anzahl > 0 && Karte.TextDarstellung.Existiert;
         }
         public override void update()
         {

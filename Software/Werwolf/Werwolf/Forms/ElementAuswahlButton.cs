@@ -46,23 +46,16 @@ namespace Werwolf.Forms
             this.GroupBox.Text = Element.Schreibname;
             this.GroupBox.Height = 160;
 
-            //Element.AdaptToCard(Karte);
-            //this.Label.Image = GetImage();
-            //this.Label.Size = Label.Image.Size;
-
             this.GroupBox.Controls.Add(Label);
             this.GroupBox.Controls.Add(Buttons);
             this.Controls.Add(GroupBox);
 
             Label.Location = new Point(10, 15);
-            //Buttons.Location = new Point(Label.Right + 5, 15);
-            //GroupBox.Width = Label.Width + 23 + Buttons.Width;
             this.Dirty = true;
             this.Width = 500;
+            this.Height = 160;
 
-            //this.AutoSize = true;
-
-            Buttons.Enable(ElementMenge.Standard != Element, "Entfernen");
+            Buttons.Enable(!Element.Unzerstorbar, "Entfernen");
             Buttons.ButtonClick += new EventHandler(Buttons_ButtonClick);
         }
 
@@ -94,12 +87,24 @@ namespace Werwolf.Forms
                 this.GroupBox.Text = Element.Schreibname;
 
                 Element.AdaptToCard(Karte);
-                this.Label.Image = GetImage();
-                this.Label.Size = Label.Image.Size;
+                RefreshLabel();
 
                 Buttons.Location = new Point(Label.Right + 5, 15);
                 GroupBox.Width = Label.Width + 23 + Buttons.Width;
                 Dirty = false;
+            }
+        }
+        private void RefreshLabel()
+        {
+            if (typeof(T).Name == "Deck")
+            {
+                this.Label.Text = (Element as Deck).ToString();
+                this.Label.AutoSize = true;
+            }
+            else
+            {
+                this.Label.Image = GetImage();
+                this.Label.Size = Label.Image.Size;
             }
         }
         private Image GetImage()
@@ -109,11 +114,9 @@ namespace Werwolf.Forms
             {
                 case "TextBild":
                     TextBild b = Element as TextBild;
-                    return b.GetImageByHeight(height); 
+                    return b.GetImageByHeight(height);
                 case "RuckseitenBild":
                     return Karte.GetBackImageByHeight(height);
-                case "Deck":
-                    throw new NotImplementedException();
                 default:
                     return Karte.GetImageByHeight(height);
             }

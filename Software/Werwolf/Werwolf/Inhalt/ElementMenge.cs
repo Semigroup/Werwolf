@@ -174,5 +174,16 @@ namespace Werwolf.Inhalt
         {
             return GetEnumerator();
         }
+
+        public override void Rescue()
+        {
+            foreach (var item in Values)
+                item.Rescue();
+        }
+        public void Rescue(T Element)
+        {
+            if (!Values.Contains(Element))
+                AddPolymorph(Element);
+        }
     }
 }

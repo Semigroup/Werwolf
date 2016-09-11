@@ -166,5 +166,12 @@ namespace Werwolf.Inhalt
         {
             return new Aufgabe(Aufgabe1, Aufgabe2);
         }
+
+        public void Rescue()
+        {
+            foreach (var item in Fragments)
+                if (item.Bild != null)
+                    Universe.TextBilder.Rescue(item.Bild);
+        }
     }
 }
