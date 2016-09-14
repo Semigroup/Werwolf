@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Drawing;
 
 using Assistment.Extensions;
 using Assistment.Xml;
@@ -19,6 +20,8 @@ namespace Werwolf.Inhalt
             public bool BlockBreak;
             public string regex;
             public TextBild Bild;
+            public bool Fehler;
+            public string FehlerhafteName;
 
             public Fragment(bool BlockBreak)
             {
@@ -32,13 +35,29 @@ namespace Werwolf.Inhalt
             {
                 this.Bild = Bild;
             }
+            public Fragment(ElementMenge<TextBild> Bilder, string name)
+            {
+                if (Bilder.ContainsKey(name))
+                    this.Bild = Bilder[name];
+                else
+                {
+                    Fehler = true;
+                    FehlerhafteName = name;
+                }
+            }
 
             public void AddDrawBox(DrawContainer Container)
             {
                 if (regex != null)
                     Container.addRegex(regex);
                 else if (Bild != null)
-                    Container.add(new WolfTextBild(Bild, Container.preferedFont));// Container.addWort(Bild.Name); 
+                    Container.add(new WolfTextBild(Bild, Container.preferedFont));
+                else if (Fehler)
+                {
+                    Image Image = Settings.NotFoundImage;
+                    float height = Container.preferedFont.yMass('_');
+                    Container.addImage(Image, Image.Size.Width * height / Image.Size.Height, height);
+                }
                 else
                     throw new NotImplementedException();
             }
@@ -131,7 +150,7 @@ namespace Werwolf.Inhalt
             foreach (var item in fragments)
             {
                 if (bild)
-                    Fragments.Add(new Fragment(Universe.TextBilder[item]));
+                    Fragments.Add(new Fragment(Universe.TextBilder, item));
                 else
                     Fragments.Add(new Fragment(item));
                 bild = !bild;
@@ -158,6 +177,8 @@ namespace Werwolf.Inhalt
                     sb.Append("\\+");
                 else if (item.Bild != null)
                     sb.Append("::" + item.Bild.Name + "::");
+                else if (item.Fehler)
+                    sb.Append("::" + item.FehlerhafteName + "::");
                 else
                     sb.Append(item.regex);
             return sb.ToString();

@@ -224,15 +224,32 @@ namespace Werwolf.Forms
         {
             if (OpenFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                List<T> tooBig = new List<T>();
                 ElementMenge<T> Menge = Universe.GetElementMenge<T>();
                 foreach (var item in OpenFileDialog.FileNames)
                 {
                     T bild = new T();
                     bild.Init(Universe);
                     bild.FilePath = item;
-                    bild.SetAutoSize();
-                    bild.Name = bild.Schreibname = Path.GetFileNameWithoutExtension(item);
-                    Menge.AddPolymorph(bild);
+                    Size s = bild.GetImageSize();
+                    if (s.Width * s.Height > Settings.MaximumImageArea)
+                        tooBig.Add(bild);
+                    else
+                    {
+                        bild.SetAutoSize();
+                        bild.Name = bild.Schreibname = Path.GetFileNameWithoutExtension(item);
+                        Menge.AddPolymorph(bild);
+                    }
+                }
+                if (!tooBig.Empty())
+                {
+                    MessageBox.Show("Die Bilder der Adressen\r\n\r\n"
+                        + tooBig.Map(x => x.TotalFilePath).SumText("\r\n")
+                        + "\r\n\r\nwurden nicht reingeladen, da ihre Größen jeweils das maximale Pixelprodukt von Breite x Höhe <= "
+                        + Settings.MaximumImageArea + " überschreiten!",
+                        "Memory-Überschreitung",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
         }
@@ -279,6 +296,7 @@ namespace Werwolf.Forms
         {
             Universe = new Universe(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
             SteuerBox.Speicherort = null;
+            PrintDeck.Enabled = false;
         }
 
         private void SetUniverse(Universe Universe)
@@ -291,7 +309,6 @@ namespace Werwolf.Forms
                 Controls.Add(ViewKarte);
             }
             ViewKarte.Karte = Universe.Karten.Standard;
-            SteuerBox.Speicherort = textBox1.Text + ".xml";
             Changed(false);
         }
 
@@ -320,7 +337,7 @@ namespace Werwolf.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.Text = Universe.Name = Universe.Schreibname = textBox1.Text;
-            SteuerBox.Speicherort = textBox1.Text + ".xml";
+            SteuerBox.Speicherort = Path.Combine(Path.GetDirectoryName(SteuerBox.Speicherort), textBox1.Text + ".xml");
             Changed(true);
         }
         private void Changed(bool changed)
@@ -331,6 +348,7 @@ namespace Werwolf.Forms
                 this.Text = Universe.Schreibname + "*";
             else
                 this.Text = Universe.Schreibname;
+            PrintDeck.Enabled = !changed;
         }
     }
 }

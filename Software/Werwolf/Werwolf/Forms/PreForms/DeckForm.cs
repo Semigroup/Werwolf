@@ -27,9 +27,9 @@ namespace Werwolf.Forms
                 ipmBox.UserValueMinimum = 0;
                 WerteListe.AddWertePaar<int>(ipmBox, 0, item.Value.Name);
             }
-            UpdatingWerteListe = false;
             this.WerteListe.WertChanged += new WertEventHandler(WerteListe_WertChanged);
             WerteListe.Setup();
+            UpdatingWerteListe = false;
         }
 
         void WerteListe_WertChanged(object sender, WertEventArgs e)
@@ -57,16 +57,14 @@ namespace Werwolf.Forms
         }
         protected override void OnSizeChanged(EventArgs e)
         {
-            base.OnSizeChanged(e);
-            ViewBox.Width = ClientSize.Width*2 / 3;
+            ViewBox.Width = ClientSize.Width * 2 / 3;
+            ViewBox.OnKarteChanged();
 
             OkButton.Location = new Point(ViewBox.Right + 20, ClientSize.Height - 50);
             AbbrechenButton.Location = new Point(OkButton.Right + 20, OkButton.Top);
 
             WerteListe.Location = new Point(ViewBox.Right, 0);
-            WerteListe.Size = new Size(ClientSize.Width / 2, ClientSize.Height - 70);
-            WerteListe.Setup();
-            ViewBox.OnKarteChanged();
+            WerteListe.Size = new Size(ClientSize.Width / 3, ClientSize.Height - 70);
         }
     }
 }

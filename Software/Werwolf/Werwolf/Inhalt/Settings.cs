@@ -36,6 +36,18 @@ namespace Werwolf.Inhalt
             }
         }
         public static Image ErrorImage { get; set; }
+        private static string notFoundImagePath;
+        public static string NotFoundImagePath
+        {
+            get
+            {
+                if (current != null && notFoundImagePath != null)
+                    return Path.Combine(current, notFoundImagePath);
+                else
+                    return "";
+            }
+        }
+        public static Image NotFoundImage { get; set; }
 
         static Settings()
         {
@@ -54,12 +66,24 @@ namespace Werwolf.Inhalt
             WolfBoxFaktor = reader.getFloat("WolfBoxFaktor");
             MaximumPpm = reader.getFloat("MaximumPpm");
             errorImagePath = reader.getString("ErrorImagePath");
+            notFoundImagePath = reader.getString("NotFoundImagePath");
             ViewPpm = reader.getFloat("ViewPpm");
 
-            using (FileStream fs = new FileStream(ErrorImagePath, FileMode.Open))
+            //using (FileStream fs = new FileStream(ErrorImagePath, FileMode.Open))
+            using (Image Image = Image.FromFile(ErrorImagePath))// Image.FromStream(fs))
             {
-                ErrorImage = Image.FromStream(fs);
-                fs.Close();
+                ErrorImage = new Bitmap(Image);
+                //using (Graphics g = ErrorImage.GetHighGraphics())
+                //    g.DrawImage(Image, 0, 0);
+                //fs.Close();
+            }
+            //using (FileStream fs = new FileStream(NotFoundImagePath, FileMode.Open))
+            using (Image Image = Image.FromFile(NotFoundImagePath))//Image.FromStream(fs))
+            {
+                NotFoundImage = new Bitmap(Image);
+                //using (Graphics g = ErrorImage.GetHighGraphics())
+                //    g.DrawImage(Image, 0, 0);
+                // fs.Close();
             }
 
             reader.Close();
@@ -78,7 +102,10 @@ namespace Werwolf.Inhalt
             writer.writeFloat("MaximumPpm", MaximumPpm);
             writer.writeFloat("ViewPpm", ViewPpm);
 
-            ErrorImage.ForcedSave(ErrorImagePath);
+            ErrorImage.Save(ErrorImagePath);//Forced
+            writer.writeAttribute("ErrorImagePath", errorImagePath);
+            NotFoundImage.Save(NotFoundImagePath);
+            writer.writeAttribute("NotFoundImagePath", notFoundImagePath);
 
             writer.WriteEndElement();
             writer.WriteEndDocument();

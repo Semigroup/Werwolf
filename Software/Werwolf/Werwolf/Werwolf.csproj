@@ -33,6 +33,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp, Version=5.5.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -146,7 +154,8 @@
     <Compile Include="Karten\IKartenmacher.cs" />
     <Compile Include="Karten\KartenEinzelbildMacher.cs" />
     <Compile Include="Karten\KartenPDFMacher.cs" />
-    <Compile Include="Karten\WolfSinglePaper.cs" />
+    <Compile Include="Karten\TitelProxy.cs" />
+    <Compile Include="Printing\WolfSinglePaper.cs" />
     <Compile Include="Karten\StandardDeck.cs" />
     <Compile Include="Karten\StandardTextBild.cs" />
     <Compile Include="Karten\StandardRuckseite.cs" />
@@ -156,6 +165,7 @@
     <Compile Include="Karten\WolfText.cs" />
     <Compile Include="Karten\WolfTextBild.cs" />
     <Compile Include="Karten\WolfTitel.cs" />
+    <Compile Include="Printing\Job.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\PrintForm.resx">
@@ -200,8 +210,11 @@
     <Folder Include="Ressourcen\Bilder\HauptBilder\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ressourcen\Bilder\FehlerBilder\Fehlerbild.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Ressourcen\Bilder\FehlerBilder\Fehlerbild.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\FehlerBilder\Kopie von Nicht Gefunden.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Artefakt.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -252,6 +265,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\TextBilder\DaumenUnten.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\FehlerBilder\Nicht Gefunden.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Settings.xml">

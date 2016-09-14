@@ -35,6 +35,15 @@ namespace Werwolf.Forms
         private Queue RefreshJobs;
         private Queue SynchronizedRefreshJobs;
 
+        private bool CancelThread = false;
+
+        public bool BearbeitungErlaubt { get; set; }
+
+        public ElementAuswahlForm(ElementMenge<T> ElementMenge,T Element)
+            : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge,Element)
+        {
+
+        }
         public ElementAuswahlForm(ElementMenge<T> ElementMenge)
             : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge)
         {
@@ -51,6 +60,10 @@ namespace Werwolf.Forms
 
         }
         public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge, T Element, ViewBox ViewBox)
+            : this(Karte, ElementMenge, Element, ViewBox, true)
+        {
+        }
+        public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge, T Element, ViewBox ViewBox, bool BearbeitungErlaubt)
             : base()
         {
             this.Karte = Karte.Clone() as Karte;
@@ -59,6 +72,7 @@ namespace Werwolf.Forms
             this.ViewBox = ViewBox;
             this.RefreshJobs = new Queue();
             this.SynchronizedRefreshJobs = Queue.Synchronized(RefreshJobs as Queue);
+            this.BearbeitungErlaubt = BearbeitungErlaubt;
             BuildUp();
         }
 
@@ -86,7 +100,7 @@ namespace Werwolf.Forms
         private void RefreshThread_DoWork(object sender, DoWorkEventArgs e)
         {
             ElementAuswahlButton<T> item;
-            while (true)
+            while (!CancelThread)
             {
                 lock (SynchronizedRefreshJobs.SyncRoot)
                     if (RefreshJobs.Count > 0)
@@ -100,6 +114,7 @@ namespace Werwolf.Forms
                     Thread.Sleep(Settings.SleepTime);
                 }
             }
+            CancelThread = false;
         }
         private void List_Scroll(object sender, ScrollEventArgs e)
         {
@@ -135,7 +150,7 @@ namespace Werwolf.Forms
 
         private Control GetButton(T element)
         {
-            ElementAuswahlButton<T> b = new ElementAuswahlButton<T>(element, Karte, ElementMenge);
+            ElementAuswahlButton<T> b = new ElementAuswahlButton<T>(element, Karte, ElementMenge, BearbeitungErlaubt);
             b.Ausgewahlt += (s, e) => Auswahlen(element);
             b.Entfernt += (s, e) => Entfernen(b);
             b.Bearbeitet += (s, e) => Bearbeiten(b);
@@ -165,6 +180,7 @@ namespace Werwolf.Forms
         private void Bearbeiten(ElementAuswahlButton<T> b)
         {
             PreForm<T> pf = GetPreform(b.Element);
+            CancelThread = true;
             if (pf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 ElementMenge.Change(b.Element.Name, pf.Element);
@@ -179,6 +195,7 @@ namespace Werwolf.Forms
             ElementAuswahlButton<T> b = GetButton(Neu) as ElementAuswahlButton<T>;
             b.Refresh();
             List.AddControl(b);
+            List.SetUp();
         }
 
         private void StartRefreshing()

@@ -130,6 +130,7 @@ namespace Werwolf.Forms
 
             WerteListe.Location = new Point(ViewBox.Right, 0);
             WerteListe.Size = new Size(ClientSize.Width / 2, ClientSize.Height - 70);
+            WerteListe.Refresh();
         }
 
         protected virtual void OnUserValueChanged(EventArgs e)

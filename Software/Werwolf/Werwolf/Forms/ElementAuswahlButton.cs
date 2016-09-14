@@ -34,14 +34,14 @@ namespace Werwolf.Forms
 
         public bool Dirty { get; set; }
 
-        public ElementAuswahlButton(T Element, Karte Karte, ElementMenge<T> ElementMenge)
+        public ElementAuswahlButton(T Element, Karte Karte, ElementMenge<T> ElementMenge, bool BearbeitungErlaubt)
         {
             this.Element = Element;
             this.ElementMenge = ElementMenge;
-            this.Karte = Karte.Clone() as Karte;
-            BuildUp();
+            this.Karte = Karte.DeepClone();
+            BuildUp(BearbeitungErlaubt);
         }
-        private void BuildUp()
+        private void BuildUp(bool BearbeitungErlaubt)
         {
             this.GroupBox.Text = Element.Schreibname;
             this.GroupBox.Height = 160;
@@ -56,6 +56,7 @@ namespace Werwolf.Forms
             this.Height = 160;
 
             Buttons.Enable(!Element.Unzerstorbar, "Entfernen");
+            Buttons.Enable(BearbeitungErlaubt, "Entfernen", "Bearbeiten", "Klonen");
             Buttons.ButtonClick += new EventHandler(Buttons_ButtonClick);
         }
 

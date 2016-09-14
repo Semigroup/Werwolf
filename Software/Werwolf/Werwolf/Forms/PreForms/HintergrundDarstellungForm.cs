@@ -27,12 +27,13 @@ namespace Werwolf.Forms
         public override void BuildWerteListe()
         {
             base.BuildWerteListe();
+
             UpdatingWerteListe = true;
-            WerteListe.AddChainedSizeFBox(new SizeF(), "Randgröße in mm");
+            WerteListe.AddChainedSizeFBox(new SizeF(), "Randgröße in mm", true, Settings.MaximumKarteSize);
             WerteListe.AddColorBox(Color.Black, "Randfarbe");
             WerteListe.AddColorBox(Color.White, "Hintergrundfarbe");
             WerteListe.AddBoolBox(false, "Hat Runde Ecken?");
-            WerteListe.AddChainedSizeFBox(new SizeF(), "Größe in mm");
+            WerteListe.AddChainedSizeFBox(new SizeF(), "Größe in mm", true, Settings.MaximumKarteSize);
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }

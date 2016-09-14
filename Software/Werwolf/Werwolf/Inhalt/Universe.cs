@@ -41,6 +41,7 @@ namespace Werwolf.Inhalt
         }
 
         public string DirectoryName { get; private set; }
+        public string Pfad { get; set; }
 
         private Universe()
             : base("Universe")
@@ -97,6 +98,7 @@ namespace Werwolf.Inhalt
         public void Root(string Pfad)
         {
             this.DirectoryName = Path.GetDirectoryName(Pfad);
+            this.Pfad = Pfad;
         }
         public void Open(string Pfad)
         {

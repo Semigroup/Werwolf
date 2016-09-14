@@ -10,15 +10,11 @@ using Assistment.Texts;
 using Werwolf.Karten;
 using Werwolf.Inhalt;
 
-namespace Werwolf.Karten
+namespace Werwolf.Printing
 {
     public class WolfSinglePaper : WolfBox
     {
         public iTextSharp.text.Rectangle PageSize { get; set; }
-        /// <summary>
-        /// in mm
-        /// </summary>
-        public SizeF Zwischenplatz { get; set; }
         /// <summary>
         /// in Pixel
         /// </summary>
@@ -30,8 +26,9 @@ namespace Werwolf.Karten
                     PageSize.Width / DrawContextDocument.factor, PageSize.Height / DrawContextDocument.factor);
             }
         }
-        public Color HintergrundFarbe { get; set; }
         public Color TrennlinienFarbe { get; set; }
+        public bool Zwischenplatz { get; set; }
+        public bool Swapped { get; set; }
 
         private List<DrawBox> Karten = new List<DrawBox>();
 
@@ -41,6 +38,12 @@ namespace Werwolf.Karten
             : base(Universe.Karten.Standard, ppm)
         {
             this.PageSize = iTextSharp.text.PageSize.A4;
+        }
+        public WolfSinglePaper(Job Job)
+            : this(Job.Universe, Job.Ppm)
+        {
+            this.Zwischenplatz = Job.Zwischenplatz;
+            this.TrennlinienFarbe = Job.TrennlinienFarbe;
         }
 
         public override void update()
@@ -66,26 +69,39 @@ namespace Werwolf.Karten
             foreach (var item in Karten)
                 item.setup(box);
 
-            SizeF zwischen = Zwischenplatz.mul(ppm);
             SizeF karte = Karten.First().box.Size;
-            SizeF Platz = karte.add(zwischen);
-            SizeF n = Seite.Size.add(zwischen).div(Platz);
+            SizeF n = Seite.Size.div(karte);
             NumberOfCards = new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
+            SizeF Offset;
+            SizeF Zwischen;
+            if (Zwischenplatz)
+            {
+                Offset = Seite.Size.sub(karte.mul(NumberOfCards));
+                Offset = Offset.div(new SizeF(1, 1).add(NumberOfCards));
+                Zwischen = Offset;
+            }
+            else
+            {
+                Zwischen = new SizeF();
+                Offset = Seite.Size.sub(karte.mul(NumberOfCards));
+                Offset = Offset.div(2);
+            }
+            SizeF Platz = karte.add(Zwischen);
 
             this.box = Seite;
-            SizeF Rest = Zwischenplatz;
-            Rest = Rest.mul(2);
-            Rest = Rest.add(karte.mul(3));
-            Rest = Seite.Size.sub(Rest);
-            Rest = Rest.div(2);
-
             IEnumerator<DrawBox> db = Karten.GetEnumerator();
+
+            if (Swapped)
+            {
+                Offset.Width = Seite.Width - karte.Width - Offset.Width;
+                Platz.Width = -Platz.Width;
+            }
 
             for (int y = 0; y < NumberOfCards.Height; y++)
                 for (int x = 0; x < NumberOfCards.Width; x++)
                     if (db.MoveNext())
                     {
-                        PointF off = Rest.ToPointF();
+                        PointF off = Offset.ToPointF();
                         off = off.add(Platz.mul(x, y).ToPointF());
                         db.Current.Move(off);
                     }
@@ -94,7 +110,11 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             foreach (var item in Karten)
+            {
                 item.draw(con);
+                if (TrennlinienFarbe.A > 0)
+                    con.drawRectangle(new Pen(TrennlinienFarbe, 0.01f), item.box);
+            }
         }
     }
 }

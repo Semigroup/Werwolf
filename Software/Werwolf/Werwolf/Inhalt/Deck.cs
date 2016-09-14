@@ -8,6 +8,7 @@ using System.Drawing;
 using Assistment.Xml;
 using Assistment.Extensions;
 using Assistment.Drawing.LinearAlgebra;
+using Assistment.Mathematik;
 
 namespace Werwolf.Inhalt
 {
@@ -32,7 +33,6 @@ namespace Werwolf.Inhalt
                 string name = item.Substring(i + 1, item.Length - i - 1);
                 Karten.Add(Universe.Karten[name], n);
             }
-            Loader.XmlReader.Next();
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -43,6 +43,28 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteRaw(sb.ToString());
         }
 
+        public List<KeyValuePair<Karte, int>> GetKarten(int ab, int Anzahl)
+        {
+            List<KeyValuePair<Karte, int>> l = new List<KeyValuePair<Karte, int>>();
+            int selected = 0;
+            foreach (var item in Karten)
+            {
+                ab -= item.Value;
+                int take = FastMath.Min(Anzahl - selected, -ab, item.Value);
+                l.Add(new KeyValuePair<Karte, int>(item.Key, take));
+                selected += take;
+                if (selected >= Anzahl)
+                    break;
+            }
+            return l;
+        }
+        public int TotalCount()
+        {
+            int n = 0;
+            foreach (var item in Karten)
+                n += item.Value;
+            return n;
+        }
         public int this[Karte Karte]
         {
             get
@@ -54,7 +76,6 @@ namespace Werwolf.Inhalt
             }
             set { SetKarte(Karte, value); }
         }
-
         public void SetKarte(Karte Karte, int Number)
         {
             if (Number > 0)

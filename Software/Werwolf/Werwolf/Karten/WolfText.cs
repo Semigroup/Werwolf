@@ -34,6 +34,8 @@ namespace Werwolf.Karten
         private float LastInnenRadius;
         private float LastPpm;
         private SizeF LastRand;
+        private Color LastRandFarbe;
+        private Color LastFarbe;
 
         public WolfText(Karte Karte, float Ppm)
             : base(Karte, Ppm)
@@ -97,7 +99,7 @@ namespace Werwolf.Karten
         {
             Brush[] br = new Brush[10];
             for (int i = 0; i < br.Length; i++)
-                br[i] = new SolidBrush(Color.FromArgb((br.Length - i) * 255 / br.Length, TextDarstellung.RandFarbe));
+                br[i] = new SolidBrush(Color.FromArgb((br.Length - i) * LastRandFarbe.A / br.Length, LastRandFarbe));
             return br;
         }
 
@@ -116,7 +118,9 @@ namespace Werwolf.Karten
                 && LastBalkenDicke.Equal(BalkenDicke)
                 && LastInnenRadius.Equal(InnenRadius)
                 && LastPpm.Equal(ppm)
-                && LastRand.Equal(Rand))
+                && LastRand.Equal(Rand)
+                && LastFarbe.Equals(TextDarstellung.Farbe)
+                && LastRandFarbe.Equals(TextDarstellung.RandFarbe))
                 return;
 
             LastoutBox = outBox;
@@ -126,22 +130,21 @@ namespace Werwolf.Karten
             LastInnenRadius = InnenRadius;
             LastPpm = ppm;
             LastRand = Rand;
+            LastRandFarbe = TextDarstellung.RandFarbe;
+            LastFarbe = TextDarstellung.Farbe;
 
             PointF Offset = outBox.Location.mul(-1);
             Back = new Bitmap(Size.Width, Size.Height);
 
             using (Graphics g = Back.GetHighGraphics(ppm))
             {
-                //g.FillRectangle(Brushes.Red, outBox.move(Offset));
-                //g.FillRectangle(Color.Green.flat().ToBrush(), innBox.move(Offset));
-
                 OrientierbarerWeg OrientierbarerWeg = Rund(innBox.move(Offset), BalkenDicke);
                 Hohe h = t => OrientierbarerWeg.normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
 
                 int L = (int)OrientierbarerWeg.L;
                 Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
                 g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
-                Brush Brush = TextDarstellung.Farbe.ToBrush();
+                Brush Brush = LastFarbe.ToBrush();
                 foreach (var item in Texts)
                 {
                     RectangleF box = item.box.mul(1 / Faktor).move(Offset);

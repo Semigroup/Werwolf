@@ -13,7 +13,7 @@ namespace Werwolf.Karten
 {
     public class WolfTitel : WolfBox
     {
-        public Titel Titel { get; private set; }
+        public TitelProxy Titel { get; private set; }
 
         private string LastSchreibname;
         private Font LastFont;
@@ -31,6 +31,12 @@ namespace Werwolf.Karten
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
+            if (Karte != null && Titel == null)
+                this.Titel = new TitelProxy(Karte.Fraktion.TitelArt,
+                Karte.Schreibname, TitelDarstellung.FontMeasurer,
+                TitelDarstellung.Rand.Height * Faktor,
+                TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
+                TitelDarstellung.Farbe.ToBrush());
             update();
         }
         public override void OnPpmChanged()
@@ -72,13 +78,18 @@ namespace Werwolf.Karten
             LastRandFarbe = TitelDarstellung.RandFarbe;
             LastPpm = ppm;
 
-            Text t = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer);
-            t.alignment = 0.5f;
-            this.Titel = Titel.GetTitel(Karte.Fraktion.TitelArt,
-                t,
-                TitelDarstellung.Rand.Height * Faktor,
-                TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
-                TitelDarstellung.Farbe.ToBrush());
+            //Text t = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer);
+            //t.alignment = 0.5f;
+            this.Titel.SetArt(Karte.Fraktion.TitelArt);
+            this.Titel.SetText(Karte.Schreibname, TitelDarstellung.FontMeasurer);
+            this.Titel.RandHohe = TitelDarstellung.Rand.Height * Faktor;
+            this.Titel.RandFarbe = TitelDarstellung.RandFarbe.ToPen(Faktor / 5);
+            this.Titel.HintergrundFarbe = TitelDarstellung.Farbe.ToBrush();
+            //this.Titel = new TitelProxy(Karte.Fraktion.TitelArt,
+            //    Karte.Schreibname,TitelDarstellung.FontMeasurer,
+            //    TitelDarstellung.Rand.Height * Faktor,
+            //    TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
+            //    TitelDarstellung.Farbe.ToBrush());
             this.Titel.Scaling = Ppm / Faktor;
             Titel.update();
         }

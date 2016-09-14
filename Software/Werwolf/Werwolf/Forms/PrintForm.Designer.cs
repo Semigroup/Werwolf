@@ -38,9 +38,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.Drucken = new System.Windows.Forms.Button();
+            this.Printer = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ppmBox1 = new Assistment.form.PpmBox();
             this.colorBox2 = new Assistment.form.ColorBox();
             this.colorBox1 = new Assistment.form.ColorBox();
-            this.floatBox1 = new Assistment.form.FloatBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,17 +64,18 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(852, 86);
+            this.radioButton2.Location = new System.Drawing.Point(852, 140);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(277, 21);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "Eine gemeinsame Rückseite pro Papier";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Visible = false;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(852, 113);
+            this.radioButton3.Location = new System.Drawing.Point(852, 86);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(139, 21);
             this.radioButton3.TabIndex = 2;
@@ -78,11 +84,13 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(830, 814);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
@@ -127,7 +135,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(852, 140);
+            this.radioButton4.Location = new System.Drawing.Point(852, 113);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(126, 21);
             this.radioButton4.TabIndex = 10;
@@ -136,13 +144,47 @@
             // 
             // Drucken
             // 
-            this.Drucken.Location = new System.Drawing.Point(852, 344);
+            this.Drucken.Location = new System.Drawing.Point(1035, 420);
             this.Drucken.Name = "Drucken";
-            this.Drucken.Size = new System.Drawing.Size(93, 43);
+            this.Drucken.Size = new System.Drawing.Size(152, 43);
             this.Drucken.TabIndex = 11;
-            this.Drucken.Text = "Drucken";
+            this.Drucken.Text = "PDF erstellen";
             this.Drucken.UseVisualStyleBackColor = true;
             this.Drucken.Click += new System.EventHandler(this.Drucken_Click);
+            // 
+            // Printer
+            // 
+            this.Printer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Printer_DoWork);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(852, 391);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(335, 23);
+            this.progressBar1.Step = 1;
+            this.progressBar1.TabIndex = 16;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(853, 260);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(176, 21);
+            this.checkBox1.TabIndex = 17;
+            this.checkBox1.Text = "Platz zwischen Karten?";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "pdf";
+            this.saveFileDialog1.Filter = "PDF (*.pdf)|*.pdf";
+            // 
+            // ppmBox1
+            // 
+            this.ppmBox1.Location = new System.Drawing.Point(852, 287);
+            this.ppmBox1.Name = "ppmBox1";
+            this.ppmBox1.Size = new System.Drawing.Size(177, 44);
+            this.ppmBox1.TabIndex = 15;
             // 
             // colorBox2
             // 
@@ -160,22 +202,25 @@
             this.colorBox1.Size = new System.Drawing.Size(217, 23);
             this.colorBox1.TabIndex = 6;
             // 
-            // floatBox1
+            // button1
             // 
-            this.floatBox1.Location = new System.Drawing.Point(875, 272);
-            this.floatBox1.Name = "floatBox1";
-            this.floatBox1.Size = new System.Drawing.Size(51, 22);
-            this.floatBox1.TabIndex = 12;
-            this.floatBox1.UserValue = 10F;
-            this.floatBox1.UserValueMaximum = 3.402823E+38F;
-            this.floatBox1.UserValueMinimum = 1E-06F;
+            this.button1.Location = new System.Drawing.Point(853, 420);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(176, 43);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Vorschau: Erste Seite";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 814);
-            this.Controls.Add(this.floatBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.ppmBox1);
             this.Controls.Add(this.Drucken);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.label3);
@@ -210,6 +255,11 @@
         private Assistment.form.ColorBox colorBox2;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.Button Drucken;
-        private Assistment.form.FloatBox floatBox1;
+        private Assistment.form.PpmBox ppmBox1;
+        private System.ComponentModel.BackgroundWorker Printer;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }

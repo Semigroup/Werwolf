@@ -80,11 +80,13 @@ namespace Werwolf.Inhalt
         {
             get
             {
+                if (FilePath == "")
+                    return LeerBild;
                 string tot = TotalFilePath;
                 if (File.Exists(tot))
                     return Image.FromFile(tot);
                 else
-                    return LeerBild;
+                    return FehlerBild;
             }
         }
 
@@ -158,8 +160,6 @@ namespace Werwolf.Inhalt
         public Image GetImageByHeight(float Height)
         {
             Image Img = this.Image;
-            if (Img == LeerBild)
-                Img = FehlerBild;
 
             RectangleF r = new RectangleF();
             r.Size = new SizeF(Img.Size.Width * Height / Img.Size.Height, Height).Max(1, 1).ToSize();

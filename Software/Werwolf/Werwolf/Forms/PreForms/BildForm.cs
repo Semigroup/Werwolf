@@ -36,6 +36,7 @@ namespace Werwolf.Forms
             WerteListe.AddStringBox("", "Name");
             image.ShowImage = false;
             image.ImageChanged += new EventHandler(image_ImageChanged);
+            image.MaximumImageSize = Settings.MaximumImageArea;
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
@@ -71,7 +72,8 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Schreibname = WerteListe.GetValue<string>("Name");
-            element.FilePath = WerteListe.GetValue<string>("Datei");
+            string s = WerteListe.GetValue<string>("Datei");
+            element.FilePath = (s == null) ? "" : s;
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             element.Zentrum = WerteListe.GetValue<PointF>("Point of Interest");
@@ -114,6 +116,7 @@ namespace Werwolf.Forms
             WerteListe.AddWerteBox<string>(
                 new WertPaar<string>("Name", new TextBildNameBox(Universe.TextBilder)), "Name");
             image.ShowImage = false;
+            image.MaximumImageSize = Settings.MaximumImageArea;
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
 

@@ -19,7 +19,7 @@ namespace Werwolf.Karten
             set { deck = value; }
         }
 
-        private Text Text;
+        private DrawBox Text;
 
         public StandardDeck(Karte Karte, float ppm)
             : base(Karte, ppm)
@@ -30,15 +30,31 @@ namespace Werwolf.Karten
         {
             if (Deck == null)
                 return;
-
-            Text = new Text("", new FontMeasurer("Calibri", 11));
-            foreach (var item in Deck.Karten)
+            CString cs = new CString();
+            foreach (var item in Deck.Universe.Fraktionen)
             {
-                if (item.Value > 1)
-                    Text.addWort(item.Value + "x");
-                if (item.Value > 0)
-                    Text.add(new StandardKarte(item.Key, Ppm));
+                IEnumerable<KeyValuePair<Karte, int>> frak = Deck.Karten.Where(x => x.Key.Fraktion == item.Value);
+                bool empty = true;
+                Text t = new Text("\\d" + item.Value.Schreibname, new FontMeasurer("Calibri", 22));
+                foreach (var karte in frak)
+                {
+                    if (karte.Value > 0)
+                    {
+                        t.addAbsatz();
+                        empty = false;
+                    }
+                    if (karte.Value > 1)
+                        t.addWort(karte.Value + "x ");
+                    if (karte.Value > 0)
+                    {
+                        t.addRegex(karte.Key.Schreibname);
+                        //Text.add(new StandardKarte(item.Key, Ppm));
+                    }
+                }
+                if (!empty)
+                    cs.add(t.Geometry(10));
             }
+            Text = cs;
         }
 
         public override void update()

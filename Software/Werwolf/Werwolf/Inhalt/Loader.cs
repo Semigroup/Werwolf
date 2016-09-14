@@ -94,6 +94,11 @@ namespace Werwolf.Inhalt
             string s = XmlReader.getString("RuckseitenBild");
             return Universe.RuckseitenBilder[s];
         }
+        public Deck GetDeck()
+        {
+            string s = XmlReader.getString("Deck");
+            return Universe.Decks[s];
+        }
 
         public void Dispose()
         {
