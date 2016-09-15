@@ -39,8 +39,11 @@ namespace Werwolf.Karten
             Color HintergrundFarbe = InfoDarstellung.Farbe;
             //System.Windows.Forms.MessageBox.Show(HintergrundFarbe + ", " + HintergrundFarbe.ToBrush().Color);
 
-            Gesinnung = new Text(Karte.Gesinnung.Aufgabe.ToString(), InfoDarstellung.FontMeasurer)
-                .Colorize(HintergrundFarbe).Geometry(Rand);
+            Text[] gesinnungen = Karte.Gesinnung.Aufgabe.ProduceTexts(InfoDarstellung.FontMeasurer);
+            if (gesinnungen.Length > 0)
+                Gesinnung = gesinnungen[0].Colorize(HintergrundFarbe).Geometry(Rand);
+            else
+                Gesinnung = new Text();
             Artist = new Text(Karte.HauptBild.Artist, InfoDarstellung.FontMeasurer)
                 .Colorize(HintergrundFarbe).Geometry(Rand);
             Kompositum = new CString(Gesinnung, Artist);
