@@ -295,8 +295,8 @@ namespace Werwolf.Forms
         private void SteuerBox_NeuClicked(object sender, EventArgs e)
         {
             Universe = new Universe(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
-            SteuerBox.Speicherort = null;
             PrintDeck.Enabled = false;
+            SteuerBox.Speicherort = null;
         }
 
         private void SetUniverse(Universe Universe)
@@ -337,7 +337,8 @@ namespace Werwolf.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.Text = Universe.Name = Universe.Schreibname = textBox1.Text;
-            SteuerBox.Speicherort = Path.Combine(Path.GetDirectoryName(SteuerBox.Speicherort), textBox1.Text + ".xml");
+            if (SteuerBox.Speicherort != null)
+                SteuerBox.Speicherort = Path.Combine(Path.GetDirectoryName(SteuerBox.Speicherort), textBox1.Text + ".xml");
             Changed(true);
         }
         private void Changed(bool changed)
