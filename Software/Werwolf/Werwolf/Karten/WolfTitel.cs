@@ -95,7 +95,7 @@ namespace Werwolf.Karten
         }
         public override bool Visible()
         {
-            return base.Visible() && TitelDarstellung.Existiert && Karte.Schreibname.Length > 0;
+            return base.Visible() && TitelDarstellung.Existiert && Karte.Schreibname.Length > 0 && !Titel.Empty();
         }
         public override void setup(RectangleF box)
         {

@@ -98,6 +98,10 @@ namespace Werwolf.Karten
                 InhaltChanged = true;
             }
         }
+        public bool Empty()
+        {
+            return Text.empty();
+        }
 
         public override DrawBox clone()
         {
