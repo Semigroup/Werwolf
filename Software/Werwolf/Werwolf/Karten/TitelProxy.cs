@@ -71,6 +71,8 @@ namespace Werwolf.Karten
 
         public override Weg GetVerlauf(float units)
         {
+            Proxied.RandHohe = this.RandHohe;
+            Proxied.Scaling = this.Scaling;
             return Proxied.GetVerlauf(units);
         }
         public override Titel.Art GetArt()
