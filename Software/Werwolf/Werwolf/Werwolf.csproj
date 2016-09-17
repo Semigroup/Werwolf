@@ -249,14 +249,14 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Zauber.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ressourcen\Bilder\RückseitenBilder\CoverArtefakte.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Ressourcen\Bilder\RuckseitenBilder\CoverArtefakte.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ressourcen\Bilder\RückseitenBilder\CoverFähigkeiten.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Ressourcen\Bilder\RuckseitenBilder\CoverFähigkeiten.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ressourcen\Bilder\RückseitenBilder\CoverRollen.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Ressourcen\Bilder\RuckseitenBilder\CoverRollen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\TextBilder\DaumenOben.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

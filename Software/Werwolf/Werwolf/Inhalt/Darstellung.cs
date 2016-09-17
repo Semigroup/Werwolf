@@ -19,14 +19,26 @@ namespace Werwolf.Inhalt
         /// in Millimeter
         /// </summary>
         public SizeF Rand { get; set; }
-        public Font Font { get { return font; } set { font = value; FontMeasurer = value != null ? value.GetMeasurer() : null; } }
+        public Font Font
+        {
+            get { return font; }
+            set
+            {
+                font = value;
+                //FontMeasurer = value != null ? value.GetMeasurer() : null;
+                if (value == null)
+                    FontMeasurer = null;
+                else
+                    FontMeasurer = new FontGraphicsMeasurer(Font);
+            }
+        }
         public bool Existiert { get; set; }
         public Color Farbe { get; set; }
         public Color RandFarbe { get; set; }
         public Color TextFarbe { get; set; }
 
         private Font font;
-        public FontMeasurer FontMeasurer { get; private set; }
+        public xFont FontMeasurer { get; private set; }
 
         public Darstellung(string XmlName)
             : base(XmlName)
@@ -102,11 +114,11 @@ namespace Werwolf.Inhalt
         private SizeF LastRand = new SizeF();
         private Color LastRandFarbe = Color.Black;
         private bool LastRundeEcken = true;
-     
+
         public HintergrundDarstellung()
             : base("HintergrundDarstellung")
         {
-     
+
         }
         public override void Init(Universe Universe)
         {
@@ -126,13 +138,13 @@ namespace Werwolf.Inhalt
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
-            XmlWriter.writeSize("Size",Size);
+            XmlWriter.writeSize("Size", Size);
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
         }
 
         public void MakeRandBild(float ppm)
         {
-            Size s = Size.mul(ppm).Max(1,1).ToSize();
+            Size s = Size.mul(ppm).Max(1, 1).ToSize();
             if (LastSize.Equals(s)
                 && LastRand.sub(Rand).norm() < 1
                 && LastRundeEcken == RundeEcken
@@ -292,7 +304,7 @@ namespace Werwolf.Inhalt
         public TextDarstellung()
             : base("TextDarstellung")
         {
-          
+
         }
         public override void Init(Universe Universe)
         {

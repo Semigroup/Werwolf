@@ -180,8 +180,8 @@ namespace Werwolf.Inhalt
                 string destiny = Path.Combine(Universe.DirectoryName, filePath);
                 try
                 {
-                    File.Copy(source, destiny, true);
                     this.FilePath = filePath;
+                    File.Copy(source, destiny, true);
                 }
                 catch (Exception)
                 {
