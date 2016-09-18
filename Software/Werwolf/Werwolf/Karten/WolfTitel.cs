@@ -33,7 +33,8 @@ namespace Werwolf.Karten
             base.OnKarteChanged();
             if (Karte != null && Titel == null)
                 this.Titel = new TitelProxy(Karte.Fraktion.TitelArt,
-                Karte.Schreibname, TitelDarstellung.FontMeasurer,
+                Karte.Schreibname,
+                TitelDarstellung.FontMeasurer,
                 TitelDarstellung.Rand.Height * Faktor,
                 TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
                 TitelDarstellung.Farbe.ToBrush());
@@ -78,24 +79,20 @@ namespace Werwolf.Karten
             LastRandFarbe = TitelDarstellung.RandFarbe;
             LastPpm = ppm;
 
-            //Text t = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer);
-            //t.alignment = 0.5f;
             this.Titel.SetArt(Karte.Fraktion.TitelArt);
             this.Titel.SetText(Karte.Schreibname, TitelDarstellung.FontMeasurer);
             this.Titel.RandHohe = TitelDarstellung.Rand.Height * Faktor;
             this.Titel.RandFarbe = TitelDarstellung.RandFarbe.ToPen(Faktor / 5);
             this.Titel.HintergrundFarbe = TitelDarstellung.Farbe.ToBrush();
-            //this.Titel = new TitelProxy(Karte.Fraktion.TitelArt,
-            //    Karte.Schreibname,TitelDarstellung.FontMeasurer,
-            //    TitelDarstellung.Rand.Height * Faktor,
-            //    TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
-            //    TitelDarstellung.Farbe.ToBrush());
             this.Titel.Scaling = Ppm / Faktor;
             Titel.update();
         }
         public override bool Visible()
         {
-            return base.Visible() && TitelDarstellung.Existiert && Karte.Schreibname.Length > 0 && !Titel.Empty();
+            return base.Visible() 
+                && TitelDarstellung.Existiert
+                && Karte.Schreibname.Length > 0
+                && !Titel.Empty();
         }
         public override void setup(RectangleF box)
         {

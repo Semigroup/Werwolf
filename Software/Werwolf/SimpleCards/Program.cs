@@ -16,8 +16,8 @@ namespace SimpleCards
         public static Pen Rand = new Pen(Color.Black, 2);
         public static Pen Linie = new Pen(Color.Black, 0.1f);
 
-        public static xFont[] Fonts = { new FontMeasurer("Exocet", 14), new FontMeasurer("Calibri", 8) };
-        public static xFont[] FontsKlein = { new FontMeasurer("Exocet", 11), new FontMeasurer("Calibri", 8) };
+        public static xFont[] Fonts = { new FontGraphicsMeasurer("Exocet", 14), new FontGraphicsMeasurer("Calibri", 8) };
+        public static xFont[] FontsKlein = { new FontGraphicsMeasurer("Exocet", 11), new FontGraphicsMeasurer("Calibri", 8) };
 
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.

@@ -29,7 +29,7 @@ namespace Werwolf.Inhalt
                 if (value == null)
                     FontMeasurer = null;
                 else
-                    FontMeasurer = new FontGraphicsMeasurer(Font);
+                    FontMeasurer = value.GetMeasurer();
             }
         }
         public bool Existiert { get; set; }

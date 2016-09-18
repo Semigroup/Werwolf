@@ -20,7 +20,7 @@ namespace Werwolf.Karten
             : base(null, 1)
         {
             this.TextBild = TextBild;
-            this.Font = Font;
+            this.Font = Font.getFont().GetMeasurer();
             this.update();
         }
 

@@ -151,14 +151,10 @@
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
     <Compile Include="Karten\DrawContextExtensions.cs" />
-    <Compile Include="Karten\IKartenmacher.cs" />
-    <Compile Include="Karten\KartenEinzelbildMacher.cs" />
-    <Compile Include="Karten\KartenPDFMacher.cs" />
     <Compile Include="Karten\FixedFontKarte.cs" />
     <Compile Include="Karten\TitelProxy.cs" />
     <Compile Include="Printing\WolfSinglePaper.cs" />
     <Compile Include="Karten\StandardDeck.cs" />
-    <Compile Include="Karten\StandardTextBild.cs" />
     <Compile Include="Karten\StandardRuckseite.cs" />
     <Compile Include="Karten\StandardKarte.cs" />
     <Compile Include="Karten\WolfBox.cs" />

@@ -35,7 +35,7 @@ namespace Werwolf.Karten
             {
                 IEnumerable<KeyValuePair<Karte, int>> frak = Deck.Karten.Where(x => x.Key.Fraktion == item.Value);
                 bool empty = true;
-                Text t = new Text("\\d" + item.Value.Schreibname, new FontMeasurer("Calibri", 22));
+                Text t = new Text("\\d" + item.Value.Schreibname, new FontGraphicsMeasurer("Calibri", 22));
                 foreach (var karte in frak)
                 {
                     if (karte.Value > 0)
