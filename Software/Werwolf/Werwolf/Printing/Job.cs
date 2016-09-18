@@ -28,6 +28,7 @@ namespace Werwolf.Printing
         public float Ppm { get; set; }
         public bool Zwischenplatz { get; set; }
         public RuckBildMode MyMode { get; set; }
+        public bool FixedFont { get; set; }
 
         public Job(Universe Universe, string Pfad) :this()
         {
@@ -43,7 +44,7 @@ namespace Werwolf.Printing
             : base("Job")
         {
         }
-        public void Init(Deck Deck, Color HintergrundFarbe, Color TrennlinienFarbe, float Ppm, bool Zwischenplatz, RuckBildMode MyMode)
+        public void Init(Deck Deck, Color HintergrundFarbe, Color TrennlinienFarbe, float Ppm, bool Zwischenplatz, RuckBildMode MyMode, bool FixedFont)
         {
             this.Deck = Deck;
             this.HintergrundFarbe = HintergrundFarbe;
@@ -51,6 +52,7 @@ namespace Werwolf.Printing
             this.Ppm = Ppm;
             this.Zwischenplatz = Zwischenplatz;
             this.MyMode = MyMode;
+            this.FixedFont = FixedFont;
 
             this.Init(Deck.Universe);
             this.Name = this.Schreibname = Deck.Name + "-Job";
@@ -66,7 +68,7 @@ namespace Werwolf.Printing
             this.Ppm = Loader.XmlReader.getFloat("Ppm");
             this.Zwischenplatz = Loader.XmlReader.getBoolean("Zwischenplatz");
             this.MyMode = Loader.XmlReader.getEnum<RuckBildMode>("MyMode");
-
+            this.FixedFont = Loader.XmlReader.getBoolean("FixedFont");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -77,6 +79,7 @@ namespace Werwolf.Printing
             XmlWriter.writeColorHexARGB("TrennlinienFarbe", TrennlinienFarbe);
             XmlWriter.writeFloat("Ppm", Ppm);
             XmlWriter.writeBoolean("Zwischenplatz", Zwischenplatz);
+            XmlWriter.writeBoolean("FixedFont", FixedFont);
             XmlWriter.writeEnum<RuckBildMode>("MyMode", MyMode);
         }
 

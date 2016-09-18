@@ -70,7 +70,7 @@ namespace WolfSlave
             ShowWindow(handle, SW_HIDE);
 
             // Show
-            ShowWindow(handle, SW_SHOW);
+            //ShowWindow(handle, SW_SHOW);
         }
 
         static void AddKarten(Job Job, int JobNumber, WolfSinglePaper wsp)
@@ -80,13 +80,13 @@ namespace WolfSlave
                 case Job.RuckBildMode.Keine:
                     foreach (var item in Job.Deck.GetKarten(JobNumber * 9, 9))
                         for (int i = 0; i < item.Value; i++)
-                            wsp.TryAdd(new StandardKarte(item.Key, Job.Ppm));
+                            wsp.TryAdd(GetKarte(item.Key, Job));
                     break;
                 case Job.RuckBildMode.Einzeln:
                     foreach (var item in Job.Deck.GetKarten((JobNumber / 2) * 9, 9))
                         for (int i = 0; i < item.Value; i++)
                             if (JobNumber % 2 == 0)
-                                wsp.TryAdd(new StandardKarte(item.Key, Job.Ppm));
+                                wsp.TryAdd(GetKarte(item.Key, Job));
                             else
                                 wsp.TryAdd(new StandardRuckseite(item.Key, Job.Ppm));
                     wsp.Swapped = JobNumber % 2 == 1;
@@ -101,6 +101,13 @@ namespace WolfSlave
                 default:
                     throw new NotImplementedException();
             }
+        }
+        public static WolfBox GetKarte(Karte Karte, Job Job)
+        {
+            if (Job.FixedFont)
+                return new FixedFontKarte(Karte, Job.Ppm);
+            else
+                return new StandardKarte(Karte, Job.Ppm);
         }
     }
 }

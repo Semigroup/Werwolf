@@ -154,6 +154,7 @@
     <Compile Include="Karten\IKartenmacher.cs" />
     <Compile Include="Karten\KartenEinzelbildMacher.cs" />
     <Compile Include="Karten\KartenPDFMacher.cs" />
+    <Compile Include="Karten\FixedFontKarte.cs" />
     <Compile Include="Karten\TitelProxy.cs" />
     <Compile Include="Printing\WolfSinglePaper.cs" />
     <Compile Include="Karten\StandardDeck.cs" />

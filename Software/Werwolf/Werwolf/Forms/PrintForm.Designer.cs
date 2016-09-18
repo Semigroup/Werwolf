@@ -46,6 +46,7 @@
             this.colorBox2 = new Assistment.form.ColorBox();
             this.colorBox1 = new Assistment.form.ColorBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -181,8 +182,11 @@
             // 
             // ppmBox1
             // 
-            this.ppmBox1.Location = new System.Drawing.Point(852, 287);
+            this.ppmBox1.Location = new System.Drawing.Point(852, 314);
             this.ppmBox1.Name = "ppmBox1";
+            this.ppmBox1.Ppm = 11.81102F;
+            this.ppmBox1.PpmMaximum = 1000F;
+            this.ppmBox1.PpmMinimum = 0.001F;
             this.ppmBox1.Size = new System.Drawing.Size(177, 44);
             this.ppmBox1.TabIndex = 15;
             // 
@@ -212,11 +216,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(852, 287);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(91, 21);
+            this.checkBox2.TabIndex = 19;
+            this.checkBox2.Text = "FixedFont";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 814);
+            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.progressBar1);
@@ -261,5 +276,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

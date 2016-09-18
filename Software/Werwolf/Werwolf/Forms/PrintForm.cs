@@ -75,7 +75,8 @@ namespace Werwolf.Forms
                 colorBox2.GetValue(),
                 ppmBox1.GetValue(),
                 checkBox1.Checked,
-                Mode);
+                Mode,
+                checkBox2.Checked);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
         }

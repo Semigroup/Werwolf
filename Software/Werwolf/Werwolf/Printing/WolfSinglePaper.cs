@@ -89,14 +89,13 @@ namespace Werwolf.Printing
             SizeF Platz = karte.add(Zwischen);
 
             this.box = Seite;
-            IEnumerator<DrawBox> db = Karten.GetEnumerator();
-
             if (Swapped)
             {
                 Offset.Width = Seite.Width - karte.Width - Offset.Width;
                 Platz.Width = -Platz.Width;
             }
 
+            IEnumerator<DrawBox> db = Karten.GetEnumerator();
             for (int y = 0; y < NumberOfCards.Height; y++)
                 for (int x = 0; x < NumberOfCards.Width; x++)
                     if (db.MoveNext())
