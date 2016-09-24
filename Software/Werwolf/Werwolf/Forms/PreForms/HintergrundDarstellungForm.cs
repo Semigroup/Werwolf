@@ -33,6 +33,7 @@ namespace Werwolf.Forms
             WerteListe.AddColorBox(Color.Black, "Randfarbe");
             WerteListe.AddColorBox(Color.White, "Hintergrundfarbe");
             WerteListe.AddBoolBox(false, "Hat Runde Ecken?");
+            WerteListe.AddBoolBox(false, "Aktionskarte");
             WerteListe.AddChainedSizeFBox(new SizeF(), "Größe in mm", true, Settings.MaximumKarteSize);
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -45,6 +46,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Randfarbe", element.RandFarbe);
             WerteListe.SetValue("Hintergrundfarbe", element.Farbe);
             WerteListe.SetValue("Hat Runde Ecken?", element.RundeEcken);
+            WerteListe.SetValue("Aktionskarte", element.AktionsKarte);
             WerteListe.SetValue("Größe in mm", element.Size);
             UpdatingWerteListe = false;
         }
@@ -57,6 +59,7 @@ namespace Werwolf.Forms
             element.RandFarbe = WerteListe.GetValue<Color>("Randfarbe");
             element.Farbe = WerteListe.GetValue<Color>("Hintergrundfarbe");
             element.RundeEcken = WerteListe.GetValue<bool>("Hat Runde Ecken?");
+            element.AktionsKarte = WerteListe.GetValue<bool>("Aktionskarte");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
         }
     }

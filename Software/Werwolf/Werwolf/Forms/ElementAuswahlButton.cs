@@ -55,8 +55,8 @@ namespace Werwolf.Forms
             this.Width = 500;
             this.Height = 160;
 
-            Buttons.Enable(!Element.Unzerstorbar, "Entfernen");
             Buttons.Enable(BearbeitungErlaubt, "Entfernen", "Bearbeiten", "Klonen");
+            Buttons.Enable(!Element.Unzerstorbar && BearbeitungErlaubt, "Entfernen");
             Buttons.ButtonClick += new EventHandler(Buttons_ButtonClick);
         }
 

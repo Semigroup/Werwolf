@@ -34,6 +34,12 @@ namespace Werwolf.Inhalt
         public BildDarstellung BildDarstellung { get; set; }
         public InfoDarstellung InfoDarstellung { get; set; }
 
+        public float Initiative { get; set; }
+        public int ReichweiteMin { get; set; }
+        public int ReichweiteMax { get; set; }
+        public int Felder { get; set; }
+        public int Storung { get; set; }
+
         public Karte()
             : base("Karte")
         {
@@ -49,7 +55,7 @@ namespace Werwolf.Inhalt
 @"\r rot \g grün \b blau \o orange \y gelb \w weiß \v violett \l sattelbraun \e grau \cff0abcde FF0ABCDE \s schwarz
 \+
 \d fett \d \i kursiv \i \u Unterstricht \u \a Oberstrich \a \f Linksstrich \f \j Rechtstrich \j \x Horizontalstrich \x"
-,Universe);
+, Universe);
             Fraktion = Universe.Fraktionen.Standard;
             Gesinnung = Universe.Gesinnungen.Standard;
             HauptBild = Universe.HauptBilder.Standard;
@@ -75,6 +81,12 @@ namespace Werwolf.Inhalt
             TitelDarstellung = Loader.GetTitelDarstellung();
             InfoDarstellung = Loader.GetInfoDarstellung();
             BildDarstellung = Loader.GetBildDarstellung();
+
+            Initiative = Loader.XmlReader.getFloat("Initiative");
+            ReichweiteMin = Loader.XmlReader.getInt("ReichweiteMin");
+            ReichweiteMax = Loader.XmlReader.getInt("ReichweiteMax");
+            Felder = Loader.XmlReader.getInt("Felder");
+            Storung = Loader.XmlReader.getInt("Storung");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -90,6 +102,12 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("TitelDarstellung", TitelDarstellung.Name);
             XmlWriter.writeAttribute("InfoDarstellung", InfoDarstellung.Name);
             XmlWriter.writeAttribute("BildDarstellung", BildDarstellung.Name);
+
+            XmlWriter.writeFloat("Initiative", Initiative);
+            XmlWriter.writeInt("ReichweiteMin", ReichweiteMin);
+            XmlWriter.writeInt("ReichweiteMax", ReichweiteMax);
+            XmlWriter.writeInt("Felder", Felder);
+            XmlWriter.writeInt("Storung", Storung);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -110,6 +128,12 @@ namespace Werwolf.Inhalt
             Karte.TitelDarstellung = TitelDarstellung;
             Karte.BildDarstellung = BildDarstellung;
             Karte.InfoDarstellung = InfoDarstellung;
+
+            Karte.Initiative = Initiative;
+            Karte.ReichweiteMin = ReichweiteMin;
+            Karte.ReichweiteMax = ReichweiteMax;
+            Karte.Storung = Storung;
+            Karte.Felder = Felder;
         }
         public override object Clone()
         {
@@ -182,6 +206,14 @@ namespace Werwolf.Inhalt
             Universe.HauptBilder.Rescue(HauptBild);
 
             Aufgaben.Rescue();
+        }
+        public virtual WolfBox GetVorderSeite(float Ppm)
+        {
+            return new StandardKarte(this, Ppm);
+        }
+        public virtual WolfBox GetRuckSeite(float Ppm)
+        {
+            return new StandardRuckseite(this, Ppm);
         }
     }
 }

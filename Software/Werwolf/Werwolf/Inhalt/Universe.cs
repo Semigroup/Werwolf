@@ -32,18 +32,14 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                return new Menge[] { HintergrundDarstellungen, TitelDarstellungen,
-                    BildDarstellungen, TextDarstellungen, InfoDarstellungen,
-                    HauptBilder, HintergrundBilder, RuckseitenBilder, TextBilder,
-                    Fraktionen, Gesinnungen, Karten,
-                    Decks };
+                return GetMengen();
             }
         }
 
         public string DirectoryName { get; private set; }
         public string Pfad { get; set; }
 
-        private Universe()
+        public Universe()
             : base("Universe")
         {
             HintergrundDarstellungen = new ElementMenge<HintergrundDarstellung>("Hintergrunddarstellungen", this);
@@ -67,6 +63,15 @@ namespace Werwolf.Inhalt
             : this()
         {
             Open(Pfad);
+        }
+
+        protected virtual Menge[] GetMengen()
+        {
+            return new Menge[] { HintergrundDarstellungen, TitelDarstellungen,
+                    BildDarstellungen, TextDarstellungen, InfoDarstellungen,
+                    HauptBilder, HintergrundBilder, RuckseitenBilder, TextBilder,
+                    Fraktionen, Gesinnungen, Karten,
+                    Decks };
         }
 
         protected override void ReadIntern(Loader Loader)

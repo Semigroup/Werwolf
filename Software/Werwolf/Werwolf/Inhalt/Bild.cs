@@ -46,9 +46,9 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                if (FilePath.Length >= 10 && FilePath.Substring(0, 10).Equals("Ressourcen"))
-                    return "";
-                else
+                //if (FilePath.Length >= 10 && FilePath.Substring(0, 10).Equals("Ressourcen"))
+                //    return "";
+                //else
                     return TotalFilePath;
             }
         }
@@ -176,7 +176,7 @@ namespace Werwolf.Inhalt
             if (File.Exists(source))
             {
                 string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
-                string filePath = "Bilder/" + XmlName + "er/" + Schreibname + extension;
+                string filePath = "Bilder/" + XmlName + "er/" + Name + extension;
                 string destiny = Path.Combine(Universe.DirectoryName, filePath);
                 try
                 {

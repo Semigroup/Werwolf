@@ -10,16 +10,20 @@ using Assistment.Extensions;
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Mathematik;
 
-namespace Werwolf.Inhalt
-{
-    public class Deck: XmlElement
-    {
-        public SortedDictionary<Karte, int> Karten { get; private set; }
+using Werwolf.Inhalt;
 
-        public Deck()
+namespace ActionCardDesigner
+{
+    public class AktionsDeck : XmlElement
+    {
+        public SortedDictionary<AktionsKarte, int> Karten { get; private set; }
+
+        public new AktionsUniverse Universe { get { return base.Universe as AktionsUniverse; } }
+
+        public AktionsDeck()
             : base("Deck")
         {
-            Karten = new SortedDictionary<Karte, int>();
+            Karten = new SortedDictionary<AktionsKarte, int>();
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -31,7 +35,7 @@ namespace Werwolf.Inhalt
                 int i = item.IndexOf(' ');
                 int n = int.Parse(item.Substring(0, i));
                 string name = item.Substring(i + 1, item.Length - i - 1);
-                Karten.Add(Universe.Karten[name], n);
+                Karten.Add(Universe.AktionsKarten[name], n);
             }
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
@@ -43,15 +47,15 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteRaw(sb.ToString());
         }
 
-        public List<KeyValuePair<Karte, int>> GetKarten(int ab, int Anzahl)
+        public List<KeyValuePair<AktionsKarte, int>> GetKarten(int ab, int Anzahl)
         {
-            List<KeyValuePair<Karte, int>> l = new List<KeyValuePair<Karte, int>>();
+            List<KeyValuePair<AktionsKarte, int>> l = new List<KeyValuePair<AktionsKarte, int>>();
             int selected = 0;
             foreach (var item in Karten)
             {
                 ab -= item.Value;
                 int take = FastMath.Min(Anzahl - selected, -ab, item.Value);
-                l.Add(new KeyValuePair<Karte, int>(item.Key, take));
+                l.Add(new KeyValuePair<AktionsKarte, int>(item.Key, take));
                 selected += take;
                 if (selected >= Anzahl)
                     break;
@@ -65,7 +69,7 @@ namespace Werwolf.Inhalt
                 n += item.Value;
             return n;
         }
-        public int this[Karte Karte]
+        public int this[AktionsKarte Karte]
         {
             get
             {
@@ -76,7 +80,7 @@ namespace Werwolf.Inhalt
             }
             set { SetKarte(Karte, value); }
         }
-        public void SetKarte(Karte Karte, int Number)
+        public void SetKarte(AktionsKarte Karte, int Number)
         {
             if (Number > 0)
             {
@@ -96,13 +100,13 @@ namespace Werwolf.Inhalt
         public override void Assimilate(XmlElement Element)
         {
             base.Assimilate(Element);
-            Deck d = Element as Deck;
-            foreach (var item in Universe.Karten.Values)
+            AktionsDeck d = Element as AktionsDeck;
+            foreach (var item in Universe.AktionsKarten.Values)
                 d[item] = this[item];
         }
         public override object Clone()
         {
-            Deck d = new Deck();
+            AktionsDeck d = new AktionsDeck();
             Assimilate(d);
             return d;
         }
@@ -121,7 +125,7 @@ namespace Werwolf.Inhalt
         }
         public override void Rescue()
         {
-            ElementMenge<Karte> Menge = Universe.Karten;
+            ElementMenge<AktionsKarte> Menge = Universe.AktionsKarten;
             foreach (var item in Karten.Keys)
                 Menge.Rescue(item);
         }

@@ -14,11 +14,27 @@ namespace Werwolf.Karten
 {
     public class StandardKarte : WolfBox
     {
+        public WolfHeader Header { get; set; }
+
         public WolfTitel Titel { get; set; }
         public WolfText Text { get; set; }
         public WolfInfo Info { get; set; }
 
-        private WolfBox[] WolfBoxs { get { return new WolfBox[] { Titel, Text, Info }; } }
+        private WolfBox[] WolfBoxs
+        {
+            get
+            {
+                if (Karte != null)
+                {
+                    if (Karte.HintergrundDarstellung.AktionsKarte)
+                        return new WolfBox[] { Header, Text };
+                    else
+                        return new WolfBox[] { Titel, Text, Info };
+                }
+                else
+                    return new WolfBox[] { };
+            }
+        }
 
         public override float getSpace()
         {
@@ -36,6 +52,11 @@ namespace Werwolf.Karten
         public StandardKarte(Karte Karte, float Ppm)
             : base(Karte, Ppm)
         {
+            BuildUp();
+        }
+        public virtual void BuildUp()
+        {
+            Header = new WolfHeader(Karte, ppm);
             Titel = new WolfTitel(Karte, ppm);
             Text = new WolfText(Karte, ppm);
             Info = new WolfInfo(Karte, ppm);
@@ -81,10 +102,10 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.setup(box);
 
-            if (Text.Visible() && Info.Visible())
+            if (Text.Visible() && Info.Visible() && !HintergrundDarstellung.AktionsKarte)
                 Text.KorrigierUmInfo(Info.Kompositum.box.Height);
         }
-        public override void draw(DrawContext con)
+        public void drawNormal(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(box.Location);
             RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
@@ -116,6 +137,46 @@ namespace Werwolf.Karten
                 HintergrundDarstellung.MakeRandBild(ppm);
                 con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
+        }
+        public void drawAction(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            float top = Header.Visible() ? Header.Bottom : MovedInnenBox.Top;
+            float bottom = MovedInnenBox.Bottom;
+            if (Text.Visible())
+                bottom = Text.OuterBox.Top + box.Location.Y;
+            else if (Info.Visible())
+                bottom = Info.Kompositum.Top;
+
+            PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
+
+            if (HintergrundDarstellung.Existiert)
+            {
+                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
+            }
+            if (BildDarstellung.Existiert)
+                con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
+
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.draw(con);
+
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
+        }
+        public override void draw(DrawContext con)
+        {
+            if (Karte.HintergrundDarstellung.AktionsKarte)
+                drawAction(con);
+            else
+                drawNormal(con);
         }
     }
 }

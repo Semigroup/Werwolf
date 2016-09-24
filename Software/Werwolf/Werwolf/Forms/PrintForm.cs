@@ -76,7 +76,9 @@ namespace Werwolf.Forms
                 ppmBox1.GetValue(),
                 checkBox1.Checked,
                 Mode,
-                checkBox2.Checked);
+                checkBox2.Checked,
+                checkBox4.Checked,
+                checkBox3.Checked);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
         }
@@ -104,63 +106,8 @@ namespace Werwolf.Forms
         }
         private void Printer_DoWork(object sender, DoWorkEventArgs e)
         {
-            int numberOfCards = Deck.TotalCount();
-            int numberOfJobs = (int)Math.Ceiling(numberOfCards / 9f);
-            int solvedJobs = 0;
-            if (Job.MyMode == Printing.Job.RuckBildMode.Einzeln)
-                numberOfJobs *= 2;
-
-            progressBar1.Invoke((MethodInvoker)delegate
-            {
-                progressBar1.Value = 0;
-                progressBar1.Maximum = numberOfJobs;
-            });
             Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = false; });
-
-            string JobPath = Path.Combine(Path.GetDirectoryName(TargetPath), Job.Schreibname + ".job.xml");
-            using (XmlWriter writer = XmlWriter.Create(JobPath))
-            {
-                writer.WriteStartDocument();
-                Job.Write(writer);
-                writer.WriteEndDocument();
-                writer.Close();
-            }
-
-            Queue<int> jobs = new Queue<int>();
-            for (int i = 0; i < numberOfJobs; i++)
-                jobs.Enqueue(i);
-
-            int maxWorkers = FastMath.Min(Settings.MaximumNumberOfCores, numberOfJobs, Environment.ProcessorCount);
-            Process[] workers = new Process[maxWorkers];
-
-            ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = Path.Combine(Directory.GetCurrentDirectory(), "WolfSlave.exe");
-            psi.Arguments = '"' + Universe.Pfad + "\" \"" + JobPath + "\"";
-
-            while (solvedJobs < numberOfJobs)
-            {
-                for (int i = 0; i < maxWorkers; i++)
-                    if (workers[i] == null && jobs.Count > 0)
-                        workers[i] = Process.Start(psi.FileName, psi.Arguments + " " + jobs.Dequeue());
-                    else if (workers[i] != null && workers[i].HasExited)
-                    {
-                        solvedJobs++;
-                        workers[i].Close();
-                        workers[i] = null;
-                        progressBar1.Invoke((MethodInvoker)delegate { progressBar1.PerformStep(); });
-                    }
-                Thread.Sleep(500);
-            }
-
-            string[] files = new string[numberOfJobs];
-            for (int i = 0; i < numberOfJobs; i++)
-                files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + "." + i + ".pdf");
-
-            PDFHelper.Concat(Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname), files);
-            foreach (var item in files)
-                File.Delete(item);
-            File.Delete(JobPath);
-
+            Job.DistributedPrint(TargetPath, progressBar1);
             Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = true; });
         }
         protected override void OnClosing(CancelEventArgs e)

@@ -47,6 +47,8 @@
             this.colorBox1 = new Assistment.form.ColorBox();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -145,7 +147,7 @@
             // 
             // Drucken
             // 
-            this.Drucken.Location = new System.Drawing.Point(1035, 420);
+            this.Drucken.Location = new System.Drawing.Point(1035, 469);
             this.Drucken.Name = "Drucken";
             this.Drucken.Size = new System.Drawing.Size(152, 43);
             this.Drucken.TabIndex = 11;
@@ -159,7 +161,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(852, 391);
+            this.progressBar1.Location = new System.Drawing.Point(852, 440);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(335, 23);
             this.progressBar1.Step = 1;
@@ -168,7 +170,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(853, 260);
+            this.checkBox1.Location = new System.Drawing.Point(852, 309);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(176, 21);
             this.checkBox1.TabIndex = 17;
@@ -182,7 +184,7 @@
             // 
             // ppmBox1
             // 
-            this.ppmBox1.Location = new System.Drawing.Point(852, 314);
+            this.ppmBox1.Location = new System.Drawing.Point(852, 363);
             this.ppmBox1.Name = "ppmBox1";
             this.ppmBox1.Ppm = 11.81102F;
             this.ppmBox1.PpmMaximum = 1000F;
@@ -208,7 +210,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(853, 420);
+            this.button1.Location = new System.Drawing.Point(853, 469);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(176, 43);
             this.button1.TabIndex = 18;
@@ -219,18 +221,40 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(852, 287);
+            this.checkBox2.Location = new System.Drawing.Point(852, 336);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(91, 21);
             this.checkBox2.TabIndex = 19;
             this.checkBox2.Text = "FixedFont";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(852, 282);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(191, 21);
+            this.checkBox3.TabIndex = 20;
+            this.checkBox3.Text = "Trennlinie auf Rückseite?";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(852, 255);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(202, 21);
+            this.checkBox4.TabIndex = 21;
+            this.checkBox4.Text = "Trennlinie auf Vorderseite?";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 814);
+            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox1);
@@ -277,5 +301,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

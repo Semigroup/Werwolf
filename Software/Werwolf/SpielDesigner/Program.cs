@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 
+using Werwolf.Inhalt;
 using Werwolf.Forms;
 
 namespace SpielDesigner
@@ -18,7 +19,7 @@ namespace SpielDesigner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartForm());
+            Application.Run(new StartForm<Universe>());
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Werwolf.Forms
 {
     public class ElementAuswahlForm<T> : Form where T : XmlElement, new()
     {
-        private Karte Karte;
+        protected Karte Karte;
         public T Element { get; private set; }
         private ElementMenge<T> ElementMenge;
 
@@ -39,8 +39,8 @@ namespace Werwolf.Forms
 
         public bool BearbeitungErlaubt { get; set; }
 
-        public ElementAuswahlForm(ElementMenge<T> ElementMenge,T Element)
-            : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge,Element)
+        public ElementAuswahlForm(ElementMenge<T> ElementMenge, T Element)
+            : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge, Element)
         {
 
         }
@@ -221,13 +221,13 @@ namespace Werwolf.Forms
                 RefreshThread.RunWorkerAsync();
         }
 
-        private PreForm<T> GetPreform(T Element)
+        protected PreForm<T> GetPreform(T Element)
         {
             PreForm<T> pf = GetPreform();
             pf.Element = Element;
             return pf;
         }
-        private PreForm<T> GetPreform()
+        protected virtual PreForm<T> GetPreform()
         {
             switch (typeof(T).Name)
             {

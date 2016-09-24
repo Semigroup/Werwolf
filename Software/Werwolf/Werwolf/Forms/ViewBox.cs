@@ -105,14 +105,20 @@ namespace Werwolf.Forms
     {
         protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
         {
-            return new StandardKarte(Karte, Ppm);
+            if (Karte == null)
+                return new StandardKarte(Karte, Ppm);
+            else
+                return Karte.GetVorderSeite(Ppm);
         }
     }
     public class ViewRuckseitenBild : ViewBox
     {
         protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
         {
-            return new StandardRuckseite(Karte, Ppm);
+            if (Karte == null)
+                return new StandardRuckseite(Karte, Ppm);
+            else
+                return Karte.GetRuckSeite(Ppm);
         }
     }
     public class ViewDeck : ViewBox

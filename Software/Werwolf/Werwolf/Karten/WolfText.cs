@@ -70,16 +70,12 @@ namespace Werwolf.Karten
             InnerBox = OuterBox.Inner(Rand.add(BalkenDicke, BalkenDicke).mul(Faktor));
             TextBox = InnerBox.Inner(InnenRadius * Faktor, InnenRadius * Faktor);
 
-            Texts = new DrawBox[Aufgaben.Anzahl];
-            int i = 0;
-            foreach (var item in Aufgaben.ProduceTexts(TextDarstellung.FontMeasurer))
-            {
-                Texts[i] = item; // new FixedBox(TextBox.Size, true, false, item);
-                Texts[i++].setup(TextBox);
-            }
+            Texts = Aufgaben.ProduceTexts(TextDarstellung.FontMeasurer);
+            foreach (var item in Texts)
+                item.setup(TextBox);
 
             float Bottom = TextBox.Bottom;
-            for (i = Texts.Length - 1; i >= 0; i--)
+            for (int i = Texts.Length - 1; i >= 0; i--)
             {
                 Texts[i].Bottom = Bottom;
                 Bottom = Texts[i].Top - Faktor * (BalkenDicke + 2 * InnenRadius);

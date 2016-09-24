@@ -29,6 +29,8 @@ namespace Werwolf.Printing
         public Color TrennlinienFarbe { get; set; }
         public bool Zwischenplatz { get; set; }
         public bool Swapped { get; set; }
+        public bool TrennlinieVorne { get; set; }
+        public bool TrennlinieHinten { get; set; }
 
         private List<DrawBox> Karten = new List<DrawBox>();
 
@@ -44,6 +46,8 @@ namespace Werwolf.Printing
         {
             this.Zwischenplatz = Job.Zwischenplatz;
             this.TrennlinienFarbe = Job.TrennlinienFarbe;
+            this.TrennlinieVorne = Job.TrennlinieVorne;
+            this.TrennlinieHinten = Job.TrennlinieHinten;
         }
 
         public override void update()
@@ -111,7 +115,7 @@ namespace Werwolf.Printing
             foreach (var item in Karten)
             {
                 item.draw(con);
-                if (TrennlinienFarbe.A > 0)
+                if ((TrennlinieVorne && !Swapped) || (TrennlinieHinten && Swapped))
                     con.drawRectangle(new Pen(TrennlinienFarbe, 0.01f), item.box);
             }
         }

@@ -103,6 +103,7 @@ namespace Werwolf.Inhalt
     }
     public class HintergrundDarstellung : Darstellung
     {
+        public bool AktionsKarte { get; set; }
         public bool RundeEcken { get; set; }
         /// <summary>
         /// Größe in Millimeter
@@ -124,6 +125,7 @@ namespace Werwolf.Inhalt
         {
             base.Init(Universe);
             RundeEcken = true;
+            AktionsKarte = false;
             Size = new SizeF(63, 89.1f);
             Farbe = Color.White;
             Rand = new SizeF(3, 3);
@@ -134,12 +136,14 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             Size = Loader.XmlReader.getSizeF("Size");
             RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
+            AktionsKarte = Loader.XmlReader.getBoolean("AktionsKarte");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
             XmlWriter.writeSize("Size", Size);
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
+            XmlWriter.writeBoolean("AktionsKarte", AktionsKarte);
         }
 
         public void MakeRandBild(float ppm)
@@ -224,6 +228,7 @@ namespace Werwolf.Inhalt
             hg.RandBild = RandBild;
             hg.LastRand = LastRand;
             hg.LastSize = LastSize;
+            hg.AktionsKarte = AktionsKarte;
         }
     }
     public class TitelDarstellung : Darstellung

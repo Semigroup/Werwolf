@@ -15,10 +15,10 @@ using Werwolf.Inhalt;
 
 namespace Werwolf.Forms
 {
-    public class StartForm : Form
+    public class StartForm<U> : Form where U : Universe, new()
     {
-        private Universe universe;
-        public Universe Universe
+        private U universe;
+        public U Universe
         {
             get { return universe; }
             private set { SetUniverse(value); }
@@ -31,7 +31,7 @@ namespace Werwolf.Forms
             "Hintergrundbilder Sammeln",
             "Textbilder Sammeln",
             "Rückseitenbilder Sammeln");
-        private ButtonReihe ElementMengenButtons = new ButtonReihe(false,
+        protected ButtonReihe ElementMengenButtons = new ButtonReihe(false,
             "Gesinnungen Bearbeiten",
             "Fraktionen Bearbeiten",
             "Karten Bearbeiten",
@@ -53,7 +53,7 @@ namespace Werwolf.Forms
         private TextBox textBox1 = new TextBox();
         private Button SettingsButton = new Button();
         private Button PrintDeck = new Button();
-        private ViewKarte ViewKarte;
+        protected ViewKarte ViewKarte;
 
         private OpenFileDialog OpenFileDialog = new OpenFileDialog();
 
@@ -253,7 +253,7 @@ namespace Werwolf.Forms
                 }
             }
         }
-        private void ElementMengenButtons_ButtonClick(object sender, EventArgs e)
+        protected virtual void ElementMengenButtons_ButtonClick(object sender, EventArgs e)
         {
             switch (ElementMengenButtons.Message)
             {
@@ -281,7 +281,9 @@ namespace Werwolf.Forms
 
         private void SteuerBox_LadenClicked(object sender, EventArgs e)
         {
-            Universe = new Universe(SteuerBox.Speicherort);
+            U u = new U();
+            u.Open(SteuerBox.Speicherort);
+            Universe = u;
         }
         private void SteuerBox_SpeichernClicked(object sender, EventArgs e)
         {
@@ -294,22 +296,28 @@ namespace Werwolf.Forms
         }
         private void SteuerBox_NeuClicked(object sender, EventArgs e)
         {
-            Universe = new Universe(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
+            U u = new U();//new Universe(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
+            u.Open(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
+            Universe = u;
             PrintDeck.Enabled = false;
             SteuerBox.Speicherort = null;
         }
 
-        private void SetUniverse(Universe Universe)
+        private void SetUniverse(U Universe)
         {
             this.universe = Universe;
             this.Text = this.textBox1.Text = universe.Schreibname;
+            BuildViewKarte();
+            Changed(false);
+        }
+        protected virtual void BuildViewKarte()
+        {
             if (ViewKarte == null)
             {
                 ViewKarte = new ViewKarte();
                 Controls.Add(ViewKarte);
             }
             ViewKarte.Karte = Universe.Karten.Standard;
-            Changed(false);
         }
 
         protected override void OnSizeChanged(EventArgs e)
@@ -341,7 +349,7 @@ namespace Werwolf.Forms
                 SteuerBox.Speicherort = Path.Combine(Path.GetDirectoryName(SteuerBox.Speicherort), textBox1.Text + ".xml");
             Changed(true);
         }
-        private void Changed(bool changed)
+        protected void Changed(bool changed)
         {
             ViewKarte.OnKarteChanged();
             SteuerBox.SpeichernNotwendig = changed;

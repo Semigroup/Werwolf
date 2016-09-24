@@ -40,6 +40,11 @@ namespace Werwolf.Forms
             BuildWertBox("Hintergrund Darstellung", Universe.HintergrundDarstellungen);
             BuildWertBox("Info Darstellung", Universe.InfoDarstellungen);
 
+            WerteListe.AddFloatBox(0, "Initiative");
+            WerteListe.AddPointBox(new Point(), "Reichweite");
+            WerteListe.AddIntBox(0, "Felder");
+            WerteListe.AddIntBox(0, "Störung");
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -63,6 +68,11 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Hintergrund Darstellung", element.HintergrundDarstellung);
             WerteListe.SetValue("Info Darstellung", element.InfoDarstellung);
 
+            WerteListe.SetValue("Initiative", element.Initiative);
+            WerteListe.SetValue("Reichweite", new Point(element.ReichweiteMin, element.ReichweiteMax));
+            WerteListe.SetValue("Felder", element.Felder);
+            WerteListe.SetValue("Störung", element.Storung);
+
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -81,6 +91,13 @@ namespace Werwolf.Forms
             element.TextDarstellung = WerteListe.GetValue<TextDarstellung>("Text Darstellung");
             element.HintergrundDarstellung = WerteListe.GetValue<HintergrundDarstellung>("Hintergrund Darstellung");
             element.InfoDarstellung = WerteListe.GetValue<InfoDarstellung>("Info Darstellung");
+
+            Point r = WerteListe.GetValue<Point>("Reichweite");
+            element.ReichweiteMin = r.X;
+            element.ReichweiteMax = r.Y;
+            element.Initiative = WerteListe.GetValue<float>("Initiative");
+            element.Felder = WerteListe.GetValue<int>("Felder");
+            element.Storung = WerteListe.GetValue<int>("Störung");
         }
     }
 }
