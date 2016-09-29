@@ -49,7 +49,7 @@ namespace Werwolf.Inhalt
                 //if (FilePath.Length >= 10 && FilePath.Substring(0, 10).Equals("Ressourcen"))
                 //    return "";
                 //else
-                    return TotalFilePath;
+                return TotalFilePath;
             }
         }
 
@@ -91,7 +91,7 @@ namespace Werwolf.Inhalt
         }
 
         public Bild(string XmlName)
-            : base(XmlName)
+            : base(XmlName, false)
         {
         }
 
@@ -170,25 +170,27 @@ namespace Werwolf.Inhalt
             return img;
         }
 
-        public virtual void Lokalisieren(bool jpg)
+        public virtual void Lokalisieren(bool jpg, string destinyDirectory)
         {
             string source = TotalFilePath;
             if (File.Exists(source))
             {
                 string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
                 string filePath = "Bilder/" + XmlName + "er/" + Name + extension;
-                string destiny = Path.Combine(Universe.DirectoryName, filePath);
+                string destiny = Path.Combine(destinyDirectory, filePath);
                 try
                 {
-                    this.FilePath = filePath;
                     File.Copy(source, destiny, true);
+                    this.FilePath = filePath;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                 }
             }
             else
+            {
                 this.FilePath = "";
+            }
         }
 
         public override void AdaptToCard(Karte Karte)

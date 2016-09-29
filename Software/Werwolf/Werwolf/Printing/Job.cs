@@ -51,7 +51,7 @@ namespace Werwolf.Printing
             }
         }
         public Job()
-            : base("Job")
+            : base("Job", true)
         {
         }
         public void Init(Deck Deck, Color HintergrundFarbe, Color TrennlinienFarbe,

@@ -17,7 +17,7 @@ namespace Werwolf.Inhalt
         public RuckseitenBild RuckseitenBild { get; set; }
 
         public Fraktion()
-            : base("Fraktion")
+            : base("Fraktion", true)
         {
         }
 

@@ -48,12 +48,12 @@ namespace Werwolf.Karten
             RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
-            con.DrawCenteredImage(Karte.Fraktion.RuckseitenBild, MovedAussenBoxCenter, MovedInnenBox);
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
             {
                 HintergrundDarstellung.MakeRandBild(ppm);
                 con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
+            con.DrawCenteredImage(Karte.Fraktion.RuckseitenBild, MovedAussenBoxCenter, MovedInnenBox);
         }
     }
 }

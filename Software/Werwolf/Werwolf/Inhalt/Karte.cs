@@ -41,7 +41,7 @@ namespace Werwolf.Inhalt
         public int Storung { get; set; }
 
         public Karte()
-            : base("Karte")
+            : base("Karte", true)
         {
 
         }

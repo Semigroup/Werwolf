@@ -41,7 +41,7 @@ namespace Werwolf.Inhalt
         public xFont FontMeasurer { get; private set; }
 
         public Darstellung(string XmlName)
-            : base(XmlName)
+            : base(XmlName, false)
         {
         }
         public override void Init(Universe Universe)
@@ -178,7 +178,7 @@ namespace Werwolf.Inhalt
                 //g.Clip = clip;
                 g.FillPolygon(RandFarbe.ToBrush(), y.getPolygon((int)(100 * y.L), 0, 1));
                 g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
-                g.FillRectangle(Color.FromArgb(1, 255, 255, 255).ToBrush(), innen); //Color.FromArgb(0)
+                //g.FillRectangle(Color.FromArgb(0, 255, 255, 255).ToBrush(), innen); //Color.FromArgb(0)
                 //g.FillRectangle(Color.FromArgb(0, 0, 0, 0).ToBrush(), innen); //Color.FromArgb(0)
             }
         }

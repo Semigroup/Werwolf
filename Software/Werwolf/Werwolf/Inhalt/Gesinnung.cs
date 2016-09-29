@@ -11,7 +11,7 @@ namespace Werwolf.Inhalt
         public Aufgabe Aufgabe { get; set; }
 
         public Gesinnung()
-            : base("Gesinnung")
+            : base("Gesinnung", true)
         {
             Aufgabe = new Aufgabe();
         }

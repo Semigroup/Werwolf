@@ -17,7 +17,7 @@ namespace Werwolf.Inhalt
         public SortedDictionary<Karte, int> Karten { get; private set; }
 
         public Deck()
-            : base("Deck")
+            : base("Deck", true)
         {
             Karten = new SortedDictionary<Karte, int>();
         }

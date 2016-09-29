@@ -14,10 +14,12 @@ namespace Werwolf.Inhalt
         public string Schreibname { get; set; }
         public Universe Universe { get; private set; }
         public bool Unzerstorbar { get; set; }
+        public bool Deep { get; private set; }
 
-        public XmlElement(string XmlName)
+        public XmlElement(string XmlName, bool Deep)
         {
             this.XmlName = XmlName;
+            this.Deep = Deep;
         }
 
         public virtual void Init(Universe Universe)

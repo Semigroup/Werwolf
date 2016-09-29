@@ -71,7 +71,7 @@ namespace Werwolf.Forms
         {
             if (element == null || UpdatingWerteListe)
                 return;
-            element.Schreibname = WerteListe.GetValue<string>("Name");
+            element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
             string s = WerteListe.GetValue<string>("Datei");
             element.FilePath = (s == null) ? "" : s;
             element.Artist = WerteListe.GetValue<string>("Artist");

@@ -11,7 +11,7 @@ namespace Werwolf.Inhalt
     public abstract class Menge : XmlElement
     {
         public Menge(string XmlName)
-            : base(XmlName)
+            : base(XmlName, true)
         {
 
         }

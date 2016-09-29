@@ -289,9 +289,8 @@ namespace Werwolf.Forms
         {
             Changed(false);
             Universe.Rescue();
-            Universe.Root(SteuerBox.Speicherort);
             if (checkBox1.Checked)
-                Universe.Lokalisieren(checkBox2.Checked);
+                Universe.Lokalisieren(checkBox2.Checked, Path.GetDirectoryName(SteuerBox.Speicherort));
             Universe.Save(SteuerBox.Speicherort);
         }
         private void SteuerBox_NeuClicked(object sender, EventArgs e)

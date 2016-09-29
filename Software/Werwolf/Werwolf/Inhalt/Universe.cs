@@ -40,7 +40,7 @@ namespace Werwolf.Inhalt
         public string Pfad { get; set; }
 
         public Universe()
-            : base("Universe")
+            : base("Universe", true)
         {
             HintergrundDarstellungen = new ElementMenge<HintergrundDarstellung>("Hintergrunddarstellungen", this);
             TitelDarstellungen = new ElementMenge<TitelDarstellung>("Titeldarstellungen", this);
@@ -128,27 +128,27 @@ namespace Werwolf.Inhalt
                 writer.Close();
             }
         }
-        public void Lokalisieren(bool jpg)
+        public void Lokalisieren(bool jpg, string destinyDirectory)
         {
             string[] bilder = { "HauptBilder", "HintergrundBilder", "RuckseitenBilder", "TextBilder" };
             foreach (var item in bilder)
             {
-                string pfad = Path.Combine(DirectoryName, "Bilder", item);
+                string pfad = Path.Combine(destinyDirectory, "Bilder", item);
                 if (!Directory.Exists(pfad))
                     Directory.CreateDirectory(pfad);
             }
             foreach (var item in HauptBilder.Values)
-                item.Lokalisieren(false);
+                item.Lokalisieren(false, destinyDirectory);
             foreach (var item in HintergrundBilder.Values)
-                item.Lokalisieren(jpg);
+                item.Lokalisieren(jpg, destinyDirectory);
             foreach (var item in RuckseitenBilder.Values)
-                item.Lokalisieren(jpg);
+                item.Lokalisieren(jpg, destinyDirectory);
             foreach (var item in TextBilder.Values)
-                item.Lokalisieren(false);
+                item.Lokalisieren(false, destinyDirectory);
         }
         public override void Rescue()
         {
-            foreach (var item in new Menge[]{ Decks, Karten, Fraktionen, Gesinnungen })
+            foreach (var item in new Menge[] { Decks, Karten, Fraktionen, Gesinnungen })
                 item.Rescue();
         }
 

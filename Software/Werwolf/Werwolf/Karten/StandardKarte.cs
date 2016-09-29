@@ -120,6 +120,11 @@ namespace Werwolf.Karten
 
             PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
 
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
             if (HintergrundDarstellung.Existiert)
             {
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
@@ -131,12 +136,6 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
-
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
         }
         public void drawAction(DrawContext con)
         {
@@ -153,6 +152,11 @@ namespace Werwolf.Karten
 
             PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
 
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
             if (HintergrundDarstellung.Existiert)
             {
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
@@ -164,12 +168,6 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
-
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
         }
         public override void draw(DrawContext con)
         {

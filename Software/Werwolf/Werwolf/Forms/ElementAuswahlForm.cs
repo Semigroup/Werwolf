@@ -186,7 +186,13 @@ namespace Werwolf.Forms
                 ElementMenge.Change(b.Element.Name, pf.Element);
                 Auswahlen(b.Element);
             }
-            StartRefreshing();
+            if (b.Element.Deep)
+                StartRefreshing();
+            else
+            {
+                b.Dirty = true;
+                b.Refresh();
+            }
         }
         private void Klonen(T element)
         {
