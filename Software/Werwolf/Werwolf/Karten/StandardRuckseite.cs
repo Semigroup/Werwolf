@@ -53,6 +53,7 @@ namespace Werwolf.Karten
                 HintergrundDarstellung.MakeRandBild(ppm);
                 con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
+            con.fillRectangle(HintergrundDarstellung.RuckseitenFarbe.ToBrush(), MovedInnenBox);
             con.DrawCenteredImage(Karte.Fraktion.RuckseitenBild, MovedAussenBoxCenter, MovedInnenBox);
         }
     }

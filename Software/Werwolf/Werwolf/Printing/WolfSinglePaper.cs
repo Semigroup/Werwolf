@@ -116,7 +116,7 @@ namespace Werwolf.Printing
             {
                 item.draw(con);
                 if ((TrennlinieVorne && !Swapped) || (TrennlinieHinten && Swapped))
-                    con.drawRectangle(new Pen(TrennlinienFarbe, 0.01f), item.box);
+                    con.drawRectangle(new Pen(TrennlinienFarbe, 0.35f), item.box);
             }
         }
     }

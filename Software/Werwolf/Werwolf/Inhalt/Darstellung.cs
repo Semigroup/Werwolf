@@ -109,6 +109,7 @@ namespace Werwolf.Inhalt
         /// Größe in Millimeter
         /// </summary>
         public SizeF Size { get; set; }
+        public Color RuckseitenFarbe { get; set; }
 
         public Image RandBild { get; private set; }
         private Size LastSize = new Size();
@@ -129,6 +130,7 @@ namespace Werwolf.Inhalt
             Size = new SizeF(63, 89.1f);
             Farbe = Color.White;
             Rand = new SizeF(3, 3);
+            RuckseitenFarbe = Color.White;
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -137,6 +139,7 @@ namespace Werwolf.Inhalt
             Size = Loader.XmlReader.getSizeF("Size");
             RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
             AktionsKarte = Loader.XmlReader.getBoolean("AktionsKarte");
+            RuckseitenFarbe = Loader.XmlReader.getColorHexARGB("RuckseitenFarbe");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -144,6 +147,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeSize("Size", Size);
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
             XmlWriter.writeBoolean("AktionsKarte", AktionsKarte);
+            XmlWriter.writeColorHexARGB("RuckseitenFarbe", RuckseitenFarbe);
         }
 
         public void MakeRandBild(float ppm)
@@ -229,6 +233,7 @@ namespace Werwolf.Inhalt
             hg.LastRand = LastRand;
             hg.LastSize = LastSize;
             hg.AktionsKarte = AktionsKarte;
+            hg.RuckseitenFarbe = RuckseitenFarbe;
         }
     }
     public class TitelDarstellung : Darstellung

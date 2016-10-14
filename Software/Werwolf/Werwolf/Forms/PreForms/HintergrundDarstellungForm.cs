@@ -18,7 +18,7 @@ namespace Werwolf.Forms
 {
     public class HintergrundDarstellungForm : DarstellungForm<HintergrundDarstellung>
     {
-        public HintergrundDarstellungForm( Karte Karte)
+        public HintergrundDarstellungForm(Karte Karte)
             : base(Karte)
         {
 
@@ -30,8 +30,11 @@ namespace Werwolf.Forms
 
             UpdatingWerteListe = true;
             WerteListe.AddChainedSizeFBox(new SizeF(), "Randgröße in mm", true, Settings.MaximumKarteSize);
+
             WerteListe.AddColorBox(Color.Black, "Randfarbe");
             WerteListe.AddColorBox(Color.White, "Hintergrundfarbe");
+            WerteListe.AddColorBox(Color.White, "Farbe Rückseite");
+
             WerteListe.AddBoolBox(false, "Hat Runde Ecken?");
             WerteListe.AddBoolBox(false, "Aktionskarte");
             WerteListe.AddChainedSizeFBox(new SizeF(), "Größe in mm", true, Settings.MaximumKarteSize);
@@ -43,8 +46,11 @@ namespace Werwolf.Forms
             base.UpdateWerteListe();
             UpdatingWerteListe = true;
             WerteListe.SetValue("Randgröße in mm", element.Rand);
+
             WerteListe.SetValue("Randfarbe", element.RandFarbe);
             WerteListe.SetValue("Hintergrundfarbe", element.Farbe);
+            WerteListe.SetValue("Farbe Rückseite", element.RuckseitenFarbe);
+
             WerteListe.SetValue("Hat Runde Ecken?", element.RundeEcken);
             WerteListe.SetValue("Aktionskarte", element.AktionsKarte);
             WerteListe.SetValue("Größe in mm", element.Size);
@@ -56,8 +62,11 @@ namespace Werwolf.Forms
                 return;
             base.UpdateElement();
             element.Rand = WerteListe.GetValue<SizeF>("Randgröße in mm");
+
             element.RandFarbe = WerteListe.GetValue<Color>("Randfarbe");
             element.Farbe = WerteListe.GetValue<Color>("Hintergrundfarbe");
+            element.RuckseitenFarbe = WerteListe.GetValue<Color>("Farbe Rückseite");
+
             element.RundeEcken = WerteListe.GetValue<bool>("Hat Runde Ecken?");
             element.AktionsKarte = WerteListe.GetValue<bool>("Aktionskarte");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
