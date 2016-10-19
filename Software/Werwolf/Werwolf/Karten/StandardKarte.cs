@@ -26,10 +26,16 @@ namespace Werwolf.Karten
             {
                 if (Karte != null)
                 {
-                    if (Karte.HintergrundDarstellung.AktionsKarte)
-                        return new WolfBox[] { Header, Text };
-                    else
-                        return new WolfBox[] { Titel, Text, Info };
+                    switch (Karte.HintergrundDarstellung.Modus)
+                    {
+                        case HintergrundDarstellung.KartenModus.Werwolfkarte:
+                            return new WolfBox[] { Titel, Text, Info };
+                        case HintergrundDarstellung.KartenModus.AktionsKarte:
+                            return new WolfBox[] { Header, Text };
+                        case HintergrundDarstellung.KartenModus.WondersKarte:
+                        default:
+                            throw new NotImplementedException();
+                    }
                 }
                 else
                     return new WolfBox[] { };
@@ -102,7 +108,8 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.setup(box);
 
-            if (Text.Visible() && Info.Visible() && !HintergrundDarstellung.AktionsKarte)
+            if (Text.Visible() && Info.Visible()
+                && (HintergrundDarstellung.Modus == Inhalt.HintergrundDarstellung.KartenModus.Werwolfkarte))
                 Text.KorrigierUmInfo(Info.Kompositum.box.Height);
         }
         public void drawNormal(DrawContext con)
@@ -171,10 +178,18 @@ namespace Werwolf.Karten
         }
         public override void draw(DrawContext con)
         {
-            if (Karte.HintergrundDarstellung.AktionsKarte)
-                drawAction(con);
-            else
-                drawNormal(con);
+            switch (Karte.HintergrundDarstellung.Modus)
+            {
+                case HintergrundDarstellung.KartenModus.Werwolfkarte:
+                    drawNormal(con);
+                    break;
+                case HintergrundDarstellung.KartenModus.AktionsKarte:
+                    drawAction(con);
+                    break;
+                case HintergrundDarstellung.KartenModus.WondersKarte:
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }

@@ -103,7 +103,14 @@ namespace Werwolf.Inhalt
     }
     public class HintergrundDarstellung : Darstellung
     {
-        public bool AktionsKarte { get; set; }
+        public enum KartenModus
+        {
+            Werwolfkarte,
+            AktionsKarte,
+            WondersKarte
+        }
+
+        public KartenModus Modus { get; set; }
         public bool RundeEcken { get; set; }
         /// <summary>
         /// Größe in Millimeter
@@ -126,7 +133,7 @@ namespace Werwolf.Inhalt
         {
             base.Init(Universe);
             RundeEcken = true;
-            AktionsKarte = false;
+            Modus = KartenModus.Werwolfkarte;
             Size = new SizeF(63, 89.1f);
             Farbe = Color.White;
             Rand = new SizeF(3, 3);
@@ -138,7 +145,7 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             Size = Loader.XmlReader.getSizeF("Size");
             RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
-            AktionsKarte = Loader.XmlReader.getBoolean("AktionsKarte");
+            Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
             RuckseitenFarbe = Loader.XmlReader.getColorHexARGB("RuckseitenFarbe");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
@@ -146,7 +153,7 @@ namespace Werwolf.Inhalt
             base.WriteIntern(XmlWriter);
             XmlWriter.writeSize("Size", Size);
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
-            XmlWriter.writeBoolean("AktionsKarte", AktionsKarte);
+            XmlWriter.writeEnum<KartenModus>("Modus", Modus);
             XmlWriter.writeColorHexARGB("RuckseitenFarbe", RuckseitenFarbe);
         }
 
@@ -232,7 +239,7 @@ namespace Werwolf.Inhalt
             hg.RandBild = RandBild;
             hg.LastRand = LastRand;
             hg.LastSize = LastSize;
-            hg.AktionsKarte = AktionsKarte;
+            hg.Modus = Modus;
             hg.RuckseitenFarbe = RuckseitenFarbe;
         }
     }

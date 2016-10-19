@@ -30,7 +30,7 @@ namespace WolfSlave
 
         static void Main(string[] args)
         {
-            HideConsole();
+            //HideConsole();
 
             string UniversePath = args[0];
             string JobPath = args[1];

@@ -49,7 +49,6 @@ namespace Werwolf.Forms
             WerteListe.Setup();
         }
 
-
         public override void UpdateWerteListe()
         {
             base.UpdateWerteListe();
@@ -62,7 +61,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Gesinnung", element.Gesinnung);
             WerteListe.SetValue("Text", element.Aufgaben.ToString());
 
-           // WerteListe.SetValue("Bild Darstellung", element.BildDarstellung);
+            // WerteListe.SetValue("Bild Darstellung", element.BildDarstellung);
             WerteListe.SetValue("Titel Darstellung", element.TitelDarstellung);
             WerteListe.SetValue("Text Darstellung", element.TextDarstellung);
             WerteListe.SetValue("Hintergrund Darstellung", element.HintergrundDarstellung);
@@ -74,6 +73,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Störung", element.Storung);
 
             UpdatingWerteListe = false;
+            SetVisibles();
         }
         public override void UpdateElement()
         {
@@ -98,6 +98,15 @@ namespace Werwolf.Forms
             element.Initiative = WerteListe.GetValue<float>("Initiative");
             element.Felder = WerteListe.GetValue<int>("Felder");
             element.Storung = WerteListe.GetValue<int>("Störung");
+
+            SetVisibles();
+        }
+
+        public void SetVisibles()
+        {
+            WerteListe.ShowBox(
+              element.HintergrundDarstellung.Modus == HintergrundDarstellung.KartenModus.AktionsKarte,
+              "Initiative", "Reichweite", "Felder", "Störung");
         }
     }
 }
