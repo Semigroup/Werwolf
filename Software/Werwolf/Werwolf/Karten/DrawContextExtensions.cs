@@ -19,5 +19,9 @@ namespace Werwolf.Karten
         {
             Context.drawClippedImage(ClippedRegion, Bild.Image, Bild.Rectangle.move(Zentrum));
         }
+        public static void DrawCenteredImage(this DrawContext Context, Bild Bild, Image Image, PointF Zentrum, RectangleF ClippedRegion)
+        {
+            Context.drawClippedImage(ClippedRegion, Image, Bild.Rectangle.move(Zentrum));
+        }
     }
 }

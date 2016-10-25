@@ -19,6 +19,10 @@ namespace Werwolf.Karten
         public WolfTitel Titel { get; set; }
         public WolfText Text { get; set; }
         public WolfInfo Info { get; set; }
+        public WolfHauptBild HauptBild { get; set; }
+
+        public WonderBalken Balken { get; set; }
+        public WonderInfos WonderInfos { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -29,10 +33,11 @@ namespace Werwolf.Karten
                     switch (Karte.HintergrundDarstellung.Modus)
                     {
                         case HintergrundDarstellung.KartenModus.Werwolfkarte:
-                            return new WolfBox[] { Titel, Text, Info };
+                            return new WolfBox[] { HauptBild, Titel, Text, Info };
                         case HintergrundDarstellung.KartenModus.AktionsKarte:
-                            return new WolfBox[] { Header, Text };
+                            return new WolfBox[] { HauptBild, Header, Text };
                         case HintergrundDarstellung.KartenModus.WondersKarte:
+                            return new WolfBox[] { HauptBild, Balken, WonderInfos };
                         default:
                             throw new NotImplementedException();
                     }
@@ -66,6 +71,9 @@ namespace Werwolf.Karten
             Titel = new WolfTitel(Karte, ppm);
             Text = new WolfText(Karte, ppm);
             Info = new WolfInfo(Karte, ppm);
+            Balken = new WonderBalken(Karte, ppm);
+            WonderInfos = new WonderInfos(Karte, ppm);
+            HauptBild = new WolfHauptBild(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -118,6 +126,7 @@ namespace Werwolf.Karten
             RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
+
             float top = Titel.Visible() ? Titel.Titel.Bottom : MovedInnenBox.Top;
             float bottom = MovedInnenBox.Bottom;
             if (Text.Visible())
@@ -125,7 +134,11 @@ namespace Werwolf.Karten
             else if (Info.Visible())
                 bottom = Info.Kompositum.Top;
 
-            PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
+            HauptBild.CenterTop = top;
+            HauptBild.CenterBottom = bottom;
+            HauptBild.setup(HauptBild.box);
+
+            //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
 
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
             {
@@ -137,8 +150,8 @@ namespace Werwolf.Karten
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
-            if (BildDarstellung.Existiert)
-                con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
+            //if (BildDarstellung.Existiert)
+            //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
@@ -157,7 +170,11 @@ namespace Werwolf.Karten
             else if (Info.Visible())
                 bottom = Info.Kompositum.Top;
 
-            PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
+            HauptBild.CenterTop = top;
+            HauptBild.CenterBottom = bottom;
+            HauptBild.setup(HauptBild.box);
+
+            //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
 
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
             {
@@ -169,12 +186,38 @@ namespace Werwolf.Karten
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
-            if (BildDarstellung.Existiert)
-                con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
+            //if (BildDarstellung.Existiert)
+            //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
+        }
+        public void drawWonders(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            HauptBild.CenterTop = MovedInnenBox.Top;
+            HauptBild.CenterBottom = MovedInnenBox.Bottom;
+            if (HauptBild.Visible())
+                HauptBild.setup(HauptBild.box);
+
+            //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
+
+            con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);/////////////
+            //if (BildDarstellung.Existiert)
+            //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
+
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.draw(con);
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
         }
         public override void draw(DrawContext con)
         {
@@ -187,6 +230,8 @@ namespace Werwolf.Karten
                     drawAction(con);
                     break;
                 case HintergrundDarstellung.KartenModus.WondersKarte:
+                    drawWonders(con);
+                    break;
                 default:
                     throw new NotImplementedException();
             }

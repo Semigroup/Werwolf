@@ -40,6 +40,11 @@ namespace Werwolf.Inhalt
         public int Felder { get; set; }
         public int Storung { get; set; }
 
+        public Aufgabe Kosten { get; set; }
+        public Aufgabe Effekt { get; set; }
+        public string[] Basen { get; set; }
+        public string[] Entwicklungen { get; set; }
+
         public Karte()
             : base("Karte", true)
         {
@@ -87,6 +92,13 @@ namespace Werwolf.Inhalt
             ReichweiteMax = Loader.XmlReader.getInt("ReichweiteMax");
             Felder = Loader.XmlReader.getInt("Felder");
             Storung = Loader.XmlReader.getInt("Storung");
+
+            Kosten = Loader.GetAufgabe("Kosten");
+            Effekt = Loader.GetAufgabe("Effekt");
+            Basen = Loader.XmlReader.getString("Basen")
+                .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
+            Entwicklungen = Loader.XmlReader.getString("Entwicklungen")
+               .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -108,6 +120,11 @@ namespace Werwolf.Inhalt
             XmlWriter.writeInt("ReichweiteMax", ReichweiteMax);
             XmlWriter.writeInt("Felder", Felder);
             XmlWriter.writeInt("Storung", Storung);
+
+            XmlWriter.writeAttribute("Kosten", Kosten.ToString());
+            XmlWriter.writeAttribute("Effekt", Effekt.ToString());
+            XmlWriter.writeAttribute("Basen", Basen.SumText(";"));
+            XmlWriter.writeAttribute("Entwicklungen", Entwicklungen.SumText(";"));
         }
 
         public override void AdaptToCard(Karte Karte)

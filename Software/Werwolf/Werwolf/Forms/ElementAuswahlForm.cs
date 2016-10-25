@@ -186,7 +186,7 @@ namespace Werwolf.Forms
                 ElementMenge.Change(b.Element.Name, pf.Element);
                 Auswahlen(b.Element);
             }
-            if (b.Element.Deep)
+            if (b.Element.Deep && Settings.RefreshDirtyButtons)
                 StartRefreshing();
             else
             {

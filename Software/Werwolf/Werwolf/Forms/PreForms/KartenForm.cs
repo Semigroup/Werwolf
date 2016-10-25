@@ -34,7 +34,7 @@ namespace Werwolf.Forms
             BuildWertBox("Gesinnung", Universe.Gesinnungen);
             WerteListe.AddBigStringBox("", "Text");
 
-            //BuildWertBox("Bild Darstellung", Universe.BildDarstellungen);
+            BuildWertBox("Bild Darstellung", Universe.BildDarstellungen);
             BuildWertBox("Titel Darstellung", Universe.TitelDarstellungen);
             BuildWertBox("Text Darstellung", Universe.TextDarstellungen);
             BuildWertBox("Hintergrund Darstellung", Universe.HintergrundDarstellungen);
@@ -61,7 +61,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Gesinnung", element.Gesinnung);
             WerteListe.SetValue("Text", element.Aufgaben.ToString());
 
-            // WerteListe.SetValue("Bild Darstellung", element.BildDarstellung);
+            WerteListe.SetValue("Bild Darstellung", element.BildDarstellung);
             WerteListe.SetValue("Titel Darstellung", element.TitelDarstellung);
             WerteListe.SetValue("Text Darstellung", element.TextDarstellung);
             WerteListe.SetValue("Hintergrund Darstellung", element.HintergrundDarstellung);
@@ -86,7 +86,7 @@ namespace Werwolf.Forms
             element.Gesinnung = WerteListe.GetValue<Gesinnung>("Gesinnung");
             element.Aufgaben = new Aufgabe(WerteListe.GetValue<string>("Text"), Universe);
 
-            //element.BildDarstellung = WerteListe.GetValue<BildDarstellung>("Bild Darstellung");
+            element.BildDarstellung = WerteListe.GetValue<BildDarstellung>("Bild Darstellung");
             element.TitelDarstellung = WerteListe.GetValue<TitelDarstellung>("Titel Darstellung");
             element.TextDarstellung = WerteListe.GetValue<TextDarstellung>("Text Darstellung");
             element.HintergrundDarstellung = WerteListe.GetValue<HintergrundDarstellung>("Hintergrund Darstellung");

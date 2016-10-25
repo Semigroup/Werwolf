@@ -42,7 +42,7 @@ namespace Werwolf.Forms
            "Rückseitenbilder Bearbeiten",
            "Textbilder Bearbeiten");
         private ButtonReihe DarstellungenButtons = new ButtonReihe(false,
-            //"Bilddarstellungen Bearbeiten",
+            "Bilddarstellungen Bearbeiten",
            "Hintergrunddarstellungen Bearbeiten",
            "Textdarstellungen Bearbeiten",
            "Titeldarstellungen Bearbeiten",
@@ -107,7 +107,7 @@ namespace Werwolf.Forms
 
             DarstellungenButtons.ButtonClick += new EventHandler(DarstellungenButtons_ButtonClick);
             ToolTip.SetToolTip(DarstellungenButtons, "Ermöglicht es Darstellungen des Spiels bearbeiten zu können.");
-            BildMengenButtons.SetToolTip(//"Ermöglicht es Bilddarstellungen, diese entscheiden, ob für eine Karte ein Hauptbild angezeigt werden soll, zu bearbeiten.",
+            BildMengenButtons.SetToolTip("Ermöglicht es Bilddarstellungen, diese entscheiden, ob für eine Karte ein Hauptbild angezeigt werden soll, zu bearbeiten.",
               "Ermöglicht es Hintergrunddarstellungen, diese legen fest, wie groß eine Karte und ihr Rand ist, zu bearbeiten.",
               "Ermöglicht es Textdarstellungen, diese legen die Schriftart des Textblockes fest, zu bearbeiten.",
               "Ermöglicht es Titeldarstellungen, diese legen die Schriftart des Titels fest, zu bearbeiten.",
@@ -127,7 +127,7 @@ namespace Werwolf.Forms
             SettingsButton.Click += new EventHandler(SettingsButton_Click);
             Controls.Add(SettingsButton);
 
-            OpenFileDialog.Filter = "Bilder|*.jpg; *.jpg; *.png; *.bmp; *.gif; *.tiff; *.tif; *.wmf";
+            OpenFileDialog.Filter = "Bilder|*.jpg; *.jpeg; *.png; *.bmp; *.gif; *.tiff; *.tif; *.wmf";
             OpenFileDialog.Multiselect = true;
 
             this.ClientSize = new Size(1200, 800);

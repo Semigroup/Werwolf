@@ -48,6 +48,7 @@ namespace Werwolf.Inhalt
             }
         }
         public static Image NotFoundImage { get; set; }
+        public static bool RefreshDirtyButtons { get; set; }
 
         static Settings()
         {
@@ -68,6 +69,7 @@ namespace Werwolf.Inhalt
             errorImagePath = reader.getString("ErrorImagePath");
             notFoundImagePath = reader.getString("NotFoundImagePath");
             ViewPpm = reader.getFloat("ViewPpm");
+            RefreshDirtyButtons = reader.getBoolean("RefreshDirtyButtons");
 
             //using (FileStream fs = new FileStream(ErrorImagePath, FileMode.Open))
             using (Image Image = Image.FromFile(ErrorImagePath))// Image.FromStream(fs))

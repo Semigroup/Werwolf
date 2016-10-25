@@ -183,7 +183,7 @@ namespace Werwolf.Inhalt
                     File.Copy(source, destiny, true);
                     this.FilePath = filePath;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
             }
