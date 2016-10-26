@@ -24,7 +24,9 @@ namespace Werwolf.Karten
         private string LastText;
         private Font LastFont;
         private SizeF LastTitelRand;
+        private Size LastSize;
 
+        private Size Size;
         private Image BearbeitetesBild;
         //private float Abstand;
         private DrawBox DrawBox;
@@ -51,17 +53,25 @@ namespace Werwolf.Karten
         {
             this.box = AussenBox;
             this.box.Location = box.Location;
-            this.box.Size = FeldBild.Size.mul(Faktor);
-
-            RectangleF Rectangle = new RectangleF();
-            Rectangle.Size = FeldBild.Size.mul(Faktor).permut();
-            Rectangle.X -= Rectangle.Size.Width;
-            Rectangle = Rectangle.Inner(Karte.TitelDarstellung.Rand.mul(Faktor));
 
             this.DrawBox = new Text(Text, TitelDarstellung.FontMeasurer);
+            DrawBox.setup(FeldBild.Size.mul(Faktor).permut());
+
+            SizeF Size1 = FeldBild.Size.mul(Ppm);
+            SizeF Size2 = DrawBox.Size.mul(Ppm / Faktor).add(Res).permut();
+            Size = Size1.Max(Size2).ToSize();
+            //System.Windows.Forms.MessageBox.Show(LastSize+"" + FeldBild.Size.mul(Ppm));
+            this.box.Size = ((SizeF)Size).mul(Faktor / Ppm);
+
+            RectangleF Rectangle = new RectangleF();
+            Rectangle.Size = ((SizeF)Size).mul(Faktor / Ppm).permut();
+            //Rectangle.X -= Rectangle.Size.Width;
+            Rectangle = Rectangle.Inner(Karte.TitelDarstellung.Rand.mul(Faktor));
+
             FixedBox = new FixedBox(Rectangle.Size, DrawBox);
             FixedBox.Alignment = new SizeF(1, 0.5f);
             FixedBox.setup(Rectangle);
+            FixedBox.Move(-Size.Height * Faktor / Ppm, 0);
         }
         /// <summary>
         /// falls oben: linker, oberer Punkt wird gleich dem LotPunkt gesetzt
@@ -87,7 +97,9 @@ namespace Werwolf.Karten
                 && Text.Equals(LastText)
                 && FeldBild.FilePath.Equals(LastFilePath)
                 && FeldBild.Size.Equal(LastFeldSize)
-                && Karte.TitelDarstellung.Rand.Equal(LastTitelRand)))
+                && Karte.TitelDarstellung.Rand.Equal(LastTitelRand)
+                && Size == LastSize
+                ))
             {
                 this.LastPpm = Ppm;
                 this.LastFont = TitelDarstellung.Font;
@@ -95,20 +107,23 @@ namespace Werwolf.Karten
                 this.LastFeldSize = FeldBild.Size;
                 this.LastFilePath = FeldBild.FilePath;
                 this.LastTitelRand = Karte.TitelDarstellung.Rand;
+                this.LastSize = Size;
                 Bearbeite();
             }
             con.drawImage(BearbeitetesBild, box);
         }
         public void Bearbeite()
         {
-            BearbeitetesBild = new Bitmap((int)(FeldBild.Size.Width * Ppm), (int)(FeldBild.Size.Height * Ppm));
+            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, 0).mul(Ppm/Faktor);
+            Point P = new Point((int)Rest.Width, (int)Rest.Height);
+            BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {
+                g.Clear(Color.Red);
                 using (Image img = Image.FromFile(FeldBild.TotalFilePath))
-                    g.DrawImage(img, new Rectangle(0, 0, BearbeitetesBild.Width, BearbeitetesBild.Height));
+                    g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
                 g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);
                 g.RotateTransform(-90);
-
                 using (DrawContextGraphics dcg = new DrawContextGraphics(g))
                     FixedBox.draw(dcg);
             }
