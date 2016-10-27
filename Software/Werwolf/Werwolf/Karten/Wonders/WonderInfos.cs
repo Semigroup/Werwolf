@@ -14,12 +14,30 @@ namespace Werwolf.Karten
 {
     public class WonderInfos : WolfBox
     {
-        public WonderTextFeld Name;
-        public WonderTextFeld Kosten;
+        public WonderNamenFeld Name;
+        public WonderKostenFeld Kosten;
         public WonderTextFeld[] Basen;
         public WonderTextFeld[] Entwicklungen;
 
         private bool Initialized = false;
+
+        private IEnumerable<WonderTextFeld> Felder
+        {
+            get
+            {
+                List<WonderTextFeld> l = new List<WonderTextFeld>();
+                if (Name != null)
+                    l.Add(Name);
+                if (Kosten != null)
+                    l.Add(Kosten);
+                IEnumerable<WonderTextFeld> e = l;
+                if (Basen != null)
+                    e = e.Concat(Basen);
+                if (Entwicklungen != null)
+                    e = e.Concat(Entwicklungen);
+                return e;
+            }
+        }
 
         public WonderInfos(Karte Karte, float Ppm)
             : base(Karte, Ppm)
@@ -33,14 +51,18 @@ namespace Werwolf.Karten
                 if (!Initialized)
                 {
                     Initialized = true;
-                    TextBild tb = Karte.Universe.TextBilder["KleinesNamenfeld"];
-                    Name = new WonderTextFeld(Karte, Ppm, false, Karte.Universe.TextBilder["GroßesNamenfeld"], Karte.Schreibname);
+                    Name = new WonderNamenFeld(Karte, Ppm);
+                    Kosten = new WonderKostenFeld(Karte, Ppm);
                 }
                 else
                 {
                     Name.Karte = Karte;
                     Name.Ppm = Ppm;
                     Name.Text = Karte.Schreibname;
+
+                    Kosten.Karte = Karte;
+                    Kosten.Ppm = Ppm;
+                    Kosten.Text = Karte.Kosten.ToString();
                 }
         }
 
@@ -61,15 +83,23 @@ namespace Werwolf.Karten
             if (Name.Visible())
             {
                 Name.setup(box);
-                Name.SetLot(new PointF(MovedInnenBox.Left + 3 * Faktor, MovedInnenBox.Bottom));
+                float rest = Faktor * HintergrundDarstellung.Anker.X - Name.Size.Width;
+                Name.SetLot(new PointF(MovedInnenBox.Left + rest / 2, MovedInnenBox.Bottom));
+            }
+            if (Kosten.Visible())
+            {
+                Kosten.setup(box);
+                float rest = Faktor * HintergrundDarstellung.Anker.X - Kosten.Size.Width;
+                Kosten.SetLot(new PointF(MovedInnenBox.Left + rest / 2, MovedInnenBox.Top));
             }
 
         }
 
         public override void draw(DrawContext con)
         {
-            if (Name.Visible())
-                Name.draw(con);
+            foreach (var item in Felder)
+                if (item.Visible())
+                    item.draw(con);
         }
     }
 }

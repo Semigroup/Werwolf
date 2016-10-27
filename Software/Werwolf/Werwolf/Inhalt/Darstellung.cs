@@ -119,6 +119,7 @@ namespace Werwolf.Inhalt
         /// </summary>
         public SizeF Size { get; set; }
         public Color RuckseitenFarbe { get; set; }
+        public PointF Anker { get; set; }
 
         public Image RandBild { get; private set; }
         private Size LastSize = new Size();
@@ -149,6 +150,7 @@ namespace Werwolf.Inhalt
             RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
             Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
             RuckseitenFarbe = Loader.XmlReader.getColorHexARGB("RuckseitenFarbe");
+            Anker = Loader.XmlReader.getPointF("Anker");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -157,6 +159,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
             XmlWriter.writeEnum<KartenModus>("Modus", Modus);
             XmlWriter.writeColorHexARGB("RuckseitenFarbe", RuckseitenFarbe);
+            XmlWriter.writePoint("Anker", Anker);
         }
 
         public void MakeRandBild(float ppm)
@@ -243,6 +246,7 @@ namespace Werwolf.Inhalt
             hg.LastSize = LastSize;
             hg.Modus = Modus;
             hg.RuckseitenFarbe = RuckseitenFarbe;
+            hg.Anker = Anker;
         }
     }
     public class TitelDarstellung : Darstellung

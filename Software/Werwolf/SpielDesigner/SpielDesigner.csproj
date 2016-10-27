@@ -79,6 +79,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Assistment\Assistment\Assistment.csproj">
+      <Project>{0C5CE078-5B2A-4160-B9DF-DBD11094422B}</Project>
+      <Name>Assistment</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Werwolf\Werwolf.csproj">
       <Project>{CDDC6E7B-BC1E-4439-81AD-AB4891063771}</Project>
       <Name>Werwolf</Name>

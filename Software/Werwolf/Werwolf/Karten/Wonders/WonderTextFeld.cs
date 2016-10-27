@@ -12,32 +12,31 @@ using Assistment.Drawing.LinearAlgebra;
 
 namespace Werwolf.Karten
 {
-    public class WonderTextFeld : WolfBox
+    public abstract class WonderTextFeld : WolfBox
     {
         public bool Oben;
         public Bild FeldBild;
         public string Text;
 
-        private string LastFilePath;
-        private SizeF LastFeldSize;
-        private float LastPpm;
-        private string LastText;
-        private Font LastFont;
-        private SizeF LastTitelRand;
-        private Size LastSize;
+        protected string LastFilePath;
+        protected SizeF LastFeldSize;
+        protected float LastPpm;
+        protected string LastText;
+        protected Font LastFont;
+        protected SizeF LastTitelRand;
+        protected Size LastSize;
+        protected bool DrawBoxChanged;
 
-        private Size Size;
-        private Image BearbeitetesBild;
-        //private float Abstand;
-        private DrawBox DrawBox;
-        private FixedBox FixedBox;
+        protected new Size Size;
+        protected Image BearbeitetesBild;
+        protected DrawBox DrawBox { get; set; }
+        protected FixedBox FixedBox;
 
-        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, Bild FeldBild, string Text)
+        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, Bild FeldBild)
             : base(Karte, Ppm)
         {
             this.Oben = Oben;
             this.FeldBild = FeldBild;
-            this.Text = Text;
         }
 
         public override void update()
@@ -46,7 +45,7 @@ namespace Werwolf.Karten
 
         public override bool Visible()
         {
-            return base.Visible() && HintergrundDarstellung.Existiert && FeldBild != null && Text.Length > 0;
+            return base.Visible() && HintergrundDarstellung.Existiert && FeldBild != null && DrawBox != null;
         }
 
         public override void setup(RectangleF box)
@@ -54,31 +53,40 @@ namespace Werwolf.Karten
             this.box = AussenBox;
             this.box.Location = box.Location;
 
-            this.DrawBox = new Text(Text, TitelDarstellung.FontMeasurer);
             DrawBox.setup(FeldBild.Size.mul(Faktor).permut());
 
             SizeF Size1 = FeldBild.Size.mul(Ppm);
-            SizeF Size2 = DrawBox.Size.mul(Ppm / Faktor).add(Res).permut();
+            SizeF Size2 = DrawBox.Size.mul(Ppm / Faktor).add(TitelDarstellung.Rand.mul(Ppm * 2)).permut();
             Size = Size1.Max(Size2).ToSize();
-            //System.Windows.Forms.MessageBox.Show(LastSize+"" + FeldBild.Size.mul(Ppm));
             this.box.Size = ((SizeF)Size).mul(Faktor / Ppm);
 
             RectangleF Rectangle = new RectangleF();
             Rectangle.Size = ((SizeF)Size).mul(Faktor / Ppm).permut();
-            //Rectangle.X -= Rectangle.Size.Width;
-            Rectangle = Rectangle.Inner(Karte.TitelDarstellung.Rand.mul(Faktor));
 
-            FixedBox = new FixedBox(Rectangle.Size, DrawBox);
-            FixedBox.Alignment = new SizeF(1, 0.5f);
-            FixedBox.setup(Rectangle);
-            FixedBox.Move(-Size.Height * Faktor / Ppm, 0);
+            SizeF Rand = TitelDarstellung.Rand.mul(Faktor);
+            if (Oben)
+            {
+                FixedBox = new FixedBox(Rectangle.Size,
+                       DrawBox.Geometry(Rand.Width, Rand.Height, 0, Rand.Height));
+                FixedBox.Alignment = new SizeF(0, 0.5f);
+                FixedBox.setup(Rectangle);
+                FixedBox.Move(-Size.Height * Faktor / Ppm, 0);
+            }
+            else
+            {
+                FixedBox = new FixedBox(Rectangle.Size,
+                DrawBox.Geometry(0, Rand.Height, Rand.Width, Rand.Height));
+                FixedBox.Alignment = new SizeF(1, 0.5f);
+                FixedBox.setup(Rectangle);
+                FixedBox.Move(-Size.Height * Faktor / Ppm, 0);
+            }
         }
         /// <summary>
         /// falls oben: linker, oberer Punkt wird gleich dem LotPunkt gesetzt
         /// <para>falls unten: linker, unterer Punkt wird gleich dem LotPunkt gesetzt</para>
         /// </summary>
         /// <param name="LotPunkt"></param>
-        public void SetLot(PointF LotPunkt)
+        public virtual void SetLot(PointF LotPunkt)
         {
             float Abstand = (FeldBild.Size.Height - TitelDarstellung.Rand.Width) * Faktor;
             if (DrawBox != null)
@@ -92,9 +100,9 @@ namespace Werwolf.Karten
 
         public override void draw(DrawContext con)
         {
-            if (!(LastPpm == Ppm
+            if (DrawBoxChanged ||
+                !(LastPpm == Ppm
                 && TitelDarstellung.Font.Equals(LastFont)
-                && Text.Equals(LastText)
                 && FeldBild.FilePath.Equals(LastFilePath)
                 && FeldBild.Size.Equal(LastFeldSize)
                 && Karte.TitelDarstellung.Rand.Equal(LastTitelRand)
@@ -103,7 +111,6 @@ namespace Werwolf.Karten
             {
                 this.LastPpm = Ppm;
                 this.LastFont = TitelDarstellung.Font;
-                this.LastText = Text;
                 this.LastFeldSize = FeldBild.Size;
                 this.LastFilePath = FeldBild.FilePath;
                 this.LastTitelRand = Karte.TitelDarstellung.Rand;
@@ -112,14 +119,14 @@ namespace Werwolf.Karten
             }
             con.drawImage(BearbeitetesBild, box);
         }
-        public void Bearbeite()
+        public virtual void Bearbeite()
         {
-            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, 0).mul(Ppm/Faktor);
+            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f ,Oben ? 1 : 0).mul(Ppm / Faktor);
             Point P = new Point((int)Rest.Width, (int)Rest.Height);
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {
-                g.Clear(Color.Red);
+                //g.Clear(Color.Red);
                 using (Image img = Image.FromFile(FeldBild.TotalFilePath))
                     g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
                 g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);

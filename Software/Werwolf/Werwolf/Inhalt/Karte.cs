@@ -70,6 +70,11 @@ namespace Werwolf.Inhalt
             TitelDarstellung = Universe.TitelDarstellungen.Standard;
             BildDarstellung = Universe.BildDarstellungen.Standard;
             InfoDarstellung = Universe.InfoDarstellungen.Standard;
+
+            this.Kosten = new Aufgabe();
+            this.Effekt = new Aufgabe();
+            this.Basen = new string[0];
+            this.Entwicklungen = new string[0];
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -151,6 +156,11 @@ namespace Werwolf.Inhalt
             Karte.ReichweiteMax = ReichweiteMax;
             Karte.Storung = Storung;
             Karte.Felder = Felder;
+
+            Karte.Kosten = Kosten;
+            Karte.Effekt = Effekt;
+            Karte.Entwicklungen = Entwicklungen.FlatClone();
+            Karte.Basen = Basen.FlatClone();
         }
         public override object Clone()
         {

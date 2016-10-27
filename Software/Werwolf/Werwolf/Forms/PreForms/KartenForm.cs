@@ -45,6 +45,9 @@ namespace Werwolf.Forms
             WerteListe.AddIntBox(0, "Felder");
             WerteListe.AddIntBox(0, "Störung");
 
+            WerteListe.AddBigStringBox("", "Kosten");
+            WerteListe.AddStringBox("", "Effekt");
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -71,6 +74,9 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Reichweite", new Point(element.ReichweiteMin, element.ReichweiteMax));
             WerteListe.SetValue("Felder", element.Felder);
             WerteListe.SetValue("Störung", element.Storung);
+
+            WerteListe.SetValue("Kosten", element.Kosten.ToString());
+            WerteListe.SetValue("Effekt", element.Effekt.ToString());
 
             UpdatingWerteListe = false;
             SetVisibles();
@@ -99,6 +105,9 @@ namespace Werwolf.Forms
             element.Felder = WerteListe.GetValue<int>("Felder");
             element.Storung = WerteListe.GetValue<int>("Störung");
 
+            element.Kosten = new Aufgabe(WerteListe.GetValue<string>("Kosten"), Universe);
+            element.Effekt = new Aufgabe(WerteListe.GetValue<string>("Effekt"), Universe);
+
             SetVisibles();
         }
 
@@ -107,6 +116,10 @@ namespace Werwolf.Forms
             WerteListe.ShowBox(
               element.HintergrundDarstellung.Modus == HintergrundDarstellung.KartenModus.AktionsKarte,
               "Initiative", "Reichweite", "Felder", "Störung");
+            WerteListe.ShowBox(
+              element.HintergrundDarstellung.Modus == HintergrundDarstellung.KartenModus.WondersKarte,
+              "Kosten", "Effekt");
+            //WerteListe.Setup();
         }
     }
 }
