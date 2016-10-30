@@ -79,7 +79,10 @@ namespace Werwolf.Karten
             Marshal.Copy(bytes, 0, data.Scan0, bytes.Length);
             b.UnlockBits(data);
             using (Graphics g = b.GetHighGraphics())
+            {
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.GammaCorrected;
                 g.DrawImage(Vorlage, new Rectangle(new Point(), Vorlage.Size));
+            }
             this.BearbeitetesBild = b;
         }
     }

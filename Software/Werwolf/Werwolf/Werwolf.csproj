@@ -80,6 +80,9 @@
     <Compile Include="Forms\PreForms\DeckForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\PreForms\ElementArrayBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\PreForms\FraktionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +154,9 @@
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
     <Compile Include="Karten\WolfHauptBild.cs" />
+    <Compile Include="Karten\Wonders\WonderEffekt.cs" />
+    <Compile Include="Karten\Wonders\WonderEntwicklungFeld.cs" />
+    <Compile Include="Karten\Wonders\WonderBasenFeld.cs" />
     <Compile Include="Karten\Wonders\WonderInfos.cs" />
     <Compile Include="Karten\Wonders\WonderKostenFeld.cs" />
     <Compile Include="Karten\Wonders\WonderNamenFeld.cs" />

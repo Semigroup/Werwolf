@@ -37,8 +37,13 @@ namespace Werwolf.Forms
 
         private bool CancelThread = false;
 
-        public bool BearbeitungErlaubt { get; set; }
+        public bool BearbeitungErlaubt { get; private set; }
 
+        public ElementAuswahlForm(ElementMenge<T> ElementMenge, bool BearbeitungErlaubt)
+            : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge, ElementMenge.Standard, GetViewBox(), BearbeitungErlaubt)
+        {
+
+        }
         public ElementAuswahlForm(ElementMenge<T> ElementMenge, T Element)
             : this(ElementMenge.Universe.Karten.Standard.Clone() as Karte, ElementMenge, Element)
         {

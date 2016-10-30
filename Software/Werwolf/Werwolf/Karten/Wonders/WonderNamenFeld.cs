@@ -12,7 +12,7 @@ namespace Werwolf.Karten
         private string LastName;
 
         public WonderNamenFeld(Karte Karte, float Ppm)
-            : base(Karte, Ppm, false, Karte.Universe.TextBilder["GroßesNamenfeld"])
+            : base(Karte, Ppm, false, true, Karte.Universe.TextBilder["GroßesNamenfeld"])
         {
 
         }
@@ -27,7 +27,8 @@ namespace Werwolf.Karten
             else if (!Karte.Name.Equals(LastName))
             {
                 this.LastName = Karte.Name;
-                DrawBox = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer);
+                DrawBox = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer)
+                    .Geometry(Faktor, Faktor, Faktor * 5, Faktor);
                 DrawBoxChanged = true;
             }
         }

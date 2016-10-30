@@ -31,10 +31,10 @@ namespace Werwolf.Forms
             WerteListe.AddChainedSizeFBox(new SizeF(), "Randgröße in mm");
             WerteListe.AddColorBox(Color.Black, "Randfarbe");
             WerteListe.AddColorBox(Color.White, "Hintergrundfarbe");
-            //WerteListe.AddColorBox(Color.Black, "Textfarbe");
             WerteListe.AddFontBox(new Font("Calibri", 8), "Font");
             WerteListe.AddFloatBox(1, "Balkendicke in mm");
             WerteListe.AddFloatBox(1, "Innenradius in mm");
+            WerteListe.AddFontBox(new Font("Calibri", 8), "Effekt Font");
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -45,10 +45,10 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Randgröße in mm", element.Rand);
             WerteListe.SetValue("Randfarbe", element.RandFarbe);
             WerteListe.SetValue("Hintergrundfarbe", element.Farbe);
-            //WerteListe.SetValue("Textfarbe", element.TextFarbe);
             WerteListe.SetValue("Font", element.Font);
             WerteListe.SetValue("Balkendicke in mm", element.BalkenDicke);
             WerteListe.SetValue("Innenradius in mm", element.InnenRadius);
+            WerteListe.SetValue("Effekt Font", element.EffektFont);
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -59,8 +59,8 @@ namespace Werwolf.Forms
             element.Rand = WerteListe.GetValue<SizeF>("Randgröße in mm");
             element.RandFarbe = WerteListe.GetValue<Color>("Randfarbe");
             element.Farbe = WerteListe.GetValue<Color>("Hintergrundfarbe");
-            //element.TextFarbe = WerteListe.GetValue<Color>("Textfarbe");
             element.Font = WerteListe.GetValue<Font>("Font");
+            element.EffektFont = WerteListe.GetValue<Font>("Effekt Font");
             element.BalkenDicke = WerteListe.GetValue<float>("Balkendicke in mm");
             element.InnenRadius = WerteListe.GetValue<float>("Innenradius in mm");
         }

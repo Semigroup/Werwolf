@@ -27,7 +27,6 @@ namespace Werwolf.Inhalt
             set
             {
                 font = value;
-                //FontMeasurer = value != null ? value.GetMeasurer() : null;
                 if (value == null)
                     FontMeasurer = null;
                 else
@@ -528,6 +527,21 @@ namespace Werwolf.Inhalt
     {
         public float BalkenDicke { get; set; }
         public float InnenRadius { get; set; }
+        public Font EffektFont
+        {
+            get { return effektFont; }
+            set
+            {
+                effektFont = value;
+                if (value == null)
+                    EffektFontMeasurer = null;
+                else
+                    EffektFontMeasurer = value.GetMeasurer();
+            }
+        }
+
+        private Font effektFont;
+        public xFont EffektFontMeasurer { get; private set; }
 
         public TextDarstellung()
             : base("TextDarstellung")
@@ -540,18 +554,21 @@ namespace Werwolf.Inhalt
             BalkenDicke = 1;
             InnenRadius = 1;
             Farbe = Color.FromArgb(128, Color.White);
+            EffektFont = new Font("Calibri", 12);
         }
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
             BalkenDicke = Loader.XmlReader.getFloat("BalkenDicke");
             InnenRadius = Loader.XmlReader.getFloat("InnenRadius");
+            EffektFont = Loader.GetFont("EffektFont");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
             XmlWriter.writeFloat("BalkenDicke", BalkenDicke);
             XmlWriter.writeFloat("InnenRadius", InnenRadius);
+            XmlWriter.writeFont("EffektFont", EffektFont);
         }
         public override void AdaptToCard(Karte Karte)
         {
@@ -569,6 +586,7 @@ namespace Werwolf.Inhalt
             TextDarstellung hg = Element as TextDarstellung;
             hg.BalkenDicke = BalkenDicke;
             hg.InnenRadius = InnenRadius;
+            hg.EffektFont = EffektFont.Clone() as Font;
         }
     }
     public class InfoDarstellung : Darstellung

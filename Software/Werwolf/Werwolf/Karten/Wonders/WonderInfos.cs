@@ -16,8 +16,8 @@ namespace Werwolf.Karten
     {
         public WonderNamenFeld Name;
         public WonderKostenFeld Kosten;
-        public WonderTextFeld[] Basen;
-        public WonderTextFeld[] Entwicklungen;
+        public WonderBasenFeld[] Basen = new WonderBasenFeld[1];
+        public WonderEntwicklungFeld[] Entwicklungen = new WonderEntwicklungFeld[2];
 
         private bool Initialized = false;
 
@@ -53,6 +53,8 @@ namespace Werwolf.Karten
                     Initialized = true;
                     Name = new WonderNamenFeld(Karte, Ppm);
                     Kosten = new WonderKostenFeld(Karte, Ppm);
+                    Basen.CountMap(i => new WonderBasenFeld(Karte, Ppm, i));
+                    Entwicklungen.CountMap(i => new WonderEntwicklungFeld(Karte, Ppm, i));
                 }
                 else
                 {
@@ -63,6 +65,12 @@ namespace Werwolf.Karten
                     Kosten.Karte = Karte;
                     Kosten.Ppm = Ppm;
                     Kosten.Text = Karte.Kosten.ToString();
+
+                    foreach (var item in Basen)
+                    {
+                        item.Karte = Karte;
+                        item.Ppm = Ppm;
+                    }
                 }
         }
 
@@ -92,7 +100,29 @@ namespace Werwolf.Karten
                 float rest = Faktor * HintergrundDarstellung.Anker.X - Kosten.Size.Width;
                 Kosten.SetLot(new PointF(MovedInnenBox.Left + rest / 2, MovedInnenBox.Top));
             }
+            PointF p = new PointF(MovedInnenBox.Right, MovedInnenBox.Top);
+            for (int i = 0; i < Basen.Length; i++)
+                if (Basen[i].Visible())
+                {
+                    Basen[i].setup(box);
+                    p = p.add(-Basen[i].Size.Width - Faktor, 0);
+                    Basen[i].SetLot(p);
+                }
 
+            p = new PointF(MovedInnenBox.Right, MovedInnenBox.Bottom);
+            for (int i = 0; i < Entwicklungen.Length; i++)
+                if (Entwicklungen[i].Visible())
+                {
+                    Entwicklungen[i].setup(box);
+                    p = p.add(-Entwicklungen[i].Size.Width - Faktor, 0);
+                    Entwicklungen[i].SetLot(p);
+                }
+        }
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            foreach (var item in Felder)
+                item.Move(ToMove);
         }
 
         public override void draw(DrawContext con)

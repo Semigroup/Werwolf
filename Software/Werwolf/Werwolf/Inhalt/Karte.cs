@@ -42,8 +42,38 @@ namespace Werwolf.Inhalt
 
         public Aufgabe Kosten { get; set; }
         public Aufgabe Effekt { get; set; }
-        public string[] Basen { get; set; }
-        public string[] Entwicklungen { get; set; }
+
+        private string[] basen { get; set; }
+        private Karte[] realBasen { get; set; }
+        public Karte[] Basen
+        {
+            get
+            {
+                if (realBasen == null)
+                    realBasen = basen.Map(s => Universe.Karten[s]).ToArray();
+                return realBasen;
+            }
+            set
+            {
+                realBasen = value;
+            }
+        }
+
+        private string[] entwicklungen { get; set; }
+        private Karte[] realEntwicklungen { get; set; }
+        public Karte[] Entwicklungen
+        {
+            get
+            {
+                if (realEntwicklungen == null)
+                    realEntwicklungen = entwicklungen.Map(s => Universe.Karten[s]).ToArray();
+                return realEntwicklungen;
+            }
+            set
+            {
+                realEntwicklungen = value;
+            }
+        }
 
         public Karte()
             : base("Karte", true)
@@ -73,8 +103,8 @@ namespace Werwolf.Inhalt
 
             this.Kosten = new Aufgabe();
             this.Effekt = new Aufgabe();
-            this.Basen = new string[0];
-            this.Entwicklungen = new string[0];
+            this.Basen = new Karte[0];
+            this.Entwicklungen = new Karte[0];
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -100,9 +130,9 @@ namespace Werwolf.Inhalt
 
             Kosten = Loader.GetAufgabe("Kosten");
             Effekt = Loader.GetAufgabe("Effekt");
-            Basen = Loader.XmlReader.getString("Basen")
+            basen = Loader.XmlReader.getString("Basen")
                 .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
-            Entwicklungen = Loader.XmlReader.getString("Entwicklungen")
+            entwicklungen = Loader.XmlReader.getString("Entwicklungen")
                .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
@@ -128,8 +158,8 @@ namespace Werwolf.Inhalt
 
             XmlWriter.writeAttribute("Kosten", Kosten.ToString());
             XmlWriter.writeAttribute("Effekt", Effekt.ToString());
-            XmlWriter.writeAttribute("Basen", Basen.SumText(";"));
-            XmlWriter.writeAttribute("Entwicklungen", Entwicklungen.SumText(";"));
+            XmlWriter.writeAttribute("Basen", Basen.Map(b => b.Name).SumText(";"));
+            XmlWriter.writeAttribute("Entwicklungen", Entwicklungen.Map(b => b.Name).SumText(";"));
         }
 
         public override void AdaptToCard(Karte Karte)

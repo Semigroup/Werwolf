@@ -23,6 +23,7 @@ namespace Werwolf.Karten
 
         public WonderBalken Balken { get; set; }
         public WonderInfos WonderInfos { get; set; }
+        public WonderEffekt WonderEffekt { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -37,7 +38,7 @@ namespace Werwolf.Karten
                         case HintergrundDarstellung.KartenModus.AktionsKarte:
                             return new WolfBox[] { HauptBild, Header, Text };
                         case HintergrundDarstellung.KartenModus.WondersKarte:
-                            return new WolfBox[] { HauptBild, Balken, WonderInfos };
+                            return new WolfBox[] { HauptBild, Balken, WonderEffekt, WonderInfos };
                         default:
                             throw new NotImplementedException();
                     }
@@ -73,6 +74,7 @@ namespace Werwolf.Karten
             Info = new WolfInfo(Karte, ppm);
             Balken = new WonderBalken(Karte, ppm);
             WonderInfos = new WonderInfos(Karte, ppm);
+            WonderEffekt = new WonderEffekt(Karte, ppm);
             HauptBild = new WolfHauptBild(Karte, ppm);
         }
 

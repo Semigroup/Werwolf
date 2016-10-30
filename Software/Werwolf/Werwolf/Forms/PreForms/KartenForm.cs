@@ -47,6 +47,8 @@ namespace Werwolf.Forms
 
             WerteListe.AddBigStringBox("", "Kosten");
             WerteListe.AddStringBox("", "Effekt");
+            BuildArrayBox("Basen", Universe.Karten);
+            BuildArrayBox("Entwicklungen", Universe.Karten);
 
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -77,6 +79,8 @@ namespace Werwolf.Forms
 
             WerteListe.SetValue("Kosten", element.Kosten.ToString());
             WerteListe.SetValue("Effekt", element.Effekt.ToString());
+            WerteListe.SetValue("Basen", element.Basen);
+            WerteListe.SetValue("Entwicklungen", element.Entwicklungen);
 
             UpdatingWerteListe = false;
             SetVisibles();
@@ -107,6 +111,8 @@ namespace Werwolf.Forms
 
             element.Kosten = new Aufgabe(WerteListe.GetValue<string>("Kosten"), Universe);
             element.Effekt = new Aufgabe(WerteListe.GetValue<string>("Effekt"), Universe);
+            element.Entwicklungen = WerteListe.GetValue<Karte[]>("Entwicklungen");
+            element.Basen = WerteListe.GetValue<Karte[]>("Basen");
 
             SetVisibles();
         }

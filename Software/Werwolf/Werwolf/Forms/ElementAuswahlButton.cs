@@ -26,6 +26,7 @@ namespace Werwolf.Forms
         private ButtonReihe Buttons = new ButtonReihe(false, "Auswählen", "Bearbeiten", "Klonen", "Entfernen");
         private Label Label = new Label();
         private GroupBox GroupBox = new GroupBox();
+        public bool BearbeitungErlaubt { get; private set; }
 
         public event EventHandler Ausgewahlt = delegate { };
         public event EventHandler Bearbeitet = delegate { };
@@ -55,6 +56,7 @@ namespace Werwolf.Forms
             this.Width = 500;
             this.Height = 160;
 
+            this.BearbeitungErlaubt = BearbeitungErlaubt;
             Buttons.Enable(BearbeitungErlaubt, "Entfernen", "Bearbeiten", "Klonen");
             Buttons.Enable(!Element.Unzerstorbar && BearbeitungErlaubt, "Entfernen");
             Buttons.ButtonClick += new EventHandler(Buttons_ButtonClick);
@@ -102,7 +104,7 @@ namespace Werwolf.Forms
                 this.Label.Text = (Element as Deck).ToString();
                 this.Label.AutoSize = true;
             }
-            else
+            else if (BearbeitungErlaubt)
             {
                 this.Label.Image = GetImage();
                 this.Label.Size = Label.Image.Size;

@@ -17,25 +17,26 @@ namespace Werwolf.Karten
         public bool Oben;
         public Bild FeldBild;
         public string Text;
+        public bool Quer;
 
         protected string LastFilePath;
         protected SizeF LastFeldSize;
         protected float LastPpm;
         protected string LastText;
         protected Font LastFont;
-        protected SizeF LastTitelRand;
         protected Size LastSize;
         protected bool DrawBoxChanged;
 
         protected new Size Size;
         protected Image BearbeitetesBild;
         protected DrawBox DrawBox { get; set; }
-        protected FixedBox FixedBox;
+        private FixedBox FixedBox;
 
-        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, Bild FeldBild)
+        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, Bild FeldBild)
             : base(Karte, Ppm)
         {
             this.Oben = Oben;
+            this.Quer = Quer;
             this.FeldBild = FeldBild;
         }
 
@@ -53,33 +54,36 @@ namespace Werwolf.Karten
             this.box = AussenBox;
             this.box.Location = box.Location;
 
-            DrawBox.setup(FeldBild.Size.mul(Faktor).permut());
+            if (Quer)
+                DrawBox.setup(FeldBild.Size.mul(Faktor).permut());
+            else
+                DrawBox.setup(FeldBild.Size.mul(Faktor));
 
             SizeF Size1 = FeldBild.Size.mul(Ppm);
-            SizeF Size2 = DrawBox.Size.mul(Ppm / Faktor).add(TitelDarstellung.Rand.mul(Ppm * 2)).permut();
+            SizeF Size2 = DrawBox.Size.mul(Ppm / Faktor);
+            if (Quer)
+                Size2 = Size2.permut();
             Size = Size1.Max(Size2).ToSize();
             this.box.Size = ((SizeF)Size).mul(Faktor / Ppm);
 
-            RectangleF Rectangle = new RectangleF();
-            Rectangle.Size = ((SizeF)Size).mul(Faktor / Ppm).permut();
+            RectangleF Rectangle = new RectangleF(new PointF(), this.box.Size);
+            if (Quer)
+            {
+                Rectangle.X = -Size.Height * Faktor / Ppm;
+                Rectangle.Size = Rectangle.Size.permut();
+            }
 
-            SizeF Rand = TitelDarstellung.Rand.mul(Faktor);
+            FixedBox = new FixedBox(Rectangle.Size, DrawBox);
             if (Oben)
-            {
-                FixedBox = new FixedBox(Rectangle.Size,
-                       DrawBox.Geometry(Rand.Width, Rand.Height, 0, Rand.Height));
-                FixedBox.Alignment = new SizeF(0, 0.5f);
-                FixedBox.setup(Rectangle);
-                FixedBox.Move(-Size.Height * Faktor / Ppm, 0);
-            }
+                FixedBox.Alignment = new SizeF(0.5f, 1);
             else
+                FixedBox.Alignment = new SizeF(0.5f, 0);
+            if (Quer)
             {
-                FixedBox = new FixedBox(Rectangle.Size,
-                DrawBox.Geometry(0, Rand.Height, Rand.Width, Rand.Height));
-                FixedBox.Alignment = new SizeF(1, 0.5f);
-                FixedBox.setup(Rectangle);
-                FixedBox.Move(-Size.Height * Faktor / Ppm, 0);
+                FixedBox.Alignment = new SizeF(1 - FixedBox.Alignment.Height, FixedBox.Alignment.Width);
             }
+
+            FixedBox.setup(Rectangle);
         }
         /// <summary>
         /// falls oben: linker, oberer Punkt wird gleich dem LotPunkt gesetzt
@@ -88,14 +92,24 @@ namespace Werwolf.Karten
         /// <param name="LotPunkt"></param>
         public virtual void SetLot(PointF LotPunkt)
         {
-            float Abstand = (FeldBild.Size.Height - TitelDarstellung.Rand.Width) * Faktor;
-            if (DrawBox != null)
-                Abstand -= DrawBox.box.Width;
+            if (DrawBox == null)
+                return;
+            float Abstand = Quer ? DrawBox.Size.Width : DrawBox.Size.Height;//FeldBild.Size.Height * Faktor;
+            float Rest = box.Size.Height - Abstand;
+            //if (DrawBox != null)
+            //    if (Quer)
+            //        Abstand -= DrawBox.box.Width;
+            //    else
+            //        Abstand -= DrawBox.box.Height;
             this.box.X = LotPunkt.X;
+            //if (Oben)
+            //    this.box.Y = LotPunkt.Y - Abstand;
+            //else
+            //    this.box.Y = LotPunkt.Y - FeldBild.Size.Height * Faktor + Abstand;
             if (Oben)
-                this.box.Y = LotPunkt.Y - Abstand;
+                this.box.Y = LotPunkt.Y - Rest;
             else
-                this.box.Y = LotPunkt.Y - FeldBild.Size.Height * Faktor + Abstand;
+                this.box.Y = LotPunkt.Y - box.Size.Height + Rest;
         }
 
         public override void draw(DrawContext con)
@@ -105,7 +119,6 @@ namespace Werwolf.Karten
                 && TitelDarstellung.Font.Equals(LastFont)
                 && FeldBild.FilePath.Equals(LastFilePath)
                 && FeldBild.Size.Equal(LastFeldSize)
-                && Karte.TitelDarstellung.Rand.Equal(LastTitelRand)
                 && Size == LastSize
                 ))
             {
@@ -113,24 +126,24 @@ namespace Werwolf.Karten
                 this.LastFont = TitelDarstellung.Font;
                 this.LastFeldSize = FeldBild.Size;
                 this.LastFilePath = FeldBild.FilePath;
-                this.LastTitelRand = Karte.TitelDarstellung.Rand;
                 this.LastSize = Size;
+                DrawBoxChanged = false;
                 Bearbeite();
             }
             con.drawImage(BearbeitetesBild, box);
         }
         public virtual void Bearbeite()
         {
-            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f ,Oben ? 1 : 0).mul(Ppm / Faktor);
+            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
             Point P = new Point((int)Rest.Width, (int)Rest.Height);
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {
-                //g.Clear(Color.Red);
                 using (Image img = Image.FromFile(FeldBild.TotalFilePath))
                     g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
                 g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);
-                g.RotateTransform(-90);
+                if (Quer)
+                    g.RotateTransform(-90);
                 using (DrawContextGraphics dcg = new DrawContextGraphics(g))
                     FixedBox.draw(dcg);
             }

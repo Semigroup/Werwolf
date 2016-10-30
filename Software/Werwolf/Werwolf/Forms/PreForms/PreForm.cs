@@ -115,6 +115,11 @@ namespace Werwolf.Forms
             element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
         }
 
+        protected void BuildArrayBox<I>(string Name, ElementMenge<I> Menge) where I : XmlElement, new()
+        {
+            ElementArrayBox<I> b = new ElementArrayBox<I>(Menge);
+            WerteListe.AddWertePaar<I[]>(b, new I[0], Name);
+        }
         protected void BuildWertBox<I>(string Name, ElementMenge<I> Menge) where I : XmlElement, new()
         {
             ElementButton<I> b = new ElementButton<I>(Menge, Karte);
