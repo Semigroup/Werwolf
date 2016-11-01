@@ -160,6 +160,7 @@
     <Compile Include="Karten\Wonders\WonderInfos.cs" />
     <Compile Include="Karten\Wonders\WonderKostenFeld.cs" />
     <Compile Include="Karten\Wonders\WonderNamenFeld.cs" />
+    <Compile Include="Karten\Wonders\WonderText.cs" />
     <Compile Include="Karten\Wonders\WonderTextFeld.cs" />
     <Compile Include="Karten\WolfHeader.cs" />
     <Compile Include="Karten\DrawContextExtensions.cs" />

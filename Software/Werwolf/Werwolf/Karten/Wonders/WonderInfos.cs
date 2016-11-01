@@ -21,6 +21,8 @@ namespace Werwolf.Karten
 
         private bool Initialized = false;
 
+        public float EntwicklungsBreite { get; set; }
+
         private IEnumerable<WonderTextFeld> Felder
         {
             get
@@ -117,6 +119,7 @@ namespace Werwolf.Karten
                     p = p.add(-Entwicklungen[i].Size.Width - Faktor, 0);
                     Entwicklungen[i].SetLot(p);
                 }
+            this.EntwicklungsBreite = MovedInnenBox.Right - p.X;
         }
         public override void Move(PointF ToMove)
         {

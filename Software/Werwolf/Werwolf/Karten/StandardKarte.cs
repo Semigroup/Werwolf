@@ -24,6 +24,7 @@ namespace Werwolf.Karten
         public WonderBalken Balken { get; set; }
         public WonderInfos WonderInfos { get; set; }
         public WonderEffekt WonderEffekt { get; set; }
+        public WonderText WonderText { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -38,7 +39,7 @@ namespace Werwolf.Karten
                         case HintergrundDarstellung.KartenModus.AktionsKarte:
                             return new WolfBox[] { HauptBild, Header, Text };
                         case HintergrundDarstellung.KartenModus.WondersKarte:
-                            return new WolfBox[] { HauptBild, Balken, WonderEffekt, WonderInfos };
+                            return new WolfBox[] { HauptBild, WonderText, Balken, WonderEffekt, WonderInfos };
                         default:
                             throw new NotImplementedException();
                     }
@@ -76,6 +77,7 @@ namespace Werwolf.Karten
             WonderInfos = new WonderInfos(Karte, ppm);
             WonderEffekt = new WonderEffekt(Karte, ppm);
             HauptBild = new WolfHauptBild(Karte, ppm);
+            WonderText = new WonderText(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -117,10 +119,24 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.setup(box);
-
-            if (Text.Visible() && Info.Visible()
-                && (HintergrundDarstellung.Modus == Inhalt.HintergrundDarstellung.KartenModus.Werwolfkarte))
-                Text.KorrigierUmInfo(Info.Kompositum.box.Height);
+            switch (HintergrundDarstellung.Modus)
+            {
+                case HintergrundDarstellung.KartenModus.Werwolfkarte:
+                    if (Text.Visible() && Info.Visible())
+                        Text.KorrigierUmInfo(Info.Kompositum.box.Height);
+                    break;
+                case HintergrundDarstellung.KartenModus.AktionsKarte:
+                    break;
+                case HintergrundDarstellung.KartenModus.WondersKarte:
+                    if (WonderText.Visible() && WonderInfos.Visible())
+                    {
+                        WonderText.SetEntwicklungsBreite(WonderInfos.EntwicklungsBreite);
+                        WonderText.setup(box);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
         public void drawNormal(DrawContext con)
         {

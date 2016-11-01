@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Werwolf.Inhalt;
 using Assistment.Texts;
+using Assistment.Drawing.LinearAlgebra;
 
 namespace Werwolf.Karten
 {
@@ -29,7 +30,8 @@ namespace Werwolf.Karten
                 //SmallFont = (Karte.Basen[Index].TitelDarstellung.FontMeasurer as FontGraphicsMeasurer) * 0.4f;
                 SmallFont = new FontGraphicsMeasurer(Karte.Basen[Index].TitelDarstellung.Font.Name, 6);
                 this.LastName = Karte.Basen[Index].Schreibname;
-                DrawBox = new Text(Karte.Basen[Index].Schreibname, SmallFont)
+                string color = Karte.Basen[Index].HintergrundDarstellung.Farbe.ToHexString();
+                DrawBox = new Text("\\c" + color + LastName, SmallFont)
                     .Geometry(2.5f * Faktor, 0.5f * Faktor, 0.5f * Faktor, 0.5f * Faktor);
                 DrawBoxChanged = true;
             }
