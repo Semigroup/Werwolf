@@ -18,7 +18,11 @@ namespace Werwolf.Karten
         WonderBalken Balken;
         WonderEffekt Effekt;
         DrawBox Text;
-        WonderAusbauStufe[] Stufen;
+        DrawBox[] Stufen;
+        /// <summary>
+        /// Mindestabstand zwischen zwei ausbaustufen
+        /// </summary>
+        float abstand = 2;
 
         public WonderReich(Karte Karte, float Ppm)
             : base(Karte, Ppm)
@@ -86,19 +90,26 @@ namespace Werwolf.Karten
             SmallBox = SmallBox.move(HintergrundDarstellung.Anker.mul(Faktor));
             Balken.setup(SmallBox);
             Effekt.setup(SmallBox);
-            Stufen = new WonderAusbauStufe[Karte.Entwicklungen.Length];
+            Stufen = new DrawBox[Karte.Entwicklungen.Length];
             if (Stufen.Length > 0)
             {
-                Stufen.CountMap(i => new WonderAusbauStufe(Karte.Entwicklungen[i], ppm));
-                float breite = Karte.Entwicklungen.Map(x => x.HintergrundDarstellung.Size.Width).Sum() * Faktor;
+                Stufen.CountMap(i => new WonderAusbauStufe(Karte.Entwicklungen[i], ppm).Geometry(abstand * Faktor, 0));
+                foreach (var item in Stufen)
+                    item.setup(0);
+                float breite = Stufen.Map(x => x.Size.Width).Sum();
                 float rest = this.HintergrundDarstellung.Size.Width * Faktor - breite;
                 float part = rest / (Stufen.Length + 1);
                 float hohe = (this.HintergrundDarstellung.Size.Height - 21) * Faktor;
                 PointF loc = new PointF(part, hohe);
+                if (rest < 0)
+                {
+                    loc = new PointF(rest / 2, hohe);
+                    part = 0;
+                }
                 foreach (var item in Stufen)
                 {
-                    item.setup(loc, 0);
-                    loc = loc.add(item.HintergrundDarstellung.Size.Width * Faktor + part, 0);
+                    item.Move(loc);
+                    loc = loc.add(item.Size.Width + part, 0);
                 }
             }
             Text.setup(this.box);
