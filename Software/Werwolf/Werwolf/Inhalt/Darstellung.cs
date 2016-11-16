@@ -108,7 +108,8 @@ namespace Werwolf.Inhalt
         {
             Werwolfkarte,
             AktionsKarte,
-            WondersKarte
+            WondersKarte,
+            WondersReichKarte
         }
 
         public KartenModus Modus { get; set; }

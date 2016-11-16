@@ -14,6 +14,7 @@ using Assistment.Extensions;
 using Werwolf.Inhalt;
 using Werwolf.Karten;
 using Werwolf.Printing;
+using Assistment.Drawing.LinearAlgebra;
 
 namespace WolfSlave
 {
@@ -53,7 +54,8 @@ namespace WolfSlave
 
                 string p = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + "." + JobNumber);
                 Console.WriteLine(p);
-                wsp.createPDF(p, Job.HintergrundFarbe);
+                Console.WriteLine(wsp.Seite.div(WolfBox.Faktor) + "");
+                wsp.createPDF(p, wsp.getMin(), float.MaxValue, wsp.PageSize, Job.HintergrundFarbe);
             }
             catch (Exception e)
             {

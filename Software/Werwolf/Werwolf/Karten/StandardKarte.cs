@@ -25,6 +25,7 @@ namespace Werwolf.Karten
         public WonderInfos WonderInfos { get; set; }
         public WonderEffekt WonderEffekt { get; set; }
         public WonderText WonderText { get; set; }
+        public WonderReich WonderReich { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -40,6 +41,8 @@ namespace Werwolf.Karten
                             return new WolfBox[] { HauptBild, Header, Text };
                         case HintergrundDarstellung.KartenModus.WondersKarte:
                             return new WolfBox[] { HauptBild, WonderText, Balken, WonderEffekt, WonderInfos };
+                        case Inhalt.HintergrundDarstellung.KartenModus.WondersReichKarte:
+                            return new WolfBox[] { HauptBild, WonderReich };//
                         default:
                             throw new NotImplementedException();
                     }
@@ -78,6 +81,7 @@ namespace Werwolf.Karten
             WonderEffekt = new WonderEffekt(Karte, ppm);
             HauptBild = new WolfHauptBild(Karte, ppm);
             WonderText = new WonderText(Karte, ppm);
+            WonderReich = new WonderReich(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -224,10 +228,31 @@ namespace Werwolf.Karten
 
             //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
 
-            con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);/////////////
+            //con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);/////////////
             //if (BildDarstellung.Existiert)
             //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
 
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.draw(con);
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
+        }
+        public void drawWondersReich(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            HauptBild.CenterTop = MovedInnenBox.Top;
+            HauptBild.CenterBottom = MovedInnenBox.Bottom;
+            if (HauptBild.Visible())
+                HauptBild.setup(HauptBild.box);
+
+            con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
@@ -249,6 +274,9 @@ namespace Werwolf.Karten
                     break;
                 case HintergrundDarstellung.KartenModus.WondersKarte:
                     drawWonders(con);
+                    break;
+                case Inhalt.HintergrundDarstellung.KartenModus.WondersReichKarte:
+                    drawWondersReich(con);
                     break;
                 default:
                     throw new NotImplementedException();

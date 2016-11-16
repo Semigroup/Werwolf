@@ -67,5 +67,10 @@ namespace Werwolf.Inhalt
         public abstract void Rescue();
 
         public abstract object Clone();
+
+        public override string ToString()
+        {
+            return Schreibname;
+        }
     }
 }

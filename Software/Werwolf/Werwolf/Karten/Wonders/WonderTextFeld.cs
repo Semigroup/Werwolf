@@ -30,7 +30,7 @@ namespace Werwolf.Karten
         protected new Size Size;
         protected Image BearbeitetesBild;
         protected DrawBox DrawBox { get; set; }
-        private FixedBox FixedBox;
+        protected FixedBox FixedBox;
 
         public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, Bild FeldBild)
             : base(Karte, Ppm)
@@ -94,18 +94,9 @@ namespace Werwolf.Karten
         {
             if (DrawBox == null)
                 return;
-            float Abstand = Quer ? DrawBox.Size.Width : DrawBox.Size.Height;//FeldBild.Size.Height * Faktor;
+            float Abstand = Quer ? DrawBox.Size.Width : DrawBox.Size.Height;
             float Rest = box.Size.Height - Abstand;
-            //if (DrawBox != null)
-            //    if (Quer)
-            //        Abstand -= DrawBox.box.Width;
-            //    else
-            //        Abstand -= DrawBox.box.Height;
             this.box.X = LotPunkt.X;
-            //if (Oben)
-            //    this.box.Y = LotPunkt.Y - Abstand;
-            //else
-            //    this.box.Y = LotPunkt.Y - FeldBild.Size.Height * Faktor + Abstand;
             if (Oben)
                 this.box.Y = LotPunkt.Y - Rest;
             else

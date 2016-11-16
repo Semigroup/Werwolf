@@ -154,12 +154,15 @@
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
     <Compile Include="Karten\WolfHauptBild.cs" />
+    <Compile Include="Karten\Wonders\WonderAusbauKostenFeld.cs" />
+    <Compile Include="Karten\Wonders\WonderAusbauStufe.cs" />
     <Compile Include="Karten\Wonders\WonderEffekt.cs" />
     <Compile Include="Karten\Wonders\WonderEntwicklungFeld.cs" />
     <Compile Include="Karten\Wonders\WonderBasenFeld.cs" />
     <Compile Include="Karten\Wonders\WonderInfos.cs" />
     <Compile Include="Karten\Wonders\WonderKostenFeld.cs" />
     <Compile Include="Karten\Wonders\WonderNamenFeld.cs" />
+    <Compile Include="Karten\Wonders\WonderReich.cs" />
     <Compile Include="Karten\Wonders\WonderText.cs" />
     <Compile Include="Karten\Wonders\WonderTextFeld.cs" />
     <Compile Include="Karten\WolfHeader.cs" />

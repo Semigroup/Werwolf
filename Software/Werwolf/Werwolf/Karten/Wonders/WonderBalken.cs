@@ -68,21 +68,27 @@ namespace Werwolf.Karten
             {
                 if (bytes[i + 3] > 0)
                 {
-                    bytes[i] = GrundFarbe.B;
-                    bytes[i + 1] = GrundFarbe.G;
-                    bytes[i + 2] = GrundFarbe.R;
-                    bytes[i + 3] = GrundFarbe.A;
+                    byte alpha = bytes[i + 3];
+                    byte beta = (byte)(255 - alpha);
+                    //bytes[i] = GrundFarbe.B;
+                    //bytes[i + 1] = GrundFarbe.G;
+                    //bytes[i + 2] = GrundFarbe.R;
+                    //bytes[i + 3] = GrundFarbe.A;
+                    bytes[i] = (byte)((alpha * bytes[i] + beta * GrundFarbe.B) / 255);
+                    bytes[i + 1] = (byte)((alpha * bytes[i + 1] + beta * GrundFarbe.G) / 255);
+                    bytes[i + 2] = (byte)((alpha * bytes[i + 2] + beta * GrundFarbe.R) / 255);
+                    bytes[i + 3] = 255;
                 }
                 else
                     bytes[i] = bytes[i + 1] = bytes[i + 2] = bytes[i + 3] = 0;
             }
             Marshal.Copy(bytes, 0, data.Scan0, bytes.Length);
             b.UnlockBits(data);
-            using (Graphics g = b.GetHighGraphics())
-            {
-                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.GammaCorrected;
-                g.DrawImage(Vorlage, new Rectangle(new Point(), Vorlage.Size));
-            }
+            //using (Graphics g = b.GetHighGraphics())
+            //{
+            //    //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.GammaCorrected;
+            //    g.DrawImage(Vorlage, new Rectangle(new Point(), Vorlage.Size));
+            //}
             this.BearbeitetesBild = b;
         }
     }

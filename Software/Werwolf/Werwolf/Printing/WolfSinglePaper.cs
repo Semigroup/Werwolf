@@ -59,10 +59,26 @@ namespace Werwolf.Printing
             if (Karten.Count < 9)
             {
                 Karten.Add(Karte);
+                Karte.setup(0);
+                if (Karte.Size.Width > Seite.Width || Karte.Size.Height > Seite.Height)
+                    PageSize = iTextSharp.text.PageSize.A3;
                 return true;
             }
             else
                 return false;
+        }
+
+        public override float getMin()
+        {
+            return Seite.Width;
+        }
+        public override float getMax()
+        {
+            return Seite.Width;
+        }
+        public override float getSpace()
+        {
+            return Seite.Width * Seite.Height;
         }
 
         public override void setup(RectangleF box)
@@ -74,6 +90,7 @@ namespace Werwolf.Printing
                 item.setup(box);
 
             SizeF karte = Karten.First().box.Size;
+
             SizeF n = Seite.Size.div(karte);
             NumberOfCards = new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
             SizeF Offset;
