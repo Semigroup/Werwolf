@@ -226,12 +226,6 @@ namespace Werwolf.Karten
             if (HauptBild.Visible())
                 HauptBild.setup(HauptBild.box);
 
-            //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
-
-            //con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);/////////////
-            //if (BildDarstellung.Existiert)
-            //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
-
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);

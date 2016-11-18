@@ -46,7 +46,7 @@ namespace Werwolf.Karten
         {
             ImageSize = TextBild.GetImageSize();
             this.box.Height = Font.yMass('_');
-            this.box.Width = box.Height * ImageSize.Width / ImageSize.Height;
+            this.box.Width = ImageSize.Width * box.Height / ImageSize.Height;
         }
         public override void setup(RectangleF box)
         {

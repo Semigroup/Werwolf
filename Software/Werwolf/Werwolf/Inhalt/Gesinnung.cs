@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assistment.Xml;
+using Assistment.Texts;
 
 namespace Werwolf.Inhalt
 {
@@ -52,6 +53,14 @@ namespace Werwolf.Inhalt
         public override void Rescue()
         {
             Aufgabe.Rescue();
+        }
+
+        public Text GetText(xFont Font)
+        {
+            if (Aufgabe.Anzahl > 0)
+                return Aufgabe.ProduceTexts(Font)[0];
+            else 
+                return null;
         }
     }
 }

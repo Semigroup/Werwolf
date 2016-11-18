@@ -16,7 +16,8 @@ namespace Werwolf.Karten
     {
         private DrawBox Text;
         private FixedBox FixedBox;
-        private Whitespace WhiteSpace = new Whitespace(0,0, true);
+        private Whitespace WhiteSpace = new Whitespace(0, 0, true);
+        private DrawBox Spieleranzahl;
 
         private FontGraphicsMeasurer LastFont;
         private FontGraphicsMeasurer LastFlavourFont;
@@ -77,17 +78,34 @@ namespace Werwolf.Karten
             WhiteSpace.box.Width = MovedInnenBox.Width - TextDarstellung.Rand.Width * Faktor * 2;
             WhiteSpace.box.Height = Faktor;
 
-            FixedBox = new FixedBox(MovedInnenBox.Size, Text.Geometry(TextDarstellung.Rand.mul(Faktor)));
+            DrawBox TextBox = Text.Geometry(TextDarstellung.Rand.mul(Faktor));
+            FixedBox = new FixedBox(MovedInnenBox.Size, TextBox);
             FixedBox.Alignment = new SizeF(0.5f, 1);
             FixedBox.setup(MovedInnenBox);
 
             MovedAussenBox = AussenBox.move(box.Location);
+
+            Text SaT = Karte.Gesinnung.GetText(InfoDarstellung.FontMeasurer);
+            if (SaT != null)
+            {
+                Spieleranzahl = SaT
+                .Geometry(InfoDarstellung.Rand.mul(Faktor))
+                .Colorize(InfoDarstellung.Farbe.ToBrush());
+                Spieleranzahl.setup(MovedInnenBox);
+                Spieleranzahl.Bottom = Text.Top;
+                Spieleranzahl.Left = MovedInnenBox.Left;
+            }
+            else
+                Spieleranzahl = null;
+
         }
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
             FixedBox.Move(ToMove);
             MovedAussenBox = MovedAussenBox.move(ToMove);
+            if (Spieleranzahl != null)
+                Spieleranzahl.Move(ToMove);
         }
         public override void draw(DrawContext con)
         {
@@ -95,6 +113,8 @@ namespace Werwolf.Karten
             MovedAussenBox.Y += Text.Top;
             con.fillRectangle(TextDarstellung.Farbe.ToBrush(), MovedAussenBox);
             FixedBox.draw(con);
+            if (Spieleranzahl != null)
+                Spieleranzahl.draw(con);
         }
     }
 }
