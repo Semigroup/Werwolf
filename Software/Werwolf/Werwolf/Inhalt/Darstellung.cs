@@ -109,7 +109,8 @@ namespace Werwolf.Inhalt
             Werwolfkarte,
             AktionsKarte,
             WondersKarte,
-            WondersReichKarte
+            WondersReichKarte,
+            WonderGlobalesProjekt
         }
 
         public KartenModus Modus { get; set; }

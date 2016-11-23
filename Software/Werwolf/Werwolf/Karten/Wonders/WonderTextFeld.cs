@@ -31,6 +31,7 @@ namespace Werwolf.Karten
         protected Image BearbeitetesBild;
         protected DrawBox DrawBox { get; set; }
         protected FixedBox FixedBox;
+        protected Region Clip;
 
         public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, Bild FeldBild)
             : base(Karte, Ppm)
@@ -101,6 +102,11 @@ namespace Werwolf.Karten
                 this.box.Y = LotPunkt.Y - Rest;
             else
                 this.box.Y = LotPunkt.Y - box.Size.Height + Rest;
+
+            if (Oben)
+                Clip = new Region(new RectangleF(0, box.Height - Abstand, box.Width, Abstand).mul(Ppm /Faktor));
+            else
+                Clip = new Region(new RectangleF(0, 0, box.Width, Abstand).mul(Ppm / Faktor));
         }
 
         public override void draw(DrawContext con)
@@ -130,6 +136,7 @@ namespace Werwolf.Karten
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {
+                g.Clip = Clip;
                 using (Image img = Image.FromFile(FeldBild.TotalFilePath))
                     g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
                 g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);

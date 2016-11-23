@@ -70,8 +70,13 @@ namespace Werwolf.Karten
 
                     foreach (var item in Basen)
                     {
-                        item.Karte = Karte;
                         item.Ppm = Ppm;
+                        item.Karte = Karte;
+                    }
+                    foreach (var item in Entwicklungen)
+                    {
+                        item.Ppm = Ppm;
+                        item.Karte = Karte;
                     }
                 }
         }

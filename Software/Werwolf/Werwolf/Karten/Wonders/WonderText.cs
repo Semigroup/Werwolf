@@ -109,8 +109,10 @@ namespace Werwolf.Karten
         }
         public override void draw(DrawContext con)
         {
-            MovedAussenBox.Height -= Text.Top;
-            MovedAussenBox.Y += Text.Top;
+            float off = Text.Top - MovedAussenBox.Top;
+            //con.fillRectangle(Brushes.Red, MovedAussenBox);
+            MovedAussenBox.Height -= off;
+            MovedAussenBox.Y += off;
             con.fillRectangle(TextDarstellung.Farbe.ToBrush(), MovedAussenBox);
             FixedBox.draw(con);
             if (Spieleranzahl != null)

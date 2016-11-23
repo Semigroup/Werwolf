@@ -51,13 +51,14 @@ namespace Werwolf.Karten
                         Effekt.Karte = SubKarte;
                     }
                     Text Text = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer);
-                    Text.addWhitespace(Text.getMax());
+                    //Text.addWhitespace(Text.getMax());
                     Text.alignment = 1;
-                    CString cs = new CString(Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor)));
-                    cs.addAbsatz();
-                    cs.addWhitespace(Karte.HintergrundDarstellung.Size.Width * Faktor);
-                    cs.alignment = 1;
-                    this.Text = cs;
+                    this.Text = Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor));
+                    //CString cs = new CString(Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor)));
+                    //cs.addAbsatz();
+                    //cs.addWhitespace(Karte.HintergrundDarstellung.Size.Width * Faktor);
+                    //cs.alignment = 1;
+                    //this.Text = cs;
                 }
             }
         }
@@ -69,8 +70,11 @@ namespace Werwolf.Karten
         }
         public override void update()
         {
-            Balken.update();
-            Effekt.update();
+            if (Balken != null)
+            {
+                Balken.update();
+                Effekt.update();
+            }
         }
 
         public override bool Visible()
