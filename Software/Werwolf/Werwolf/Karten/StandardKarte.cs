@@ -27,6 +27,7 @@ namespace Werwolf.Karten
         public WonderText WonderText { get; set; }
         public WonderReich WonderReich { get; set; }
         public WonderGlobalesReich WonderGlobalesReich { get; set; }
+        public WondersDoppelBild WondersDoppelBild { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -45,7 +46,9 @@ namespace Werwolf.Karten
                         case Inhalt.HintergrundDarstellung.KartenModus.WondersReichKarte:
                             return new WolfBox[] { HauptBild, WonderReich };
                         case Inhalt.HintergrundDarstellung.KartenModus.WonderGlobalesProjekt:
-                            return new WolfBox[] { HauptBild, WonderGlobalesReich };//
+                            return new WolfBox[] { HauptBild, WonderGlobalesReich };
+                        case Inhalt.HintergrundDarstellung.KartenModus.WondersAuswahlKarte:
+                            return new WolfBox[] { WondersDoppelBild };
                         default:
                             throw new NotImplementedException();
                     }
@@ -86,6 +89,7 @@ namespace Werwolf.Karten
             WonderText = new WonderText(Karte, ppm);
             WonderReich = new WonderReich(Karte, ppm);
             WonderGlobalesReich = new WonderGlobalesReich(Karte, ppm);
+            WondersDoppelBild = new WondersDoppelBild(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -260,6 +264,22 @@ namespace Werwolf.Karten
                 con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
         }
+        public void drawWondersAuswahl(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.draw(con);
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+            }
+        }
         public override void draw(DrawContext con)
         {
             switch (Karte.HintergrundDarstellung.Modus)
@@ -276,6 +296,9 @@ namespace Werwolf.Karten
                 case Inhalt.HintergrundDarstellung.KartenModus.WondersReichKarte:
                 case Inhalt.HintergrundDarstellung.KartenModus.WonderGlobalesProjekt:
                     drawWondersReich(con);
+                    break;
+                case Inhalt.HintergrundDarstellung.KartenModus.WondersAuswahlKarte:
+                    drawWondersAuswahl(con);
                     break;
                 default:
                     throw new NotImplementedException();

@@ -12,9 +12,19 @@ namespace Werwolf.Karten
 {
     public class WonderEntwicklungFeld : WonderTextFeld
     {
+        private static string[] PWeiss;
+        private static string[] PSchwarz;
+
         private string LastName;
         public readonly int Index;
         private FontGraphicsMeasurer SmallFont;
+
+        static WonderEntwicklungFeld()
+        {
+            PSchwarz = new string[14];
+            PSchwarz.CountMap(i => "P" + i);
+            PWeiss = PSchwarz.Map(x => x + "W").ToArray();
+        }
 
         public WonderEntwicklungFeld(Karte Karte, float Ppm, int Index)
             : base(Karte, Ppm, false, true, Karte.Universe.TextBilder["KleinesNamenfeld"])
@@ -34,10 +44,20 @@ namespace Werwolf.Karten
             {
                 Karte Entwicklung = Karte.Entwicklungen[Index];
                 SmallFont = new FontGraphicsMeasurer(Entwicklung.TitelDarstellung.Font.Name, 6);
+                FontGraphicsMeasurer EffektFont = new FontGraphicsMeasurer(Entwicklung.TitelDarstellung.Font.Name, 8);
                 this.LastName = Entwicklung.Schreibname;
                 string color = Entwicklung.HintergrundDarstellung.Farbe.tween(Color.Black, 0.5f).ToHexString();
-                DrawBox = new Text(@"\c" + color + Entwicklung.Schreibname, SmallFont) // + ""
-                    .Geometry(0.5f * Faktor, 0.5f * Faktor, 2.5f * Faktor, 0.5f * Faktor); // 
+
+                Text Text = new Text();
+                //if (Entwicklung.Effekt.Anzahl > 0)
+                //{
+                //    Text Effekt = Entwicklung.Effekt.Replace(PWeiss, PSchwarz).ProduceTexts(EffektFont)[0];
+                //    Effekt.RemoveWhitespaces();
+                //    Text.addRange(Effekt);
+                //    Text.addWhitespace(EffektFont.getWhitespace());
+                //}
+                Text.addRegex(@"\c" + color + Entwicklung.Schreibname, SmallFont);
+                DrawBox = Text.Geometry(0.5f * Faktor, 0.5f * Faktor, 2.5f * Faktor, 0.5f * Faktor);
                 DrawBoxChanged = true;
             }
         }

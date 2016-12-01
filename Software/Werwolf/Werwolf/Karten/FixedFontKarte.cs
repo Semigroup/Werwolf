@@ -14,9 +14,12 @@ namespace Werwolf.Karten
 {
     public class FixedFontKarte : WolfBox
     {
-        public FixedFontKarte(Karte Karte, float ppm)
+        public bool Ruckseite { get; set; }
+
+        public FixedFontKarte(Karte Karte, float ppm, bool Ruckseite)
             : base(Karte, ppm)
         {
+            this.Ruckseite = Ruckseite;
         }
 
         public override float getMax()
@@ -41,8 +44,12 @@ namespace Werwolf.Karten
         }
         public override void draw(DrawContext con)
         {
-            using (Image image = Karte.GetImage(Ppm))
-                con.drawImage(image, AussenBox.move(box.Location));
+            if (Ruckseite)
+                using (Image image = Karte.GetBackImage(Ppm, Color.Black))
+                    con.drawImage(image, AussenBox.move(box.Location));
+            else
+                using (Image image = Karte.GetImage(Ppm))
+                    con.drawImage(image, AussenBox.move(box.Location));
         }
         public override void Move(PointF ToMove)
         {

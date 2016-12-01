@@ -49,6 +49,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.floatBox1 = new Assistment.form.FloatBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,7 +149,7 @@
             // 
             // Drucken
             // 
-            this.Drucken.Location = new System.Drawing.Point(1035, 469);
+            this.Drucken.Location = new System.Drawing.Point(1035, 523);
             this.Drucken.Name = "Drucken";
             this.Drucken.Size = new System.Drawing.Size(152, 43);
             this.Drucken.TabIndex = 11;
@@ -161,7 +163,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(852, 440);
+            this.progressBar1.Location = new System.Drawing.Point(852, 494);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(335, 23);
             this.progressBar1.Step = 1;
@@ -186,7 +188,7 @@
             // 
             this.ppmBox1.Location = new System.Drawing.Point(852, 363);
             this.ppmBox1.Name = "ppmBox1";
-            this.ppmBox1.Ppm = 11.81102F;
+            this.ppmBox1.Ppm = 24F;
             this.ppmBox1.PpmMaximum = 1000F;
             this.ppmBox1.PpmMinimum = 0.001F;
             this.ppmBox1.Size = new System.Drawing.Size(177, 44);
@@ -210,7 +212,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(853, 469);
+            this.button1.Location = new System.Drawing.Point(853, 523);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(176, 43);
             this.button1.TabIndex = 18;
@@ -251,11 +253,33 @@
             this.checkBox4.Text = "Trennlinie auf Vorderseite?";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
+            // floatBox1
+            // 
+            this.floatBox1.Location = new System.Drawing.Point(1005, 425);
+            this.floatBox1.Name = "floatBox1";
+            this.floatBox1.Size = new System.Drawing.Size(51, 22);
+            this.floatBox1.TabIndex = 22;
+            this.floatBox1.UserValue = 300F;
+            this.floatBox1.UserValueMaximum = 3.402823E+38F;
+            this.floatBox1.UserValueMinimum = 0F;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(849, 425);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(150, 17);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Maximale Größe in MB";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 814);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.floatBox1);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
@@ -306,5 +330,7 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
+        private Assistment.form.FloatBox floatBox1;
+        private System.Windows.Forms.Label label4;
     }
 }

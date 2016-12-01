@@ -110,7 +110,6 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             float off = Text.Top - MovedAussenBox.Top;
-            //con.fillRectangle(Brushes.Red, MovedAussenBox);
             MovedAussenBox.Height -= off;
             MovedAussenBox.Y += off;
             con.fillRectangle(TextDarstellung.Farbe.ToBrush(), MovedAussenBox);

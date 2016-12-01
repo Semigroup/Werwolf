@@ -43,7 +43,6 @@ namespace Werwolf.Forms
                         + "Decks, die echt mehr als 99 Karten besitzen, können auf Grund von Memory-Gründen zu einem Programmabsturz führen.");
             }
         }
-
         public Universe Universe
         {
             get { return universe; }
@@ -78,7 +77,8 @@ namespace Werwolf.Forms
                 Mode,
                 checkBox2.Checked,
                 checkBox4.Checked,
-                checkBox3.Checked);
+                checkBox3.Checked,
+                floatBox1.UserValue);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
         }

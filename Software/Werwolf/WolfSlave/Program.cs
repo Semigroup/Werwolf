@@ -90,13 +90,13 @@ namespace WolfSlave
                             if (JobNumber % 2 == 0)
                                 wsp.TryAdd(GetKarte(item.Key, Job));
                             else
-                                wsp.TryAdd(new StandardRuckseite(item.Key, Job.Ppm));
+                                wsp.TryAdd(GetRuckseite(item.Key, Job));
                     wsp.Swapped = JobNumber % 2 == 1;
                     break;
                 case Job.RuckBildMode.Nur:
                     foreach (var item in Job.Deck.GetKarten(JobNumber * 9, 9))
                         for (int i = 0; i < item.Value; i++)
-                            wsp.TryAdd(new StandardRuckseite(item.Key, Job.Ppm));
+                                wsp.TryAdd(GetRuckseite(item.Key, Job));
                     wsp.Swapped = true;
                     break;
                 case Job.RuckBildMode.Gemeinsam:
@@ -107,9 +107,16 @@ namespace WolfSlave
         public static WolfBox GetKarte(Karte Karte, Job Job)
         {
             if (Job.FixedFont)
-                return new FixedFontKarte(Karte, Job.Ppm);
+                return new FixedFontKarte(Karte, Job.Ppm, false);
             else
                 return new StandardKarte(Karte, Job.Ppm);
+        }
+        public static WolfBox GetRuckseite(Karte Karte, Job Job)
+        {
+            if (Job.FixedFont)
+                return new FixedFontKarte(Karte, Job.Ppm, true);
+            else
+                return new StandardRuckseite(Karte, Job.Ppm);
         }
     }
 }

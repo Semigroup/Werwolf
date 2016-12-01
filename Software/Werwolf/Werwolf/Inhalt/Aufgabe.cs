@@ -194,5 +194,26 @@ namespace Werwolf.Inhalt
                 if (item.Bild != null)
                     Universe.TextBilder.Rescue(item.Bild);
         }
+
+        public Aufgabe Replace(string[] oldBilder, string[] newBilder)
+        {
+            Aufgabe a = new Aufgabe();
+            a.Anzahl = Anzahl;
+            a.Fragments = this.Fragments.Map(fragment =>
+            {
+                if (fragment.Bild == null)
+                    return fragment;
+                else 
+                {
+                    int i = oldBilder.IndexOfTrue(x => x == fragment.Bild.Name);
+                    if (i >= 0)
+                        return new Fragment(fragment.Bild.Universe.TextBilder, newBilder[i]);
+                    else
+                        return fragment;
+                }
+            });
+            return a;
+        }
+
     }
 }

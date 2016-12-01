@@ -38,6 +38,10 @@ namespace Werwolf.Printing
         public bool FixedFont { get; set; }
         public bool TrennlinieVorne { get; set; }
         public bool TrennlinieHinten { get; set; }
+        /// <summary>
+        /// Dateigröße in MB
+        /// </summary>
+        public float MaximaleGrose { get; set; }
 
         public Job(Universe Universe, string Pfad)
             : this()
@@ -56,7 +60,8 @@ namespace Werwolf.Printing
         }
         public void Init(Deck Deck, Color HintergrundFarbe, Color TrennlinienFarbe,
             float Ppm, bool Zwischenplatz, RuckBildMode MyMode,
-            bool FixedFont, bool TrennlinieVorne, bool TrennlinieHinten)
+            bool FixedFont, bool TrennlinieVorne, bool TrennlinieHinten,
+            float MaximaleGrose)
         {
             this.Deck = Deck;
             this.HintergrundFarbe = HintergrundFarbe;
@@ -67,6 +72,7 @@ namespace Werwolf.Printing
             this.FixedFont = FixedFont;
             this.TrennlinieVorne = TrennlinieVorne;
             this.TrennlinieHinten = TrennlinieHinten;
+            this.MaximaleGrose = MaximaleGrose;
 
             this.Init(Deck.Universe);
             this.Name = this.Schreibname = Deck.Name + "-Job";
@@ -84,6 +90,7 @@ namespace Werwolf.Printing
             this.FixedFont = Loader.XmlReader.getBoolean("FixedFont");
             this.TrennlinieVorne = Loader.XmlReader.getBoolean("TrennlinieVorne");
             this.TrennlinieHinten = Loader.XmlReader.getBoolean("TrennlinieHinten");
+            this.MaximaleGrose = Loader.XmlReader.getFloat("MaximaleGrose");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -98,6 +105,7 @@ namespace Werwolf.Printing
             XmlWriter.writeEnum<RuckBildMode>("MyMode", MyMode);
             XmlWriter.writeBoolean("TrennlinieVorne", TrennlinieVorne);
             XmlWriter.writeBoolean("TrennlinieHinten", TrennlinieHinten);
+            XmlWriter.writeFloat("MaximaleGrose", MaximaleGrose);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -168,7 +176,10 @@ namespace Werwolf.Printing
             for (int i = 0; i < numberOfJobs; i++)
                 files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
 
-            PDFHelper.Concat(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), files);
+            if (MyMode == RuckBildMode.Einzeln)
+                PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+            else
+                PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
             foreach (var item in files)
                 File.Delete(item);
             File.Delete(JobPath);
