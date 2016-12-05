@@ -28,6 +28,7 @@ namespace Werwolf.Karten
         public WonderReich WonderReich { get; set; }
         public WonderGlobalesReich WonderGlobalesReich { get; set; }
         public WondersDoppelBild WondersDoppelBild { get; set; }
+        public WonderDoppelName WonderDoppelName { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -48,7 +49,7 @@ namespace Werwolf.Karten
                         case Inhalt.HintergrundDarstellung.KartenModus.WonderGlobalesProjekt:
                             return new WolfBox[] { HauptBild, WonderGlobalesReich };
                         case Inhalt.HintergrundDarstellung.KartenModus.WondersAuswahlKarte:
-                            return new WolfBox[] { WondersDoppelBild };
+                            return new WolfBox[] { WondersDoppelBild, WonderDoppelName };
                         default:
                             throw new NotImplementedException();
                     }
@@ -90,6 +91,7 @@ namespace Werwolf.Karten
             WonderReich = new WonderReich(Karte, ppm);
             WonderGlobalesReich = new WonderGlobalesReich(Karte, ppm);
             WondersDoppelBild = new WondersDoppelBild(Karte, ppm);
+            WonderDoppelName = new WonderDoppelName(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -233,6 +235,8 @@ namespace Werwolf.Karten
             HauptBild.CenterBottom = MovedInnenBox.Bottom;
             if (HauptBild.Visible())
                 HauptBild.setup(HauptBild.box);
+
+            con.fillRectangle(Karte.TitelDarstellung.Farbe.ToBrush(), MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())

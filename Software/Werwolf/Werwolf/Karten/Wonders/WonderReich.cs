@@ -51,14 +51,17 @@ namespace Werwolf.Karten
                         Effekt.Karte = SubKarte;
                     }
                     Text Text = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer);
-                    //Text.addWhitespace(Text.getMax());
                     Text.alignment = 1;
                     this.Text = Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor));
-                    //CString cs = new CString(Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor)));
-                    //cs.addAbsatz();
-                    //cs.addWhitespace(Karte.HintergrundDarstellung.Size.Width * Faktor);
-                    //cs.alignment = 1;
-                    //this.Text = cs;
+                    if (Karte.MeineAufgaben.Anzahl > 0)
+                    {
+                        Text t2 = Karte.MeineAufgaben.ProduceTexts(Karte.TextDarstellung.EffektFontMeasurer)[0];
+                        t2.alignment = 1;
+                        this.Text *= t2;//new CString(Text,
+                            //new Whitespace(0, 0, true),
+                            //t2);
+                        //this.Text = this.Text.Colorize(Brushes.Red);
+                    }
                 }
             }
         }

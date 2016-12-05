@@ -18,7 +18,7 @@ namespace Werwolf.Karten
         private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 14); // 16
 
         public WonderKostenFeld(Karte Karte, float Ppm)
-            : base(Karte, Ppm, true, false, Karte.Universe.TextBilder["KleinesNamenfeldTransponiert"])
+            : base(Karte, Ppm, true, false, false, Karte.Universe.TextBilder["KleinesNamenfeldTransponiert"])
         {
 
         }

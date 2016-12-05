@@ -27,7 +27,7 @@ namespace Werwolf.Karten
         }
 
         public WonderEntwicklungFeld(Karte Karte, float Ppm, int Index)
-            : base(Karte, Ppm, false, true, Karte.Universe.TextBilder["KleinesNamenfeld"])
+            : base(Karte, Ppm, false, true, false, Karte.Universe.TextBilder["KleinesNamenfeld"])
         {
             this.Index = Index;
             OnKarteChanged();

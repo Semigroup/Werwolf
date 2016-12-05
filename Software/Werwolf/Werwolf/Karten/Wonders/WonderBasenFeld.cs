@@ -16,7 +16,7 @@ namespace Werwolf.Karten
         private FontGraphicsMeasurer SmallFont;
 
         public WonderBasenFeld(Karte Karte, float Ppm, int Index)
-            : base(Karte, Ppm, true, true, Karte.Universe.TextBilder["KleinesNamenfeldTransponiert"])
+            : base(Karte, Ppm, true, true, false, Karte.Universe.TextBilder["KleinesNamenfeldTransponiert"])
         {
             this.Index = Index;
             OnKarteChanged();

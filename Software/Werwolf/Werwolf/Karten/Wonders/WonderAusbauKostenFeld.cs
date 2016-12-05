@@ -102,7 +102,7 @@ namespace Werwolf.Karten
 
 
         public WonderAusbauKostenFeld(Karte Karte, float Ppm)
-            : base(Karte, Ppm, false, false, Karte.Universe.TextBilder["KleinesNamenfeldVersatz"])
+            : base(Karte, Ppm, false, false, false, Karte.Universe.TextBilder["KleinesNamenfeldVersatz"])
         {
 
         }

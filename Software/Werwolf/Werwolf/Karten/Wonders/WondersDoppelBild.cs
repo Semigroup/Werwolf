@@ -9,22 +9,15 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using Assistment.Extensions;
 using Werwolf.Inhalt;
+using System.Drawing.Drawing2D;
 
 namespace Werwolf.Karten
 {
     public class WondersDoppelBild : WolfBox
     {
-        public float CenterTop { get; set; }
-        public float CenterBottom { get; set; }
-
-        public PointF PointOfInterest;
-
-        private Bitmap GefiltertesBild;
-
-        private Color LastErsteFilterFarbe;
-        private Color LastZweiteFilterFarbe;
-        private BildDarstellung.Filter LastFilter;
-        private string LastFilePath;
+        private Karte Reich1, Reich2;
+        private bool NeuZeichnen;
+        private Image Bild;
 
         public WondersDoppelBild(Karte Karte, float Ppm)
             : base(Karte, Ppm)
@@ -34,68 +27,117 @@ namespace Werwolf.Karten
 
         public override bool Visible()
         {
-            return base.Visible() && BildDarstellung.Existiert && Karte.HauptBild.FilePath.Length > 0;
+            return base.Visible() && BildDarstellung.Existiert;
         }
 
         public override void update()
         {
         }
-
-        public override void setup(RectangleF box)
+        public override void OnPpmChanged()
         {
-            this.box = box;
-            RectangleF MovedAussenBox = AussenBox.move(box.Location);
-            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
-            PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * CenterTop + CenterBottom) / 4);
-
-            if (BildDarstellung.MyFilter != Inhalt.BildDarstellung.Filter.Keiner)
+            base.OnPpmChanged();
+            if (Karte != null)
             {
-                if (!(LastErsteFilterFarbe == BildDarstellung.ErsteFilterFarbe
-                    && LastZweiteFilterFarbe == BildDarstellung.ZweiteFilterFarbe
-                    && LastFilter == BildDarstellung.MyFilter
-                    && LastFilePath == Karte.HauptBild.FilePath
-                    ))
-                {
-                    LastErsteFilterFarbe = BildDarstellung.ErsteFilterFarbe;
-                    LastZweiteFilterFarbe = BildDarstellung.ZweiteFilterFarbe;
-                    LastFilter = BildDarstellung.MyFilter;
-                    LastFilePath = Karte.HauptBild.FilePath;
-                    Filter();
-                }
+                Size s = Karte.HintergrundDarstellung.Size
+                    .sub(Karte.HintergrundDarstellung.Rand.mul(2))
+                    .mul(ppm).ToSize();
+                if ((Bild == null || !Bild.Size.Equals(s)))
+                    Bild = new Bitmap(s.Width, s.Height);
+            }
+        }
+        public override void OnKarteChanged()
+        {
+            base.OnKarteChanged();
+            if (Karte == null)
+            {
+                Bild = null;
+                return;
             }
 
+            if (Karte.Entwicklungen.Length > 0)
+            {
+                if (Reich1 != Karte.Entwicklungen[0])
+                    NeuZeichnen = true;
+                Reich1 = Karte.Entwicklungen[0];
+            }
+            else
+            {
+                if (Reich1 != null)
+                    NeuZeichnen = true;
+                Reich1 = null;
+            }
+            if (Karte.Entwicklungen.Length > 1)
+            {
+                if (Reich2 != Karte.Entwicklungen[1])
+                    NeuZeichnen = true;
+                Reich2 = Karte.Entwicklungen[1];
+            }
+            else
+            {
+                if (Reich2 != null)
+                    NeuZeichnen = true;
+                Reich2 = null;
+            }
+            OnPpmChanged();
+        }
+        public override void setup(RectangleF box)
+        {
+            this.box = AussenBox.move(box.Location);
         }
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
-            PointOfInterest = PointOfInterest.add(ToMove);
         }
 
         public override void draw(DrawContext con)
         {
             RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
-            if (BildDarstellung.MyFilter == Inhalt.BildDarstellung.Filter.Keiner)
-                con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
-            else
-                con.DrawCenteredImage(Karte.HauptBild, GefiltertesBild, PointOfInterest, MovedInnenBox);
+            if (NeuZeichnen && Bild != null)
+            {
+                ErstelleBild();
+                con.drawImage(Bild, MovedInnenBox);
+            }
         }
-        private void Filter()
+        private void ErstelleBild()
         {
-            if (GefiltertesBild != null)
-                GefiltertesBild.Dispose();
+            Size s = Bild.Size;
+            float h = HintergrundDarstellung.Anker.Y * ppm;
+            float heigh = s.Height - h;
+            PointF Zenter = new PointF(s.Width / 4, heigh / 4);
 
-            Bitmap Bitmap = new Bitmap(Karte.HauptBild.TotalFilePath);
-            BitmapData Data = Bitmap.LockBits(
-                new Rectangle(new Point(), Bitmap.Size),
-                ImageLockMode.ReadWrite,
-                Bitmap.PixelFormat);
-            int bufferSize = Data.Height * Data.Stride;
-            byte[] bytes = new byte[bufferSize]; //BGRA
-            Marshal.Copy(Data.Scan0, bytes, 0, bufferSize);
-            BildDarstellung.FilterBytes(bytes, Bitmap.PixelFormat);
-            Marshal.Copy(bytes, 0, Data.Scan0, bufferSize);
-            Bitmap.UnlockBits(Data);
-            GefiltertesBild = Bitmap;
+            using (Graphics g = Bild.GetHighGraphics())
+            {
+                if (Reich1 != null)
+                {
+                    SizeF FeldSize = Reich1.HintergrundDarstellung.Size;
+                    float skal = heigh / FeldSize.Height;
+                    RectangleF Rec = Reich1.HauptBild.Rectangle.mul(skal / Faktor);
+                    Rec = Rec.move(Zenter);
+                    using (Image img = Reich1.HauptBild.Image)
+                        g.DrawImage(img, Rec);
+                }
+
+                GraphicsPath gp = new GraphicsPath();
+                gp.AddLine(0, s.Height, 0, s.Height - h);
+                gp.AddLine(0, s.Height - h, s.Width, h);
+                gp.AddLine(s.Width, h, s.Width, s.Height);
+                gp.AddLine(s.Width, s.Height, 0, s.Height);
+                gp.CloseFigure();
+                g.Clip = new Region(gp);
+                g.TranslateTransform(s.Width / 2, s.Height / 2);
+                g.RotateTransform(180);
+                g.TranslateTransform(-s.Width / 2, -s.Height / 2);
+                if (Reich2 != null)
+                {
+                    SizeF FeldSize = Reich2.HintergrundDarstellung.Size;
+                    float skal = heigh / FeldSize.Height;
+                    RectangleF Rec = Reich2.HauptBild.Rectangle.mul(skal / Faktor);
+                    Rec = Rec.move(Zenter);
+                    using (Image img = Reich2.HauptBild.Image)
+                        g.DrawImage(img, Rec);
+                }
+
+            }
         }
     }
 }

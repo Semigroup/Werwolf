@@ -18,6 +18,7 @@ namespace Werwolf.Karten
         public Bild FeldBild;
         public string Text;
         public bool Quer;
+        public bool AufKopf;
 
         protected string LastFilePath;
         protected SizeF LastFeldSize;
@@ -29,15 +30,25 @@ namespace Werwolf.Karten
 
         protected new Size Size;
         protected Image BearbeitetesBild;
-        protected DrawBox DrawBox { get; set; }
-        protected FixedBox FixedBox;
+        public DrawBox DrawBox { get; set; }
+        public FixedBox FixedBox;
         protected Region Clip;
 
-        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, Bild FeldBild)
+        public float Drehung
+        {
+            get
+            {
+                return (Quer ? -90 : 0)
+                    + (AufKopf ? 180 : 0);
+            }
+        }
+
+        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, bool AufKopf, Bild FeldBild)
             : base(Karte, Ppm)
         {
             this.Oben = Oben;
             this.Quer = Quer;
+            this.AufKopf = AufKopf;
             this.FeldBild = FeldBild;
         }
 
@@ -69,20 +80,15 @@ namespace Werwolf.Karten
 
             RectangleF Rectangle = new RectangleF(new PointF(), this.box.Size);
             if (Quer)
-            {
-                Rectangle.X = -Size.Height * Faktor / Ppm;
                 Rectangle.Size = Rectangle.Size.permut();
-            }
 
             FixedBox = new FixedBox(Rectangle.Size, DrawBox);
-            if (Oben)
+            if (Oben ^ AufKopf)
                 FixedBox.Alignment = new SizeF(0.5f, 1);
             else
                 FixedBox.Alignment = new SizeF(0.5f, 0);
             if (Quer)
-            {
                 FixedBox.Alignment = new SizeF(1 - FixedBox.Alignment.Height, FixedBox.Alignment.Width);
-            }
 
             FixedBox.setup(Rectangle);
         }
@@ -104,7 +110,7 @@ namespace Werwolf.Karten
                 this.box.Y = LotPunkt.Y - box.Size.Height + Rest;
 
             if (Oben)
-                Clip = new Region(new RectangleF(0, box.Height - Abstand, box.Width, Abstand).mul(Ppm /Faktor));
+                Clip = new Region(new RectangleF(0, box.Height - Abstand, box.Width, Abstand).mul(Ppm / Faktor));
             else
                 Clip = new Region(new RectangleF(0, 0, box.Width, Abstand).mul(Ppm / Faktor));
         }
@@ -139,9 +145,17 @@ namespace Werwolf.Karten
                 g.Clip = Clip;
                 using (Image img = Image.FromFile(FeldBild.TotalFilePath))
                     g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
-                g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);
+
+                g.TranslateTransform(Size.Width / 2, Size.Height / 2);
+                g.RotateTransform(Drehung);
                 if (Quer)
-                    g.RotateTransform(-90);
+                    g.TranslateTransform(-Size.Height / 2, -Size.Width / 2);
+                else
+                    g.TranslateTransform(-Size.Width / 2, -Size.Height / 2);
+
+                g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);
+                //if (Quer)
+                //    g.RotateTransform(-90);
                 using (DrawContextGraphics dcg = new DrawContextGraphics(g))
                     FixedBox.draw(dcg);
             }

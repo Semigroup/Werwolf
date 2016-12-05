@@ -154,6 +154,7 @@
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
     <Compile Include="Karten\WolfHauptBild.cs" />
+    <Compile Include="Karten\Wonders\WonderDoppelName.cs" />
     <Compile Include="Karten\Wonders\WondersDoppelBild.cs" />
     <Compile Include="Karten\Wonders\WonderGlobalesReich.cs" />
     <Compile Include="Karten\Wonders\WonderAusbauKostenFeld.cs" />
