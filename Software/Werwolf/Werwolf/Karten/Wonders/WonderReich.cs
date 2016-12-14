@@ -57,10 +57,7 @@ namespace Werwolf.Karten
                     {
                         Text t2 = Karte.MeineAufgaben.ProduceTexts(Karte.TextDarstellung.EffektFontMeasurer)[0];
                         t2.alignment = 1;
-                        this.Text *= t2;//new CString(Text,
-                            //new Whitespace(0, 0, true),
-                            //t2);
-                        //this.Text = this.Text.Colorize(Brushes.Red);
+                        this.Text *= t2;
                     }
                 }
             }
@@ -106,7 +103,7 @@ namespace Werwolf.Karten
                 float breite = Stufen.Map(x => x.Size.Width).Sum();
                 float rest = this.HintergrundDarstellung.Size.Width * Faktor - breite;
                 float part = rest / (Stufen.Length + 1);
-                float hohe = (this.HintergrundDarstellung.Size.Height - 21) * Faktor;
+                float hohe = (this.HintergrundDarstellung.Size.Height - 23) * Faktor;
                 PointF loc = new PointF(part, hohe);
                 if (rest < 0)
                 {

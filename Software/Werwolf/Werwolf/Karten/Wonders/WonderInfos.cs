@@ -17,7 +17,7 @@ namespace Werwolf.Karten
         public WonderNamenFeld Name;
         public WonderKostenFeld Kosten;
         public WonderBasenFeld[] Basen = new WonderBasenFeld[1];
-        public WonderEntwicklungFeld[] Entwicklungen = new WonderEntwicklungFeld[3];
+        public WonderEntwicklungFeld[] Entwicklungen = new WonderEntwicklungFeld[5];
 
         private bool Initialized = false;
 
