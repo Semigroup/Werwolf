@@ -170,20 +170,11 @@ namespace Werwolf.Karten
             HauptBild.CenterBottom = bottom;
             HauptBild.setup(HauptBild.box);
 
-            //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
-
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
             if (HintergrundDarstellung.Existiert)
             {
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
-            //if (BildDarstellung.Existiert)
-            //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
@@ -206,20 +197,11 @@ namespace Werwolf.Karten
             HauptBild.CenterBottom = bottom;
             HauptBild.setup(HauptBild.box);
 
-            //PointF PointOfInterest = new PointF(MovedAussenBoxCenter.X, (3 * top + bottom) / 4);
-
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
             if (HintergrundDarstellung.Existiert)
             {
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
-            //if (BildDarstellung.Existiert)
-            //    con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
@@ -241,11 +223,6 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
         }
         public void drawWondersReich(DrawContext con)
         {
@@ -262,11 +239,6 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
         }
         public void drawWondersAuswahl(DrawContext con)
         {
@@ -278,11 +250,6 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.draw(con);
-            if (HintergrundDarstellung.Rand.Inhalt() > 0)
-            {
-                HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
-            }
         }
         public override void draw(DrawContext con)
         {
@@ -306,6 +273,16 @@ namespace Werwolf.Karten
                     break;
                 default:
                     throw new NotImplementedException();
+            }
+            drawRand(con);
+        }
+        public void drawRand(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(box.Location);
+            if (HintergrundDarstellung.Rand.Inhalt() > 0)
+            {
+                HintergrundDarstellung.MakeRandBild(ppm);
+                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
         }
     }

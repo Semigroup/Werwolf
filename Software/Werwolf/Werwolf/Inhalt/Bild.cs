@@ -80,8 +80,8 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                if (FilePath == "")
-                    return LeerBild;
+                if (FilePath.Length == 0)
+                    return LeerBild.Clone() as Image;
                 string tot = TotalFilePath;
                 if (File.Exists(tot))
                     return Image.FromFile(tot);

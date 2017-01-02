@@ -14,9 +14,12 @@ namespace Werwolf.Karten
 {
     public class WonderReich : WolfBox
     {
+        TextBild[,] AusbauStufen;
+
         Karte SubKarte = new Karte();
-        WonderBalken Balken;
-        WonderEffekt Effekt;
+        //WonderBalken Balken;
+        //WonderEffekt Effekt;
+        WonderProduktionsFeld Produktion;
         DrawBox Text;
         DrawBox[] Stufen;
         /// <summary>
@@ -28,28 +31,44 @@ namespace Werwolf.Karten
             : base(Karte, Ppm)
         {
         }
+
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
             if (Karte != null)
             {
+                if (AusbauStufen == null)
+                {
+                    AusbauStufen = new TextBild[4, 4];
+                    for (int i = 0; i < 4; i++)
+                        for (int j = 0; j < 4; j++)
+                            AusbauStufen[i, j] = Karte.Universe.TextBilder["Ausbaustufe " + (i + 1) + "/" + (j + 1)];
+                }
+
                 if (Karte.Basen.Length > 0)
                 {
-                    Karte.Basen[0].Assimilate(SubKarte);
-                    SubKarte.Schreibname = "";
-                    SubKarte.HintergrundDarstellung = SubKarte.HintergrundDarstellung.Clone() as HintergrundDarstellung;
-                    SubKarte.HintergrundDarstellung.Rand = new SizeF();
+                    //Karte.Basen[0].Assimilate(SubKarte);
+                    //SubKarte.Schreibname = "";
+                    //SubKarte.HintergrundDarstellung = SubKarte.HintergrundDarstellung.Clone() as HintergrundDarstellung;
+                    //SubKarte.HintergrundDarstellung.Rand = new SizeF();
+                    SubKarte = Karte.Basen[0];
 
-                    if (Balken == null)
-                    {
-                        Balken = new WonderBalken(SubKarte, Ppm);
-                        Effekt = new WonderEffekt(SubKarte, Ppm);
-                    }
+                    //if (Balken == null)
+                    //{
+                    //    Balken = new WonderBalken(SubKarte, Ppm);
+                    //    Effekt = new WonderEffekt(SubKarte, Ppm);
+                    //}
+                    //else
+                    //{
+                    //    Balken.Karte = SubKarte;
+                    //    Effekt.Karte = SubKarte;
+                    //}
+
+                    if (Produktion == null)
+                        Produktion = new WonderProduktionsFeld(SubKarte, Ppm);
                     else
-                    {
-                        Balken.Karte = SubKarte;
-                        Effekt.Karte = SubKarte;
-                    }
+                        Produktion.Karte = SubKarte;
+
                     Text Text = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer);
                     Text.alignment = 1;
                     this.Text = Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor));
@@ -65,16 +84,19 @@ namespace Werwolf.Karten
         public override void OnPpmChanged()
         {
             base.OnPpmChanged();
-            Balken.Ppm = ppm;
-            Effekt.Ppm = ppm;
+            //Balken.Ppm = ppm;
+            //Effekt.Ppm = ppm;
+            Produktion.Ppm = ppm;
         }
         public override void update()
         {
-            if (Balken != null)
-            {
-                Balken.update();
-                Effekt.update();
-            }
+            //if (Balken != null)
+            //{
+            //    Balken.update();
+            //    Effekt.update();
+            //}
+            if (Produktion != null)
+                Produktion.update();
         }
 
         public override bool Visible()
@@ -90,10 +112,13 @@ namespace Werwolf.Karten
             this.box = AussenBox;
             this.box.Location = box.Location;
 
-            RectangleF SmallBox = new RectangleF(box.Location, SubKarte.HintergrundDarstellung.Size).mul(Faktor);
-            SmallBox = SmallBox.move(HintergrundDarstellung.Anker.mul(Faktor));
-            Balken.setup(SmallBox);
-            Effekt.setup(SmallBox);
+            //RectangleF SmallBox = new RectangleF(box.Location, SubKarte.HintergrundDarstellung.Size).mul(Faktor);
+            //SmallBox = SmallBox.move(HintergrundDarstellung.Anker.mul(Faktor));
+            //Balken.setup(SmallBox);
+            //Effekt.setup(SmallBox);
+
+            Produktion.setup(box);
+
             Stufen = new DrawBox[Karte.Entwicklungen.Length];
             if (Stufen.Length > 0)
             {
@@ -124,8 +149,9 @@ namespace Werwolf.Karten
                 return;
 
             base.Move(ToMove);
-            Balken.Move(ToMove);
-            Effekt.Move(ToMove);
+            //Balken.Move(ToMove);
+            //Effekt.Move(ToMove);
+            Produktion.Move(ToMove);
             foreach (var item in Stufen)
                 item.Move(ToMove);
             Text.Move(ToMove);
@@ -136,10 +162,26 @@ namespace Werwolf.Karten
             if (SubKarte.HintergrundDarstellung == null)
                 return;
 
-            Balken.draw(con);
-            Effekt.draw(con);
-            foreach (var item in Stufen)
-                item.draw(con);
+            //Balken.draw(con);
+            //Effekt.draw(con);
+            Produktion.draw(con);
+
+            int n = Stufen.Length;
+            for (int i = 0; i < n; i++)
+                Stufen[i].draw(con);
+            for (int i = 0; i < n; i++)
+            {
+                WonderAusbauStufe Stufe = (Stufen[i] as GeometryBox).DrawBox as WonderAusbauStufe;
+                TextBild tb = AusbauStufen[i, n - 1];
+                RectangleF r = new RectangleF(Stufe.Location, new SizeF());
+                r.Height = 20 * Faktor;
+                r.Width = tb.Size.ratio() * r.Height;
+                r = r.move(Stufe.box.Width - r.Width / 2, -r.Height / 2);
+
+                using (Image img = tb.Image)
+                    con.drawImage(img, r);
+            }
+
             Text.draw(con);
         }
     }

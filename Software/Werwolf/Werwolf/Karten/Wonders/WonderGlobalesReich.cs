@@ -65,8 +65,12 @@ namespace Werwolf.Karten
                 {
                     Karte Ausbau = new Karte();
                     Karte.Entwicklungen[i].Assimilate(Ausbau);
-                    Ausbau.BildDarstellung = Karte.Universe.BildDarstellungen["Schwarz-Weiß"];
+                    //Ausbau.HintergrundDarstellung = Karte.Universe.HintergrundDarstellungen["Globaler_Ausbau"];
                     Stufen[i] = new StandardKarte(Ausbau, ppm).Geometry(abstand * Faktor, 0);
+                    //Bitmap Image = Ausbau.GetImage(ppm);
+                    //Image.Filter(HintergrundDarstellung.Farbe, HintergrundDarstellung.Farbe.A/255f);
+                    //Stufen[i] = new ImageBox(Ausbau.HintergrundDarstellung.Size.Width * Faktor, Image)
+                    //    .Geometry(abstand * Faktor, 0);
                 }
                 foreach (var item in Stufen)
                     item.setup(0);
@@ -99,7 +103,14 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             foreach (var item in Stufen)
-                item.draw(con);
+            {
+                //item.draw(con);
+                StandardKarte sk = (item as GeometryBox).DrawBox as StandardKarte;
+                Bitmap b = sk.Karte.GetImage(ppm);
+                b.Filter(HintergrundDarstellung.Farbe, HintergrundDarstellung.Farbe.A / 255f);
+                con.drawImage(b, sk.box);
+                sk.drawRand(con);
+            }
             Text.draw(con);
         }
     }

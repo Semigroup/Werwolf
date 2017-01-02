@@ -34,7 +34,7 @@ namespace Werwolf.Printing
 
         private List<DrawBox> Karten = new List<DrawBox>();
 
-        private Size NumberOfCards;
+        private Size NumberOfCards = new Size();
 
         public WolfSinglePaper(Universe Universe, float ppm)
             : base(Universe.Karten.Standard, ppm)
@@ -56,12 +56,19 @@ namespace Werwolf.Printing
 
         public bool TryAdd(DrawBox Karte)
         {
-            if (Karten.Count < 9)
+            if (NumberOfCards.IsEmpty)
             {
                 Karten.Add(Karte);
                 Karte.setup(0);
                 if (Karte.Size.Width > Seite.Width || Karte.Size.Height > Seite.Height)
                     PageSize = iTextSharp.text.PageSize.A3;
+                SizeF n = Seite.Size.div(Karte.box.Size);
+                NumberOfCards = new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
+                return true;
+            }
+            else if (Karten.Count < NumberOfCards.Height * NumberOfCards.Width)
+            {
+                Karten.Add(Karte);
                 return true;
             }
             else
@@ -135,6 +142,25 @@ namespace Werwolf.Printing
                 if ((TrennlinieVorne && !Swapped) || (TrennlinieHinten && Swapped))
                     con.drawRectangle(new Pen(TrennlinienFarbe, 0.35f), item.box);
             }
+        }
+
+        /// <summary>
+        /// Size in DrawBox Maß
+        /// </summary>
+        /// <param name="Size"></param>
+        /// <returns></returns>
+        public static Size GetNumberOfCards(SizeF Size)
+        {
+            SizeF Seite = (4).DinA(true);
+            Seite = Seite.mul(Faktor);
+
+            if (Size.Width > Seite.Width || Size.Height > Seite.Height)
+            {
+                Seite = (3).DinA(true);
+                Seite = Seite.mul(Faktor);
+            }
+            SizeF n = Seite.div(Size);
+            return new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
         }
     }
 }

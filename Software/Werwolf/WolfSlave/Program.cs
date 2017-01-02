@@ -77,15 +77,17 @@ namespace WolfSlave
 
         static void AddKarten(Job Job, int JobNumber, WolfSinglePaper wsp)
         {
+            int numberProSheet = Job.GetNumberProSheet();
+
             switch (Job.MyMode)
             {
                 case Job.RuckBildMode.Keine:
-                    foreach (var item in Job.Deck.GetKarten(JobNumber * 9, 9))
+                    foreach (var item in Job.Deck.GetKarten(JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             wsp.TryAdd(GetKarte(item.Key, Job));
                     break;
                 case Job.RuckBildMode.Einzeln:
-                    foreach (var item in Job.Deck.GetKarten((JobNumber / 2) * 9, 9))
+                    foreach (var item in Job.Deck.GetKarten((JobNumber / 2) * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             if (JobNumber % 2 == 0)
                                 wsp.TryAdd(GetKarte(item.Key, Job));
@@ -94,7 +96,7 @@ namespace WolfSlave
                     wsp.Swapped = JobNumber % 2 == 1;
                     break;
                 case Job.RuckBildMode.Nur:
-                    foreach (var item in Job.Deck.GetKarten(JobNumber * 9, 9))
+                    foreach (var item in Job.Deck.GetKarten(JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                                 wsp.TryAdd(GetRuckseite(item.Key, Job));
                     wsp.Swapped = true;

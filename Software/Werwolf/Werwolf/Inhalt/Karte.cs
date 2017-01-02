@@ -213,10 +213,10 @@ namespace Werwolf.Inhalt
         {
             return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm));
         }
-        public Image GetImage(float ppm, Color BackColor, WolfBox WolfBox)
+        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox)
         {
             Size s = GetPictureSize(ppm);
-            Image img = new Bitmap(s.Width, s.Height);
+            Bitmap img = new Bitmap(s.Width, s.Height);
             using (Graphics g = img.GetHighGraphics(ppm / WolfBox.Faktor))
             using (DrawContextGraphics dcg = new DrawContextGraphics(g))
             {
@@ -226,15 +226,15 @@ namespace Werwolf.Inhalt
             }
             return img;
         }
-        public Image GetImage(float ppm, Color BackColor)
+        public Bitmap GetImage(float ppm, Color BackColor)
         {
             return GetImage(ppm, BackColor, new StandardKarte(this, ppm));
         }
-        public Image GetImage(float ppm)
+        public Bitmap GetImage(float ppm)
         {
             return GetImage(ppm, Color.FromArgb(0));
         }
-        public Image GetImageByHeight(float Height)
+        public Bitmap GetImageByHeight(float Height)
         {
             float ppm = Height / HintergrundDarstellung.Size.Height;
             return GetImage(ppm, Color.FromArgb(0));
@@ -248,7 +248,7 @@ namespace Werwolf.Inhalt
         public int CompareTo(Karte other)
         {
             return this.Gesinnung.Name.CompareTo(other.Gesinnung.Name) * 10000
-                +this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10000000
+                //+this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10000000
                 + this.Name.CompareTo(other.Name);
         }
         public override void Rescue()

@@ -125,5 +125,18 @@ namespace Werwolf.Inhalt
             foreach (var item in Karten.Keys)
                 Menge.Rescue(item);
         }
+
+        /// <summary>
+        /// erste karte, in ppm
+        /// <para> sind keine Karten da, wird (0,0) gegeben</para>
+        /// </summary>
+        /// <returns></returns>
+        public SizeF GetKartenSize()
+        {
+            foreach (var item in Karten)
+                if (item.Value > 0)
+                    return item.Key.HintergrundDarstellung.Size;
+            return new SizeF();
+        }
     }
 }

@@ -13,6 +13,7 @@ using Assistment.Xml;
 using Assistment.Extensions;
 using Assistment.Mathematik;
 using Assistment.PDF;
+using Assistment.Drawing.LinearAlgebra;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;
@@ -121,10 +122,16 @@ namespace Werwolf.Printing
             throw new NotImplementedException();
         }
 
+        public int GetNumberProSheet()
+        {
+            return WolfSinglePaper.GetNumberOfCards(Deck.GetKartenSize().mul(WolfBox.Faktor)).Inhalt();
+        }
+
         public void DistributedPrint(string TargetPath, ProgressBar progressBar1)
         {
+            int numberProSheet = GetNumberProSheet();
             int numberOfCards = Deck.TotalCount();
-            int numberOfJobs = (int)Math.Ceiling(numberOfCards / 9f);
+            int numberOfJobs = (int)Math.Ceiling(numberOfCards * 1f / numberProSheet);
             int solvedJobs = 0;
             if (MyMode == Printing.Job.RuckBildMode.Einzeln)
                 numberOfJobs *= 2;
