@@ -185,6 +185,8 @@ namespace Werwolf.Inhalt
                 }
                 catch (Exception)
                 {
+                    if (File.Exists(destiny))
+                        this.FilePath = filePath;
                 }
             }
             else
