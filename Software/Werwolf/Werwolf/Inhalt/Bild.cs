@@ -190,9 +190,7 @@ namespace Werwolf.Inhalt
                 }
             }
             else
-            {
                 this.FilePath = "";
-            }
         }
 
         public override void AdaptToCard(Karte Karte)
