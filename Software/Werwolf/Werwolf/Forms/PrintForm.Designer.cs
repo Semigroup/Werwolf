@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.Drucken = new System.Windows.Forms.Button();
+            this.DruckenBilder = new System.Windows.Forms.Button();
             this.Printer = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -156,6 +157,16 @@
             this.Drucken.Text = "PDF erstellen";
             this.Drucken.UseVisualStyleBackColor = true;
             this.Drucken.Click += new System.EventHandler(this.Drucken_Click);
+            // 
+            // DruckenBilder
+            // 
+            this.DruckenBilder.Location = new System.Drawing.Point(1035, 566);
+            this.DruckenBilder.Name = "DruckenBilder";
+            this.DruckenBilder.Size = new System.Drawing.Size(152, 43);
+            this.DruckenBilder.TabIndex = 102;
+            this.DruckenBilder.Text = "Bilder erstellen";
+            this.DruckenBilder.UseVisualStyleBackColor = true;
+            this.DruckenBilder.Click += new System.EventHandler(DruckenBilder_Click);
             // 
             // Printer
             // 
@@ -288,6 +299,7 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.ppmBox1);
             this.Controls.Add(this.Drucken);
+            this.Controls.Add(this.DruckenBilder);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.colorBox2);
@@ -321,6 +333,7 @@
         private Assistment.form.ColorBox colorBox2;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.Button Drucken;
+        private System.Windows.Forms.Button DruckenBilder;
         private Assistment.form.PpmBox ppmBox1;
         private System.ComponentModel.BackgroundWorker Printer;
         private System.Windows.Forms.ProgressBar progressBar1;

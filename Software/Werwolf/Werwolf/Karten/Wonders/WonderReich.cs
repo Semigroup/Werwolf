@@ -177,6 +177,9 @@ namespace Werwolf.Karten
                 r.Height = 20 * Faktor;
                 r.Width = tb.Size.ratio() * r.Height;
                 r = r.move(Stufe.box.Width - r.Width / 2, -r.Height / 2);
+                r.X = Math.Min(r.X, box.Location.X + AussenBox.Width - r.Width * 0.7f);
+                //if (i + 1 < n)
+                //    r.X = Math.Min(r.X, Stufen[i + 1].Left - r.Width);
 
                 using (Image img = tb.Image)
                     con.drawImage(img, r);

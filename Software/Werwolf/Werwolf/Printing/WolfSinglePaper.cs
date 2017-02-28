@@ -31,8 +31,10 @@ namespace Werwolf.Printing
         public bool Swapped { get; set; }
         public bool TrennlinieVorne { get; set; }
         public bool TrennlinieHinten { get; set; }
+        public bool FillUpRemainder { get; set; }
 
         private List<DrawBox> Karten = new List<DrawBox>();
+        private List<DrawBox> ToPrint = new List<DrawBox>();
 
         private Size NumberOfCards = new Size();
 
@@ -40,6 +42,7 @@ namespace Werwolf.Printing
             : base(Universe.Karten.Standard, ppm)
         {
             this.PageSize = iTextSharp.text.PageSize.A4;
+            this.FillUpRemainder = true;
         }
         public WolfSinglePaper(Job Job)
             : this(Job.Universe, Job.Ppm)
@@ -100,6 +103,12 @@ namespace Werwolf.Printing
 
             SizeF n = Seite.Size.div(karte);
             NumberOfCards = new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
+
+            ToPrint = new List<DrawBox>(Karten);
+            if (FillUpRemainder)
+                for (int i = Karten.Count; i < NumberOfCards.Width * NumberOfCards.Height; i++)
+                    ToPrint.Add(new Whitespace(karte.Width, karte.Height, false));
+
             SizeF Offset;
             SizeF Zwischen;
             if (Zwischenplatz)
@@ -123,7 +132,7 @@ namespace Werwolf.Printing
                 Platz.Width = -Platz.Width;
             }
 
-            IEnumerator<DrawBox> db = Karten.GetEnumerator();
+            IEnumerator<DrawBox> db = ToPrint.GetEnumerator();
             for (int y = 0; y < NumberOfCards.Height; y++)
                 for (int x = 0; x < NumberOfCards.Width; x++)
                     if (db.MoveNext())
@@ -136,7 +145,7 @@ namespace Werwolf.Printing
 
         public override void draw(DrawContext con)
         {
-            foreach (var item in Karten)
+            foreach (var item in ToPrint)
             {
                 item.draw(con);
                 if ((TrennlinieVorne && !Swapped) || (TrennlinieHinten && Swapped))

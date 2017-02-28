@@ -83,6 +83,27 @@ namespace Werwolf.Forms
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
         }
 
+        private void DruckenBilder_Click(object sender, System.EventArgs e)
+        {
+            saveFileDialog1.FileName = Deck.Schreibname;
+            if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            FetchJob();
+
+            Drucken.Enabled = false;
+            foreach (var item in Job.Deck.Karten)
+            {
+                if (item.Value > 0)
+                {
+                    string s = Path.Combine(Path.GetDirectoryName(TargetPath), item.Key.Schreibname + ".jpg");
+                    using (Image img = item.Key.GetImage(Job.Ppm))
+                        img.Save(s, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    GC.Collect();
+                }
+            }
+            Drucken.Enabled = true;
+        }
         private void DeckButton_Click(object sender, EventArgs e)
         {
             ElementAuswahlForm<Deck> form = new ElementAuswahlForm<Deck>(

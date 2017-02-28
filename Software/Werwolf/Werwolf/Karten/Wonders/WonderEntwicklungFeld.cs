@@ -12,8 +12,8 @@ namespace Werwolf.Karten
 {
     public class WonderEntwicklungFeld : WonderTextFeld
     {
-        private static string[] PWeiss;
-        private static string[] PSchwarz;
+        //private static string[] PWeiss;
+        //private static string[] PSchwarz;
 
         private string LastName;
         public readonly int Index;
@@ -21,9 +21,9 @@ namespace Werwolf.Karten
 
         static WonderEntwicklungFeld()
         {
-            PSchwarz = new string[14];
-            PSchwarz.CountMap(i => "P" + i);
-            PWeiss = PSchwarz.Map(x => x + "W").ToArray();
+            //PSchwarz = new string[14];
+            //PSchwarz.CountMap(i => "P" + i);
+            //PWeiss = PSchwarz.Map(x => x + "W").ToArray();
         }
 
         public WonderEntwicklungFeld(Karte Karte, float Ppm, int Index)
