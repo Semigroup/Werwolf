@@ -43,6 +43,10 @@ namespace Werwolf.Printing
         /// Dateigröße in MB
         /// </summary>
         public float MaximaleGrose { get; set; }
+        /// <summary>
+        /// Macht Bilder statt Pdf, falls true
+        /// </summary>
+        public bool MachBilder { get; set; }
 
         public Job(Universe Universe, string Pfad)
             : this()
@@ -62,7 +66,7 @@ namespace Werwolf.Printing
         public void Init(Deck Deck, Color HintergrundFarbe, Color TrennlinienFarbe,
             float Ppm, bool Zwischenplatz, RuckBildMode MyMode,
             bool FixedFont, bool TrennlinieVorne, bool TrennlinieHinten,
-            float MaximaleGrose)
+            float MaximaleGrose, bool MachBilder)
         {
             this.Deck = Deck;
             this.HintergrundFarbe = HintergrundFarbe;
@@ -74,6 +78,7 @@ namespace Werwolf.Printing
             this.TrennlinieVorne = TrennlinieVorne;
             this.TrennlinieHinten = TrennlinieHinten;
             this.MaximaleGrose = MaximaleGrose;
+            this.MachBilder = MachBilder;
 
             this.Init(Deck.Universe);
             this.Name = this.Schreibname = Deck.Name + "-Job";
@@ -92,6 +97,7 @@ namespace Werwolf.Printing
             this.TrennlinieVorne = Loader.XmlReader.getBoolean("TrennlinieVorne");
             this.TrennlinieHinten = Loader.XmlReader.getBoolean("TrennlinieHinten");
             this.MaximaleGrose = Loader.XmlReader.getFloat("MaximaleGrose");
+            this.MachBilder = Loader.XmlReader.getBoolean("MachBilder");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -107,6 +113,7 @@ namespace Werwolf.Printing
             XmlWriter.writeBoolean("TrennlinieVorne", TrennlinieVorne);
             XmlWriter.writeBoolean("TrennlinieHinten", TrennlinieHinten);
             XmlWriter.writeFloat("MaximaleGrose", MaximaleGrose);
+            XmlWriter.writeBoolean("MachBilder", MachBilder);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -129,12 +136,18 @@ namespace Werwolf.Printing
 
         public void DistributedPrint(string TargetPath, ProgressBar progressBar1)
         {
-            int numberProSheet = GetNumberProSheet();
-            int numberOfCards = Deck.TotalCount();
-            int numberOfJobs = (int)Math.Ceiling(numberOfCards * 1f / numberProSheet);
             int solvedJobs = 0;
-            if (MyMode == Printing.Job.RuckBildMode.Einzeln)
-                numberOfJobs *= 2;
+            int numberOfJobs;
+            if (MachBilder)
+                numberOfJobs = Deck.UniqueCount();
+            else
+            {
+                int numberProSheet = GetNumberProSheet();
+                int numberOfCards = Deck.TotalCount();
+                numberOfJobs = (int)Math.Ceiling(numberOfCards * 1f / numberProSheet);
+                if (MyMode == Printing.Job.RuckBildMode.Einzeln)
+                    numberOfJobs *= 2;
+            }
 
             if (progressBar1 != null)
                 progressBar1.Invoke((MethodInvoker)delegate
@@ -178,17 +191,19 @@ namespace Werwolf.Printing
                     }
                 Thread.Sleep(500);
             }
+            if (!MachBilder)
+            {
+                string[] files = new string[numberOfJobs];
+                for (int i = 0; i < numberOfJobs; i++)
+                    files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
 
-            string[] files = new string[numberOfJobs];
-            for (int i = 0; i < numberOfJobs; i++)
-                files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
-
-            if (MyMode == RuckBildMode.Einzeln)
-                PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-            else
-                PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-            foreach (var item in files)
-                File.Delete(item);
+                if (MyMode == RuckBildMode.Einzeln)
+                    PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                else
+                    PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                foreach (var item in files)
+                    File.Delete(item);
+            }
             File.Delete(JobPath);
         }
     }

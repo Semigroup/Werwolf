@@ -145,12 +145,34 @@ namespace Werwolf.Printing
 
         public override void draw(DrawContext con)
         {
+            float top = 1;
+            float left = 0;
+            float bottom = Seite.Height - 1;
+            float right = Seite.Width;
+
+            bool linie = (TrennlinieVorne && !Swapped) || (TrennlinieHinten && Swapped);
+            Pen LinePen = new Pen(TrennlinienFarbe, 0.35f);
+            if (linie)
+                foreach (var item in ToPrint)
+                {
+                    float x1 = item.box.Left - 10 * Faktor;
+                    x1 = Math.Max(x1, left); 
+                    float x2 = item.box.Right + 10 * Faktor;
+                    x2 = Math.Min(x2, right);
+                    float y1 = item.box.Top - 10 * Faktor;
+                    y1 = Math.Max(top, y1);
+                    float y2 = item.box.Bottom + 10 * Faktor;
+                    y2 = Math.Min(bottom, y2);
+                    con.drawLine(LinePen, new PointF(x1, top), new PointF(x1, bottom));
+                    con.drawLine(LinePen, new PointF(x2, top), new PointF(x2, bottom));
+                    con.drawLine(LinePen, new PointF(left, y1), new PointF(right, y1));
+                    con.drawLine(LinePen, new PointF(left, y2), new PointF(right, y2));
+                }
             foreach (var item in ToPrint)
-            {
                 item.draw(con);
-                if ((TrennlinieVorne && !Swapped) || (TrennlinieHinten && Swapped))
-                    con.drawRectangle(new Pen(TrennlinienFarbe, 0.35f), item.box);
-            }
+            if (linie)
+                foreach (var item in ToPrint)
+                    con.drawRectangle(LinePen, item.box);
         }
 
         /// <summary>

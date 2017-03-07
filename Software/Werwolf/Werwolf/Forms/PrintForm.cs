@@ -59,7 +59,7 @@ namespace Werwolf.Forms
             this.ppmBox1.PpmMaximum = Settings.MaximumPpm;
         }
 
-        private void FetchJob()
+        private void FetchJob(bool MachBilder)
         {
             Job.RuckBildMode Mode = Printing.Job.RuckBildMode.Keine;
             if (radioButton1.Checked)
@@ -78,7 +78,8 @@ namespace Werwolf.Forms
                 checkBox2.Checked,
                 checkBox4.Checked,
                 checkBox3.Checked,
-                floatBox1.UserValue);
+                floatBox1.UserValue,
+                MachBilder);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
         }
@@ -89,20 +90,9 @@ namespace Werwolf.Forms
             if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
-            FetchJob();
+            FetchJob(true);
 
-            Drucken.Enabled = false;
-            foreach (var item in Job.Deck.Karten)
-            {
-                if (item.Value > 0)
-                {
-                    string s = Path.Combine(Path.GetDirectoryName(TargetPath), item.Key.Schreibname + ".jpg");
-                    using (Image img = item.Key.GetImage(Job.Ppm))
-                        img.Save(s, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    GC.Collect();
-                }
-            }
-            Drucken.Enabled = true;
+            Printer.RunWorkerAsync();
         }
         private void DeckButton_Click(object sender, EventArgs e)
         {
@@ -121,15 +111,17 @@ namespace Werwolf.Forms
             if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
 
-            FetchJob();
+            FetchJob(false);
 
             Printer.RunWorkerAsync();
         }
         private void Printer_DoWork(object sender, DoWorkEventArgs e)
         {
             Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = false; });
+            DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = false; });
             Job.DistributedPrint(TargetPath, progressBar1);
             Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = true; });
+            DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = true; });
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -138,7 +130,7 @@ namespace Werwolf.Forms
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            FetchJob();
+            FetchJob(false);
             WolfSinglePaper wsp = new WolfSinglePaper(Job);
             foreach (var item in deck.GetKarten(0, 9))
                 for (int i = 0; i < item.Value; i++)

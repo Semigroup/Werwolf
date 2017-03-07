@@ -12,7 +12,7 @@ using Assistment.Mathematik;
 
 namespace Werwolf.Inhalt
 {
-    public class Deck: XmlElement
+    public class Deck : XmlElement
     {
         public SortedDictionary<Karte, int> Karten { get; private set; }
 
@@ -57,6 +57,14 @@ namespace Werwolf.Inhalt
                     break;
             }
             return l;
+        }
+        public int UniqueCount()
+        {
+            int n = 0;
+            foreach (var item in Karten)
+                if (item.Value > 0)
+                    n++;
+            return n;
         }
         public int TotalCount()
         {

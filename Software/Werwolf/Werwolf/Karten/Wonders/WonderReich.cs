@@ -111,13 +111,14 @@ namespace Werwolf.Karten
 
             this.box = AussenBox;
             this.box.Location = box.Location;
+            RectangleF MovedInnenBox = InnenBox.move(box.Location);
 
             //RectangleF SmallBox = new RectangleF(box.Location, SubKarte.HintergrundDarstellung.Size).mul(Faktor);
             //SmallBox = SmallBox.move(HintergrundDarstellung.Anker.mul(Faktor));
             //Balken.setup(SmallBox);
             //Effekt.setup(SmallBox);
 
-            Produktion.setup(box);
+            Produktion.setup(MovedInnenBox);
 
             Stufen = new DrawBox[Karte.Entwicklungen.Length];
             if (Stufen.Length > 0)
@@ -126,10 +127,11 @@ namespace Werwolf.Karten
                 foreach (var item in Stufen)
                     item.setup(0);
                 float breite = Stufen.Map(x => x.Size.Width).Sum();
-                float rest = this.HintergrundDarstellung.Size.Width * Faktor - breite;
+                float rest = MovedInnenBox.Width - breite;
                 float part = rest / (Stufen.Length + 1);
-                float hohe = (this.HintergrundDarstellung.Size.Height - 23) * Faktor;
+                float hohe = MovedInnenBox.Height - 23 * Faktor;
                 PointF loc = new PointF(part, hohe);
+                PointF Rand = HintergrundDarstellung.Rand.ToPointF().mul(Faktor);
                 if (rest < 0)
                 {
                     loc = new PointF(rest / 2, hohe);
@@ -138,10 +140,11 @@ namespace Werwolf.Karten
                 foreach (var item in Stufen)
                 {
                     item.Move(loc);
+                    item.Move(Rand);
                     loc = loc.add(item.Size.Width + part, 0);
                 }
             }
-            Text.setup(this.box);
+            Text.setup(MovedInnenBox);
         }
         public override void Move(PointF ToMove)
         {
