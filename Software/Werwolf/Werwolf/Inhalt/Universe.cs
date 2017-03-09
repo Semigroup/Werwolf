@@ -22,6 +22,8 @@ namespace Werwolf.Inhalt
         public ElementMenge<RuckseitenBild> RuckseitenBilder { get; private set; }
         public ElementMenge<TextBild> TextBilder { get; private set; }
 
+        public ElementMenge<LayoutDarstellung> LayoutDarstellungen { get; private set; }
+
         public ElementMenge<Fraktion> Fraktionen { get; private set; }
         public ElementMenge<Gesinnung> Gesinnungen { get; private set; }
         public ElementMenge<Karte> Karten { get; private set; }
@@ -53,6 +55,8 @@ namespace Werwolf.Inhalt
             RuckseitenBilder = new ElementMenge<RuckseitenBild>("Rückseitenbilder", this);
             TextBilder = new ElementMenge<TextBild>("Textbilder", this);
 
+            LayoutDarstellungen = new ElementMenge<LayoutDarstellung>("Layoutdarstellungen", this);
+
             Fraktionen = new ElementMenge<Fraktion>("Fraktionen", this);
             Gesinnungen = new ElementMenge<Gesinnung>("Gesinnungen", this);
             Karten = new ElementMenge<Karte>("Karten", this);
@@ -68,8 +72,9 @@ namespace Werwolf.Inhalt
         protected virtual Menge[] GetMengen()
         {
             return new Menge[] { HintergrundDarstellungen, TitelDarstellungen,
-                    BildDarstellungen, TextDarstellungen, InfoDarstellungen,
+                    BildDarstellungen, TextDarstellungen, InfoDarstellungen, 
                     HauptBilder, HintergrundBilder, RuckseitenBilder, TextBilder,
+                    LayoutDarstellungen,
                     Fraktionen, Gesinnungen, Karten,
                     Decks };
         }
@@ -79,8 +84,13 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
 
             Loader.XmlReader.Next();
-            foreach (var item in ElementMengen)
-                item.Read(Loader);
+            while (!Loader.XmlReader.EOF)
+            {
+                Menge M = ElementMengen.First(m => m.XmlName.Equals(Loader.XmlReader.Name));
+                M.Read(Loader);
+            }
+            //foreach (var item in ElementMengen)
+            //    item.Read(Loader);
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {

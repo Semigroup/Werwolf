@@ -34,11 +34,13 @@ namespace Werwolf.Forms
             BuildWertBox("Gesinnung", Universe.Gesinnungen);
             WerteListe.AddBigStringBox("", "Text");
 
+            WerteListe.AddEnumBox(Karte.KartenModus.Werwolfkarte, "Modus");
             BuildWertBox("Bild Darstellung", Universe.BildDarstellungen);
             BuildWertBox("Titel Darstellung", Universe.TitelDarstellungen);
             BuildWertBox("Text Darstellung", Universe.TextDarstellungen);
             BuildWertBox("Hintergrund Darstellung", Universe.HintergrundDarstellungen);
             BuildWertBox("Info Darstellung", Universe.InfoDarstellungen);
+            BuildWertBox("Layout Darstellung", Universe.LayoutDarstellungen);
 
             WerteListe.AddFloatBox(0, "Initiative");
             WerteListe.AddPointBox(new Point(), "Reichweite");
@@ -66,11 +68,13 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Gesinnung", element.Gesinnung);
             WerteListe.SetValue("Text", element.Aufgaben.ToString());
 
+            WerteListe.SetValue<object>("Modus", element.Modus);
             WerteListe.SetValue("Bild Darstellung", element.BildDarstellung);
             WerteListe.SetValue("Titel Darstellung", element.TitelDarstellung);
             WerteListe.SetValue("Text Darstellung", element.TextDarstellung);
             WerteListe.SetValue("Hintergrund Darstellung", element.HintergrundDarstellung);
             WerteListe.SetValue("Info Darstellung", element.InfoDarstellung);
+            WerteListe.SetValue("Layout Darstellung", element.LayoutDarstellung);
 
             WerteListe.SetValue("Initiative", element.Initiative);
             WerteListe.SetValue("Reichweite", new Point(element.ReichweiteMin, element.ReichweiteMax));
@@ -96,11 +100,13 @@ namespace Werwolf.Forms
             element.Gesinnung = WerteListe.GetValue<Gesinnung>("Gesinnung");
             element.Aufgaben = new Aufgabe(WerteListe.GetValue<string>("Text"), Universe);
 
+            element.Modus = (Karte.KartenModus)WerteListe.GetValue<object>("Modus");
             element.BildDarstellung = WerteListe.GetValue<BildDarstellung>("Bild Darstellung");
             element.TitelDarstellung = WerteListe.GetValue<TitelDarstellung>("Titel Darstellung");
             element.TextDarstellung = WerteListe.GetValue<TextDarstellung>("Text Darstellung");
             element.HintergrundDarstellung = WerteListe.GetValue<HintergrundDarstellung>("Hintergrund Darstellung");
             element.InfoDarstellung = WerteListe.GetValue<InfoDarstellung>("Info Darstellung");
+            element.LayoutDarstellung = WerteListe.GetValue<LayoutDarstellung>("Layout Darstellung");
 
             Point r = WerteListe.GetValue<Point>("Reichweite");
             element.ReichweiteMin = r.X;
@@ -120,10 +126,10 @@ namespace Werwolf.Forms
         public void SetVisibles()
         {
             WerteListe.ShowBox(
-              element.HintergrundDarstellung.Modus == HintergrundDarstellung.KartenModus.AktionsKarte,
+              element.Modus == Karte.KartenModus.AktionsKarte,
               "Initiative", "Reichweite", "Felder", "Störung");
             WerteListe.ShowBox(
-              element.HintergrundDarstellung.Modus == HintergrundDarstellung.KartenModus.WondersKarte,
+              element.Modus == Karte.KartenModus.WondersKarte,
               "Kosten", "Effekt");
             //WerteListe.Setup();
         }

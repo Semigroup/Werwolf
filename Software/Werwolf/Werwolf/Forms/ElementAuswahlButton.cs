@@ -119,9 +119,9 @@ namespace Werwolf.Forms
                     TextBild b = Element as TextBild;
                     return b.GetImageByHeight(height);
                 case "RuckseitenBild":
-                    return Karte.GetBackImageByHeight(height);
+                    return Karte.GetBackImageByHeight(height, false);
                 default:
-                    return Karte.GetImageByHeight(height);
+                    return Karte.GetImageByHeight(height, false);
             }
         }
 

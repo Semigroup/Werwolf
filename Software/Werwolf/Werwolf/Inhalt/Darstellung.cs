@@ -62,6 +62,8 @@ namespace Werwolf.Inhalt
 
             Existiert = Loader.XmlReader.getBoolean("Existiert");
             Font = Loader.GetFont("Font");
+            if (Font == null)
+                Font = new Font("Calibri", 11);
             Rand = Loader.XmlReader.getSizeF("Rand");
             Farbe = Loader.XmlReader.getColorHexARGB("Farbe");
             RandFarbe = Loader.XmlReader.getColorHexARGB("RandFarbe");
@@ -104,17 +106,6 @@ namespace Werwolf.Inhalt
     }
     public class HintergrundDarstellung : Darstellung
     {
-        public enum KartenModus
-        {
-            Werwolfkarte,
-            AktionsKarte,
-            WondersKarte,
-            WondersReichKarte,
-            WonderGlobalesProjekt,
-            WondersAuswahlKarte
-        }
-
-        public KartenModus Modus { get; set; }
         public bool RundeEcken { get; set; }
         /// <summary>
         /// Größe in Millimeter
@@ -138,7 +129,7 @@ namespace Werwolf.Inhalt
         {
             base.Init(Universe);
             RundeEcken = true;
-            Modus = KartenModus.Werwolfkarte;
+            //Modus = KartenModus.Werwolfkarte;
             Size = new SizeF(63, 89.1f);
             Farbe = Color.White;
             Rand = new SizeF(3, 3);
@@ -150,7 +141,6 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             Size = Loader.XmlReader.getSizeF("Size");
             RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
-            Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
             RuckseitenFarbe = Loader.XmlReader.getColorHexARGB("RuckseitenFarbe");
             Anker = Loader.XmlReader.getPointF("Anker");
         }
@@ -159,7 +149,6 @@ namespace Werwolf.Inhalt
             base.WriteIntern(XmlWriter);
             XmlWriter.writeSize("Size", Size);
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
-            XmlWriter.writeEnum<KartenModus>("Modus", Modus);
             XmlWriter.writeColorHexARGB("RuckseitenFarbe", RuckseitenFarbe);
             XmlWriter.writePoint("Anker", Anker);
         }
@@ -191,7 +180,6 @@ namespace Werwolf.Inhalt
                 RectangleF aussen = new RectangleF(new PointF(), Size);
                 RectangleF innen = aussen.Inner(Rand);
 
-                //Region clip = new Region(innen);
                 //clip.Complement(aussen);
                 //g.Clip = clip;
                 g.FillPolygon(RandFarbe.ToBrush(), y.getPolygon((int)(100 * y.L), 0, 1));
@@ -214,7 +202,6 @@ namespace Werwolf.Inhalt
             OrientierbarerWeg Sektor3 = Sektor2.Spiegel(Vertikale) ^ -1;
             OrientierbarerWeg Sektor4 = Sektor3.Spiegel(Horizontale) ^ -1;
 
-            //(Sektor1 * 100f + new PointF(500, 500)).print(1000, 1000, 10);
             Sektor1 = Sektor1.ConcatLinear(Sektor2).ConcatLinear(Sektor3).ConcatLinear(Sektor4).AbschlussLinear();
             return Sektor1;
         }
@@ -246,7 +233,6 @@ namespace Werwolf.Inhalt
             hg.RandBild = RandBild;
             hg.LastRand = LastRand;
             hg.LastSize = LastSize;
-            hg.Modus = Modus;
             hg.RuckseitenFarbe = RuckseitenFarbe;
             hg.Anker = Anker;
         }
@@ -557,7 +543,7 @@ namespace Werwolf.Inhalt
             BalkenDicke = 1;
             InnenRadius = 1;
             Farbe = Color.FromArgb(128, Color.White);
-            EffektFont = new Font("Calibri", 12);
+            EffektFont = new Font("Calibri", 11);
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -565,6 +551,8 @@ namespace Werwolf.Inhalt
             BalkenDicke = Loader.XmlReader.getFloat("BalkenDicke");
             InnenRadius = Loader.XmlReader.getFloat("InnenRadius");
             EffektFont = Loader.GetFont("EffektFont");
+            if (EffektFont == null)
+                EffektFont = new Font("Calibri", 11);
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -611,6 +599,125 @@ namespace Werwolf.Inhalt
             InfoDarstellung hg = new InfoDarstellung();
             Assimilate(hg);
             return hg;
+        }
+    }
+    /// <summary>
+    /// Beinhaltet alle Textbilder, die fürs Layout verwendet werden.
+    /// </summary>
+    public class LayoutDarstellung : Darstellung
+    {
+        private TextBild grossesNamenfeld;
+        public TextBild GrossesNamenfeld
+        {
+            get { return grossesNamenfeld; }
+            set
+            {
+                grossesNamenfeld = value;
+                GrossesNamenfeldTransponiert = new TrafoTextBild(RotateFlipType.RotateNoneFlipY, value);
+            }
+        }
+        public TextBild GrossesNamenfeldTransponiert { get; private set; }
+
+        private TextBild kleinesNamenfeld;
+        public TextBild KleinesNamenfeld
+        {
+            get { return kleinesNamenfeld; }
+            set
+            {
+                kleinesNamenfeld = value;
+                KleinesNamenfeldTransponiert = new TrafoTextBild(RotateFlipType.RotateNoneFlipY, value);
+            }
+        }
+        public TextBild KleinesNamenfeldTransponiert { get; private set; }
+
+        public TextBild Storung { get; set; }
+        public TextBild Initiative { get; set; }
+        public TextBild Felder { get; set; }
+        public TextBild Reichweite { get; set; }
+
+        public LayoutDarstellung()
+            : base("LayoutDarstellung")
+        {
+        }
+        public override void Init(Universe Universe)
+        {
+            base.Init(Universe);
+            GrossesNamenfeld = Universe.TextBilder.Standard;
+            KleinesNamenfeld = Universe.TextBilder.Standard;
+
+            Storung =
+                Initiative =
+                Felder =
+                Reichweite = Universe.TextBilder.Standard;
+        }
+        protected override void ReadIntern(Loader Loader)
+        {
+            base.ReadIntern(Loader);
+            GrossesNamenfeld = Universe.TextBilder[Loader.XmlReader.getString("GrossesNamenfeld")];
+            KleinesNamenfeld = Universe.TextBilder[Loader.XmlReader.getString("KleinesNamenfeld")];
+
+            Storung = Universe.TextBilder[Loader.XmlReader.getString("Storung")];
+            Initiative = Universe.TextBilder[Loader.XmlReader.getString("Initiative")];
+            Felder = Universe.TextBilder[Loader.XmlReader.getString("Felder")];
+            Reichweite = Universe.TextBilder[Loader.XmlReader.getString("Reichweite")];
+        }
+        protected override void WriteIntern(XmlWriter XmlWriter)
+        {
+            base.WriteIntern(XmlWriter);
+            XmlWriter.writeAttribute("GrossesNamenfeld", GrossesNamenfeld.Name);
+            XmlWriter.writeAttribute("KleinesNamenfeld", KleinesNamenfeld.Name);
+
+            XmlWriter.writeAttribute("Storung", Storung.Name);
+            XmlWriter.writeAttribute("Initiative", Initiative.Name);
+            XmlWriter.writeAttribute("Felder", Felder.Name);
+            XmlWriter.writeAttribute("Reichweite", Reichweite.Name);
+        }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.LayoutDarstellung = this;
+        }
+        public override void Assimilate(XmlElement Element)
+        {
+            base.Assimilate(Element);
+            LayoutDarstellung ld = Element as LayoutDarstellung;
+            ld.GrossesNamenfeld = GrossesNamenfeld;
+            ld.KleinesNamenfeld = KleinesNamenfeld;
+            ld.Initiative = Initiative;
+            ld.Storung = Storung;
+            ld.Reichweite = Reichweite;
+            ld.Felder = Felder;
+        }
+        public override object Clone()
+        {
+            LayoutDarstellung hg = new LayoutDarstellung();
+            Assimilate(hg);
+            return hg;
+        }
+        public override void Rescue()
+        {
+            base.Rescue();
+            Universe.TextBilder.Rescue(GrossesNamenfeld);
+            Universe.TextBilder.Rescue(KleinesNamenfeld);
+            Universe.TextBilder.Rescue(Storung);
+            Universe.TextBilder.Rescue(Initiative);
+            Universe.TextBilder.Rescue(Felder);
+            Universe.TextBilder.Rescue(Reichweite);
+        }
+
+        public TextBild GetGrossesNamenfeld(bool AufDemKopf)
+        {
+            if (AufDemKopf)
+                return GrossesNamenfeldTransponiert;
+            else
+                return GrossesNamenfeld;
+        }
+        public TextBild GetKleinesNamenfeld(bool AufDemKopf)
+        {
+            if (AufDemKopf)
+                return KleinesNamenfeldTransponiert;
+            else
+                return KleinesNamenfeld;
         }
     }
 }

@@ -95,7 +95,7 @@ namespace WolfSlave
             string s = t.ToString().ToFileName();
             s = s.Replace(" ", "");
             s = Path.Combine(Path.GetDirectoryName(JobPath), s + ".jpg");
-            using (Image img = Karte.GetImage(Job.Ppm))
+            using (Image img = Karte.GetImage(Job.Ppm, true))
                 img.Save(s, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 

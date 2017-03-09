@@ -18,16 +18,20 @@ namespace Werwolf.Karten
         private string LastName;
         public readonly int Index;
         private FontGraphicsMeasurer SmallFont;
-
-        static WonderEntwicklungFeld()
+        public override Bild FeldBild
         {
-            //PSchwarz = new string[14];
-            //PSchwarz.CountMap(i => "P" + i);
-            //PWeiss = PSchwarz.Map(x => x + "W").ToArray();
+            get { return Karte.LayoutDarstellung.KleinesNamenfeld; }
         }
 
+        //static WonderEntwicklungFeld()
+        //{
+        //    PSchwarz = new string[14];
+        //    PSchwarz.CountMap(i => "P" + i);
+        //    PWeiss = PSchwarz.Map(x => x + "W").ToArray();
+        //}
+
         public WonderEntwicklungFeld(Karte Karte, float Ppm, int Index)
-            : base(Karte, Ppm, false, true, false, Karte.Universe.TextBilder["KleinesNamenfeld"])
+            : base(Karte, Ppm, false, true, false )
         {
             this.Index = Index;
             OnKarteChanged();

@@ -46,7 +46,7 @@ namespace Werwolf.Forms
             WerteListe.Setup();
         }
 
-        void image_ImageChanged(object sender, EventArgs e)
+       public virtual void image_ImageChanged(object sender, EventArgs e)
         {
             if (UpdatingWerteListe)
                 return;
@@ -72,8 +72,7 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
-            string s = WerteListe.GetValue<string>("Datei");
-            element.FilePath = (s == null) ? "" : s;
+            element.FilePath = WerteListe.GetString("Datei");
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             element.Zentrum = WerteListe.GetValue<PointF>("Point of Interest");
@@ -119,12 +118,17 @@ namespace Werwolf.Forms
             image.MaximumImageSize = Settings.MaximumImageArea;
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
+            WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
 
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
 
-
+        public override void image_ImageChanged(object sender, EventArgs e)
+        {
+            if (UpdatingWerteListe)
+                return;
+        }
         public override void UpdateWerteListe()
         {
             if (element == null)
@@ -134,6 +138,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Name", element.Name);
             WerteListe.SetValue("Datei", element.HiddenFilePath);
             WerteListe.SetValue("Artist", element.Artist);
+            WerteListe.SetValue("Größe in mm", element.Size);
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -141,8 +146,9 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = WerteListe.GetValue<string>("Name");
-            element.FilePath = WerteListe.GetValue<string>("Datei");
+            element.FilePath = WerteListe.GetString("Datei");
             element.Artist = WerteListe.GetValue<string>("Artist");
+            element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
         }
     }
 }

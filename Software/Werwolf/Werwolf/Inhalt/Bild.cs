@@ -28,7 +28,7 @@ namespace Werwolf.Inhalt
             {
                 if (File.Exists(FilePath))
                     return Path.GetFullPath(FilePath);
-                else if (FilePath != null && FilePath.Length > 0)
+                else if (FilePath.Length > 0)
                 {
                     string fp = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
                     if (File.Exists(fp))
@@ -76,7 +76,7 @@ namespace Werwolf.Inhalt
             get { return new RectangleF(ZentrumAbsolut.mul(-WolfBox.Faktor), Size.mul(WolfBox.Faktor)); }
         }
 
-        public Image Image
+        public virtual Image Image
         {
             get
             {
@@ -200,10 +200,6 @@ namespace Werwolf.Inhalt
         public override void Rescue()
         {
         }
-        public override object Clone()
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class HauptBild : Bild
@@ -298,6 +294,56 @@ namespace Werwolf.Inhalt
         public override object Clone()
         {
             TextBild b = new TextBild();
+            Assimilate(b);
+            return b;
+        }
+    }
+    public class TrafoTextBild : TextBild
+    {
+        public override System.Drawing.Image Image
+        {
+            get
+            {
+                Image img = Original.Image;
+                img.RotateFlip(Transformation);
+                return img;
+            }
+        }
+
+
+        public RotateFlipType Transformation { get; set; }
+        public TextBild Original { get; set; }
+
+        public TrafoTextBild(RotateFlipType Transformation, TextBild Original)
+        {
+            this.Transformation = Transformation;
+            this.Original = Original;
+            Original.Assimilate(this);
+        }
+        public override void Init(Universe Universe)
+        {
+            throw new NotImplementedException();
+            //base.Init(Universe);
+            //Size = Universe.HintergrundDarstellungen.Standard.Size;
+            //Zentrum = new PointF(0.5f, 0.5f);
+            //this.Original = Universe.TextBilder.Standard;
+            //this.Transformation = RotateFlipType.RotateNoneFlipNone;
+        }
+
+        public override void AdaptToCard(Karte Karte)
+        {
+            Karte.Aufgaben = new Aufgabe(this);
+        }
+        public override void Assimilate(XmlElement Element)
+        {
+            base.Assimilate(Element);
+            TrafoTextBild b = Element as TrafoTextBild;
+            b.Transformation = Transformation;
+            b.Original = Original;
+        }
+        public override object Clone()
+        {
+            TrafoTextBild b = new TrafoTextBild(Transformation, Original);
             Assimilate(b);
             return b;
         }

@@ -103,7 +103,7 @@ namespace Werwolf.Karten
         {
             RectangleF outBox = OuterBox.mul(1 / Faktor);
             RectangleF innBox = InnerBox.mul(1 / Faktor);
-            Size Size = outBox.Size.mul(ppm).Max(new SizeF(1, 1)).ToSize();
+            Size Size = outBox.Size.mul(ppm).Max(new SizeF(1, 1)).ToPointF().Ceil().ToSize().ToSize();
 
             float BalkenDicke = this.BalkenDicke;
             float InnenRadius = this.InnenRadius;
@@ -134,11 +134,18 @@ namespace Werwolf.Karten
 
             using (Graphics g = Back.GetHighGraphics(ppm))
             {
-                OrientierbarerWeg OrientierbarerWeg = Rund(innBox.move(Offset), BalkenDicke);
-                Hohe h = t => OrientierbarerWeg.normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
+                int L;
+                OrientierbarerWeg OrientierbarerWeg;
+                if (!Rand.IsEmpty)
+                {
+                    OrientierbarerWeg = Rund(innBox.move(Offset), BalkenDicke);
+                    Hohe h = t => OrientierbarerWeg.normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
+                    L = (int)OrientierbarerWeg.L;
+                    Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
+                }
+                else
+                    g.Clear(TextDarstellung.RandFarbe);
 
-                int L = (int)OrientierbarerWeg.L;
-                Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
                 g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                 Brush Brush = LastFarbe.ToBrush();
                 foreach (var item in Texts)

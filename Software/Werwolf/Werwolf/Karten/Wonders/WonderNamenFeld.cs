@@ -9,8 +9,19 @@ namespace Werwolf.Karten
 {
     public class WonderNamenFeld : WonderTextFeld
     {
+        public override Bild FeldBild
+        {
+            get { return Karte.LayoutDarstellung.GetGrossesNamenfeld(AufKopf); }
+        }
         private string LastName;
         public xFont Font;
+        public xFont FontToUse
+        {
+            get
+            {
+                return Font == null ? TitelDarstellung.FontMeasurer : Font;
+            }
+        }
 
         public WonderNamenFeld(Karte Karte, float Ppm)
             : this(Karte, false, false, Ppm)
@@ -18,8 +29,7 @@ namespace Werwolf.Karten
 
         }
         public WonderNamenFeld(Karte Karte, bool oben, bool AufKopf, float Ppm)
-            : base(Karte, Ppm, oben, true, AufKopf,
-            AufKopf ? Karte.Universe.TextBilder["GroßesNamenfeldTransponiert"] : Karte.Universe.TextBilder["GroßesNamenfeld"])
+            : base(Karte, Ppm, oben, true, AufKopf)
         {
 
         }
@@ -31,15 +41,17 @@ namespace Werwolf.Karten
                 DrawBox = null;
                 return;
             }
-            else if (!Karte.Name.Equals(LastName))
+            else if (!Karte.Name.Equals(LastName) || !FontToUse.getFont().Equals(LastFont))
             {
                 this.LastName = Karte.Name;
+                this.LastFont = FontToUse.getFont();
                 UpdateDrawBox();
             }
         }
+   
         public void UpdateDrawBox()
         {
-            DrawBox = new Text(Karte.Schreibname, Font == null ? Karte.TitelDarstellung.FontMeasurer : Font)
+            DrawBox = new Text(Karte.Schreibname, FontToUse)
                     .FirstLine()
                     .Geometry(Faktor, Faktor, Faktor * 5, Faktor);
             DrawBoxChanged = true;

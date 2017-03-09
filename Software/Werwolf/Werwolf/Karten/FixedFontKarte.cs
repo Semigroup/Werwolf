@@ -45,10 +45,10 @@ namespace Werwolf.Karten
         public override void draw(DrawContext con)
         {
             if (Ruckseite)
-                using (Image image = Karte.GetBackImage(Ppm, Color.Black))
+                using (Image image = Karte.GetBackImage(Ppm, Color.Black, true))
                     con.drawImage(image, AussenBox.move(box.Location));
             else
-                using (Image image = Karte.GetImage(Ppm))
+                using (Image image = Karte.GetImage(Ppm, true))
                     con.drawImage(image, AussenBox.move(box.Location));
         }
         public override void Move(PointF ToMove)

@@ -36,7 +36,6 @@ namespace Werwolf.Forms
             WerteListe.AddColorBox(Color.White, "Farbe Rückseite");
 
             WerteListe.AddBoolBox(false, "Hat Runde Ecken?");
-            WerteListe.AddEnumBox(HintergrundDarstellung.KartenModus.Werwolfkarte, "Modus");
             WerteListe.AddChainedSizeFBox(new SizeF(), "Größe in mm", true, Settings.MaximumKarteSize);
             WerteListe.AddPointFBox(new PointF(), "Anker");
             UpdatingWerteListe = false;
@@ -53,7 +52,6 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Farbe Rückseite", element.RuckseitenFarbe);
 
             WerteListe.SetValue("Hat Runde Ecken?", element.RundeEcken);
-            WerteListe.SetValue<object>("Modus", element.Modus);
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Anker", element.Anker);
             UpdatingWerteListe = false;
@@ -70,7 +68,6 @@ namespace Werwolf.Forms
             element.RuckseitenFarbe = WerteListe.GetValue<Color>("Farbe Rückseite");
 
             element.RundeEcken = WerteListe.GetValue<bool>("Hat Runde Ecken?");
-            element.Modus = (HintergrundDarstellung.KartenModus)WerteListe.GetValue<object>("Modus");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             element.Anker = WerteListe.GetValue<PointF>("Anker");
         }

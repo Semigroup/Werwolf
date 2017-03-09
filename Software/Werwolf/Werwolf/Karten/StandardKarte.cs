@@ -36,19 +36,19 @@ namespace Werwolf.Karten
             {
                 if (Karte != null)
                 {
-                    switch (Karte.HintergrundDarstellung.Modus)
+                    switch (Karte.Modus)
                     {
-                        case HintergrundDarstellung.KartenModus.Werwolfkarte:
+                        case Karte.KartenModus.Werwolfkarte:
                             return new WolfBox[] { HauptBild, Titel, Text, Info };
-                        case HintergrundDarstellung.KartenModus.AktionsKarte:
+                        case Karte.KartenModus.AktionsKarte:
                             return new WolfBox[] { HauptBild, Header, Text };
-                        case HintergrundDarstellung.KartenModus.WondersKarte:
+                        case Karte.KartenModus.WondersKarte:
                             return new WolfBox[] { HauptBild, WonderText, Balken, WonderEffekt, WonderInfos };
-                        case Inhalt.HintergrundDarstellung.KartenModus.WondersReichKarte:
+                        case Karte.KartenModus.WondersReichKarte:
                             return new WolfBox[] { HauptBild, WonderReich };
-                        case Inhalt.HintergrundDarstellung.KartenModus.WonderGlobalesProjekt:
+                        case Karte.KartenModus.WonderGlobalesProjekt:
                             return new WolfBox[] { HauptBild, WonderGlobalesReich };
-                        case Inhalt.HintergrundDarstellung.KartenModus.WondersAuswahlKarte:
+                        case Karte.KartenModus.WondersAuswahlKarte:
                             return new WolfBox[] { WondersDoppelBild, WonderDoppelName };
                         default:
                             throw new NotImplementedException();
@@ -133,15 +133,15 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.setup(box);
-            switch (HintergrundDarstellung.Modus)
+            switch (Karte.Modus)
             {
-                case HintergrundDarstellung.KartenModus.Werwolfkarte:
+                case Karte.KartenModus.Werwolfkarte:
                     if (Text.Visible() && Info.Visible())
                         Text.KorrigierUmInfo(Info.Kompositum.box.Height);
                     break;
-                case HintergrundDarstellung.KartenModus.AktionsKarte:
+                case Karte.KartenModus.AktionsKarte:
                     break;
-                case HintergrundDarstellung.KartenModus.WondersKarte:
+                case Karte.KartenModus.WondersKarte:
                     if (WonderText.Visible() && WonderInfos.Visible())
                     {
                         WonderText.SetEntwicklungsBreite(WonderInfos.EntwicklungsBreite);
@@ -157,7 +157,6 @@ namespace Werwolf.Karten
             RectangleF MovedAussenBox = AussenBox.move(box.Location);
             RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
-
 
             float top = Titel.Visible() ? Titel.Titel.Bottom : MovedInnenBox.Top;
             float bottom = MovedInnenBox.Bottom;
@@ -253,22 +252,22 @@ namespace Werwolf.Karten
         }
         public override void draw(DrawContext con)
         {
-            switch (Karte.HintergrundDarstellung.Modus)
+            switch (Karte.Modus)
             {
-                case HintergrundDarstellung.KartenModus.Werwolfkarte:
+                case Karte.KartenModus.Werwolfkarte:
                     drawNormal(con);
                     break;
-                case HintergrundDarstellung.KartenModus.AktionsKarte:
+                case Karte.KartenModus.AktionsKarte:
                     drawAction(con);
                     break;
-                case HintergrundDarstellung.KartenModus.WondersKarte:
+                case Karte.KartenModus.WondersKarte:
                     drawWonders(con);
                     break;
-                case Inhalt.HintergrundDarstellung.KartenModus.WondersReichKarte:
-                case Inhalt.HintergrundDarstellung.KartenModus.WonderGlobalesProjekt:
+                case Karte.KartenModus.WondersReichKarte:
+                case Karte.KartenModus.WonderGlobalesProjekt:
                     drawWondersReich(con);
                     break;
-                case Inhalt.HintergrundDarstellung.KartenModus.WondersAuswahlKarte:
+                case Karte.KartenModus.WondersAuswahlKarte:
                     drawWondersAuswahl(con);
                     break;
                 default:

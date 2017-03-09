@@ -14,8 +14,19 @@ namespace Werwolf.Karten
 {
     public class WonderAusbauKostenFeld : WonderTextFeld
     {
+        private bool Klein = true;
         private string LastKosten;
         private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 12); // 16
+        public override Bild FeldBild
+        {
+            get
+            {
+                if (Klein)
+                    return Karte.LayoutDarstellung.GetKleinesNamenfeld(false);// return Karte.Universe.TextBilder["KleinesNamenfeldVersatz"]; 
+                else
+                    return Karte.LayoutDarstellung.GetGrossesNamenfeld(false);// return Karte.Universe.TextBilder["GroßesNamenfeldVersatz"];
+            }
+        }
 
         private class KostenBox : DrawBox
         {
@@ -46,7 +57,6 @@ namespace Werwolf.Karten
             {
                 return Symbole.getSpace();
             }
-
             public override float getMin()
             {
                 if (klein)
@@ -54,16 +64,13 @@ namespace Werwolf.Karten
                 else
                     return durchmesser + hohe;
             }
-
             public override float getMax()
             {
                 return getMax();
             }
-
             public override void update()
             {
             }
-
             public override void setup(RectangleF box)
             {
                 this.box = box;
@@ -87,25 +94,23 @@ namespace Werwolf.Karten
                 if (!klein)
                     this.box.Height += (durchmesser + abstand) / 2;
             }
-
             public override void draw(DrawContext con)
             {
                 foreach (var item in Symbole)
                     item.draw(con);
             }
-
             public override DrawBox clone()
             {
                 throw new NotImplementedException();
             }
         }
 
-
         public WonderAusbauKostenFeld(Karte Karte, float Ppm)
-            : base(Karte, Ppm, false, false, false, Karte.Universe.TextBilder["KleinesNamenfeldVersatz"])
+            : base(Karte, Ppm, false, false, false)
         {
 
         }
+
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
@@ -125,10 +130,8 @@ namespace Werwolf.Karten
                     {
                         KostenBox KostenBox = new KostenBox(1, KostenText[0]);
                         DrawBox = KostenBox;
-                        if (KostenBox.klein)
-                            base.FeldBild = Karte.Universe.TextBilder["KleinesNamenfeldVersatz"];
-                        else
-                            base.FeldBild = Karte.Universe.TextBilder["GroßesNamenfeldVersatz"];
+                        this.Klein = KostenBox.klein;
+
                     }
                     else
                         DrawBox = null;
@@ -136,17 +139,16 @@ namespace Werwolf.Karten
                 }
             }
         }
-
         public override void Bearbeite()
         {
-            Bild FeldBild;
-            if ((DrawBox as KostenBox).klein)
-                FeldBild = Karte.Universe.TextBilder["KleinesNamenfeldVersatz"];
-            else
-                FeldBild = Karte.Universe.TextBilder["GroßesNamenfeldVersatz"];
+            Bild FeldBild = this.FeldBild;
+            //if ((DrawBox as KostenBox).klein)
+            //    FeldBild = Karte.Universe.TextBilder["KleinesNamenfeldVersatz"];
+            //else
+            //    FeldBild = Karte.Universe.TextBilder["GroßesNamenfeldVersatz"];
 
             SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
-            Point P = new Point((int)Rest.Width, (int)Rest.Height);
+            Point P = new Point((int)Rest.Width, (int)(Rest.Height + 0.5f * Ppm));
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {

@@ -33,6 +33,7 @@ namespace Werwolf.Inhalt
         public TitelDarstellung TitelDarstellung { get; set; }
         public BildDarstellung BildDarstellung { get; set; }
         public InfoDarstellung InfoDarstellung { get; set; }
+        public LayoutDarstellung LayoutDarstellung { get; set; }
 
         public float Initiative { get; set; }
         public int ReichweiteMin { get; set; }
@@ -75,6 +76,17 @@ namespace Werwolf.Inhalt
             }
         }
 
+        public enum KartenModus
+        {
+            Werwolfkarte,
+            AktionsKarte,
+            WondersKarte,
+            WondersReichKarte,
+            WonderGlobalesProjekt,
+            WondersAuswahlKarte
+        }
+        public KartenModus Modus { get; set; }
+
         public Karte()
             : base("Karte", true)
         {
@@ -100,11 +112,14 @@ namespace Werwolf.Inhalt
             TitelDarstellung = Universe.TitelDarstellungen.Standard;
             BildDarstellung = Universe.BildDarstellungen.Standard;
             InfoDarstellung = Universe.InfoDarstellungen.Standard;
+            LayoutDarstellung = Universe.LayoutDarstellungen.Standard;
 
             this.Kosten = new Aufgabe();
             this.Effekt = new Aufgabe();
             this.Basen = new Karte[0];
             this.Entwicklungen = new Karte[0];
+
+            this.Modus = KartenModus.Werwolfkarte;
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -121,6 +136,7 @@ namespace Werwolf.Inhalt
             TitelDarstellung = Loader.GetTitelDarstellung();
             InfoDarstellung = Loader.GetInfoDarstellung();
             BildDarstellung = Loader.GetBildDarstellung();
+            LayoutDarstellung = Loader.GetLayoutDarstellung();
 
             Initiative = Loader.XmlReader.getFloat("Initiative");
             ReichweiteMin = Loader.XmlReader.getInt("ReichweiteMin");
@@ -134,6 +150,7 @@ namespace Werwolf.Inhalt
                 .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
             entwicklungen = Loader.XmlReader.getString("Entwicklungen")
                .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
+            Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -149,6 +166,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("TitelDarstellung", TitelDarstellung.Name);
             XmlWriter.writeAttribute("InfoDarstellung", InfoDarstellung.Name);
             XmlWriter.writeAttribute("BildDarstellung", BildDarstellung.Name);
+            XmlWriter.writeAttribute("LayoutDarstellung", LayoutDarstellung.Name);
 
             XmlWriter.writeFloat("Initiative", Initiative);
             XmlWriter.writeInt("ReichweiteMin", ReichweiteMin);
@@ -160,6 +178,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("Effekt", Effekt.ToString());
             XmlWriter.writeAttribute("Basen", Basen.Map(b => b.Name).SumText(";"));
             XmlWriter.writeAttribute("Entwicklungen", Entwicklungen.Map(b => b.Name).SumText(";"));
+            XmlWriter.writeEnum<KartenModus>("Modus", Modus);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -180,6 +199,7 @@ namespace Werwolf.Inhalt
             Karte.TitelDarstellung = TitelDarstellung;
             Karte.BildDarstellung = BildDarstellung;
             Karte.InfoDarstellung = InfoDarstellung;
+            Karte.LayoutDarstellung = LayoutDarstellung;
 
             Karte.Initiative = Initiative;
             Karte.ReichweiteMin = ReichweiteMin;
@@ -191,6 +211,8 @@ namespace Werwolf.Inhalt
             Karte.Effekt = Effekt;
             Karte.Entwicklungen = Entwicklungen.FlatClone();
             Karte.Basen = Basen.FlatClone();
+
+            Karte.Modus = Modus;
         }
         public override object Clone()
         {
@@ -209,15 +231,15 @@ namespace Werwolf.Inhalt
         {
             return HintergrundDarstellung.Size.mul(ppm).Max(1, 1).ToSize();
         }
-        public Image GetBackImage(float ppm, Color BackColor)
+        public Image GetBackImage(float ppm, Color BackColor, bool high)
         {
-            return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm));
+            return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm), high);
         }
-        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox)
+        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox, bool high)
         {
             Size s = GetPictureSize(ppm);
             Bitmap img = new Bitmap(s.Width, s.Height);
-            using (Graphics g = img.GetHighGraphics(ppm / WolfBox.Faktor))
+            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor,null, high))
             using (DrawContextGraphics dcg = new DrawContextGraphics(g))
             {
                 g.Clear(BackColor);
@@ -226,23 +248,23 @@ namespace Werwolf.Inhalt
             }
             return img;
         }
-        public Bitmap GetImage(float ppm, Color BackColor)
+        public Bitmap GetImage(float ppm, Color BackColor, bool high)
         {
-            return GetImage(ppm, BackColor, new StandardKarte(this, ppm));
+            return GetImage(ppm, BackColor, new StandardKarte(this, ppm), high);
         }
-        public Bitmap GetImage(float ppm)
+        public Bitmap GetImage(float ppm, bool high)
         {
-            return GetImage(ppm, Color.FromArgb(0));
+            return GetImage(ppm, Color.FromArgb(0), high);
         }
-        public Bitmap GetImageByHeight(float Height)
+        public Bitmap GetImageByHeight(float Height, bool high)
         {
             float ppm = Height / HintergrundDarstellung.Size.Height;
-            return GetImage(ppm, Color.FromArgb(0));
+            return GetImage(ppm, Color.FromArgb(0), high);
         }
-        public Image GetBackImageByHeight(float Height)
+        public Image GetBackImageByHeight(float Height, bool high)
         {
             float ppm = Height / HintergrundDarstellung.Size.Height;
-            return GetBackImage(ppm, Color.FromArgb(0));
+            return GetBackImage(ppm, Color.FromArgb(0), high);
         }
 
         public int CompareTo(Karte other)
@@ -258,6 +280,7 @@ namespace Werwolf.Inhalt
             Universe.TextDarstellungen.Rescue(TextDarstellung);
             Universe.TitelDarstellungen.Rescue(TitelDarstellung);
             Universe.BildDarstellungen.Rescue(BildDarstellung);
+            Universe.LayoutDarstellungen.Rescue(LayoutDarstellung);
 
             Universe.Fraktionen.Rescue(Fraktion);
             Universe.Gesinnungen.Rescue(Gesinnung);

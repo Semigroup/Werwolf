@@ -270,6 +270,8 @@ namespace Werwolf.Forms
                     return new TextDarstellungForm(Karte) as PreForm<T>;
                 case "TitelDarstellung":
                     return new TitelDarstellungForm(Karte) as PreForm<T>;
+                case "LayoutDarstellung":
+                    return new LayoutDarstellungForm(Karte) as PreForm<T>;
                 default:
                     throw new NotImplementedException();
             }
@@ -290,6 +292,7 @@ namespace Werwolf.Forms
                 case "InfoDarstellung":
                 case "TextDarstellung":
                 case "TitelDarstellung":
+                case "LayoutDarstellung":
                     return new ViewKarte();
 
                 case "RuckseitenBild":

@@ -104,6 +104,9 @@
     <Compile Include="Forms\PreForms\InfoDarstellungForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\PreForms\LayoutDarstellungForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\PreForms\TextBildNameBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -286,6 +289,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Initiative.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Universen.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Reichweite.png">

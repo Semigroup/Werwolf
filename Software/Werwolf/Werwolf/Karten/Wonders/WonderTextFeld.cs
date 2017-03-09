@@ -15,7 +15,7 @@ namespace Werwolf.Karten
     public abstract class WonderTextFeld : WolfBox
     {
         public bool Oben;
-        public Bild FeldBild;
+        public abstract Bild FeldBild { get; }
         public string Text;
         public bool Quer;
         public bool AufKopf;
@@ -43,13 +43,13 @@ namespace Werwolf.Karten
             }
         }
 
-        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, bool AufKopf, Bild FeldBild)
+        public WonderTextFeld(Karte Karte, float Ppm, bool Oben, bool Quer, bool AufKopf)
             : base(Karte, Ppm)
         {
             this.Oben = Oben;
             this.Quer = Quer;
             this.AufKopf = AufKopf;
-            this.FeldBild = FeldBild;
+            //this.FeldBild = FeldBild;
         }
 
         public override void update()
@@ -143,7 +143,7 @@ namespace Werwolf.Karten
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {
                 g.Clip = Clip;
-                using (Image img = Image.FromFile(FeldBild.TotalFilePath))
+                using (Image img = FeldBild.Image)//Image.FromFile(FeldBild.TotalFilePath))
                     g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
 
                 g.TranslateTransform(Size.Width / 2, Size.Height / 2);

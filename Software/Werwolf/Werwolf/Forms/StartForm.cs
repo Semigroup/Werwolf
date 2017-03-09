@@ -46,7 +46,8 @@ namespace Werwolf.Forms
            "Hintergrunddarstellungen Bearbeiten",
            "Textdarstellungen Bearbeiten",
            "Titeldarstellungen Bearbeiten",
-           "Infodarstellungen Bearbeiten");
+           "Infodarstellungen Bearbeiten",
+           "Layoutdarstellungen Bearbeiten");
         private ScrollList ScrollList = new ScrollList();
         private CheckBox checkBox1 = new CheckBox();
         private CheckBox checkBox2 = new CheckBox();
@@ -111,8 +112,8 @@ namespace Werwolf.Forms
               "Ermöglicht es Hintergrunddarstellungen, diese legen fest, wie groß eine Karte und ihr Rand ist, zu bearbeiten.",
               "Ermöglicht es Textdarstellungen, diese legen die Schriftart des Textblockes fest, zu bearbeiten.",
               "Ermöglicht es Titeldarstellungen, diese legen die Schriftart des Titels fest, zu bearbeiten.",
-              "Ermöglicht es Infodarstellungen, diese legen die Schriftart des Infoteils fest, zu bearbeiten.");
-
+              "Ermöglicht es Infodarstellungen, diese legen die Schriftart des Infoteils fest, zu bearbeiten.",
+              "Ermöglicht es Layoutdarstellungen, diese legen die Elemente des Layout fest, zu bearbeiten.");
 
             PrintDeck.AutoSize = true;
             PrintDeck.Text = "Ein Kartendeck in eine PDF-Datei verwandeln";
@@ -216,6 +217,10 @@ namespace Werwolf.Forms
                     new ElementAuswahlForm<HintergrundDarstellung>(Universe.HintergrundDarstellungen).ShowDialog();
                     Changed(true);
                     break;
+                case "Layoutdarstellungen Bearbeiten":
+                    new ElementAuswahlForm<LayoutDarstellung>(Universe.LayoutDarstellungen).ShowDialog();
+                    Changed(true);
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -295,7 +300,7 @@ namespace Werwolf.Forms
         }
         private void SteuerBox_NeuClicked(object sender, EventArgs e)
         {
-            U u = new U();//new Universe(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
+            U u = new U();
             u.Open(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
             Universe = u;
             PrintDeck.Enabled = false;
@@ -344,8 +349,8 @@ namespace Werwolf.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.Text = Universe.Name = Universe.Schreibname = textBox1.Text;
-            if (SteuerBox.Speicherort != null)
-                SteuerBox.Speicherort = Path.Combine(Path.GetDirectoryName(SteuerBox.Speicherort), textBox1.Text + ".xml");
+            //if (SteuerBox.Speicherort != null)
+            //    SteuerBox.Speicherort = Path.Combine(Path.GetDirectoryName(SteuerBox.Speicherort), textBox1.Text + ".xml");
             Changed(true);
         }
         protected void Changed(bool changed)

@@ -14,10 +14,10 @@ namespace Werwolf.Karten
 {
     public class WolfHeader : WolfBox
     {
-        private static Image FelderBild = Image.FromFile("./Ressourcen/Felder.png");
-        private static Image InitiativeBild = Image.FromFile("./Ressourcen/Initiative.png");
-        private static Image ReichweiteBild = Image.FromFile("./Ressourcen/Reichweite.png");
-        private static Image StorungBild = Image.FromFile("./Ressourcen/Storung.png");
+        //private static Image FelderBild = Image.FromFile("./Ressourcen/Felder.png");
+        //private static Image InitiativeBild = Image.FromFile("./Ressourcen/Initiative.png");
+        //private static Image ReichweiteBild = Image.FromFile("./Ressourcen/Reichweite.png");
+        //private static Image StorungBild = Image.FromFile("./Ressourcen/Storung.png");
 
         private Pen Rand = Pens.Black;
         CString Kompositum;
@@ -42,12 +42,14 @@ namespace Werwolf.Karten
             Links = new Text(Karte.Fraktion.Schreibname + "\n" + Karte.Schreibname, font);
             Rechts = new Text("", font);
             Rechts.addWort(Karte.Initiative);
-            Rechts.addZoomedImage(InitiativeBild);
+            Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Initiative, font));
+            //Rechts.addZoomedImage(InitiativeBild);
             Rechts.addWhitespace(1);
             if (Karte.Felder > 0)
             {
                 Rechts.addWort(Karte.Felder);
-                Rechts.addZoomedImage(FelderBild);
+                Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Felder, font));
+                //Rechts.addZoomedImage(FelderBild);
                 Rechts.addWhitespace(1);
             }
             Rechts.addAbsatz();
@@ -58,14 +60,16 @@ namespace Werwolf.Karten
                     Rechts.addWort(Karte.ReichweiteMax + "m");
                 else
                     Rechts.addWort(Karte.ReichweiteMin + "-" + Karte.ReichweiteMax + "m");
-                Rechts.addZoomedImage(ReichweiteBild);
+                Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Reichweite, font));
+                //Rechts.addZoomedImage(ReichweiteBild);
                 Rechts.addWhitespace(1);
             }
           
             if (Karte.Storung > 0)
             {
                 Rechts.addWort(Karte.Storung);
-                Rechts.addZoomedImage(StorungBild);
+                Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Storung, font));
+                //Rechts.addZoomedImage(StorungBild);
                 Rechts.addWhitespace(1);
             }
 

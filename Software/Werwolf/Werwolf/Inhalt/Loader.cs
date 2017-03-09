@@ -73,6 +73,11 @@ namespace Werwolf.Inhalt
             string s = XmlReader.getString("InfoDarstellung");
             return Universe.InfoDarstellungen[s];
         }
+        public LayoutDarstellung GetLayoutDarstellung()
+        {
+            string s = XmlReader.getString("LayoutDarstellung");
+            return Universe.LayoutDarstellungen[s];
+        }
 
         public HauptBild GetHauptBild()
         {

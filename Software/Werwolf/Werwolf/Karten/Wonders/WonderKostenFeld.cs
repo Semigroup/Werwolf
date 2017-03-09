@@ -14,11 +14,15 @@ namespace Werwolf.Karten
 {
     public class WonderKostenFeld : WonderTextFeld
     {
+        public override Bild FeldBild
+        {
+            get { return Karte.LayoutDarstellung.GetKleinesNamenfeld(true); }
+        }
         private string LastKosten;
         private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 14); // 16
 
         public WonderKostenFeld(Karte Karte, float Ppm)
-            : base(Karte, Ppm, true, false, false, Karte.Universe.TextBilder["KleinesNamenfeldTransponiert"])
+            : base(Karte, Ppm, true, false, false)
         {
 
         }

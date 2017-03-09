@@ -110,7 +110,7 @@ namespace Werwolf.Karten
             {
                 //item.draw(con);
                 StandardKarte sk = (item as GeometryBox).DrawBox as StandardKarte;
-                Bitmap b = sk.Karte.GetImage(ppm);
+                Bitmap b = sk.Karte.GetImage(ppm, true);
                 b.Filter(HintergrundDarstellung.Farbe, HintergrundDarstellung.Farbe.A / 255f);
                 con.drawImage(b, sk.box);
                 sk.drawRand(con);
