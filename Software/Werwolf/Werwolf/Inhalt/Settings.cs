@@ -71,22 +71,10 @@ namespace Werwolf.Inhalt
             ViewPpm = reader.getFloat("ViewPpm");
             RefreshDirtyButtons = reader.getBoolean("RefreshDirtyButtons");
 
-            //using (FileStream fs = new FileStream(ErrorImagePath, FileMode.Open))
             using (Image Image = Image.FromFile(ErrorImagePath))// Image.FromStream(fs))
-            {
                 ErrorImage = new Bitmap(Image);
-                //using (Graphics g = ErrorImage.GetHighGraphics())
-                //    g.DrawImage(Image, 0, 0);
-                //fs.Close();
-            }
-            //using (FileStream fs = new FileStream(NotFoundImagePath, FileMode.Open))
             using (Image Image = Image.FromFile(NotFoundImagePath))//Image.FromStream(fs))
-            {
                 NotFoundImage = new Bitmap(Image);
-                //using (Graphics g = ErrorImage.GetHighGraphics())
-                //    g.DrawImage(Image, 0, 0);
-                // fs.Close();
-            }
 
             reader.Close();
         }

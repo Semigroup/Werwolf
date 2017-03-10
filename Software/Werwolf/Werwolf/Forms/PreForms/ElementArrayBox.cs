@@ -41,7 +41,7 @@ namespace Werwolf.Forms
             this.Entfernen.Click += new EventHandler(Entfernen_Click);
             this.Hinzufugen.Click += new EventHandler(Hinzufugen_Click);
 
-            this.Size = new Size(150, 150);
+            this.Size = new Size(250, 120);
             OnResize(EventArgs.Empty);
         }
 

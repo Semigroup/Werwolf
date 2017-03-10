@@ -29,12 +29,13 @@ namespace Werwolf.Forms
             base.BuildWerteListe();
             UpdatingWerteListe = true;
 
+            WerteListe.AddLabelBox(Karte.KartenModus.Werwolfkarte, "Kartentyp");
+
             BuildWertBox("Bild", Universe.HauptBilder);
             BuildWertBox("Fraktion", Universe.Fraktionen);
             BuildWertBox("Gesinnung", Universe.Gesinnungen);
             WerteListe.AddBigStringBox("", "Text");
 
-            WerteListe.AddEnumBox(Karte.KartenModus.Werwolfkarte, "Modus");
             BuildWertBox("Bild Darstellung", Universe.BildDarstellungen);
             BuildWertBox("Titel Darstellung", Universe.TitelDarstellungen);
             BuildWertBox("Text Darstellung", Universe.TextDarstellungen);
@@ -47,7 +48,7 @@ namespace Werwolf.Forms
             WerteListe.AddIntBox(0, "Felder");
             WerteListe.AddIntBox(0, "Störung");
 
-            WerteListe.AddBigStringBox("", "Kosten");
+            WerteListe.AddStringBox("", "Kosten");
             WerteListe.AddStringBox("", "Effekt");
             BuildArrayBox("Basen", Universe.Karten);
             BuildArrayBox("Entwicklungen", Universe.Karten);
@@ -68,7 +69,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Gesinnung", element.Gesinnung);
             WerteListe.SetValue("Text", element.Aufgaben.ToString());
 
-            WerteListe.SetValue<object>("Modus", element.Modus);
+            WerteListe.SetValue<string>("Kartentyp", element.Modus.ToString());
             WerteListe.SetValue("Bild Darstellung", element.BildDarstellung);
             WerteListe.SetValue("Titel Darstellung", element.TitelDarstellung);
             WerteListe.SetValue("Text Darstellung", element.TextDarstellung);
@@ -87,7 +88,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Entwicklungen", element.Entwicklungen);
 
             UpdatingWerteListe = false;
-            SetVisibles();
+            //SetVisibles();
         }
         public override void UpdateElement()
         {
@@ -100,7 +101,7 @@ namespace Werwolf.Forms
             element.Gesinnung = WerteListe.GetValue<Gesinnung>("Gesinnung");
             element.Aufgaben = new Aufgabe(WerteListe.GetValue<string>("Text"), Universe);
 
-            element.Modus = (Karte.KartenModus)WerteListe.GetValue<object>("Modus");
+            //element.Modus = (Karte.KartenModus)WerteListe.GetValue<object>("Kartentyp");
             element.BildDarstellung = WerteListe.GetValue<BildDarstellung>("Bild Darstellung");
             element.TitelDarstellung = WerteListe.GetValue<TitelDarstellung>("Titel Darstellung");
             element.TextDarstellung = WerteListe.GetValue<TextDarstellung>("Text Darstellung");
@@ -120,18 +121,24 @@ namespace Werwolf.Forms
             element.Entwicklungen = WerteListe.GetValue<Karte[]>("Entwicklungen");
             element.Basen = WerteListe.GetValue<Karte[]>("Basen");
 
-            SetVisibles();
+            //SetVisibles();
         }
 
-        public void SetVisibles()
+        protected override void SetVisibles()
         {
-            WerteListe.ShowBox(
-              element.Modus == Karte.KartenModus.AktionsKarte,
-              "Initiative", "Reichweite", "Felder", "Störung");
-            WerteListe.ShowBox(
-              element.Modus == Karte.KartenModus.WondersKarte,
-              "Kosten", "Effekt");
-            //WerteListe.Setup();
+            SetVisible(Karte.KartenModus.AktionsKarte, "Initiative", "Reichweite", "Felder", "Störung");
+            SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.WondersReichKarte, "Basen");
+            SetVisible(Karte.WondersIrgendwas, "Entwicklungen");
+            SetVisible(Karte.KartenModus.WondersKarte, "Kosten", "Effekt");
+            SetVisible(~Karte.KartenModus.Werwolfkarte, "Layout Darstellung");
+            SetVisible(Karte.KartenModus.Werwolfkarte, "Info Darstellung");
+            SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt | Karte.KartenModus.WondersAuswahlKarte), "Text");
+            SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt 
+                | Karte.KartenModus.AktionsKarte
+                | Karte.KartenModus.WondersAuswahlKarte
+                | Karte.KartenModus.WondersReichKarte), "Gesinnung");
+            SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt
+                | Karte.KartenModus.WondersReichKarte), "Fraktion");
         }
     }
 }

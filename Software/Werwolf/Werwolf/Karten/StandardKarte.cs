@@ -139,8 +139,6 @@ namespace Werwolf.Karten
                     if (Text.Visible() && Info.Visible())
                         Text.KorrigierUmInfo(Info.Kompositum.box.Height);
                     break;
-                case Karte.KartenModus.AktionsKarte:
-                    break;
                 case Karte.KartenModus.WondersKarte:
                     if (WonderText.Visible() && WonderInfos.Visible())
                     {

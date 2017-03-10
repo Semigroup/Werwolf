@@ -81,11 +81,15 @@ namespace Werwolf.Inhalt
 
         protected override void ReadIntern(Loader Loader)
         {
+            Loader.Universe = this;
             base.ReadIntern(Loader);
 
             Loader.XmlReader.Next();
             while (!Loader.XmlReader.EOF)
             {
+                //Loader.XmlReader.Dump();
+                if (Loader.XmlReader.Name.Equals("Break"))
+                    break;
                 Menge M = ElementMengen.First(m => m.XmlName.Equals(Loader.XmlReader.Name));
                 M.Read(Loader);
             }
@@ -164,7 +168,7 @@ namespace Werwolf.Inhalt
 
         public override void AdaptToCard(Karte Karte)
         {
-            throw new NotImplementedException();
+            Karten.Standard.Assimilate(Karte);
         }
         public override object Clone()
         {

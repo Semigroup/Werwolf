@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Assistment.form;
 using Assistment.Extensions;
+using Assistment.Xml;
 
 using Werwolf.Inhalt;
 
@@ -80,7 +81,8 @@ namespace Werwolf.Forms
             //Controls.Add(checkBox2);
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
 
-            SteuerBox_NeuClicked(this, EventArgs.Empty);
+            //SteuerBox_NeuClicked(this, EventArgs.Empty);
+            MachNeuesStandardUniverse();
 
             textBox1.TextChanged += new EventHandler(textBox1_TextChanged);
             textBox1.Width = 200;
@@ -300,13 +302,35 @@ namespace Werwolf.Forms
         }
         private void SteuerBox_NeuClicked(object sender, EventArgs e)
         {
-            U u = new U();
-            u.Open(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
-            Universe = u;
+            //U u = new U();
+            //u.Open(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universe.xml"));
+            //Universe = u;
+            ElementMenge<U> Us = new ElementMenge<U>("Universen", null);
+            Loader l = new Loader(null, "Ressourcen/Universen.xml");
+            l.XmlReader.Next();
+            Us.Read(l);
+            foreach (var item in Us)
+                item.Value.Root(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universen.xml"));
+            ElementAuswahlForm<U> f = new ElementAuswahlForm<U>(Us.Standard.Karten.Standard.Clone() as Karte, Us, false);
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Universe = f.Element;
+                PrintDeck.Enabled = false;
+                SteuerBox.Speicherort = null;
+            }
+        }
+
+        private void MachNeuesStandardUniverse()
+        {
+            ElementMenge<U> Us = new ElementMenge<U>("Universen", null);
+            Loader l = new Loader(null, "Ressourcen/Universen.xml");
+            l.XmlReader.Next();
+            Us.Read(l);
+            Us.Standard.Root(Path.Combine(Directory.GetCurrentDirectory(), "Ressourcen/Universen.xml"));
+            Universe = Us.Standard;
             PrintDeck.Enabled = false;
             SteuerBox.Speicherort = null;
         }
-
         private void SetUniverse(U Universe)
         {
             this.universe = Universe;

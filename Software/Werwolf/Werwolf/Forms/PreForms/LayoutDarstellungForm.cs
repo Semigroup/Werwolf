@@ -26,9 +26,8 @@ namespace Werwolf.Forms
 
         public override void BuildWerteListe()
         {
-            base.BuildWerteListe();
-
             UpdatingWerteListe = true;
+            WerteListe.AddStringBox("", "Name");
 
             BuildWertBox("Kleines Namenfeld", Universe.TextBilder);
             BuildWertBox("Großes Namenfeld", Universe.TextBilder);
@@ -43,10 +42,10 @@ namespace Werwolf.Forms
         }
         public override void UpdateWerteListe()
         {
-            base.UpdateWerteListe();
             if (element == null)
                 return;
             UpdatingWerteListe = true;
+            WerteListe.SetValue("Name", element.Name);
 
             WerteListe.SetValue("Kleines Namenfeld", element.KleinesNamenfeld);
             WerteListe.SetValue("Großes Namenfeld", element.GrossesNamenfeld);
@@ -60,9 +59,9 @@ namespace Werwolf.Forms
         }
         public override void UpdateElement()
         {
-            base.UpdateElement();
             if (element == null || UpdatingWerteListe)
                 return;
+            element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
 
             element.KleinesNamenfeld = WerteListe.GetValue<TextBild>("Kleines Namenfeld");
             element.GrossesNamenfeld = WerteListe.GetValue<TextBild>("Großes Namenfeld");
@@ -71,6 +70,11 @@ namespace Werwolf.Forms
             element.Reichweite = WerteListe.GetValue<TextBild>("Reichweite");
             element.Initiative = WerteListe.GetValue<TextBild>("Initiative");
             element.Felder = WerteListe.GetValue<TextBild>("Felder");
+        }
+        protected override void SetVisibles()
+        {
+            SetVisible(Karte.KartenModus.AktionsKarte, "Störung", "Reichweite", "Initiative", "Felder");
+            SetVisible(Karte.WondersIrgendwas, "Kleines Namenfeld", "Großes Namenfeld");
         }
     }
 }

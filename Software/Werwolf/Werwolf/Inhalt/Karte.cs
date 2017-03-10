@@ -78,14 +78,22 @@ namespace Werwolf.Inhalt
 
         public enum KartenModus
         {
-            Werwolfkarte,
-            AktionsKarte,
-            WondersKarte,
-            WondersReichKarte,
-            WonderGlobalesProjekt,
-            WondersAuswahlKarte
+            Werwolfkarte = 0x1,
+            AktionsKarte = 0x2,
+            WondersKarte = 0x4,
+            WondersReichKarte = 0x8,
+            WonderGlobalesProjekt = 0x10,
+            WondersAuswahlKarte = 0x20,
         }
         public KartenModus Modus { get; set; }
+        public static KartenModus WondersIrgendwas
+        {
+            get
+            {
+                return KartenModus.WondersKarte | KartenModus.WondersReichKarte | KartenModus.WonderGlobalesProjekt 
+                    | KartenModus.WondersAuswahlKarte;
+            }
+        }
 
         public Karte()
             : base("Karte", true)
@@ -239,7 +247,7 @@ namespace Werwolf.Inhalt
         {
             Size s = GetPictureSize(ppm);
             Bitmap img = new Bitmap(s.Width, s.Height);
-            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor,null, high))
+            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, null, high))
             using (DrawContextGraphics dcg = new DrawContextGraphics(g))
             {
                 g.Clear(BackColor);

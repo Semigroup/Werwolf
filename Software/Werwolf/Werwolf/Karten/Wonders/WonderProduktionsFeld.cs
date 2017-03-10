@@ -19,14 +19,26 @@ namespace Werwolf.Karten
         public WonderProduktionsFeld(Karte Karte, float Ppm)
             : base(Karte, Ppm)
         {
-
         }
 
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
+            if (Karte != null && Karte.Effekt.Anzahl > 0)
+            {
+                Text Text = Karte.Effekt.ProduceTexts(Karte.TextDarstellung.EffektFontMeasurer)[0];
+                SizeF Size = Karte.HintergrundDarstellung.Size.sub(Karte.HintergrundDarstellung.Rand);
+                Produktion = new FixedBox(Size.mul(Faktor), Text);
+                (Produktion as FixedBox).Alignment = new SizeF(0.5f, 0.5f);
+            }
+            else
+                Produktion = null;
         }
 
+        public override bool Visible()
+        {
+            return base.Visible() && Produktion != null;
+        }
         public override void update()
         {
         }
@@ -35,17 +47,7 @@ namespace Werwolf.Karten
         {
             this.box = box;
             this.box.Size = Karte.HintergrundDarstellung.Size.mul(Faktor);
-
-            if (Karte.Effekt.Anzahl > 0)
-            {
-                Text Text = Karte.Effekt.ProduceTexts(Karte.TextDarstellung.EffektFontMeasurer)[0];
-                SizeF Size = Karte.HintergrundDarstellung.Size.sub(Karte.HintergrundDarstellung.Rand);
-                Produktion = new FixedBox(Size.mul(Faktor), Text);
-                (Produktion as FixedBox).Alignment = new SizeF(0.5f, 0.5f);
-                Produktion.setup(box);
-            }
-            else
-                Produktion = null;
+            Produktion.setup(box);
         }
 
         public override void draw(DrawContext con)
@@ -53,8 +55,7 @@ namespace Werwolf.Karten
             con.fillRectangle(Karte.HintergrundDarstellung.Farbe.ToBrush(), box);
             using (Image Image = Karte.Fraktion.HintergrundBild.Image)
                 con.drawImage(Image, box);
-            if (Produktion != null)
-                Produktion.draw(con);
+            Produktion.draw(con);
         }
     }
 }

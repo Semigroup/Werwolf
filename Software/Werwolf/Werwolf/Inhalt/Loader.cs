@@ -13,7 +13,7 @@ namespace Werwolf.Inhalt
 {
     public class Loader : IDisposable
     {
-        public Universe Universe { get; private set; }
+        public Universe Universe { get;  set; }
         public XmlReader XmlReader { get; private set; }
 
         public Loader(Universe Universe, XmlReader XmlReader)
@@ -25,10 +25,13 @@ namespace Werwolf.Inhalt
             : this(Universe, XmlReader.Create(Pfad))
         {
         }
+        public Loader(string Pfad)
+            : this(null, XmlReader.Create(Pfad))
+        {
+        }
 
         public Font GetFont(string AttributeName)
         {
-            //  return new FontMeasurer(XmlReader.getString(AttributeName), XmlReader.getFloat(AttributeName + "_Size"));
             return XmlReader.getFont(AttributeName);
         }
 

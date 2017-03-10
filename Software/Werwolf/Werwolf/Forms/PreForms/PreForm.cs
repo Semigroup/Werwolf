@@ -72,6 +72,7 @@ namespace Werwolf.Forms
         public void SetElement(T Element)
         {
             this.element = Element.Clone() as T;
+            //SetVisibles();
             ViewBox.ChangeKarte(element);
             UpdateWerteListe();
         }
@@ -148,6 +149,20 @@ namespace Werwolf.Forms
         protected virtual void OnInvalidChange(EventArgs e)
         {
             //OkButton.Enabled = WerteListe.Valid();
+        }
+
+        protected virtual void SetVisibles()
+        {
+        }
+        protected virtual void SetVisible(Karte.KartenModus DesiredModus, params string[] Namen)
+        {
+            WerteListe.ShowBox(((Karte.Modus & DesiredModus) != 0), Namen);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            SetVisibles();
+            WerteListe.Setup();
         }
     }
 }

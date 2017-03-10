@@ -62,5 +62,10 @@ namespace Werwolf.Forms
             element.RuckseitenBild = WerteListe.GetValue<RuckseitenBild>("Bild Rückseite");
             element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"),Universe);
         }
+
+        protected override void SetVisibles()
+        {
+            SetVisible(Karte.KartenModus.Werwolfkarte, "Titel Art");
+        }
     }
 }

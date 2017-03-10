@@ -54,6 +54,11 @@ namespace Werwolf.Forms
         {
 
         }
+        public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge, bool BearbeitungErlaubt)
+            : this(Karte, ElementMenge, ElementMenge.Standard, GetViewBox(), BearbeitungErlaubt)
+        {
+
+        }
         public ElementAuswahlForm(Karte Karte, ElementMenge<T> ElementMenge)
             : this(Karte, ElementMenge, ElementMenge.Standard)
         {
@@ -293,6 +298,7 @@ namespace Werwolf.Forms
                 case "TextDarstellung":
                 case "TitelDarstellung":
                 case "LayoutDarstellung":
+                case "Universe":
                     return new ViewKarte();
 
                 case "RuckseitenBild":

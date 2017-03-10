@@ -41,7 +41,7 @@ namespace Werwolf.Inhalt
         public void Read(Loader Loader)
         {
             if (!Loader.XmlReader.Name.Equals(XmlName))
-                throw new NotImplementedException();
+                throw new NotImplementedException(Loader.XmlReader.DumpInfo());
             ReadIntern(Loader);
         }
         protected virtual void WriteIntern(XmlWriter XmlWriter)
