@@ -71,5 +71,10 @@ namespace Werwolf.Forms
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             element.Anker = WerteListe.GetValue<PointF>("Anker");
         }
+
+        protected override void SetVisibles()
+        {
+            SetVisible(0, "Hat Runde Ecken?");
+        }
     }
 }

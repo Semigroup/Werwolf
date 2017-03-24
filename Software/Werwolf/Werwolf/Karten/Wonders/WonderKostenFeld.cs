@@ -19,7 +19,7 @@ namespace Werwolf.Karten
             get { return Karte.LayoutDarstellung.GetKleinesNamenfeld(true); }
         }
         private string LastKosten;
-        private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 14); // 16
+        private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 17.5f); // 16
 
         public WonderKostenFeld(Karte Karte, float Ppm)
             : base(Karte, Ppm, true, false, false)

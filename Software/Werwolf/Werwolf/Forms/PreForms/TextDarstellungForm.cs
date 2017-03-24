@@ -64,5 +64,10 @@ namespace Werwolf.Forms
             element.BalkenDicke = WerteListe.GetValue<float>("Balkendicke in mm");
             element.InnenRadius = WerteListe.GetValue<float>("Innenradius in mm");
         }
+
+        protected override void SetVisibles()
+        {
+            SetVisible(Karte.KartenModus.WondersKarte, "Effekt Font");
+        }
     }
 }

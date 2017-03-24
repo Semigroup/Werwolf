@@ -131,7 +131,7 @@ namespace Werwolf.Forms
             SetVisible(Karte.WondersIrgendwas, "Entwicklungen");
             SetVisible(Karte.KartenModus.WondersKarte, "Kosten", "Effekt");
             SetVisible(~Karte.KartenModus.Werwolfkarte, "Layout Darstellung");
-            SetVisible(Karte.KartenModus.Werwolfkarte, "Info Darstellung");
+            SetVisible(Karte.KartenModus.Werwolfkarte |Karte.KartenModus.WondersKarte, "Info Darstellung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt | Karte.KartenModus.WondersAuswahlKarte), "Text");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt 
                 | Karte.KartenModus.AktionsKarte
