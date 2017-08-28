@@ -84,6 +84,7 @@ namespace Werwolf.Inhalt
             WondersReichKarte = 0x8,
             WonderGlobalesProjekt = 0x10,
             WondersAuswahlKarte = 0x20,
+            CyberAktionsKarte = 0x40
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
