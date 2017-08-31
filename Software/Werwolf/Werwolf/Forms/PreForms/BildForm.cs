@@ -37,6 +37,7 @@ namespace Werwolf.Forms
             image.ShowImage = false;
             image.ImageChanged += new EventHandler(image_ImageChanged);
             image.MaximumImageSize = Settings.MaximumImageArea;
+            image.InternetResultsDirectory = Universe.HauptBilder
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
