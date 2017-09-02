@@ -37,7 +37,6 @@ namespace Werwolf.Forms
             image.ShowImage = false;
             image.ImageChanged += new EventHandler(image_ImageChanged);
             image.MaximumImageSize = Settings.MaximumImageArea;
-         sadasd   image.InternetResultsDirectory = "C:/Users/Rüstü/Desktop/dump/";
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
@@ -68,6 +67,8 @@ namespace Werwolf.Forms
             ball.Image = element.Image;
             image.DesiredInternetSize = element.Size;
             UpdatingWerteListe = false;
+            if (image.InternetResultsDirectory == null)
+                image.InternetResultsDirectory = element.GetDirectory();
         }
         public override void UpdateElement()
         {

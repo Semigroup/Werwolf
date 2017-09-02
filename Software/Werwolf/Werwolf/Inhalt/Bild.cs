@@ -177,6 +177,16 @@ namespace Werwolf.Inhalt
         {
             return "Bilder/" + XmlName + "er/";
         }
+        /// <summary>
+        /// Hier werden Bilder abgespeichert
+        /// <para>gibt Null zurück, wenn Universe nicht gespeichert ist</para>
+        /// </summary>
+        /// <returns></returns>
+        public string GetDirectory()
+        {
+            if (Universe.Pfad == null) return null;
+            return Path.Combine(Universe.DirectoryName + GetSubfolder());
+        }
 
         public virtual void Lokalisieren(bool jpg, string destinyDirectory)
         {

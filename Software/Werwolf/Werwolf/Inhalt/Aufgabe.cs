@@ -143,17 +143,15 @@ namespace Werwolf.Inhalt
             }
             this.Fragments = Fragments;
         }
-        private void ConsumeLine(string Line, List<Fragment> Fragments)
+
+        private void ConsumeLine(string line, ICollection<Fragment> fragments)
         {
-            string[] fragments = Line.Split(new string[] { "::" }, StringSplitOptions.None);
-            bool bild = false;
-            foreach (var item in fragments)
+            var separatedFragments = line.Split(new[] { "::" }, StringSplitOptions.None);
+            for (var i = 0; i < separatedFragments.Length; i++)
             {
-                if (bild)
-                    Fragments.Add(new Fragment(Universe.TextBilder, item));
-                else
-                    Fragments.Add(new Fragment(item));
-                bild = !bild;
+                //separatedFragments is an alternating collection of text and pictures
+                var fragment = separatedFragments[i];
+                fragments.Add(i % 2 == 1 ? new Fragment(Universe.TextBilder, fragment) : new Fragment(fragment));
             }
         }
 
@@ -203,7 +201,7 @@ namespace Werwolf.Inhalt
             {
                 if (fragment.Bild == null)
                     return fragment;
-                else 
+                else
                 {
                     int i = oldBilder.IndexOfTrue(x => x == fragment.Bild.Name);
                     if (i >= 0)
