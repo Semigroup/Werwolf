@@ -37,7 +37,7 @@ namespace Werwolf.Forms
             image.ShowImage = false;
             image.ImageChanged += new EventHandler(image_ImageChanged);
             image.MaximumImageSize = Settings.MaximumImageArea;
-            image.InternetResultsDirectory = "C:/Users/Rüstü/Desktop/dump/";
+         sadasd   image.InternetResultsDirectory = "C:/Users/Rüstü/Desktop/dump/";
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);

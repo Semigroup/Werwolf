@@ -169,6 +169,14 @@ namespace Werwolf.Inhalt
                 g.DrawImage(Img, r);
             return img;
         }
+        /// <summary>
+        /// "Bilder/" + XmlName + "er/"
+        /// </summary>
+        /// <returns></returns>
+        public string GetSubfolder()
+        {
+            return "Bilder/" + XmlName + "er/";
+        }
 
         public virtual void Lokalisieren(bool jpg, string destinyDirectory)
         {
@@ -176,7 +184,7 @@ namespace Werwolf.Inhalt
             if (File.Exists(source))
             {
                 string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
-                string filePath = "Bilder/" + XmlName + "er/" + Name + extension;
+                string filePath = GetSubfolder() + Name + extension;
                 string destiny = Path.Combine(destinyDirectory, filePath);
                 try
                 {
