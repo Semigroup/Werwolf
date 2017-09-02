@@ -37,7 +37,7 @@ namespace Werwolf.Forms
             image.ShowImage = false;
             image.ImageChanged += new EventHandler(image_ImageChanged);
             image.MaximumImageSize = Settings.MaximumImageArea;
-            image.InternetResultsDirectory = Universe.HauptBilder
+            image.InternetResultsDirectory = "C:/Users/Rüstü/Desktop/dump/";
             WerteListe.AddWertePaar<string>(image, "", "Datei");
             WerteListe.AddStringBox("", "Artist");
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
@@ -66,6 +66,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Point of Interest", element.Zentrum);
             ball.Image = element.Image;
+            image.DesiredInternetSize = element.Size;
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -76,6 +77,7 @@ namespace Werwolf.Forms
             element.FilePath = WerteListe.GetString("Datei");
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
+            image.DesiredInternetSize = element.Size;
             element.Zentrum = WerteListe.GetValue<PointF>("Point of Interest");
         }
     }
