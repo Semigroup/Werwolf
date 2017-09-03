@@ -154,7 +154,7 @@ namespace Werwolf.Inhalt
         public void SetAutoSize()
         {
             SizeF KartenSize = Universe.HintergrundDarstellungen.Standard.Size;
-            this.Size = GetImageSize();
+            //this.Size = GetImageSize();
             this.Size = new SizeF(KartenSize.Width, KartenSize.Width / Size.ratio());
         }
         public Image GetImageByHeight(float Height)
