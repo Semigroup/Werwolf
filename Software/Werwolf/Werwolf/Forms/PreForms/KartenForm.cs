@@ -53,6 +53,10 @@ namespace Werwolf.Forms
             BuildArrayBox("Basen", Universe.Karten);
             BuildArrayBox("Entwicklungen", Universe.Karten);
 
+
+            WerteListe.AddStringBox("", "Aktionsname");
+
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -87,8 +91,9 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Basen", element.Basen);
             WerteListe.SetValue("Entwicklungen", element.Entwicklungen);
 
+            WerteListe.SetValue("Aktionsname", element.AktionsName.ToString());
+
             UpdatingWerteListe = false;
-            //SetVisibles();
         }
         public override void UpdateElement()
         {
@@ -121,24 +126,26 @@ namespace Werwolf.Forms
             element.Entwicklungen = WerteListe.GetValue<Karte[]>("Entwicklungen");
             element.Basen = WerteListe.GetValue<Karte[]>("Basen");
 
-            //SetVisibles();
+            element.AktionsName = new Aufgabe(WerteListe.GetValue<string>("Aktionsname"), Universe);
         }
 
         protected override void SetVisibles()
         {
-            SetVisible(Karte.KartenModus.AktionsKarte, "Initiative", "Reichweite", "Felder", "Störung");
+            SetVisible(Karte.KartenModus.AktionsKarte, "Störung");
+            SetVisible(Karte.KartenModus.AktionsKarte | Karte.KartenModus.CyberWaffenKarte, "Initiative", "Reichweite", "Felder");
             SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.WondersReichKarte, "Basen");
             SetVisible(Karte.WondersIrgendwas, "Entwicklungen");
-            SetVisible(Karte.KartenModus.WondersKarte, "Kosten", "Effekt");
+            SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.CyberWaffenKarte, "Kosten", "Effekt");
             SetVisible(~Karte.KartenModus.Werwolfkarte, "Layout Darstellung");
-            SetVisible(Karte.KartenModus.Werwolfkarte |Karte.KartenModus.WondersKarte, "Info Darstellung");
+            SetVisible(Karte.KartenModus.Werwolfkarte | Karte.KartenModus.WondersKarte, "Info Darstellung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt | Karte.KartenModus.WondersAuswahlKarte), "Text");
-            SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt 
+            SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt
                 | Karte.KartenModus.AktionsKarte
                 | Karte.KartenModus.WondersAuswahlKarte
                 | Karte.KartenModus.WondersReichKarte), "Gesinnung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt
                 | Karte.KartenModus.WondersReichKarte), "Fraktion");
+            SetVisible(Karte.KartenModus.CyberWaffenKarte, "Aktionsname");
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Werwolf.Karten
 
         public override void draw(DrawContext con)
         {
-            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location);//.Inner(0, 0);
             if (BildDarstellung.MyFilter == Inhalt.BildDarstellung.Filter.Keiner)
                 con.DrawCenteredImage(Karte.HauptBild, PointOfInterest, MovedInnenBox);
             else

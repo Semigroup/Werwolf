@@ -185,7 +185,7 @@ namespace Werwolf.Inhalt
         public string GetDirectory()
         {
             if (Universe.Pfad == null) return null;
-            return Path.Combine(Universe.DirectoryName + GetSubfolder());
+            return Path.Combine(Universe.DirectoryName , GetSubfolder());
         }
 
         public virtual void Lokalisieren(bool jpg, string destinyDirectory)

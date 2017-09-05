@@ -9,6 +9,7 @@ using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
 
 using Werwolf.Inhalt;
+using Werwolf.Karten.CyberAktion;
 
 namespace Werwolf.Karten
 {
@@ -30,6 +31,8 @@ namespace Werwolf.Karten
         public WondersDoppelBild WondersDoppelBild { get; set; }
         public WonderDoppelName WonderDoppelName { get; set; }
 
+        public HochBildTiefBox HochBildTiefBox { get; set; }
+
         private WolfBox[] WolfBoxs
         {
             get
@@ -50,6 +53,8 @@ namespace Werwolf.Karten
                             return new WolfBox[] { HauptBild, WonderGlobalesReich };
                         case Karte.KartenModus.WondersAuswahlKarte:
                             return new WolfBox[] { WondersDoppelBild, WonderDoppelName };
+                        case Karte.KartenModus.CyberWaffenKarte:
+                            return new WolfBox[] { HochBildTiefBox };
                         default:
                             throw new NotImplementedException();
                     }
@@ -92,6 +97,7 @@ namespace Werwolf.Karten
             WonderGlobalesReich = new WonderGlobalesReich(Karte, ppm);
             WondersDoppelBild = new WondersDoppelBild(Karte, ppm);
             WonderDoppelName = new WonderDoppelName(Karte, ppm);
+            HochBildTiefBox = new HochBildTiefBox(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -149,6 +155,34 @@ namespace Werwolf.Karten
                 default:
                     break;
             }
+        }
+        public override void draw(DrawContext con)
+        {
+            switch (Karte.Modus)
+            {
+                case Karte.KartenModus.Werwolfkarte:
+                    drawNormal(con);
+                    break;
+                case Karte.KartenModus.AktionsKarte:
+                    drawAction(con);
+                    break;
+                case Karte.KartenModus.WondersKarte:
+                    drawWonders(con);
+                    break;
+                case Karte.KartenModus.WondersReichKarte:
+                case Karte.KartenModus.WonderGlobalesProjekt:
+                    drawWondersReich(con);
+                    break;
+                case Karte.KartenModus.WondersAuswahlKarte:
+                    drawWondersAuswahl(con);
+                    break;
+                case Karte.KartenModus.CyberWaffenKarte:
+                    drawCyberAction(con);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+            drawRand(con);
         }
         public void drawNormal(DrawContext con)
         {
@@ -248,31 +282,6 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.draw(con);
         }
-        public override void draw(DrawContext con)
-        {
-            switch (Karte.Modus)
-            {
-                case Karte.KartenModus.Werwolfkarte:
-                    drawNormal(con);
-                    break;
-                case Karte.KartenModus.AktionsKarte:
-                    drawAction(con);
-                    break;
-                case Karte.KartenModus.WondersKarte:
-                    drawWonders(con);
-                    break;
-                case Karte.KartenModus.WondersReichKarte:
-                case Karte.KartenModus.WonderGlobalesProjekt:
-                    drawWondersReich(con);
-                    break;
-                case Karte.KartenModus.WondersAuswahlKarte:
-                    drawWondersAuswahl(con);
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-            drawRand(con);
-        }
         public void drawRand(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(box.Location);
@@ -281,6 +290,22 @@ namespace Werwolf.Karten
                 HintergrundDarstellung.MakeRandBild(ppm);
                 con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
+        }
+        public void drawCyberAction(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            if (HintergrundDarstellung.Existiert)
+            {
+                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
+            }
+
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.draw(con);
         }
     }
 }

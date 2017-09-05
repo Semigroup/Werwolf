@@ -76,6 +76,10 @@ namespace Werwolf.Inhalt
             }
         }
 
+        public Aufgabe AktionsName { get; set; }
+
+        public string ZielSicherheiten { get; set; }
+
         public enum KartenModus
         {
             Werwolfkarte = 0x1,
@@ -84,7 +88,7 @@ namespace Werwolf.Inhalt
             WondersReichKarte = 0x8,
             WonderGlobalesProjekt = 0x10,
             WondersAuswahlKarte = 0x20,
-            CyberAktionsKarte = 0x40
+            CyberWaffenKarte = 0x40
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
@@ -128,6 +132,9 @@ namespace Werwolf.Inhalt
             this.Basen = new Karte[0];
             this.Entwicklungen = new Karte[0];
 
+            this.AktionsName = new Aufgabe();
+            this.ZielSicherheiten = "";
+
             this.Modus = KartenModus.Werwolfkarte;
         }
 
@@ -160,6 +167,9 @@ namespace Werwolf.Inhalt
             entwicklungen = Loader.XmlReader.getString("Entwicklungen")
                .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
             Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
+
+            AktionsName = Loader.GetAufgabe("AktionsName");
+            ZielSicherheiten = Loader.XmlReader.getString("ZielSicherheiten");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -188,6 +198,9 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("Basen", Basen.Map(b => b.Name).SumText(";"));
             XmlWriter.writeAttribute("Entwicklungen", Entwicklungen.Map(b => b.Name).SumText(";"));
             XmlWriter.writeEnum<KartenModus>("Modus", Modus);
+
+            XmlWriter.writeAttribute("AktionsName", AktionsName.ToString());
+            XmlWriter.writeAttribute("ZielSicherheiten", ZielSicherheiten);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -220,6 +233,9 @@ namespace Werwolf.Inhalt
             Karte.Effekt = Effekt;
             Karte.Entwicklungen = Entwicklungen.FlatClone();
             Karte.Basen = Basen.FlatClone();
+
+            Karte.AktionsName = AktionsName;
+            Karte.ZielSicherheiten = ZielSicherheiten;
 
             Karte.Modus = Modus;
         }
@@ -296,6 +312,11 @@ namespace Werwolf.Inhalt
             Universe.HauptBilder.Rescue(HauptBild);
 
             Aufgaben.Rescue();
+
+            Kosten.Rescue();
+            Effekt.Rescue();
+
+            AktionsName.Rescue();
         }
         public virtual WolfBox GetVorderSeite(float Ppm)
         {

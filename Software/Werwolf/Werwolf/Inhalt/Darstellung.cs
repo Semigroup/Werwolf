@@ -635,6 +635,13 @@ namespace Werwolf.Inhalt
         public TextBild Felder { get; set; }
         public TextBild Reichweite { get; set; }
 
+        /// <summary>
+        /// ZielSicherheiten[x+9] lieftert ZielSicherheit x
+        /// <para> x geht von -9 bis 9, beide Grenzen eingeschlossen </para>
+        /// </summary>
+        public TextBild[] ZielSicherheiten { get; set; } = new TextBild[19];
+        public TextBild ZielSicherheitenSchutze { get; set; }
+
         public LayoutDarstellung()
             : base("LayoutDarstellung")
         {
@@ -645,10 +652,12 @@ namespace Werwolf.Inhalt
             GrossesNamenfeld = Universe.TextBilder.Standard;
             KleinesNamenfeld = Universe.TextBilder.Standard;
 
-            Storung =
-                Initiative =
-                Felder =
-                Reichweite = Universe.TextBilder.Standard;
+            Storung = Initiative = Felder = Reichweite
+                = Universe.TextBilder.Standard;
+
+            for (int i = 0; i < ZielSicherheiten.Length; i++)
+                ZielSicherheiten[i] = Universe.TextBilder.Standard;
+            ZielSicherheitenSchutze = Universe.TextBilder.Standard;
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -660,6 +669,9 @@ namespace Werwolf.Inhalt
             Initiative = Universe.TextBilder[Loader.XmlReader.getString("Initiative")];
             Felder = Universe.TextBilder[Loader.XmlReader.getString("Felder")];
             Reichweite = Universe.TextBilder[Loader.XmlReader.getString("Reichweite")];
+
+            ZielSicherheiten = Loader.XmlReader.getStrings("ZielSicherheiten", ",").Map(x => Universe.TextBilder[x]).ToArray();
+            ZielSicherheitenSchutze = Universe.TextBilder[Loader.XmlReader.getString("Schütze")];
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -671,6 +683,9 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("Initiative", Initiative.Name);
             XmlWriter.writeAttribute("Felder", Felder.Name);
             XmlWriter.writeAttribute("Reichweite", Reichweite.Name);
+
+            XmlWriter.writeAttribute("ZielSicherheiten",ZielSicherheiten.SumText(","));
+            XmlWriter.writeAttribute("Schütze", ZielSicherheitenSchutze.Name);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -687,6 +702,9 @@ namespace Werwolf.Inhalt
             ld.Storung = Storung;
             ld.Reichweite = Reichweite;
             ld.Felder = Felder;
+            for (int i = 0; i < ZielSicherheiten.Length; i++)
+                ld.ZielSicherheiten[i] = ZielSicherheiten[i];
+            ld.ZielSicherheitenSchutze = ZielSicherheitenSchutze;
         }
         public override object Clone()
         {
@@ -703,6 +721,9 @@ namespace Werwolf.Inhalt
             Universe.TextBilder.Rescue(Initiative);
             Universe.TextBilder.Rescue(Felder);
             Universe.TextBilder.Rescue(Reichweite);
+            for (int i = 0; i < ZielSicherheiten.Length; i++)
+                Universe.TextBilder.Rescue(ZielSicherheiten[i]);
+            Universe.TextBilder.Rescue(ZielSicherheitenSchutze);
         }
 
         public TextBild GetGrossesNamenfeld(bool AufDemKopf)
