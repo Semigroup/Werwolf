@@ -53,9 +53,8 @@ namespace Werwolf.Forms
             BuildArrayBox("Basen", Universe.Karten);
             BuildArrayBox("Entwicklungen", Universe.Karten);
 
-
             WerteListe.AddStringBox("", "Aktionsname");
-
+            WerteListe.AddStringBox("", "Zielsicherheiten");
 
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -92,6 +91,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Entwicklungen", element.Entwicklungen);
 
             WerteListe.SetValue("Aktionsname", element.AktionsName.ToString());
+            WerteListe.SetValue("Zielsicherheiten", element.ZielSicherheiten);
 
             UpdatingWerteListe = false;
         }
@@ -127,6 +127,7 @@ namespace Werwolf.Forms
             element.Basen = WerteListe.GetValue<Karte[]>("Basen");
 
             element.AktionsName = new Aufgabe(WerteListe.GetValue<string>("Aktionsname"), Universe);
+            element.ZielSicherheiten = WerteListe.GetValue<string>("Zielsicherheiten");
         }
 
         protected override void SetVisibles()
@@ -145,7 +146,7 @@ namespace Werwolf.Forms
                 | Karte.KartenModus.WondersReichKarte), "Gesinnung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt
                 | Karte.KartenModus.WondersReichKarte), "Fraktion");
-            SetVisible(Karte.KartenModus.CyberWaffenKarte, "Aktionsname");
+            SetVisible(Karte.KartenModus.CyberWaffenKarte, "Aktionsname", "Zielsicherheiten");
         }
     }
 }

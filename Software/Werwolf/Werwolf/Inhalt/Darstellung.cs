@@ -670,7 +670,8 @@ namespace Werwolf.Inhalt
             Felder = Universe.TextBilder[Loader.XmlReader.getString("Felder")];
             Reichweite = Universe.TextBilder[Loader.XmlReader.getString("Reichweite")];
 
-            ZielSicherheiten = Loader.XmlReader.getStrings("ZielSicherheiten", ",").Map(x => Universe.TextBilder[x]).ToArray();
+            string[] strings = Loader.XmlReader.getStrings("ZielSicherheiten", ", ");
+            ZielSicherheiten = strings.Map(x => Universe.TextBilder[x]).ToArray();
             ZielSicherheitenSchutze = Universe.TextBilder[Loader.XmlReader.getString("Schütze")];
         }
         protected override void WriteIntern(XmlWriter XmlWriter)

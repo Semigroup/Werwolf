@@ -264,10 +264,9 @@ namespace Werwolf.Inhalt
         {
             Size s = GetPictureSize(ppm);
             Bitmap img = new Bitmap(s.Width, s.Height);
-            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, null, high))
+            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, BackColor, high))
             using (DrawContextGraphics dcg = new DrawContextGraphics(g))
             {
-                g.Clear(BackColor);
                 WolfBox.setup(0);
                 WolfBox.draw(dcg);
             }

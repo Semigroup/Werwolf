@@ -97,5 +97,13 @@ namespace Werwolf.Karten.CyberAktion
             if (RightText != null)
                 RightText.update();
         }
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            if (LeftText != null)
+                LeftText.Move(ToMove);
+            if (RightText != null)
+                RightText.Move(ToMove);
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace Werwolf.Forms
             WerteListe.AddEnumBox(Titel.Art.Rund, "Titel Art");
             BuildWertBox("Bild Rückseite", Universe.RuckseitenBilder);
             WerteListe.AddBigStringBox("", "Fraktionstext");
+            BuildWertBox("Symbol", Universe.TextBilder);
 
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -48,6 +49,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Titel Art", element.TitelArt as object);
             WerteListe.SetValue("Bild Rückseite", element.RuckseitenBild);
             WerteListe.SetValue("Fraktionstext", element.StandardAufgaben.ToString());
+            WerteListe.SetValue("Symbol", element.Symbol);
 
             UpdatingWerteListe = false;
         }
@@ -61,11 +63,13 @@ namespace Werwolf.Forms
             element.TitelArt = (Titel.Art)WerteListe.GetValue<object>("Titel Art");
             element.RuckseitenBild = WerteListe.GetValue<RuckseitenBild>("Bild Rückseite");
             element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"),Universe);
+            element.Symbol = WerteListe.GetValue<TextBild>("Symbol");
         }
 
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.Werwolfkarte, "Titel Art");
+            SetVisible(Karte.KartenModus.CyberWaffenKarte, "Symbol");
         }
     }
 }
