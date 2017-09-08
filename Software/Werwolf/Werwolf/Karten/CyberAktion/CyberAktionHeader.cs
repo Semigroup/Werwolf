@@ -29,7 +29,7 @@ namespace Werwolf.Karten.CyberAktion
             Text[] texts = Karte.AktionsName.ProduceTexts(Font);
             Text[] kosten = Karte.Kosten.ProduceTexts(Font);
             this[0, 0] = texts.Length > 0 ? texts[0].Geometry(InnenRadius.mul( Faktor)) : null ;
-            this[0, 1] = new Text(Karte.Fraktion.Schreibname, Font).Geometry(InnenRadius.mul(Faktor));
+            this[0, 1] = (Karte.Modus == Karte.KartenModus.CyberSupportKarte)? null :new Text(Karte.Fraktion.Schreibname, Font).Geometry(InnenRadius.mul(Faktor));
             this[1, 0] = texts.Length > 1 ? texts[1].Geometry(InnenRadius.mul(Faktor)) : null;
             this[1, 1] = kosten.Length > 0 ? kosten[0].Geometry(InnenRadius.mul(Faktor)) : null;
             Text inRen = new Text("", Font);

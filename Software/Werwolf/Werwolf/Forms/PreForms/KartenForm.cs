@@ -133,10 +133,11 @@ namespace Werwolf.Forms
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.AktionsKarte, "Störung");
-            SetVisible(Karte.KartenModus.AktionsKarte | Karte.KartenModus.CyberWaffenKarte, "Initiative", "Reichweite", "Felder");
+            SetVisible(Karte.KartenModus.AktionsKarte | Karte.CyberIrgendwas,
+                "Initiative", "Reichweite", "Felder");
             SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.WondersReichKarte, "Basen");
             SetVisible(Karte.WondersIrgendwas, "Entwicklungen");
-            SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.CyberWaffenKarte, "Kosten", "Effekt");
+            SetVisible(Karte.KartenModus.WondersKarte | Karte.CyberIrgendwas, "Kosten", "Effekt");
             SetVisible(~Karte.KartenModus.Werwolfkarte, "Layout Darstellung");
             SetVisible(Karte.KartenModus.Werwolfkarte | Karte.KartenModus.WondersKarte, "Info Darstellung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt | Karte.KartenModus.WondersAuswahlKarte), "Text");
@@ -146,7 +147,7 @@ namespace Werwolf.Forms
                 | Karte.KartenModus.WondersReichKarte), "Gesinnung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt
                 | Karte.KartenModus.WondersReichKarte), "Fraktion");
-            SetVisible(Karte.KartenModus.CyberWaffenKarte, "Aktionsname", "Zielsicherheiten");
+            SetVisible(Karte.CyberIrgendwas, "Aktionsname", "Zielsicherheiten");
         }
     }
 }

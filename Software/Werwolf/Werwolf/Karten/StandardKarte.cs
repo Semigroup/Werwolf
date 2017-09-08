@@ -54,6 +54,8 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.WondersAuswahlKarte:
                             return new WolfBox[] { WondersDoppelBild, WonderDoppelName };
                         case Karte.KartenModus.CyberWaffenKarte:
+                        case Karte.KartenModus.CyberSupportKarte:
+                        case Karte.KartenModus.CyberHackKarte:
                             return new WolfBox[] { HochBildTiefBox };
                         default:
                             throw new NotImplementedException();
@@ -176,6 +178,8 @@ namespace Werwolf.Karten
                 case Karte.KartenModus.WondersAuswahlKarte:
                     drawWondersAuswahl(con);
                     break;
+                case Karte.KartenModus.CyberHackKarte:
+                case Karte.KartenModus.CyberSupportKarte:
                 case Karte.KartenModus.CyberWaffenKarte:
                     drawCyberAction(con);
                     break;

@@ -88,7 +88,9 @@ namespace Werwolf.Inhalt
             WondersReichKarte = 0x8,
             WonderGlobalesProjekt = 0x10,
             WondersAuswahlKarte = 0x20,
-            CyberWaffenKarte = 0x40
+            CyberWaffenKarte = 0x40,
+            CyberSupportKarte = 0x80,
+            CyberHackKarte = 0x100
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
@@ -97,6 +99,13 @@ namespace Werwolf.Inhalt
             {
                 return KartenModus.WondersKarte | KartenModus.WondersReichKarte | KartenModus.WonderGlobalesProjekt 
                     | KartenModus.WondersAuswahlKarte;
+            }
+        }
+        public static KartenModus CyberIrgendwas
+        {
+            get
+            {
+                return KartenModus.CyberWaffenKarte | KartenModus.CyberSupportKarte | KartenModus.CyberHackKarte;
             }
         }
 

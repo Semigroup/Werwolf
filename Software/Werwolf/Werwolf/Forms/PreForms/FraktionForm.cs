@@ -69,7 +69,7 @@ namespace Werwolf.Forms
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.Werwolfkarte, "Titel Art");
-            SetVisible(Karte.KartenModus.CyberWaffenKarte, "Symbol");
+            SetVisible(Karte.CyberIrgendwas, "Symbol");
         }
     }
 }

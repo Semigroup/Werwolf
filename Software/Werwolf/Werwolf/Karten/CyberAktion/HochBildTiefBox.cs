@@ -68,6 +68,7 @@ namespace Werwolf.Karten.CyberAktion
             base.draw(con);
             Mitte.draw(con);
             Hoch.draw(con);
+            if (Karte.Modus != Karte.KartenModus.CyberSupportKarte)
             FormattedImpressum.draw(con);
             //ZielBox.draw(con);
             Tief.box = Tief.box.Inner(-1, -1);
