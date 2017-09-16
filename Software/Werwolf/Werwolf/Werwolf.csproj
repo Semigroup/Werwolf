@@ -261,6 +261,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Beten.png" />
+    <Content Include="Ressourcen\Bilder\HauptBilder\Computer.png" />
     <Content Include="Ressourcen\Bilder\FehlerBilder\Fehlerbild.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -372,6 +374,7 @@
     <Content Include="Ressourcen\Bilder\HauptBilder\Cyberdog_gun_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Denken.png" />
     <Content Include="Ressourcen\Bilder\HauptBilder\Dorfbewohner.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -417,9 +420,11 @@
     <Content Include="Ressourcen\Bilder\HauptBilder\Gigolo.svg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Granate.png" />
     <Content Include="Ressourcen\Bilder\HauptBilder\Guns.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Hammer.png" />
     <Content Include="Ressourcen\Bilder\HauptBilder\Hata Mari.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -465,6 +470,7 @@
     <Content Include="Ressourcen\Bilder\HauptBilder\MadeMan.svg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Maschinenpistole.png" />
     <Content Include="Ressourcen\Bilder\HauptBilder\MathWrath.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -498,6 +504,7 @@
     <Content Include="Ressourcen\Bilder\HauptBilder\Perk_reflex_booster.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Pistolenschuss.png" />
     <Content Include="Ressourcen\Bilder\HauptBilder\Plasma_pistol_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -537,6 +544,7 @@
     <Content Include="Ressourcen\Bilder\HauptBilder\SprayPray.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Sprint.png" />
     <Content Include="Ressourcen\Bilder\HauptBilder\Sputnik.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -561,6 +569,8 @@
     <Content Include="Ressourcen\Bilder\HauptBilder\Werwolf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Angel.jpg" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Angel_2.jpg" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Artefakt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -570,6 +580,7 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\DeckerHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\DNA.jpg" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Dorf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -591,6 +602,7 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\GegnerHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Geist.jpg" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Geister.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -603,6 +615,7 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Inquisition.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Kamikaze.jpg" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\MedicHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -621,6 +634,8 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\MW Reich Produktion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Nazi.jpg" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Nord.png" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Oberflaeche - Leader.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -630,12 +645,18 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\SergeantHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Solaris.jpg" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\System.png" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\TeenSpirit.jpg" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Vampire.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Verfluchtes Artefakt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\vIrus.jpeg" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Volksdroge.gif" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\voodoo.jpg" />
     <Content Include="Ressourcen\Bilder\HintergrundBilder\WarperHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -645,6 +666,7 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Zauber.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\RuckseitenBilder\Back.png" />
     <Content Include="Ressourcen\Bilder\RuckseitenBilder\FaceD0Hintergrund.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -684,6 +706,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\A.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Angel.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Augusto Pinochet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -693,6 +716,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\Che Guevara.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Copyright.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Daumen Oben.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -714,6 +738,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\De_2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\DNA.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Dwight_Eisenhower.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -723,6 +748,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\EEG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Eisen.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\EpBr.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -801,9 +827,11 @@
     <Content Include="Ressourcen\Bilder\TextBilder\GB_2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Geist.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Georges Clemenceau.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Gift.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\GKK.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -846,6 +874,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\K.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Kamikaze.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\KleinesNamenfeld.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -867,6 +896,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\L.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Laser.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Leo XIII.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -894,6 +924,8 @@
     <Content Include="Ressourcen\Bilder\TextBilder\N.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Nano.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\Nazi.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\NoE.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -906,6 +938,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\NoM2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Nord.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\NoU.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1002,6 +1035,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\PK.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Plasma.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Politische Verschwoerung.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1041,6 +1075,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\Reichweite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Rein.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Richard Feynman.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1071,6 +1106,7 @@
     <Content Include="Ressourcen\Bilder\TextBilder\Slash2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Solaris.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Spionageabwehrdienst.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1083,9 +1119,12 @@
     <Content Include="Ressourcen\Bilder\TextBilder\Streik-Weltrevolution.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\System.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\TeenSpirit.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Terrorismus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\Trauma.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\U.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1116,6 +1155,9 @@
     <Content Include="Ressourcen\Bilder\TextBilder\UUG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\vIrus.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\Volksdroge.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\voodoo.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\W.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1128,6 +1170,25 @@
     <Content Include="Ressourcen\Bilder\TextBilder\ZG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+1.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+2.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+3.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+4.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+5.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+6.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+7.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+8.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit+9.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-1.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-2.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-3.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-4.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-5.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-6.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-7.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-8.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit-9.png" />
+    <Content Include="Ressourcen\Bilder\TextBilder\ZielSicherheit0.png" />
     <Content Include="Ressourcen\Bilder\TextBilder\Ö.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

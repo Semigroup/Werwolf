@@ -20,6 +20,9 @@ namespace Werwolf.Forms
     {
         protected BallPointFBox ball;
         protected ImageSelectBox image;
+        protected Point MouseDownPoint;
+
+        protected Timer timer;
 
         public BildForm(Karte Karte, ViewBox ViewBox)
             : base(Karte, ViewBox)
@@ -42,11 +45,44 @@ namespace Werwolf.Forms
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
             WerteListe.AddWertePaar<PointF>(ball, new PointF(), "Point of Interest");
 
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Enabled = false;
+            timer.Tick += Timer_Tick;
+            ViewBox.MouseDown += ViewBox_MouseDown;
+            ViewBox.MouseUp += ViewBox_MouseUp;
+
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
 
-       public virtual void image_ImageChanged(object sender, EventArgs e)
+        private void ViewBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                timer.Enabled = false;
+        }
+        private void ViewBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.MouseDownPoint = Cursor.Position;
+                timer.Enabled = true;
+            }
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Point newPos = Cursor.Position;
+            PointF center =  newPos.sub(MouseDownPoint);
+            center = center.div(ViewBox.GetCurrentPictureSize());
+            center = ball.GetValue().sub(center);
+            ball.SetValue(center);
+            this.MouseDownPoint = newPos;
+        }
+
+
+
+        public virtual void image_ImageChanged(object sender, EventArgs e)
         {
             if (UpdatingWerteListe)
                 return;
@@ -75,7 +111,7 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
-            element.SetFilePath( WerteListe.GetString("Datei"));
+            element.SetFilePath(WerteListe.GetString("Datei"));
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             image.DesiredInternetSize = element.Size;
@@ -151,7 +187,7 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = WerteListe.GetValue<string>("Name");
-            element.SetFilePath( WerteListe.GetString("Datei"));
+            element.SetFilePath(WerteListe.GetString("Datei"));
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
         }

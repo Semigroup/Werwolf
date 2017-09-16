@@ -25,6 +25,7 @@ namespace Werwolf.Inhalt
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
+            //string dump = Loader.XmlReader.DumpInfo();
             string s = Loader.XmlReader.ReadString();
             foreach (var item in s.Split("\r\n".ToArray(), StringSplitOptions.RemoveEmptyEntries))
             {

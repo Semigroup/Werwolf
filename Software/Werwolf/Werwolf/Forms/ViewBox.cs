@@ -53,6 +53,8 @@ namespace Werwolf.Forms
         {
             InitializeComponent();
             WolfBox = GetWolfBox(Karte, ppm);
+            pictureBox1.MouseDown += (x, e) => OnMouseDown(e);
+            pictureBox1.MouseUp += (x, e) => OnMouseUp(e);
         }
         public virtual void ChangeKarte(XmlElement ChangedElement)
         {
@@ -95,6 +97,13 @@ namespace Werwolf.Forms
             return true;
         }
         protected abstract WolfBox GetWolfBox(Karte Karte, float Ppm);
+        public PointF GetCurrentPictureSize()
+        {
+            PointF res = new PointF(LastSize.Width * 1f / pictureBox1.Width,
+                LastSize.Height * 1f / pictureBox1.Height);
+            return new PointF(LastSize.Width, LastSize.Height).div(
+                res.X > res.Y ? res.X : res.Y);
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -141,7 +150,7 @@ namespace Werwolf.Forms
         protected override bool ChangeSize()
         {
             SizeF size = PictureBox.Size;
-            Size Size = size.Max(1,1).ToSize();
+            Size Size = size.Max(1, 1).ToSize();
             if (Size.Equals(LastSize))
                 return false;
             LastSize = Size;
