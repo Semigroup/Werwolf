@@ -13,6 +13,10 @@ using Assistment.Extensions;
 using Assistment.Xml;
 
 using Werwolf.Inhalt;
+using Werwolf.Inhalt.Data;
+using Werwolf.Forms.Data;
+
+using System.Threading;
 
 namespace Werwolf.Forms
 {
@@ -77,7 +81,7 @@ namespace Werwolf.Forms
             checkBox1.Text = "Bilder extra Abspeichern? (Erhöht die Speicherdauer um ein paar Minuten...)";
             checkBox2.Text = "Bilder in Jpeg (90%) abspeichern? (Spart Speicherplatz)";
             checkBox1.AutoSize = checkBox2.AutoSize = true;
-            Controls.Add(checkBox1);
+            //Controls.Add(checkBox1);
             //Controls.Add(checkBox2);
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
 
@@ -237,7 +241,7 @@ namespace Werwolf.Forms
                 {
                     T bild = new T();
                     bild.Init(Universe);
-                    bild.FilePath = item;
+                    bild.SetFilePath(item);
                     Size s = bild.GetImageSize();
                     if (s.Width * s.Height > Settings.MaximumImageArea)
                         tooBig.Add(bild);
@@ -294,11 +298,24 @@ namespace Werwolf.Forms
         }
         private void SteuerBox_SpeichernClicked(object sender, EventArgs e)
         {
-            Changed(false);
+            ViewKarte.Active = false;
+            DialogResult dialogResult = DialogResult.OK;
+            string destinyDir = Path.GetDirectoryName(SteuerBox.Speicherort);
             Universe.Rescue();
-            if (checkBox1.Checked)
-                Universe.Lokalisieren(checkBox2.Checked, Path.GetDirectoryName(SteuerBox.Speicherort));
-            Universe.Save(SteuerBox.Speicherort);
+            List<Konflikt> konflikte = Universe.CheckBeforeSave(destinyDir);
+            if (konflikte.Count > 0)
+                using (KonfliktForm kf = new KonfliktForm())
+                {
+                    kf.SetKonflikte(konflikte);
+                    dialogResult = kf.ShowDialog();
+                }
+            if (dialogResult == DialogResult.OK)
+            {
+                Changed(false);
+                Universe.Lokalisieren(destinyDir);
+                Universe.Save(SteuerBox.Speicherort);
+            }
+            ViewKarte.Active = true;
         }
         private void SteuerBox_NeuClicked(object sender, EventArgs e)
         {

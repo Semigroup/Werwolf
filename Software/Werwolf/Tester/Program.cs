@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Assistment.Testing;
+using Assistment.Texts;
+using Assistment.Texts.Paper;
+using System.Drawing;
+using Assistment.Drawing.LinearAlgebra;
 
 namespace Tester
 {
@@ -14,9 +18,10 @@ namespace Tester
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
+
         }
     }
 }

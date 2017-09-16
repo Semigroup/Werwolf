@@ -47,7 +47,7 @@ namespace Werwolf.Karten
             else if (!Karte.Entwicklungen[Index].Schreibname.Equals(LastName))
             {
                 Karte Entwicklung = Karte.Entwicklungen[Index];
-                SmallFont = new FontGraphicsMeasurer(Entwicklung.TitelDarstellung.Font.Name, 6);
+                SmallFont = new FontGraphicsMeasurer(Entwicklung.TitelDarstellung.Font.Name, 8);
                 FontGraphicsMeasurer EffektFont = new FontGraphicsMeasurer(Entwicklung.TitelDarstellung.Font.Name, 8);
                 this.LastName = Entwicklung.Schreibname;
                 string color = Entwicklung.HintergrundDarstellung.Farbe.tween(Color.Black, 0.5f).ToHexString();

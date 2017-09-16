@@ -18,6 +18,12 @@ namespace Werwolf.Forms
 {
     public abstract partial class ViewBox : UserControl
     {
+        public bool Active
+        {
+            get { return timer1.Enabled; }
+            set { timer1.Enabled = value; }
+        }
+
         private int DelayStep { get { return Settings.DelayTime; } }
         private int CurrentDelay = 0;
 
@@ -135,7 +141,7 @@ namespace Werwolf.Forms
         protected override bool ChangeSize()
         {
             SizeF size = PictureBox.Size;
-            Size Size = size.ToSize();
+            Size Size = size.Max(1,1).ToSize();
             if (Size.Equals(LastSize))
                 return false;
             LastSize = Size;

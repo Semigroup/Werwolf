@@ -33,7 +33,7 @@ namespace Werwolf.Karten
             else if (!Karte.Basen[Index].Schreibname.Equals(LastName))
             {
                 Karte Basis = Karte.Basen[Index];
-                SmallFont = new FontGraphicsMeasurer(Basis.TitelDarstellung.Font.Name, 6);
+                SmallFont = new FontGraphicsMeasurer(Basis.TitelDarstellung.Font.Name, 8);
                 this.LastName = Basis.Schreibname;
                 string color = Basis.HintergrundDarstellung.Farbe.tween(Color.Black, 0.5f).ToHexString();
                 DrawBox = new Text("\\c" + color + LastName, SmallFont)

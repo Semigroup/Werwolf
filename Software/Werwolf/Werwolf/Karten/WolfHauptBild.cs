@@ -34,7 +34,9 @@ namespace Werwolf.Karten
 
         public override bool Visible()
         {
-            return base.Visible() && BildDarstellung.Existiert && Karte.HauptBild.FilePath.Length > 0;
+            return base.Visible() 
+                && BildDarstellung.Existiert 
+                && Karte.HauptBild.TotalFilePath.Length > 0;
         }
 
         public override void update()

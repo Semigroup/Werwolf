@@ -16,15 +16,15 @@ namespace Werwolf.Karten
     {
         private bool Klein = true;
         private string LastKosten;
-        private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 12); // 16
+        private static FontGraphicsMeasurer Font = new FontGraphicsMeasurer("Calibri", 15); // 16
         public override Bild FeldBild
         {
             get
             {
                 if (Klein)
-                    return Karte.LayoutDarstellung.GetKleinesNamenfeld(false);// return Karte.Universe.TextBilder["KleinesNamenfeldVersatz"]; 
+                    return Karte.LayoutDarstellung.GetKleinesNamenfeld(false);
                 else
-                    return Karte.LayoutDarstellung.GetGrossesNamenfeld(false);// return Karte.Universe.TextBilder["GroßesNamenfeldVersatz"];
+                    return Karte.LayoutDarstellung.GetGrossesNamenfeld(false);
             }
         }
 
@@ -142,10 +142,6 @@ namespace Werwolf.Karten
         public override void Bearbeite()
         {
             Bild FeldBild = this.FeldBild;
-            //if ((DrawBox as KostenBox).klein)
-            //    FeldBild = Karte.Universe.TextBilder["KleinesNamenfeldVersatz"];
-            //else
-            //    FeldBild = Karte.Universe.TextBilder["GroßesNamenfeldVersatz"];
 
             SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
             Point P = new Point((int)Rest.Width, (int)(Rest.Height + 0.5f * Ppm));

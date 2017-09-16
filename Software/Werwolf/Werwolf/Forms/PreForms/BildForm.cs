@@ -60,26 +60,27 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
             this.Text = element.XmlName + " namens " + element.Schreibname + " bearbeiten...";
             WerteListe.SetValue("Name", element.Schreibname);
-            WerteListe.SetValue("Datei", element.HiddenFilePath);
+            WerteListe.SetValue("Datei", element.TotalFilePath);
             WerteListe.SetValue("Artist", element.Artist);
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Point of Interest", element.Zentrum);
             ball.Image = element.Image;
             image.DesiredInternetSize = element.Size;
             UpdatingWerteListe = false;
-            if (image.InternetResultsDirectory == null)
-                image.InternetResultsDirectory = element.GetDirectory();
+            //if (image.InternetResultsDirectory == null)
+            //    image.InternetResultsDirectory = element.GetInternetDirectory();
         }
         public override void UpdateElement()
         {
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
-            element.FilePath = WerteListe.GetString("Datei");
+            element.SetFilePath( WerteListe.GetString("Datei"));
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             image.DesiredInternetSize = element.Size;
             element.Zentrum = WerteListe.GetValue<PointF>("Point of Interest");
+            element.TryNewIdentifier = true;
         }
     }
 
@@ -140,7 +141,7 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
             this.Text = element.XmlName + " namens " + element.Name + " bearbeiten...";
             WerteListe.SetValue("Name", element.Name);
-            WerteListe.SetValue("Datei", element.HiddenFilePath);
+            WerteListe.SetValue("Datei", element.TotalFilePath);
             WerteListe.SetValue("Artist", element.Artist);
             WerteListe.SetValue("Größe in mm", element.Size);
             UpdatingWerteListe = false;
@@ -150,7 +151,7 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = WerteListe.GetValue<string>("Name");
-            element.FilePath = WerteListe.GetString("Datei");
+            element.SetFilePath( WerteListe.GetString("Datei"));
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
         }

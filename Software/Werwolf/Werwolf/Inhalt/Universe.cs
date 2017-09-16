@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 
 using Assistment.Xml;
+using Werwolf.Inhalt.Data;
 
 namespace Werwolf.Inhalt
 {
@@ -35,6 +36,17 @@ namespace Werwolf.Inhalt
             get
             {
                 return GetMengen();
+            }
+        }
+        public IEnumerable<Bild>[] BildMengen
+        {
+            get
+            {
+                return new IEnumerable<Bild>[] {
+                HauptBilder.Values,
+                HintergrundBilder.Values,
+                RuckseitenBilder.Values,
+                TextBilder.Values };
             }
         }
 
@@ -72,7 +84,7 @@ namespace Werwolf.Inhalt
         protected virtual Menge[] GetMengen()
         {
             return new Menge[] { HintergrundDarstellungen, TitelDarstellungen,
-                    BildDarstellungen, TextDarstellungen, InfoDarstellungen, 
+                    BildDarstellungen, TextDarstellungen, InfoDarstellungen,
                     HauptBilder, HintergrundBilder, RuckseitenBilder, TextBilder,
                     LayoutDarstellungen,
                     Fraktionen, Gesinnungen, Karten,
@@ -128,7 +140,6 @@ namespace Werwolf.Inhalt
         public void Save(string Pfad)
         {
             Root(Pfad);
-            this.DirectoryName = Path.GetDirectoryName(Pfad);
 
             XmlWriterSettings s = new XmlWriterSettings();
             s.NewLineOnAttributes = true;
@@ -142,7 +153,7 @@ namespace Werwolf.Inhalt
                 writer.Close();
             }
         }
-        public void Lokalisieren(bool jpg, string destinyDirectory)
+        public void Lokalisieren(string destinyDirectory)
         {
             string[] bilder = { "HauptBilder", "HintergrundBilder", "RuckseitenBilder", "TextBilder" };
             foreach (var item in bilder)
@@ -151,14 +162,26 @@ namespace Werwolf.Inhalt
                 if (!Directory.Exists(pfad))
                     Directory.CreateDirectory(pfad);
             }
-            foreach (var item in HauptBilder.Values)
-                item.Lokalisieren(false, destinyDirectory);
-            foreach (var item in HintergrundBilder.Values)
-                item.Lokalisieren(jpg, destinyDirectory);
-            foreach (var item in RuckseitenBilder.Values)
-                item.Lokalisieren(jpg, destinyDirectory);
-            foreach (var item in TextBilder.Values)
-                item.Lokalisieren(false, destinyDirectory);
+            foreach (var menge in BildMengen)
+                foreach (var item in menge)
+                    item.Lokalisieren(destinyDirectory);
+        }
+        public List<Konflikt> CheckBeforeSave(string destinyDirectory)
+        {
+            List<Konflikt> list = new List<Konflikt>();
+            foreach (var menge in BildMengen)
+                AddConflicts(destinyDirectory, menge, list);
+            return list;
+        }
+        private void AddConflicts<B>(string destinyDirectory, IEnumerable<B> menge, List<Konflikt> cache)
+            where B : Bild
+        {
+            foreach (var item in menge)
+            {
+                item.SetKonflikt(destinyDirectory);
+                if (item.Konflikt.FehlerArt == Konflikt.Art.ZielMitVerschiedenerDateiBesetzt)
+                    cache.Add(item.Konflikt);
+            }
         }
         public override void Rescue()
         {

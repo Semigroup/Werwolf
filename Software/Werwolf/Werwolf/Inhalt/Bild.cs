@@ -13,6 +13,7 @@ using Assistment.Xml;
 using Assistment.Extensions;
 
 using Werwolf.Karten;
+using Werwolf.Inhalt.Data;
 
 namespace Werwolf.Inhalt
 {
@@ -21,35 +22,38 @@ namespace Werwolf.Inhalt
         private static Image LeerBild = new Bitmap(1, 1);
         private static Image FehlerBild = Settings.ErrorImage;
 
-        public string FilePath { get; set; }
+        /// <summary>
+        /// name.png
+        /// </summary>
+        public string Identifier { get; private set; }
+        /// <summary>
+        /// C:\asdad\asdasda.png
+        /// oder relativ
+        /// </summary>
+        public string FilePath { get; private set; }
+
         public string TotalFilePath
         {
             get
             {
-                if (File.Exists(FilePath))
-                    return Path.GetFullPath(FilePath);
-                else if (FilePath.Length > 0)
+                if (HasIdentifier())
                 {
-                    string fp = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
-                    if (File.Exists(fp))
-                        return fp;
-                    fp = Path.Combine(Universe.DirectoryName, FilePath);
-                    if (File.Exists(fp))
-                        return fp;
-                    return "";
+                    string result = Path.Combine(Universe.DirectoryName, GetSubfolder(), Identifier);
+                    if (File.Exists(result))
+                        return result;
                 }
-                else
-                    return "";
-            }
-        }
-        public string HiddenFilePath
-        {
-            get
-            {
-                //if (FilePath.Length >= 10 && FilePath.Substring(0, 10).Equals("Ressourcen"))
-                //    return "";
-                //else
-                return TotalFilePath;
+                if (HasFilePath())
+                {
+                    if (File.Exists(FilePath))
+                        return Path.GetFullPath(FilePath);
+                    else
+                    {
+                        string result = Path.Combine(Universe.DirectoryName, FilePath);
+                        if (File.Exists(result))
+                            return result;
+                    }
+                }
+                return "";
             }
         }
 
@@ -76,15 +80,34 @@ namespace Werwolf.Inhalt
             get { return new RectangleF(ZentrumAbsolut.mul(-WolfBox.Faktor), Size.mul(WolfBox.Faktor)); }
         }
 
+        /// <summary>
+        /// gibt an, ob TotalFilePath Länge gleich Null hat
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty()
+        {
+            return TotalFilePath.Length == 0;
+        }
+        public bool HasIdentifier()
+        {
+            return Identifier != null && Identifier.Length > 0;
+        }
+        public bool HasFilePath()
+        {
+            return FilePath != null && FilePath.Length > 0;
+        }
+        public Konflikt Konflikt { get; private set; }
+        public bool TryNewIdentifier { get; set; }
+
         public virtual Image Image
         {
             get
             {
-                if (FilePath.Length == 0)
+                string tfp = TotalFilePath;
+                if (TotalFilePath.Length == 0)
                     return LeerBild.Clone() as Image;
-                string tot = TotalFilePath;
-                if (File.Exists(tot))
-                    return Image.FromFile(tot);
+                if (File.Exists(tfp))
+                    return Image.FromFile(tfp);
                 else
                     return FehlerBild;
             }
@@ -98,7 +121,6 @@ namespace Werwolf.Inhalt
         public override void Init(Universe Universe)
         {
             base.Init(Universe);
-            FilePath = "";
             Artist = "";
         }
 
@@ -107,6 +129,7 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
 
             this.FilePath = Loader.XmlReader.getString("FilePath");
+            this.Identifier = Loader.XmlReader.getString("Identifier");
             this.Artist = Loader.XmlReader.getString("Artist");
             this.Zentrum = Loader.XmlReader.getPointF("Zentrum");
             this.Size = Loader.XmlReader.getSizeF("Size");
@@ -114,6 +137,7 @@ namespace Werwolf.Inhalt
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
+            XmlWriter.writeAttribute("Identifier", Identifier);
             XmlWriter.writeAttribute("FilePath", FilePath);
             XmlWriter.writeAttribute("Artist", Artist);
             XmlWriter.writeSize("Size", Size);
@@ -125,9 +149,11 @@ namespace Werwolf.Inhalt
             base.Assimilate(Element);
             Bild b = Element as Bild;
             b.FilePath = FilePath;
+            b.Identifier = Identifier;
             b.Artist = Artist;
             b.Size = Size;
             b.Zentrum = Zentrum;
+            b.TryNewIdentifier = TryNewIdentifier;
         }
         public SizeF StandardSize(Image image)
         {
@@ -154,19 +180,19 @@ namespace Werwolf.Inhalt
         public void SetAutoSize()
         {
             SizeF KartenSize = Universe.HintergrundDarstellungen.Standard.Size;
-            //this.Size = GetImageSize();
             this.Size = new SizeF(KartenSize.Width, KartenSize.Width / Size.ratio());
         }
         public Image GetImageByHeight(float Height)
         {
-            Image Img = this.Image;
-
-            RectangleF r = new RectangleF();
-            r.Size = new SizeF(Img.Size.Width * Height / Img.Size.Height, Height).Max(1, 1).ToSize();
-            Image img = new Bitmap((int)r.Width, (int)r.Height);
-
-            using (Graphics g = img.GetHighGraphics())
-                g.DrawImage(Img, r);
+            Image img;
+            using (Image Img = this.Image)
+            {
+                RectangleF r = new RectangleF();
+                r.Size = new SizeF(Img.Size.Width * Height / Img.Size.Height, Height).Max(1, 1).ToSize();
+                img = new Bitmap((int)r.Width, (int)r.Height);
+                using (Graphics g = img.GetHighGraphics())
+                    g.DrawImage(Img, r);
+            }
             return img;
         }
         /// <summary>
@@ -175,42 +201,63 @@ namespace Werwolf.Inhalt
         /// <returns></returns>
         public string GetSubfolder()
         {
-            return "Bilder/" + XmlName + "er/";
+            return "Bilder\\" + XmlName + "er\\";
         }
-        /// <summary>
-        /// Hier werden Bilder abgespeichert
-        /// <para>gibt Null zurück, wenn Universe nicht gespeichert ist</para>
-        /// </summary>
-        /// <returns></returns>
-        public string GetDirectory()
-        {
-            if (Universe.Pfad == null) return null;
-            return Path.Combine(Universe.DirectoryName , GetSubfolder());
-        }
+        ///// <summary>
+        ///// Hier werden Bilder abgespeichert
+        ///// <para>gibt Null zurück, wenn Universe nicht gespeichert ist</para>
+        ///// </summary>
+        ///// <returns></returns>
+        //public string GetInternetDirectory()
+        //{
+        //    if (Universe.Pfad == null) return null;
+        //    return Path.Combine(Universe.DirectoryName, GetSubfolder());
+        //}
 
-        public virtual void Lokalisieren(bool jpg, string destinyDirectory)
+        public void Lokalisieren(string destinyDirectory)
+        {
+            string NewFilePath;
+            switch (Konflikt.LosungArt)
+            {
+                case Konflikt.Losung.NichtErsetzen:
+                    this.FilePath = Konflikt.DestinyFile;
+                    this.Identifier = Path.GetFileName(this.FilePath);
+                    this.TryNewIdentifier = false;
+                    return;
+                case Konflikt.Losung.Ersetzen:
+                    NewFilePath = Konflikt.DestinyFile;
+                    break;
+                case Konflikt.Losung.Umbennen:
+                    NewFilePath = Konflikt.DestinyFile.DecollideFilename();
+                    break;
+                case Konflikt.Losung.Keine:
+                default:
+                    throw new NotImplementedException();
+            }
+            File.Copy(TotalFilePath, NewFilePath);
+            this.FilePath = NewFilePath;
+            this.Identifier =  Path.GetFileName(this.FilePath);
+            this.TryNewIdentifier = false;
+        }
+        public void SetKonflikt(string destinyDirectory)
         {
             string source = TotalFilePath;
-            if (File.Exists(source))
-            {
-                string extension = jpg ? ".jpeg" : Path.GetExtension(FilePath);
-                string filePath = GetSubfolder() + Name + extension;
-                string destiny = Path.Combine(destinyDirectory, filePath);
-                try
-                {
-                    File.Copy(source, destiny, true);
-                    this.FilePath = filePath;
-                }
-                catch (Exception)
-                {
-                    if (File.Exists(destiny))
-                        this.FilePath = filePath;
-                }
-            }
-            else
-                this.FilePath = "";
+
+            string destiny = Path.Combine(
+                destinyDirectory, 
+                GetSubfolder(),
+                (TryNewIdentifier || !HasIdentifier()
+                ? Name.ToFileName() + Path.GetExtension(FilePath)
+                : Identifier));
+            this.Konflikt = new Konflikt(this, source, destiny);
         }
 
+        public void SetFilePath(string FilePath)
+        {
+            this.FilePath = FilePath;
+            this.Identifier = null;
+            this.TryNewIdentifier = true;
+        }
         public override void AdaptToCard(Karte Karte)
         {
             throw new NotImplementedException();
@@ -327,7 +374,6 @@ namespace Werwolf.Inhalt
                 return img;
             }
         }
-
 
         public RotateFlipType Transformation { get; set; }
         public TextBild Original { get; set; }

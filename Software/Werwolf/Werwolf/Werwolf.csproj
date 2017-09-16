@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -70,6 +71,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\Xml\XmlReaderWriterExtensions.cs" />
+    <Compile Include="Forms\Data\KonfliktFeld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Data\KonfliktFeld.Designer.cs">
+      <DependentUpon>KonfliktFeld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Data\KonfliktForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Data\KonfliktForm.Designer.cs">
+      <DependentUpon>KonfliktForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ElementAuswahlButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +165,7 @@
     <Compile Include="Inhalt\Aufgabe.cs" />
     <Compile Include="Inhalt\Bild.cs" />
     <Compile Include="Inhalt\Darstellung.cs" />
+    <Compile Include="Inhalt\Data\Konflikt.cs" />
     <Compile Include="Inhalt\Deck.cs" />
     <Compile Include="Inhalt\ElementMenge.cs" />
     <Compile Include="Inhalt\Fraktion.cs" />
@@ -200,6 +214,12 @@
     <Compile Include="Printing\Job.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Data\KonfliktFeld.resx">
+      <DependentUpon>KonfliktFeld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Data\KonfliktForm.resx">
+      <DependentUpon>KonfliktForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintForm.resx">
       <DependentUpon>PrintForm.cs</DependentUpon>
     </EmbeddedResource>

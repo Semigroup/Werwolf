@@ -41,19 +41,19 @@ namespace Werwolf.Karten
 
         public override void draw(DrawContext con)
         {
+            string tfp = Karte.Fraktion.HintergrundBild.TotalFilePath;
+            if (tfp.Length == 0) return;
             RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
-            if (Karte.Fraktion.HintergrundBild.FilePath.Length == 0)
-                return;
-            if (!Karte.Fraktion.HintergrundBild.FilePath.Equals(FilePath)
+            if (!tfp.Equals(FilePath)
                 || !Karte.HintergrundDarstellung.Farbe.Equals(AlteFarbe))
             {
                 this.AlteFarbe = Karte.HintergrundDarstellung.Farbe;
-                this.FilePath = Karte.Fraktion.HintergrundBild.FilePath;
-                using (Bitmap Vorlage = new Bitmap(Karte.Fraktion.HintergrundBild.TotalFilePath))
+                this.FilePath = tfp;
+                using (Bitmap Vorlage = new Bitmap(tfp))
                     Bearbeite(Vorlage, AlteFarbe);
             }
-            PointF Zentrum = MovedInnenBox.Center();//Karte.TitelDarstellung.Rand.add(Karte.HintergrundDarstellung.Rand).mul(Faktor).ToPointF();
-            con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, BearbeitetesBild, Zentrum, MovedInnenBox); // 
+            PointF Zentrum = MovedInnenBox.Center();
+            con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, BearbeitetesBild, Zentrum, MovedInnenBox);
         }
 
 
