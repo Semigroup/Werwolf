@@ -80,6 +80,8 @@ namespace Werwolf.Karten
                 else
                 {
                     p1 = new PointF(hohe, (durchmesser + abstand) / 2);
+                    if (Symbole.Count() > 5)
+                        p1.Y = p1.Y * 0.85f;
                     p2 = new PointF(-p1.X, p1.Y);
                 }
                 int i = 0;

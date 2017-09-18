@@ -234,7 +234,7 @@ namespace Werwolf.Inhalt
                 default:
                     throw new NotImplementedException();
             }
-            File.Copy(TotalFilePath, NewFilePath);
+            File.Copy(TotalFilePath, NewFilePath, true);
             this.FilePath = NewFilePath;
             this.Identifier =  Path.GetFileName(this.FilePath);
             this.TryNewIdentifier = false;

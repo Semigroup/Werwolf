@@ -299,21 +299,31 @@ namespace Werwolf.Forms
         private void SteuerBox_SpeichernClicked(object sender, EventArgs e)
         {
             ViewKarte.Active = false;
-            DialogResult dialogResult = DialogResult.OK;
-            string destinyDir = Path.GetDirectoryName(SteuerBox.Speicherort);
-            Universe.Rescue();
-            List<Konflikt> konflikte = Universe.CheckBeforeSave(destinyDir);
-            if (konflikte.Count > 0)
-                using (KonfliktForm kf = new KonfliktForm())
-                {
-                    kf.SetKonflikte(konflikte);
-                    dialogResult = kf.ShowDialog();
-                }
-            if (dialogResult == DialogResult.OK)
+            try
             {
-                Changed(false);
-                Universe.Lokalisieren(destinyDir);
-                Universe.Save(SteuerBox.Speicherort);
+                DialogResult dialogResult = DialogResult.OK;
+                string destinyDir = Path.GetDirectoryName(SteuerBox.Speicherort);
+                Universe.Rescue();
+                List<Konflikt> konflikte = Universe.CheckBeforeSave(destinyDir);
+                if (konflikte.Count > 0)
+                    using (KonfliktForm kf = new KonfliktForm())
+                    {
+                        kf.SetKonflikte(konflikte);
+                        dialogResult = kf.ShowDialog();
+                    }
+                if (dialogResult == DialogResult.OK)
+                {
+                    Changed(false);
+                    Universe.Lokalisieren(destinyDir);
+                    Universe.Save(SteuerBox.Speicherort);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Das Spiel konnte nicht an die Adresse "
+                    + SteuerBox.Speicherort+"abgespeichert werden."
+                    +"\r\nFehlernachricht:\r\n"
+                    +exception.Message);
             }
             ViewKarte.Active = true;
         }

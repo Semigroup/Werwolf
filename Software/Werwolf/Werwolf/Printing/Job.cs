@@ -197,10 +197,29 @@ namespace Werwolf.Printing
                 for (int i = 0; i < numberOfJobs; i++)
                     files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
 
-                if (MyMode == RuckBildMode.Einzeln)
-                    PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-                else
-                    PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                bool pdfCreated = false;
+                while (!pdfCreated)
+                {
+                    try
+                    {
+                        if (MyMode == RuckBildMode.Einzeln)
+                            PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                        else
+                            PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                        pdfCreated = true;
+                    }
+                    catch (Exception e)
+                    {
+                        DialogResult dr = MessageBox.Show("Datei " + Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + ".pdf")
+                              + " kann nicht erstellt werden. Bitte schließen Sie das Dokument und führen Sie diesen Vorgang nochmal aus."
+                              + "\r\nFehlernachricht:\r\n"
+                              + e.Message,
+                            "Dokument muss geschlossen werden",
+                            MessageBoxButtons.AbortRetryIgnore);
+                        if (dr != DialogResult.Retry)
+                            pdfCreated = true;
+                    }
+                }
                 foreach (var item in files)
                     File.Delete(item);
             }
