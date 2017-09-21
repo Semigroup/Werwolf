@@ -78,6 +78,7 @@ namespace Werwolf.Forms
                 checkBox2.Checked,
                 checkBox4.Checked,
                 checkBox3.Checked,
+                dinA4ForcedBox.Checked,
                 floatBox1.UserValue,
                 MachBilder);
             TargetPath = Path.Combine(saveFileDialog1.FileName);

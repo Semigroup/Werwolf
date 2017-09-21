@@ -47,6 +47,7 @@ namespace Werwolf.Printing
         /// Macht Bilder statt Pdf, falls true
         /// </summary>
         public bool MachBilder { get; set; }
+        public bool Rotieren { get; set; }
 
         public Job(Universe Universe, string Pfad)
             : this()
@@ -66,6 +67,7 @@ namespace Werwolf.Printing
         public void Init(Deck Deck, Color HintergrundFarbe, Color TrennlinienFarbe,
             float Ppm, bool Zwischenplatz, RuckBildMode MyMode,
             bool FixedFont, bool TrennlinieVorne, bool TrennlinieHinten,
+            bool Rotieren,
             float MaximaleGrose, bool MachBilder)
         {
             this.Deck = Deck;
@@ -79,6 +81,7 @@ namespace Werwolf.Printing
             this.TrennlinieHinten = TrennlinieHinten;
             this.MaximaleGrose = MaximaleGrose;
             this.MachBilder = MachBilder;
+            this.Rotieren = Rotieren;
 
             this.Init(Deck.Universe);
             this.Name = this.Schreibname = Deck.Name + "-Job";
@@ -98,6 +101,7 @@ namespace Werwolf.Printing
             this.TrennlinieHinten = Loader.XmlReader.getBoolean("TrennlinieHinten");
             this.MaximaleGrose = Loader.XmlReader.getFloat("MaximaleGrose");
             this.MachBilder = Loader.XmlReader.getBoolean("MachBilder");
+            this.Rotieren = Loader.XmlReader.getBoolean("Rotieren");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -114,6 +118,7 @@ namespace Werwolf.Printing
             XmlWriter.writeBoolean("TrennlinieHinten", TrennlinieHinten);
             XmlWriter.writeFloat("MaximaleGrose", MaximaleGrose);
             XmlWriter.writeBoolean("MachBilder", MachBilder);
+            XmlWriter.writeBoolean("Rotieren", Rotieren);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -131,7 +136,10 @@ namespace Werwolf.Printing
 
         public int GetNumberProSheet()
         {
-            return WolfSinglePaper.GetNumberOfCards(Deck.GetKartenSize().mul(WolfBox.Faktor)).Inhalt();
+            SizeF kartenSize = Deck.GetKartenSize().mul(WolfBox.Faktor);
+            if (Rotieren)
+                kartenSize = kartenSize.permut();
+            return WolfSinglePaper.GetNumberOfCards(kartenSize).Inhalt();
         }
 
         public void DistributedPrint(string TargetPath, ProgressBar progressBar1)

@@ -144,14 +144,14 @@ namespace WolfSlave
         public static WolfBox GetKarte(Karte Karte, Job Job)
         {
             if (Job.FixedFont)
-                return new FixedFontKarte(Karte, Job.Ppm, false);
+                return new FixedFontKarte(Karte, Job.Ppm, false, Job.Rotieren);
             else
                 return new StandardKarte(Karte, Job.Ppm);
         }
         public static WolfBox GetRuckseite(Karte Karte, Job Job)
         {
             if (Job.FixedFont)
-                return new FixedFontKarte(Karte, Job.Ppm, true);
+                return new FixedFontKarte(Karte, Job.Ppm, true, Job.Rotieren);
             else
                 return new StandardRuckseite(Karte, Job.Ppm);
         }
