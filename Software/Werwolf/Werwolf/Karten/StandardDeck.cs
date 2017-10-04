@@ -68,6 +68,7 @@ namespace Werwolf.Karten
         }
         public override void draw(DrawContext con)
         {
+            con.fillRectangle(Brushes.White, 0,0,1000,1000);
             Text.draw(con);
         }
         public override void Move(PointF ToMove)

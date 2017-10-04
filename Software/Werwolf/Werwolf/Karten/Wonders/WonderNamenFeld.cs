@@ -36,7 +36,7 @@ namespace Werwolf.Karten
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
-            if (Karte == null)
+            if (Karte == null || !Karte.TitelDarstellung.Existiert)
             {
                 DrawBox = null;
                 return;

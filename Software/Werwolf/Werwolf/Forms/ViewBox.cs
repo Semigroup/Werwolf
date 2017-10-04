@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;
@@ -42,6 +43,8 @@ namespace Werwolf.Forms
 
         protected Size LastSize = new Size();
         protected Graphics g;
+        private bool Drawing;
+        private bool Dirty;
 
         protected DrawContextGraphics DrawContext;
         protected WolfBox WolfBox;
@@ -68,22 +71,30 @@ namespace Werwolf.Forms
         }
         protected virtual void Draw()
         {
-            if (karte != null)
+            if (karte == null) return;
+            if (!Drawing)
             {
+                Drawing = true;
                 ChangeSize();
-                g.Clear(Color.White);
+                //g.Clear(Color.White);
                 WolfBox.Karte = karte;
                 RectangleF r = new RectangleF();
                 r.Size = LastSize;
                 r.Size = r.Size.mul(ppm / WolfBox.Faktor);
                 WolfBox.setup(r);
                 WolfBox.draw(DrawContext);
+                //await Task.Run( () => );
+                Drawing = false;
             }
+            else
+                Dirty = true;
         }
         public override void Refresh()
         {
             Draw();
-            base.Refresh();
+            if (this.IsHandleCreated)
+                this.Invoke((MethodInvoker)(() => base.Refresh()));
+            //base.Refresh();
         }
         protected virtual bool ChangeSize()
         {
@@ -111,8 +122,14 @@ namespace Werwolf.Forms
                 CurrentDelay--;
             else if (CurrentDelay == 1)
             {
+                Dirty = false;
                 this.Refresh();
                 CurrentDelay = 0;
+            }
+            else if(Dirty)
+            {
+                Dirty = false;
+                OnKarteChanged();
             }
         }
     }
