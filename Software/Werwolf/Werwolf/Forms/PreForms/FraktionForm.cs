@@ -34,6 +34,7 @@ namespace Werwolf.Forms
             BuildWertBox("Bild Rückseite", Universe.RuckseitenBilder);
             WerteListe.AddBigStringBox("", "Fraktionstext");
             BuildWertBox("Symbol", Universe.TextBilder);
+            WerteListe.AddEnumBox(Fraktion.RuckseitenArt.Normal, "Rückseiten Art");
 
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -50,6 +51,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Bild Rückseite", element.RuckseitenBild);
             WerteListe.SetValue("Fraktionstext", element.StandardAufgaben.ToString());
             WerteListe.SetValue("Symbol", element.Symbol);
+            WerteListe.SetValue("Rückseiten Art", element.RuckArt as object);
 
             UpdatingWerteListe = false;
         }
@@ -64,6 +66,7 @@ namespace Werwolf.Forms
             element.RuckseitenBild = WerteListe.GetValue<RuckseitenBild>("Bild Rückseite");
             element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"),Universe);
             element.Symbol = WerteListe.GetValue<TextBild>("Symbol");
+            element.RuckArt = (Fraktion.RuckseitenArt)WerteListe.GetValue<object>("Rückseiten Art");
         }
 
         protected override void SetVisibles()

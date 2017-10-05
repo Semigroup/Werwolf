@@ -97,7 +97,7 @@ namespace Werwolf.Inhalt
         {
             get
             {
-                return KartenModus.WondersKarte | KartenModus.WondersReichKarte | KartenModus.WonderGlobalesProjekt 
+                return KartenModus.WondersKarte | KartenModus.WondersReichKarte | KartenModus.WonderGlobalesProjekt
                     | KartenModus.WondersAuswahlKarte;
             }
         }
@@ -267,7 +267,19 @@ namespace Werwolf.Inhalt
         }
         public Image GetBackImage(float ppm, Color BackColor, bool high)
         {
-            return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm), high);
+            switch (Fraktion.RuckArt)
+            {
+                case Fraktion.RuckseitenArt.Normal:
+                    return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm), high);
+                case Fraktion.RuckseitenArt.Identisch:
+                    return GetImage(ppm, BackColor, high);
+                case Fraktion.RuckseitenArt.Deckungsgleich:
+                    Image img = GetImage(ppm, BackColor, high);
+                    img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    return img;
+                default:
+                    throw new NotImplementedException();
+            }
         }
         public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox, bool high)
         {

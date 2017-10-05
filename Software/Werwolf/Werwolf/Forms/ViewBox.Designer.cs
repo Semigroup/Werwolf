@@ -50,7 +50,7 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1;
-            this.timer1.Tick += async (o, e) => await System.Threading.Tasks.Task.Run(() => timer1_Tick(o, e));
+            this.timer1.Tick += timer1_Tick;// async (o, e) => await System.Threading.Tasks.Task.Run(() => timer1_Tick(o, e));
             // 
             // ViewBox
             // 

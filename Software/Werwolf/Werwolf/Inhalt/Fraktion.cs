@@ -11,11 +11,28 @@ namespace Werwolf.Inhalt
 {
     public class Fraktion : XmlElement, IComparable<Fraktion>
     {
+        public enum RuckseitenArt
+        {
+            /// <summary>
+            /// Rückseite wird durch ein Bild bestimmt
+            /// </summary>
+            Normal,
+            /// <summary>
+            /// Rückseite = Vorderseite
+            /// </summary>
+            Identisch,
+            /// <summary>
+            /// Rückseite = Vorderseite gespiegelt
+            /// </summary>
+            Deckungsgleich
+        }
+
         public Aufgabe StandardAufgaben { get;  set; }
         public Titel.Art TitelArt { get;  set; }
         public HintergrundBild HintergrundBild { get; set; }
         public RuckseitenBild RuckseitenBild { get; set; }
         public TextBild Symbol { get; set; }
+        public RuckseitenArt RuckArt { get; set; }
 
         public Fraktion()
             : base("Fraktion", true)
@@ -30,6 +47,7 @@ namespace Werwolf.Inhalt
             this.HintergrundBild = Universe.HintergrundBilder.Standard;
             this.RuckseitenBild = Universe.RuckseitenBilder.Standard;
             this.Symbol = Universe.TextBilder.Standard;
+            this.RuckArt = RuckseitenArt.Normal;
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -40,6 +58,7 @@ namespace Werwolf.Inhalt
             HintergrundBild = Loader.GetHintergrundBild();
             RuckseitenBild = Loader.GetRuckseitenBild();
             Symbol = Loader.GetTextBild();
+            RuckArt = Loader.XmlReader.getEnum<RuckseitenArt>("RuckArt");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -50,6 +69,7 @@ namespace Werwolf.Inhalt
             XmlWriter.writeAttribute("HintergrundBild", HintergrundBild.Name);
             XmlWriter.writeAttribute("RuckseitenBild", RuckseitenBild.Name);
             XmlWriter.writeAttribute("TextBild", Symbol.Name);
+            XmlWriter.writeEnum<RuckseitenArt>("RuckArt", RuckArt);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -71,6 +91,7 @@ namespace Werwolf.Inhalt
             f.StandardAufgaben = StandardAufgaben;
             f.RuckseitenBild = RuckseitenBild;
             f.Symbol = Symbol;
+            f.RuckArt = RuckArt;
         }
 
         public int CompareTo(Fraktion other)
