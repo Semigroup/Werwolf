@@ -38,7 +38,9 @@ namespace WolfSlave
 
         static void Main(string[] args)
         {
-            //HideConsole();
+#if !DEBUG
+            HideConsole();
+#endif
 
             string UniversePath = args[0];
             JobPath = args[1];

@@ -80,6 +80,8 @@ namespace Werwolf.Inhalt
 
         public string ZielSicherheiten { get; set; }
 
+        public bool Translatiert { get; set; }
+
         public enum KartenModus
         {
             Werwolfkarte = 0x1,
@@ -179,6 +181,7 @@ namespace Werwolf.Inhalt
 
             AktionsName = Loader.GetAufgabe("AktionsName");
             ZielSicherheiten = Loader.XmlReader.getString("ZielSicherheiten");
+            Translatiert = Loader.XmlReader.getBoolean("Translatiert");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -210,6 +213,7 @@ namespace Werwolf.Inhalt
 
             XmlWriter.writeAttribute("AktionsName", AktionsName.ToString());
             XmlWriter.writeAttribute("ZielSicherheiten", ZielSicherheiten);
+            XmlWriter.writeBoolean("Translatiert", Translatiert);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -247,6 +251,7 @@ namespace Werwolf.Inhalt
             Karte.ZielSicherheiten = ZielSicherheiten;
 
             Karte.Modus = Modus;
+            Karte.Translatiert = Translatiert;
         }
         public override object Clone()
         {

@@ -63,12 +63,12 @@ namespace Werwolf.Forms
 
         private OpenFileDialog OpenFileDialog = new OpenFileDialog();
 
-        public StartForm()
+        public StartForm(params ITool[] Tools)
         {
-            BuildUp();
+            BuildUp(Tools);
         }
 
-        protected void BuildUp()
+        protected void BuildUp(params ITool[] Tools)
         {
             SteuerBox.NeuClicked += new EventHandler(SteuerBox_NeuClicked);
             SteuerBox.SpeichernClicked += new EventHandler(SteuerBox_SpeichernClicked);
@@ -83,12 +83,12 @@ namespace Werwolf.Forms
             checkBox1.AutoSize = checkBox2.AutoSize = true;
             //Controls.Add(checkBox1);
             //Controls.Add(checkBox2);
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            checkBox1.CheckedChanged += CheckBox1_CheckedChanged;
 
             //SteuerBox_NeuClicked(this, EventArgs.Empty);
             MachNeuesStandardUniverse();
 
-            textBox1.TextChanged += new EventHandler(textBox1_TextChanged);
+            textBox1.TextChanged += new EventHandler(TextBox1_TextChanged);
             textBox1.Width = 200;
 
             BilderButtons.ButtonClick += new EventHandler(BilderButtons_ButtonClick);
@@ -127,6 +127,20 @@ namespace Werwolf.Forms
 
             ScrollList.AddControl(textBox1, BilderButtons, ElementMengenButtons,
                 PrintDeck, BildMengenButtons, DarstellungenButtons);
+            ScrollList.AddControl(Tools.Map(tool =>
+            {
+                Button b = new Button()
+                {
+                    Text = tool.ToolDescription,
+                    AutoSize = true,
+                };
+                b.Click += (o, e) =>
+                {
+                    tool.EditUniverse(universe);
+                    Changed(true);
+                };
+                return b;
+            }));
             Controls.Add(ScrollList);
 
             SettingsButton.AutoSize = true;
@@ -142,9 +156,7 @@ namespace Werwolf.Forms
 
         private void PrintDeck_Click(object sender, EventArgs e)
         {
-            PrintForm pf = new PrintForm();
-            pf.Universe = Universe;
-            pf.ShowDialog();
+            new PrintForm() { Universe = Universe }.ShowDialog();
         }
         private void SettingsButton_Click(object sender, EventArgs e)
         {
@@ -321,9 +333,9 @@ namespace Werwolf.Forms
             catch (Exception exception)
             {
                 MessageBox.Show("Das Spiel konnte nicht an die Adresse "
-                    + SteuerBox.Speicherort+"abgespeichert werden."
-                    +"\r\nFehlernachricht:\r\n"
-                    +exception.Message);
+                    + SteuerBox.Speicherort + "abgespeichert werden."
+                    + "\r\nFehlernachricht:\r\n"
+                    + exception.Message);
             }
             ViewKarte.Active = true;
         }
@@ -393,11 +405,11 @@ namespace Werwolf.Forms
             base.OnClosing(e);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             checkBox2.Enabled = checkBox1.Checked;
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             this.Text = Universe.Name = Universe.Schreibname = textBox1.Text;
             //if (SteuerBox.Speicherort != null)
@@ -414,5 +426,18 @@ namespace Werwolf.Forms
                 this.Text = Universe.Schreibname;
             PrintDeck.Enabled = !changed;
         }
+
+        //public void AppendTool(ITool Tool)
+        //{
+        //    Button b = new Button()
+        //    {
+        //        Text = Tool.Name,
+        //        AutoSize = true,
+        //    };
+        //    b.Click += (o, e) => Tool.EditUniverse(universe);
+        //    ScrollList.AddControl(b);
+        //    ScrollList.SetUp();
+        //    this.Refresh();
+        //}
     }
 }

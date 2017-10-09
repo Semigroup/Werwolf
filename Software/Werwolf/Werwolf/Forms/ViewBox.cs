@@ -76,7 +76,7 @@ namespace Werwolf.Forms
             {
                 Drawing = true;
                 ChangeSize();
-                //g.Clear(Color.White);
+                g.Clear(Color.White);
                 WolfBox.Karte = karte;
                 RectangleF r = new RectangleF();
                 r.Size = LastSize;

@@ -105,24 +105,26 @@ namespace Werwolf.Inhalt
         }
         public Aufgabe(TextBild Test)
         {
-            List<Fragment> Fragments = new List<Fragment>();
-            Fragments.Add(new Fragment(@"What's your \rfavourite "));
-            Fragments.Add(new Fragment(Test));
-            Fragments.Add(new Fragment(" ide\ba?"));
+            List<Fragment> Fragments = new List<Fragment>
+            {
+                new Fragment(@"What's your \rfavourite "),
+                new Fragment(Test),
+                new Fragment(" ide\ba?"),
 
-            Fragments.Add(new Fragment(true));
-            Fragments.Add(new Fragment(@"Mine is being \i\oc\br\ge\ya\rt\vi\lv\oe "));
-            Fragments.Add(new Fragment(Test));
-            Fragments.Add(new Fragment(@" \d!"));
+                new Fragment(true),
+                new Fragment(@"Mine is being \i\oc\br\ge\ya\rt\vi\lv\oe "),
+                new Fragment(Test),
+                new Fragment(@" \d!"),
 
-            Fragments.Add(new Fragment(true));
-            Fragments.Add(new Fragment(@"\xHow do you "));
-            Fragments.Add(new Fragment(Test));
-            Fragments.Add(new Fragment(@" \xget the idea?"));
+                new Fragment(true),
+                new Fragment(@"\xHow do you "),
+                new Fragment(Test),
+                new Fragment(@" \xget the idea?"),
 
-            Fragments.Add(new Fragment(true));
-            Fragments.Add(new Fragment(Test));
-            Fragments.Add(new Fragment(@"\dI just try to think \rc\br\ge\oa\vt\li\ev\ye\rl\by!"));
+                new Fragment(true),
+                new Fragment(Test),
+                new Fragment(@"\dI just try to think \rc\br\ge\oa\vt\li\ev\ye\rl\by!")
+            };
 
             this.Fragments = Fragments;
             this.Anzahl = 4;
@@ -143,7 +145,6 @@ namespace Werwolf.Inhalt
             }
             this.Fragments = Fragments;
         }
-
         private void ConsumeLine(string line, ICollection<Fragment> fragments)
         {
             var separatedFragments = line.Split(new[] { "::" }, StringSplitOptions.None);
@@ -185,33 +186,59 @@ namespace Werwolf.Inhalt
         {
             return new Aufgabe(Aufgabe1, Aufgabe2);
         }
-
         public void Rescue()
         {
             foreach (var item in Fragments)
                 if (item.Bild != null)
                     Universe.TextBilder.Rescue(item.Bild);
         }
-
         public Aufgabe Replace(string[] oldBilder, string[] newBilder)
         {
-            Aufgabe a = new Aufgabe();
-            a.Anzahl = Anzahl;
-            a.Fragments = this.Fragments.Map(fragment =>
+            Aufgabe a = new Aufgabe
             {
-                if (fragment.Bild == null)
-                    return fragment;
-                else
+                Anzahl = Anzahl,
+                Fragments = this.Fragments.Map(fragment =>
                 {
-                    int i = oldBilder.IndexOfTrue(x => x == fragment.Bild.Name);
-                    if (i >= 0)
-                        return new Fragment(fragment.Bild.Universe.TextBilder, newBilder[i]);
-                    else
+                    if (fragment.Bild == null)
                         return fragment;
-                }
-            });
+                    else
+                    {
+                        int i = oldBilder.IndexOfTrue(x => x == fragment.Bild.Name);
+                        if (i >= 0)
+                            return new Fragment(fragment.Bild.Universe.TextBilder, newBilder[i]);
+                        else
+                            return fragment;
+                    }
+                })
+            };
             return a;
         }
-
+        public List<string> GetLines()
+        {
+            List<string> result = new List<string>();
+            StringBuilder sb = new StringBuilder(Anzahl);
+            foreach (var item in Fragments)
+                if (item.BlockBreak)
+                {
+                    result.Add(sb.ToString());
+                    sb = new StringBuilder(Anzahl);
+                }
+                else if (item.Bild != null)
+                    sb.Append("::" + item.Bild.Name + "::");
+                else if (item.Fehler)
+                    sb.Append("::" + item.FehlerhafteName + "::");
+                else
+                    sb.Append(item.regex);
+            result.Add(sb.ToString());
+            return result;
+        }
+        public List<TextBild> GetTextBilder()
+        {
+            List<TextBild> result = new List<TextBild>();
+            foreach (var item in Fragments)
+                if (item.Bild != null)
+                    result.Add(item.Bild);
+            return result;
+        }
     }
 }

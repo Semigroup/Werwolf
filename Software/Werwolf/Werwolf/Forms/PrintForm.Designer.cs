@@ -53,6 +53,7 @@
             this.floatBox1 = new Assistment.form.FloatBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dinA4ForcedBox = new System.Windows.Forms.CheckBox();
+            this.consoleBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,7 +161,7 @@
             // 
             // Drucken
             // 
-            this.Drucken.Location = new System.Drawing.Point(776, 465);
+            this.Drucken.Location = new System.Drawing.Point(775, 529);
             this.Drucken.Margin = new System.Windows.Forms.Padding(2);
             this.Drucken.Name = "Drucken";
             this.Drucken.Size = new System.Drawing.Size(114, 35);
@@ -171,7 +172,7 @@
             // 
             // DruckenBilder
             // 
-            this.DruckenBilder.Location = new System.Drawing.Point(776, 500);
+            this.DruckenBilder.Location = new System.Drawing.Point(775, 564);
             this.DruckenBilder.Margin = new System.Windows.Forms.Padding(2);
             this.DruckenBilder.Name = "DruckenBilder";
             this.DruckenBilder.Size = new System.Drawing.Size(114, 35);
@@ -186,7 +187,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(639, 441);
+            this.progressBar1.Location = new System.Drawing.Point(638, 505);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(251, 19);
@@ -211,7 +212,7 @@
             // 
             // ppmBox1
             // 
-            this.ppmBox1.Location = new System.Drawing.Point(639, 335);
+            this.ppmBox1.Location = new System.Drawing.Point(638, 399);
             this.ppmBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ppmBox1.Name = "ppmBox1";
             this.ppmBox1.Ppm = 24F;
@@ -240,7 +241,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(640, 465);
+            this.button1.Location = new System.Drawing.Point(639, 529);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(132, 35);
@@ -254,7 +255,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(640, 293);
+            this.checkBox2.Location = new System.Drawing.Point(639, 357);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(72, 17);
@@ -287,7 +288,7 @@
             // 
             // floatBox1
             // 
-            this.floatBox1.Location = new System.Drawing.Point(754, 385);
+            this.floatBox1.Location = new System.Drawing.Point(753, 449);
             this.floatBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.floatBox1.Name = "floatBox1";
             this.floatBox1.Size = new System.Drawing.Size(38, 18);
@@ -299,7 +300,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(637, 385);
+            this.label4.Location = new System.Drawing.Point(636, 449);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 13);
@@ -318,11 +319,22 @@
             this.dinA4ForcedBox.Text = "Karten um 90° rotieren?";
             this.dinA4ForcedBox.UseVisualStyleBackColor = true;
             // 
+            // consoleBox
+            // 
+            this.consoleBox.AutoSize = true;
+            this.consoleBox.Location = new System.Drawing.Point(639, 294);
+            this.consoleBox.Name = "consoleBox";
+            this.consoleBox.Size = new System.Drawing.Size(122, 17);
+            this.consoleBox.TabIndex = 104;
+            this.consoleBox.Text = "Konsolen anzeigen?";
+            this.consoleBox.UseVisualStyleBackColor = true;
+            // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 661);
+            this.Controls.Add(this.consoleBox);
             this.Controls.Add(this.dinA4ForcedBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.floatBox1);
@@ -382,5 +394,6 @@
         private Assistment.form.FloatBox floatBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox dinA4ForcedBox;
+        private System.Windows.Forms.CheckBox consoleBox;
     }
 }

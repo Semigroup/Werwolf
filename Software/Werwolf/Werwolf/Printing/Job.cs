@@ -48,6 +48,7 @@ namespace Werwolf.Printing
         /// </summary>
         public bool MachBilder { get; set; }
         public bool Rotieren { get; set; }
+        public bool KonsolenAnzeigen { get; set; }
 
         public Job(Universe Universe, string Pfad)
             : this()
@@ -68,7 +69,8 @@ namespace Werwolf.Printing
             float Ppm, bool Zwischenplatz, RuckBildMode MyMode,
             bool FixedFont, bool TrennlinieVorne, bool TrennlinieHinten,
             bool Rotieren,
-            float MaximaleGrose, bool MachBilder)
+            float MaximaleGrose, bool MachBilder,
+            bool KonsolenAnzeigen)
         {
             this.Deck = Deck;
             this.HintergrundFarbe = HintergrundFarbe;
@@ -82,6 +84,7 @@ namespace Werwolf.Printing
             this.MaximaleGrose = MaximaleGrose;
             this.MachBilder = MachBilder;
             this.Rotieren = Rotieren;
+            this.KonsolenAnzeigen = KonsolenAnzeigen;
 
             this.Init(Deck.Universe);
             this.Name = this.Schreibname = Deck.Name + "-Job";
@@ -102,6 +105,7 @@ namespace Werwolf.Printing
             this.MaximaleGrose = Loader.XmlReader.getFloat("MaximaleGrose");
             this.MachBilder = Loader.XmlReader.getBoolean("MachBilder");
             this.Rotieren = Loader.XmlReader.getBoolean("Rotieren");
+            this.KonsolenAnzeigen = Loader.XmlReader.getBoolean("KonsolenAnzeigen");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -119,6 +123,7 @@ namespace Werwolf.Printing
             XmlWriter.writeFloat("MaximaleGrose", MaximaleGrose);
             XmlWriter.writeBoolean("MachBilder", MachBilder);
             XmlWriter.writeBoolean("Rotieren", Rotieren);
+            XmlWriter.writeBoolean("KonsolenAnzeigen", KonsolenAnzeigen);
         }
 
         public override void AdaptToCard(Karte Karte)

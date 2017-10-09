@@ -64,14 +64,19 @@ namespace Werwolf.Karten
                 Text Text1 = Karte.MeineAufgaben.ProduceTexts(LastFont)[0];
                 if (Karte.MeineAufgaben.Anzahl == 1)
                     Text = Text1;
-                else
+                else if (Karte.MeineAufgaben.Anzahl == 2)
                 {
                     Text Text2 = Karte.MeineAufgaben.ProduceTexts(LastFlavourFont)[1];
                     Text2.alignment = 0.5f;
-                    Text = new CString();
-                    (Text as CString).add(Text1);
-                    (Text as CString).add(WhiteSpace);
-                    (Text as CString).add(Text2);
+                    Text = new CString() { Text1, WhiteSpace, Text2 };
+                }
+                else if (Karte.MeineAufgaben.Anzahl > 2)
+                {
+                    List<string> lines = Karte.MeineAufgaben.GetLines();
+                    Text anekdote = "„" + lines[1] +"“";
+                    Text autor = "—" + lines[2];
+                    anekdote.alignment = autor.alignment = 0.5f;
+                    Text = new CString() { Text1, WhiteSpace, anekdote, WhiteSpace, autor };
                 }
             }
 

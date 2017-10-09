@@ -47,6 +47,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp, Version=5.5.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
@@ -176,6 +177,7 @@
     <Compile Include="Inhalt\Settings.cs" />
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
+    <Compile Include="Forms\ITool.cs" />
     <Compile Include="Karten\CyberAktion\CyberAktionHeader.cs" />
     <Compile Include="Karten\CyberAktion\CyberWaffenHeader.cs" />
     <Compile Include="Karten\CyberAktion\DoppelTabTextBox.cs" />

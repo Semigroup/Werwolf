@@ -38,7 +38,7 @@ namespace Werwolf.Forms
                 deck = value;
                 label1.Text = deck.Schreibname;
                 int n = deck.TotalCount();
-                if (n > 99)
+                if (n > 99 && !Environment.Is64BitProcess)
                     MessageBox.Show("Achtung. Das Deck " + deck.Schreibname + " besitzt " + n + " Karten.\r\n"
                         + "Decks, die echt mehr als 99 Karten besitzen, können auf Grund von Memory-Gründen zu einem Programmabsturz führen.");
             }
@@ -80,7 +80,8 @@ namespace Werwolf.Forms
                 checkBox3.Checked,
                 dinA4ForcedBox.Checked,
                 floatBox1.UserValue,
-                MachBilder);
+                MachBilder,
+                consoleBox.Checked);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
         }
