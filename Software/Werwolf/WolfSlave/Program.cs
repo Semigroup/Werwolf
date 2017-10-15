@@ -38,9 +38,9 @@ namespace WolfSlave
 
         static void Main(string[] args)
         {
-#if !DEBUG
-            HideConsole();
-#endif
+//#if !DEBUG
+//            HideConsole();
+//#endif
 
             string UniversePath = args[0];
             JobPath = args[1];
@@ -54,6 +54,8 @@ namespace WolfSlave
             Console.WriteLine("Universe read");
             Job = new Job(Universe, JobPath);
             Console.WriteLine("Job read");
+            if (!Job.KonsolenAnzeigen)
+                HideConsole();
 
             try
             {

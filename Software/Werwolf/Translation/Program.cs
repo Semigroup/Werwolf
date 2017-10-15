@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Werwolf.Forms;
 using Werwolf.Inhalt;
+using Translation.PDFWorkarounds;
 
 namespace Translation
 {
@@ -18,7 +19,7 @@ namespace Translation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartForm<Universe>(new TranslatingTool()));
+            Application.Run(new StartForm<Universe>(new TranslatingTool(), new ProduktionSteik()));
         }
     }
 }
