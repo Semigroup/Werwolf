@@ -19,7 +19,7 @@ namespace Translation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartForm<Universe>(new TranslatingTool(), new ProduktionSteik()));
+            Application.Run(new StartForm<Universe>(new TranslatingTool()));//, new ProduktionSteik()
         }
     }
 }
