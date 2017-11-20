@@ -178,6 +178,9 @@ namespace Werwolf.Inhalt
             entwicklungen = Loader.XmlReader.getString("Entwicklungen")
                .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
             Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
+            //Abwärtskompatibilität mit Daten, die keinen Kartenmodus definieren
+            if (Modus == 0)
+               Modus = KartenModus.Werwolfkarte;
 
             AktionsName = Loader.GetAufgabe("AktionsName");
             ZielSicherheiten = Loader.XmlReader.getString("ZielSicherheiten");
