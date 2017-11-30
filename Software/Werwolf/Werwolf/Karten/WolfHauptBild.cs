@@ -83,6 +83,8 @@ namespace Werwolf.Karten
         }
         private void Filter()
         {
+            if (Karte.HauptBild.TotalFilePath == null || Karte.HauptBild.TotalFilePath.Length == 0) return;
+
             if (GefiltertesBild != null)
                 GefiltertesBild.Dispose();
 
