@@ -68,7 +68,7 @@ namespace Werwolf.Karten
                 item.Ppm = ppm;
         }
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -77,20 +77,20 @@ namespace Werwolf.Karten
             return base.Visible();
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
-            this.box = AussenBox;
-            this.box.Location = box.Location;
+            this.Box = AussenBox;
+            this.Box.Location = box.Location;
             if (Name1 != null && Name1.Visible())
             {
-                Name1.setup(box);
+                Name1.Setup(box);
                 float rest = Faktor * HintergrundDarstellung.Anker.X - Name1.Size.Width;
                 Name1.SetLot(new PointF(MovedInnenBox.Left + rest / 2, MovedInnenBox.Top));
             }
             if (Name2 != null && Name2.Visible())
             {
-                Name2.setup(box);
+                Name2.Setup(box);
                 float rest = Faktor * HintergrundDarstellung.Anker.X - Name2.Size.Width;
                 Name2.SetLot(new PointF(MovedInnenBox.Right - Name2.Size.Width - rest / 2, MovedInnenBox.Bottom));
             }
@@ -103,11 +103,11 @@ namespace Werwolf.Karten
                     item.Move(ToMove);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             foreach (var item in Felder)
                 if (item != null && item.Visible())
-                    item.draw(con);
+                    item.Draw(con);
         }
     }
 }

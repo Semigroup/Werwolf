@@ -81,7 +81,7 @@ namespace Werwolf.Karten
                 }
         }
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -90,20 +90,20 @@ namespace Werwolf.Karten
             return base.Visible();
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
-            this.box = AussenBox;
-            this.box.Location = box.Location;
+            this.Box = AussenBox;
+            this.Box.Location = box.Location;
             if (Name.Visible())
             {
-                Name.setup(box);
+                Name.Setup(box);
                 float rest = Faktor * HintergrundDarstellung.Anker.X - Name.Size.Width;
                 Name.SetLot(new PointF(MovedInnenBox.Left + rest / 2, MovedInnenBox.Bottom));
             }
             if (Kosten.Visible())
             {
-                Kosten.setup(box);
+                Kosten.Setup(box);
                 float rest = Faktor * HintergrundDarstellung.Anker.X - Kosten.Size.Width;
                 Kosten.SetLot(new PointF(MovedInnenBox.Left + rest / 2, MovedInnenBox.Top));
             }
@@ -111,7 +111,7 @@ namespace Werwolf.Karten
             for (int i = 0; i < Basen.Length; i++)
                 if (Basen[i].Visible())
                 {
-                    Basen[i].setup(box);
+                    Basen[i].Setup(box);
                     p = p.add(-Basen[i].Size.Width - Faktor, 0);
                     Basen[i].SetLot(p);
                 }
@@ -120,7 +120,7 @@ namespace Werwolf.Karten
             for (int i = 0; i < Entwicklungen.Length; i++)
                 if (Entwicklungen[i].Visible())
                 {
-                    Entwicklungen[i].setup(box);
+                    Entwicklungen[i].Setup(box);
                     p = p.add(-Entwicklungen[i].Size.Width - Faktor, 0);
                     Entwicklungen[i].SetLot(p);
                 }
@@ -133,11 +133,11 @@ namespace Werwolf.Karten
                 item.Move(ToMove);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             foreach (var item in Felder)
                 if (item.Visible())
-                    item.draw(con);
+                    item.Draw(con);
         }
     }
 }

@@ -152,8 +152,8 @@ namespace Werwolf.Forms
             using (DrawContextGraphics dcg = new DrawContextGraphics(g, Job.HintergrundFarbe.ToBrush()))
             {
                 g.Clear(Job.HintergrundFarbe);
-                wsp.setup(wsp.Seite);
-                wsp.draw(dcg);
+                wsp.Setup(wsp.Seite);
+                wsp.Draw(dcg);
             }
             pictureBox1.Image = b;
         }

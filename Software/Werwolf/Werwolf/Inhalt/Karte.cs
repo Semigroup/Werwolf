@@ -296,8 +296,8 @@ namespace Werwolf.Inhalt
             using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, BackColor, high))
             using (DrawContextGraphics dcg = new DrawContextGraphics(g))
             {
-                WolfBox.setup(0);
-                WolfBox.draw(dcg);
+                WolfBox.Setup(0);
+                WolfBox.Draw(dcg);
             }
             return img;
         }

@@ -31,7 +31,7 @@ namespace Werwolf.Karten
             if (Karte != null)
             {
                 Text Text = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer);
-                Text.alignment = 1;
+                Text.Alignment = 1;
                 this.Text = Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor));
             }
             else
@@ -43,7 +43,7 @@ namespace Werwolf.Karten
         {
             base.OnPpmChanged();
         }
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -52,11 +52,11 @@ namespace Werwolf.Karten
             return base.Visible();
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
 
-            this.box = AussenBox;
-            this.box.Location = box.Location;
+            this.Box = AussenBox;
+            this.Box.Location = box.Location;
 
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
 
@@ -75,11 +75,11 @@ namespace Werwolf.Karten
                     //    .Geometry(abstand * Faktor, 0);
                 }
                 foreach (var item in Stufen)
-                    item.setup(0);
+                    item.Setup(0);
                 float breite = Stufen.Map(x => x.Size.Width).Sum();
                 float rest = MovedInnenBox.Width - breite;
                 float part = rest / (Stufen.Length + 1);
-                float hohe = (MovedInnenBox.Height - Stufen[0].box.Height) / 2;
+                float hohe = (MovedInnenBox.Height - Stufen[0].Box.Height) / 2;
                 PointF loc = new PointF(part, hohe);
                 PointF Rand = HintergrundDarstellung.Rand.ToPointF().mul(Faktor);
                 if (rest < 0)
@@ -94,7 +94,7 @@ namespace Werwolf.Karten
                     loc = loc.add(item.Size.Width + part, 0);
                 }
             }
-            Text.setup(MovedInnenBox);
+            Text.Setup(MovedInnenBox);
         }
         public override void Move(PointF ToMove)
         {
@@ -104,7 +104,7 @@ namespace Werwolf.Karten
             Text.Move(ToMove);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             foreach (var item in Stufen)
             {
@@ -112,10 +112,10 @@ namespace Werwolf.Karten
                 StandardKarte sk = (item as GeometryBox).DrawBox as StandardKarte;
                 Bitmap b = sk.Karte.GetImage(ppm, true);
                 b.Filter(HintergrundDarstellung.Farbe, HintergrundDarstellung.Farbe.A / 255f);
-                con.drawImage(b, sk.box);
+                con.drawImage(b, sk.Box);
                 sk.drawRand(con);
             }
-            Text.draw(con);
+            Text.Draw(con);
         }
     }
 }

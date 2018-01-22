@@ -44,7 +44,7 @@ namespace Werwolf.Karten
                     if (KostenText.Length > 0)
                     {
                         for (int i = KostenText[0].Count() - 1; i >= 0; i--)
-                            KostenText[0].insert(i, new Whitespace(1 * Faktor, 1 * Faktor, true));
+                            KostenText[0].Insert(i, new Whitespace(1 * Faktor, 1 * Faktor, true));
                         DrawBox = KostenText[0].Geometry(Faktor, Faktor, Faktor, Faktor * 5);
                     }
                     else

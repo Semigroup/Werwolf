@@ -17,7 +17,8 @@ namespace Werwolf.Generating
         public enum Art
         {
             ChaosRechteck,
-            OldSchool
+            OldSchool,
+            Kreis
         }
 
         public Art MeineArt { get; set; }

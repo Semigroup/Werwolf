@@ -37,17 +37,17 @@ namespace Werwolf.Karten
         {
             return base.Visible() && Karte.MeineAufgaben.Anzahl > 0;
         }
-        public override void update()
+        public override void Update()
         {
         }
         public void SetEntwicklungsBreite(float Breite)
         {
             this.EntwicklungsBreite = Breite;
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = box;
-            this.box.Size = AussenBox.Size;
+            this.Box = box;
+            this.Box.Size = AussenBox.Size;
 
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
             MovedInnenBox = MovedInnenBox.move(HintergrundDarstellung.Anker.mul(Faktor));
@@ -67,7 +67,7 @@ namespace Werwolf.Karten
                 else if (Karte.MeineAufgaben.Anzahl == 2)
                 {
                     Text Text2 = Karte.MeineAufgaben.ProduceTexts(LastFlavourFont)[1];
-                    Text2.alignment = 0.5f;
+                    Text2.Alignment = 0.5f;
                     Text = new CString() { Text1, WhiteSpace, Text2 };
                 }
                 else if (Karte.MeineAufgaben.Anzahl > 2)
@@ -75,18 +75,18 @@ namespace Werwolf.Karten
                     List<string> lines = Karte.MeineAufgaben.GetLines();
                     Text anekdote = "„" + lines[1] +"“";
                     Text autor = "—" + lines[2];
-                    anekdote.alignment = autor.alignment = 0.5f;
+                    anekdote.Alignment = autor.Alignment = 0.5f;
                     Text = new CString() { Text1, WhiteSpace, anekdote, WhiteSpace, autor };
                 }
             }
 
-            WhiteSpace.box.Width = MovedInnenBox.Width - TextDarstellung.Rand.Width * Faktor * 2;
-            WhiteSpace.box.Height = Faktor;
+            WhiteSpace.Box.Width = MovedInnenBox.Width - TextDarstellung.Rand.Width * Faktor * 2;
+            WhiteSpace.Box.Height = Faktor;
 
             DrawBox TextBox = Text.Geometry(TextDarstellung.Rand.mul(Faktor));
             FixedBox = new FixedBox(MovedInnenBox.Size, TextBox);
             FixedBox.Alignment = new SizeF(0.5f, 1);
-            FixedBox.setup(MovedInnenBox);
+            FixedBox.Setup(MovedInnenBox);
 
             MovedAussenBox = AussenBox.move(box.Location);
 
@@ -96,7 +96,7 @@ namespace Werwolf.Karten
                 Spieleranzahl = SaT
                 .Geometry(InfoDarstellung.Rand.mul(Faktor))
                 .Colorize(InfoDarstellung.Farbe.ToBrush());
-                Spieleranzahl.setup(MovedInnenBox);
+                Spieleranzahl.Setup(MovedInnenBox);
                 Spieleranzahl.Bottom = Text.Top;
                 Spieleranzahl.Left = MovedInnenBox.Left;
             }
@@ -112,15 +112,15 @@ namespace Werwolf.Karten
             if (Spieleranzahl != null)
                 Spieleranzahl.Move(ToMove);
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             float off = Text.Top - MovedAussenBox.Top;
             MovedAussenBox.Height -= off;
             MovedAussenBox.Y += off;
             con.fillRectangle(TextDarstellung.Farbe.ToBrush(), MovedAussenBox);
-            FixedBox.draw(con);
+            FixedBox.Draw(con);
             if (Spieleranzahl != null)
-                Spieleranzahl.draw(con);
+                Spieleranzahl.Draw(con);
         }
     }
 }

@@ -41,13 +41,13 @@ namespace Werwolf.Karten.CyberAktion
                     Lines[line].RightText = value;
             }
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            base.draw(con);
-            con.fillRectangle(Darstellung.Farbe.ToBrush(), box);
+            base.Draw(con);
+            con.fillRectangle(Darstellung.Farbe.ToBrush(), Box);
             foreach (var item in Lines)
-                item.draw(con);
-            con.drawRectangle(Darstellung.RandFarbe.ToPen(Darstellung.Rand.Width), box);
+                item.Draw(con);
+            con.drawRectangle(Darstellung.RandFarbe.ToPen(Darstellung.Rand.Width), Box);
         }
         public override void Move(PointF ToMove)
         {
@@ -55,21 +55,21 @@ namespace Werwolf.Karten.CyberAktion
             foreach (var item in Lines)
                 item.Move(ToMove);
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = new RectangleF(box.Location, new SizeF());
+            this.Box = new RectangleF(box.Location, new SizeF());
             PointF pointOfProgress = box.Location;
             foreach (var item in Lines)
             {
-                item.setup(pointOfProgress, box.Width);
-                pointOfProgress = pointOfProgress.add(0, item.box.Height);
+                item.Setup(pointOfProgress, box.Width);
+                pointOfProgress = pointOfProgress.add(0, item.Box.Height);
             }
-            this.box.Size = new SizeF(box.Width, pointOfProgress.Y - this.box.Y);
+            this.Box.Size = new SizeF(box.Width, pointOfProgress.Y - this.Box.Y);
         }
-        public override void update()
+        public override void Update()
         {
             foreach (var item in Lines)
-                item.update();
+                item.Update();
         }
         public override void OnKarteChanged()
         {

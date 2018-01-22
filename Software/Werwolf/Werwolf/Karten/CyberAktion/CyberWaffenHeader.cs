@@ -48,8 +48,8 @@ namespace Werwolf.Karten.CyberAktion
             for (int i = 0; i < pure.Length; i++)
             {
                 if (i % 4 == 0 && i > 0)
-                    text.addWhitespace(Font.getWhitespace() * 1);
-                text.add(GetZielSicherheit(pure[i], small));
+                    text.AddWhitespace(Font.getWhitespace() * 1);
+                text.Add(GetZielSicherheit(pure[i], small));
             }
             return text;
         }

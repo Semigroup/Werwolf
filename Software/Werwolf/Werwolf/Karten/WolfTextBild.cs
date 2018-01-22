@@ -21,43 +21,34 @@ namespace Werwolf.Karten
         {
             this.TextBild = TextBild;
             this.Font = Font.getFont().GetMeasurer();
-            this.update();
+            this.Update();
         }
 
-        public override float getMax()
-        {
-            return box.Width;
-        }
-        public override float getMin()
-        {
-            return getMax();
-        }
-        public override float getSpace()
-        {
-            return box.Size.Inhalt();
-        }
+        public override float Max => Box.Width;
+        public override float Min => Max;
+        public override float Space => Box.Size.Inhalt();
         public override void OnKarteChanged()
         {
             if (TextBild != null)
-                update();
+                Update();
         }
 
-        public override void update()
+        public override void Update()
         {
             ImageSize = TextBild.GetImageSize();
-            this.box.Height = Font.yMass('_');
-            this.box.Width = ImageSize.Width * box.Height / ImageSize.Height;
+            this.Box.Height = Font.yMass('_');
+            this.Box.Width = ImageSize.Width * Box.Height / ImageSize.Height;
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box.Location = box.Location;
+            this.Box.Location = box.Location;
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             Image img = TextBild.Image;
             if (img == null)
                 return;
-            con.drawImage(img, box);
+            con.drawImage(img, Box);
         }
     }
 }

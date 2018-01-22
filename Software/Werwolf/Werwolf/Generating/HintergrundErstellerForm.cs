@@ -37,7 +37,7 @@ namespace Werwolf.Generating
 
             this.BoxenBox.UserPoint = new Point(1, 121);// new Point(10, 10);
             this.ThumbBox.UserPoint = new Point(1, 2);//new Point(2, 2);
-            this.SamplesBox.UserPoint = new Point(40,50);//new Point(50, 1);//new Point(100, 100);
+            this.SamplesBox.UserPoint = new Point(40, 50);//new Point(50, 1);//new Point(100, 100);
 
             this.enumBox1.UserValue = HintergrundSchema.Art.ChaosRechteck;
 
@@ -116,6 +116,12 @@ namespace Werwolf.Generating
                     break;
                 case HintergrundSchema.Art.OldSchool:
                     Shadex.ChaosFlacheBundig(g, hs.Schema);
+                    break;
+                case HintergrundSchema.Art.Kreis:
+                    float sqr = FastMath.Sqrt(2);
+                    hs.Schema.Flache = (u, v) => hs.Size.mul(FastMath.Sphere(u * Math.PI * 2)
+                        .mul(sqr * (v + burst * d.NextFloat())/2).add(0.5f, 0.5f)).ToPointF();
+                    Shadex.ChaosFlache(g, hs.Schema);
                     break;
                 default:
                     throw new NotImplementedException();

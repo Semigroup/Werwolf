@@ -53,33 +53,24 @@ namespace Werwolf.Karten
             base.OnPpmChanged();
         }
 
-        public override float getSpace()
-        {
-            throw new NotImplementedException();
-        }
-        public override float getMin()
-        {
-            throw new NotImplementedException();
-        }
-        public override float getMax()
-        {
-            throw new NotImplementedException();
-        }
+        public override float Space => throw new NotImplementedException();
+        public override float Min => throw new NotImplementedException();
+        public override float Max => throw new NotImplementedException();
 
-        public override void update()
+        public override void Update()
         {
 
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            Kompositum.setup(InnenBox);
+            Kompositum.Setup(InnenBox);
             Kompositum.Bottom = InnenBox.Bottom;
             Artist.Right = InnenBox.Right;
             Kompositum.Move(box.Location);
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            Kompositum.draw(con);
+            Kompositum.Draw(con);
         }
         public override void Move(PointF ToMove)
         {

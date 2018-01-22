@@ -48,12 +48,12 @@ namespace Werwolf.Karten
                 Produktion.Karte = Karte.Basen.Length > 0 ? Karte.Basen[0] : null;
 
                 Text Text = new Text(Karte.Schreibname, Karte.TitelDarstellung.FontMeasurer);
-                Text.alignment = 1;
+                Text.Alignment = 1;
                 this.Text = Text.Colorize(TitelDarstellung.Farbe).Geometry(TitelDarstellung.Rand.mul(Faktor));
                 if (Karte.MeineAufgaben.Anzahl > 0)
                 {
                     Text t2 = Karte.MeineAufgaben.ProduceTexts(Karte.TextDarstellung.EffektFontMeasurer)[0];
-                    t2.alignment = 1;
+                    t2.Alignment = 1;
                     this.Text *= t2;
                 }
             }
@@ -63,9 +63,9 @@ namespace Werwolf.Karten
             base.OnPpmChanged();
             Produktion.Ppm = ppm;
         }
-        public override void update()
+        public override void Update()
         {
-            Produktion.update();
+            Produktion.Update();
         }
 
         public override bool Visible()
@@ -73,21 +73,21 @@ namespace Werwolf.Karten
             return base.Visible();
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = AussenBox;
-            this.box.Location = box.Location;
+            this.Box = AussenBox;
+            this.Box.Location = box.Location;
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
 
             if (Produktion.Visible())
-                Produktion.setup(MovedInnenBox);
+                Produktion.Setup(MovedInnenBox);
 
             Stufen = new DrawBox[Karte.Entwicklungen.Length];
             if (Stufen.Length > 0)
             {
                 Stufen.CountMap(i => new WonderAusbauStufe(Karte.Entwicklungen[i], ppm).Geometry(abstand * Faktor, 0));
                 foreach (var item in Stufen)
-                    item.setup(0);
+                    item.Setup(0);
                 float breite = Stufen.Map(x => x.Size.Width).Sum();
                 float rest = MovedInnenBox.Width - breite;
                 float part = rest / (Stufen.Length + 1);
@@ -106,7 +106,7 @@ namespace Werwolf.Karten
                     loc = loc.add(item.Size.Width + part, 0);
                 }
             }
-            Text.setup(MovedInnenBox);
+            Text.Setup(MovedInnenBox);
         }
         public override void Move(PointF ToMove)
         {
@@ -117,14 +117,14 @@ namespace Werwolf.Karten
             Text.Move(ToMove);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             if (Produktion.Visible())
-                Produktion.draw(con);
+                Produktion.Draw(con);
 
             int n = Stufen.Length;
             for (int i = 0; i < n; i++)
-                Stufen[i].draw(con);
+                Stufen[i].Draw(con);
             for (int i = 0; i < n; i++)
             {
                 WonderAusbauStufe Stufe = (Stufen[i] as GeometryBox).DrawBox as WonderAusbauStufe;
@@ -132,8 +132,8 @@ namespace Werwolf.Karten
                 RectangleF r = new RectangleF(Stufe.Location, new SizeF());
                 r.Height = 20 * Faktor;
                 r.Width = tb.Size.ratio() * r.Height;
-                r = r.move(Stufe.box.Width - r.Width / 2, -r.Height / 2);
-                r.X = Math.Min(r.X, box.Location.X + AussenBox.Width - r.Width * 0.7f);
+                r = r.move(Stufe.Box.Width - r.Width / 2, -r.Height / 2);
+                r.X = Math.Min(r.X, Box.Location.X + AussenBox.Width - r.Width * 0.7f);
                 //if (i + 1 < n)
                 //    r.X = Math.Min(r.X, Stufen[i + 1].Left - r.Width);
 
@@ -141,7 +141,7 @@ namespace Werwolf.Karten
                     con.drawImage(img, r);
             }
 
-            Text.draw(con);
+            Text.Draw(con);
         }
     }
 }

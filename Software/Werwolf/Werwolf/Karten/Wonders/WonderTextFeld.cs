@@ -52,7 +52,7 @@ namespace Werwolf.Karten
             //this.FeldBild = FeldBild;
         }
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -61,24 +61,24 @@ namespace Werwolf.Karten
             return base.Visible() && HintergrundDarstellung.Existiert && FeldBild != null && DrawBox != null;
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = AussenBox;
-            this.box.Location = box.Location;
+            this.Box = AussenBox;
+            this.Box.Location = box.Location;
 
             if (Quer)
-                DrawBox.setup(FeldBild.Size.mul(Faktor).permut());
+                DrawBox.Setup(FeldBild.Size.mul(Faktor).permut());
             else
-                DrawBox.setup(FeldBild.Size.mul(Faktor));
+                DrawBox.Setup(FeldBild.Size.mul(Faktor));
 
             SizeF Size1 = FeldBild.Size.mul(Ppm);
             SizeF Size2 = DrawBox.Size.mul(Ppm / Faktor);
             if (Quer)
                 Size2 = Size2.permut();
             Size = Size1.Max(Size2).ToSize();
-            this.box.Size = ((SizeF)Size).mul(Faktor / Ppm);
+            this.Box.Size = ((SizeF)Size).mul(Faktor / Ppm);
 
-            RectangleF Rectangle = new RectangleF(new PointF(), this.box.Size);
+            RectangleF Rectangle = new RectangleF(new PointF(), this.Box.Size);
             if (Quer)
                 Rectangle.Size = Rectangle.Size.permut();
 
@@ -90,7 +90,7 @@ namespace Werwolf.Karten
             if (Quer)
                 FixedBox.Alignment = new SizeF(1 - FixedBox.Alignment.Height, FixedBox.Alignment.Width);
 
-            FixedBox.setup(Rectangle);
+            FixedBox.Setup(Rectangle);
         }
         /// <summary>
         /// falls oben: linker, oberer Punkt wird gleich dem LotPunkt gesetzt
@@ -102,20 +102,20 @@ namespace Werwolf.Karten
             if (DrawBox == null)
                 return;
             float Abstand = Quer ? DrawBox.Size.Width : DrawBox.Size.Height;
-            float Rest = box.Size.Height - Abstand;
-            this.box.X = LotPunkt.X;
+            float Rest = Box.Size.Height - Abstand;
+            this.Box.X = LotPunkt.X;
             if (Oben)
-                this.box.Y = LotPunkt.Y - Rest;
+                this.Box.Y = LotPunkt.Y - Rest;
             else
-                this.box.Y = LotPunkt.Y - box.Size.Height + Rest;
+                this.Box.Y = LotPunkt.Y - Box.Size.Height + Rest;
 
             if (Oben)
-                Clip = new Region(new RectangleF(0, box.Height - Abstand, box.Width, Abstand).mul(Ppm / Faktor));
+                Clip = new Region(new RectangleF(0, Box.Height - Abstand, Box.Width, Abstand).mul(Ppm / Faktor));
             else
-                Clip = new Region(new RectangleF(0, 0, box.Width, Abstand).mul(Ppm / Faktor));
+                Clip = new Region(new RectangleF(0, 0, Box.Width, Abstand).mul(Ppm / Faktor));
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             if (DrawBoxChanged ||
                 !(LastPpm == Ppm
@@ -133,11 +133,11 @@ namespace Werwolf.Karten
                 DrawBoxChanged = false;
                 Bearbeite();
             }
-            con.drawImage(BearbeitetesBild, box);
+            con.drawImage(BearbeitetesBild, Box);
         }
         public virtual void Bearbeite()
         {
-            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
+            SizeF Rest = Box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
             Point P = new Point((int)Rest.Width, (int)Rest.Height);
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
@@ -157,7 +157,7 @@ namespace Werwolf.Karten
                 //if (Quer)
                 //    g.RotateTransform(-90);
                 using (DrawContextGraphics dcg = new DrawContextGraphics(g))
-                    FixedBox.draw(dcg);
+                    FixedBox.Draw(dcg);
             }
         }
     }

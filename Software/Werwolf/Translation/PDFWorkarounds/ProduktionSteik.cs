@@ -19,12 +19,12 @@ namespace Translation.PDFWorkarounds
 
         public string ToolDescription => "ProduktionStreikBogenWorkaround";
 
-        public override DrawBox clone()
+        public override DrawBox Clone()
         {
             throw new NotImplementedException();
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             float max = 991 + 2f / 3;
             PointF[] points = { new PointF(50, 50), new PointF(max - 50, 50), new PointF(max - 50, 1350) };
@@ -72,44 +72,44 @@ namespace Translation.PDFWorkarounds
             PointF prog = new PointF(0, 70);
 
             Text all = new Text();
-            all.add(this);
-            all.addWhitespace(10, prog.Y, true);
+            all.Add(this);
+            all.AddWhitespace(10, prog.Y, true);
 
             for (int i = 0; i < 7; i++)
             {
                 prog.X = einzugProd;
-                all.addWhitespace(einzugProd, 1);
+                all.AddWhitespace(einzugProd, 1);
                 for (int j = 0; j < 3; j++)
                 {
                     Prod[i, j] = new FixedFontKarte(universe.Karten[prods[i]], ppm, ruck,false);
-                    Prod[i, j].setup(prog);
-                    all.add(Prod[i, j]);
-                    all.add(new Whitespace(2,2, false));
-                    prog.X += Prod[i, j].box.Width;
+                    Prod[i, j].Setup(prog);
+                    all.Add(Prod[i, j]);
+                    all.Add(new Whitespace(2,2, false));
+                    prog.X += Prod[i, j].Box.Width;
                 }
-                all.addAbsatz();
-                    all.add(new Whitespace(2,2, false));
-                all.addAbsatz();
-                prog.Y += Prod[i, 0].box.Height;
+                all.AddAbsatz();
+                    all.Add(new Whitespace(2,2, false));
+                all.AddAbsatz();
+                prog.Y += Prod[i, 0].Box.Height;
             }
             for (int i = 0; i < 2; i++)
             {
                 prog.X = einzugAgen;
-                all.addWhitespace(einzugAgen, 1);
+                all.AddWhitespace(einzugAgen, 1);
                 for (int j = 0; j < 3; j++)
                 {
                     Agen[i, j] = new FixedFontKarte(universe.Karten["Streik"], ppm, ruck, false);
-                    Agen[i, j].setup(prog);
-                    all.add(Agen[i, j]);
-                    all.add(new Whitespace(2,2, false));
-                    prog.X += Agen[i, j].box.Width;
+                    Agen[i, j].Setup(prog);
+                    all.Add(Agen[i, j]);
+                    all.Add(new Whitespace(2,2, false));
+                    prog.X += Agen[i, j].Box.Width;
                 }
-                all.addAbsatz();
-                all.add(new Whitespace(2, 2, false));
-                all.addAbsatz();
-                prog.Y += Agen[i, 0].box.Height;
+                all.AddAbsatz();
+                all.Add(new Whitespace(2, 2, false));
+                all.AddAbsatz();
+                prog.Y += Agen[i, 0].Box.Height;
             }
-            all.createPDF("ProdStreik"+ruck);
+            all.CreatePDF("ProdStreik"+ruck);
 
             //MessageBox.Show(Prod[0,2].box.Right+
             //    "\r\n"
@@ -118,26 +118,17 @@ namespace Translation.PDFWorkarounds
             return DialogResult.OK;
         }
 
-        public override float getMax()
-        {
-            return 1;
-        }
+        public override float Max => 1;
 
-        public override float getMin()
-        {
-            return 0;
-        }
+        public override float Min => 0;
 
-        public override float getSpace()
-        {
-            return 1;
-        }
+        public override float Space => 1;
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
         }
 
-        public override void update()
+        public override void Update()
         {
         }
     }

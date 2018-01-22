@@ -38,28 +38,19 @@ namespace Werwolf.Karten
                 TitelDarstellung.Rand.Height * Faktor,
                 TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
                 TitelDarstellung.Farbe.ToBrush());
-            update();
+            Update();
         }
         public override void OnPpmChanged()
         {
             base.OnKarteChanged();
-            update();
+            Update();
         }
 
-        public override float getSpace()
-        {
-            return Titel.getSpace();
-        }
-        public override float getMin()
-        {
-            return Titel.getMin();
-        }
-        public override float getMax()
-        {
-            return Titel.getMax();
-        }
+        public override float Space => Titel.Space;
+        public override float Min => Titel.Min;
+        public override float Max => Titel.Max;
 
-        public override void update()
+        public override void Update()
         {
             if (karte == null ||
                 (Karte.Schreibname.Equals(LastSchreibname)
@@ -85,7 +76,7 @@ namespace Werwolf.Karten
             this.Titel.RandFarbe = TitelDarstellung.RandFarbe.ToPen(Faktor / 5);
             this.Titel.HintergrundFarbe = TitelDarstellung.Farbe.ToBrush();
             this.Titel.Scaling = Ppm / Faktor;
-            Titel.update();
+            Titel.Update();
         }
         public override bool Visible()
         {
@@ -94,10 +85,10 @@ namespace Werwolf.Karten
                 && Karte.Schreibname.Length > 0
                 && !Titel.Empty();
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = box;
-            Titel.setup(InnenBox.move(box.Location).Inner(Faktor, Faktor));
+            this.Box = box;
+            Titel.Setup(InnenBox.move(box.Location).Inner(Faktor, Faktor));
         }
         public override void Move(PointF ToMove)
         {
@@ -105,9 +96,9 @@ namespace Werwolf.Karten
             Titel.Move(ToMove);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            Titel.draw(con);
+            Titel.Draw(con);
         }
     }
 }

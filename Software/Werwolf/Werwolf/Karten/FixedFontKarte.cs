@@ -24,48 +24,39 @@ namespace Werwolf.Karten
             this.Rotieren = Rotieren;
         }
 
-        public override float getMax()
-        {
-            return Rotieren ? AussenBox.Height : AussenBox.Width;
-        }
-        public override float getMin()
-        {
-            return getMax();
-        }
-        public override float getSpace()
-        {
-            return AussenBox.Size.Inhalt();
-        }
+        public override float Max => Rotieren ? AussenBox.Height : AussenBox.Width;
+        public override float Min => Max;
+        public override float Space => AussenBox.Size.Inhalt();
 
-        public override void update()
+        public override void Update()
         {
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = AussenBox.move(box.Location);
+            this.Box = AussenBox.move(box.Location);
             if (Rotieren)
-                this.box.Size = this.box.Size.permut();
+                this.Box.Size = this.Box.Size.permut();
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             if (Ruckseite)
                 using (Image image = Karte.GetBackImage(Ppm, Color.Black, true))
                 {
                     if (Rotieren)
                         image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    con.drawImage(image, box);
+                    con.drawImage(image, Box);
                 }
             else
                 using (Image image = Karte.GetImage(Ppm, true))
                 {
                     if (Rotieren)
                         image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    con.drawImage(image, box);
+                    con.drawImage(image, Box);
                 }
         }
         public override void Move(PointF ToMove)
         {
-            this.box = this.box.move(ToMove);
+            this.Box = this.Box.move(ToMove);
         }
     }
 }

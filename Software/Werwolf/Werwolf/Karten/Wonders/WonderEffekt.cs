@@ -22,32 +22,32 @@ namespace Werwolf.Karten
 
         }
 
-        public override void update()
+        public override void Update()
         {
         }
         public override bool Visible()
         {
             return base.Visible() && Karte.Effekt.Anzahl > 0;
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = box;
-            this.box.Size = AussenBox.Size;
+            this.Box = box;
+            this.Box.Size = AussenBox.Size;
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
             SizeF Size = new SizeF(InnenBox.Width, Karte.HintergrundDarstellung.Anker.Y * Faktor);
             Text t = Karte.Effekt.ProduceTexts(Karte.TextDarstellung.EffektFontMeasurer)[0];
             DrawBox = new FixedBox(Size, t);
             (DrawBox as FixedBox).Alignment = new SizeF(0.5f, 0.5f);
-            DrawBox.setup(MovedInnenBox);
+            DrawBox.Setup(MovedInnenBox);
         }
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
             DrawBox.Move(ToMove);
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            DrawBox.draw(con);
+            DrawBox.Draw(con);
         }
     }
 }

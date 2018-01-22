@@ -35,12 +35,12 @@ namespace Werwolf.Karten
             InhaltChanged = true;
             LastRegex = regex;
             LastFont = Font;
-            Text.alignment = 0.5f;
+            Text.Alignment = 0.5f;
         }
 
         private void DrawImage()
         {
-            Size Size = box.Size.mul(Scaling).Max(1, 1).ToSize();
+            Size Size = Box.Size.mul(Scaling).Max(1, 1).ToSize();
             if (!InhaltChanged
                 && Size.Equals(LastSize)
                 && RandHohe.Equals(LastRandHohe))
@@ -53,7 +53,7 @@ namespace Werwolf.Karten
             Image = new Bitmap(Size.Width + 1, Size.Height + 1);
             using (Graphics g = Image.GetHighGraphics(Scaling))
             {
-                RectangleF pseudoBox = new RectangleF(RandHohe, RandHohe, Inhalt.box.Width, Inhalt.box.Height);
+                RectangleF pseudoBox = new RectangleF(RandHohe, RandHohe, Inhalt.Box.Width, Inhalt.Box.Height);
                 OrientierbarerWeg ow = OrientierbarerWeg.RundesRechteck(pseudoBox);
                 int samples = 10000;
                 Weg y = GetVerlauf(ow.L / RandHohe);
@@ -62,11 +62,11 @@ namespace Werwolf.Karten
                 g.FillDrawWegAufOrientierbarerWeg(HintergrundFarbe, RandFarbe, z, ow, samples);
             }
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             DrawImage();
-            con.drawImage(Image, box);
-            Inhalt.draw(con);
+            con.drawImage(Image, Box);
+            Inhalt.Draw(con);
         }
 
         public override Weg GetVerlauf(float units)
@@ -87,7 +87,7 @@ namespace Werwolf.Karten
                 LastFont = Font;
                 InhaltChanged = true;
                 (this.Inhalt as GeometryBox).DrawBox = new Text(regex, Font);
-                Text.alignment = 0.5f;
+                Text.Alignment = 0.5f;
             }
         }
         public void SetArt(Titel.Art Art)
@@ -100,10 +100,10 @@ namespace Werwolf.Karten
         }
         public bool Empty()
         {
-            return Text.empty();
+            return Text.Empty();
         }
 
-        public override DrawBox clone()
+        public override DrawBox Clone()
         {
             throw new NotImplementedException();
         }

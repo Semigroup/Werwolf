@@ -53,7 +53,7 @@ namespace Werwolf.Printing
             this.TrennlinieHinten = Job.TrennlinieHinten;
         }
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -62,10 +62,10 @@ namespace Werwolf.Printing
             if (NumberOfCards.IsEmpty)
             {
                 Karten.Add(Karte);
-                Karte.setup(0);
+                Karte.Setup(0);
                 if (Karte.Size.Width > Seite.Width || Karte.Size.Height > Seite.Height)
                     PageSize = iTextSharp.text.PageSize.A3;
-                SizeF n = Seite.Size.div(Karte.box.Size);
+                SizeF n = Seite.Size.div(Karte.Box.Size);
                 NumberOfCards = new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
                 return true;
             }
@@ -78,28 +78,19 @@ namespace Werwolf.Printing
                 return false;
         }
 
-        public override float getMin()
-        {
-            return Seite.Width;
-        }
-        public override float getMax()
-        {
-            return Seite.Width;
-        }
-        public override float getSpace()
-        {
-            return Seite.Width * Seite.Height;
-        }
+        public override float Min => Seite.Width;
+        public override float Max => Seite.Width;
+        public override float Space => Seite.Width * Seite.Height;
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             if (Karten.Count == 0)
                 return;
 
             foreach (var item in Karten)
-                item.setup(box);
+                item.Setup(box);
 
-            SizeF karte = Karten.First().box.Size;
+            SizeF karte = Karten.First().Box.Size;
 
             SizeF n = Seite.Size.div(karte);
             NumberOfCards = new Size((int)Math.Floor(n.Width), (int)Math.Floor(n.Height));
@@ -125,7 +116,7 @@ namespace Werwolf.Printing
             }
             SizeF Platz = karte.add(Zwischen);
 
-            this.box = Seite;
+            this.Box = Seite;
             if (Swapped)
             {
                 Offset.Width = Seite.Width - karte.Width - Offset.Width;
@@ -143,7 +134,7 @@ namespace Werwolf.Printing
                     }
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             float top = 1;
             float left = 0;
@@ -155,13 +146,13 @@ namespace Werwolf.Printing
             if (linie)
                 foreach (var item in ToPrint)
                 {
-                    float x1 = item.box.Left - 10 * Faktor;
+                    float x1 = item.Box.Left - 10 * Faktor;
                     x1 = Math.Max(x1, left); 
-                    float x2 = item.box.Right + 10 * Faktor;
+                    float x2 = item.Box.Right + 10 * Faktor;
                     x2 = Math.Min(x2, right);
-                    float y1 = item.box.Top - 10 * Faktor;
+                    float y1 = item.Box.Top - 10 * Faktor;
                     y1 = Math.Max(top, y1);
-                    float y2 = item.box.Bottom + 10 * Faktor;
+                    float y2 = item.Box.Bottom + 10 * Faktor;
                     y2 = Math.Min(bottom, y2);
                     con.drawLine(LinePen, new PointF(x1, top), new PointF(x1, bottom));
                     con.drawLine(LinePen, new PointF(x2, top), new PointF(x2, bottom));
@@ -169,10 +160,10 @@ namespace Werwolf.Printing
                     con.drawLine(LinePen, new PointF(left, y2), new PointF(right, y2));
                 }
             foreach (var item in ToPrint)
-                item.draw(con);
+                item.Draw(con);
             if (linie)
                 foreach (var item in ToPrint)
-                    con.drawRectangle(LinePen, item.box);
+                    con.drawRectangle(LinePen, item.Box);
         }
 
         /// <summary>

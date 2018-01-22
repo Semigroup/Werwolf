@@ -13,35 +13,26 @@ namespace Werwolf.Karten.CyberAktion
         public DrawBox LeftText { get; set; }
         public DrawBox RightText { get; set; }
 
-        public override DrawBox clone()
+        public override DrawBox Clone()
         {
             LeftRightLine clone = new LeftRightLine();
-            clone.LeftText = LeftText.clone();
-            clone.RightText = RightText.clone();
+            clone.LeftText = LeftText.Clone();
+            clone.RightText = RightText.Clone();
             return clone;
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             if (LeftText != null)
-                LeftText.draw(con);
+                LeftText.Draw(con);
             if (RightText != null)
-                RightText.draw(con);
+                RightText.Draw(con);
         }
-        public override float getMax()
+        public override float Max => LeftText.Max + RightText.Max;
+        public override float Min => LeftText.Min + RightText.Min;
+        public override float Space => LeftText.Space + RightText.Space;
+        public override void Setup(RectangleF box)
         {
-            return LeftText.getMax() + RightText.getMax();
-        }
-        public override float getMin()
-        {
-            return LeftText.getMin() + RightText.getMin();
-        }
-        public override float getSpace()
-        {
-            return LeftText.getSpace() + RightText.getSpace();
-        }
-        public override void setup(RectangleF box)
-        {
-            this.box = box;
+            this.Box = box;
             if (LeftText != null)
             {
                 if (RightText != null)
@@ -52,50 +43,50 @@ namespace Werwolf.Karten.CyberAktion
             else if (RightText != null)
                 setupSingle();
             else
-                this.box.Height = 0;
+                this.Box.Height = 0;
         }
         private void setupBoth()
         {
-            float leftWidth = box.Width * LeftText.getSpace() / this.getSpace();
-            float rightWidth = box.Width - leftWidth;
-            float leftRest = leftWidth - LeftText.getMin();
-            float rightRest = rightWidth - RightText.getMin();
+            float leftWidth = Box.Width * LeftText.Space/ this.Space;
+            float rightWidth = Box.Width - leftWidth;
+            float leftRest = leftWidth - LeftText.Min;
+            float rightRest = rightWidth - RightText.Min;
             if (leftRest < 0)
             {
                 if (rightRest < 0)
-                    leftWidth = box.Width * LeftText.getMin() / this.getMin();
+                    leftWidth = Box.Width * LeftText.Min/ this.Min;
                 else
-                    leftWidth = LeftText.getMin();
+                    leftWidth = LeftText.Min;
             }
             else if (rightRest < 0)
-                leftWidth = box.Width - RightText.getMin();
-            rightWidth = box.Width - leftWidth;
+                leftWidth = Box.Width - RightText.Min;
+            rightWidth = Box.Width - leftWidth;
 
-            LeftText.setup(box.Location, leftWidth);
-            RightText.setup(box.Location, rightWidth);
-            RightText.Move(box.Right - RightText.Right, 0);
-            this.box.Height = Math.Max(RightText.box.Height, LeftText.box.Height);
+            LeftText.Setup(Box.Location, leftWidth);
+            RightText.Setup(Box.Location, rightWidth);
+            RightText.Move(Box.Right - RightText.Right, 0);
+            this.Box.Height = Math.Max(RightText.Box.Height, LeftText.Box.Height);
         }
         private void setupSingle()
         {
             if (LeftText != null)
             {
-                LeftText.setup(box);
-                this.box.Height = LeftText.box.Height;
+                LeftText.Setup(Box);
+                this.Box.Height = LeftText.Box.Height;
             }
             else
             {
-                RightText.setup(box);
-                RightText.Move(box.Right - RightText.Right, 0);
-                this.box.Height = RightText.box.Height;
+                RightText.Setup(Box);
+                RightText.Move(Box.Right - RightText.Right, 0);
+                this.Box.Height = RightText.Box.Height;
             }
         }
-        public override void update()
+        public override void Update()
         {
             if (LeftText != null)
-                LeftText.update();
+                LeftText.Update();
             if (RightText != null)
-                RightText.update();
+                RightText.Update();
         }
         public override void Move(PointF ToMove)
         {

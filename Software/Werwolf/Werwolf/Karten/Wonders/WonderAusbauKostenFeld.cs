@@ -49,31 +49,29 @@ namespace Werwolf.Karten
                 abstand = Abstand * Faktor;
                 n = Symbole.Count();
                 if (n > 0)
-                    durchmesser = Symbole.First().getMin();
+                    durchmesser = Symbole.First().Min;
                 klein = n < 4;
             }
 
-            public override float getSpace()
+            public override float Space => Symbole.Space;
+            public override float Min
             {
-                return Symbole.getSpace();
+                get
+                {
+                    if (klein)
+                        return durchmesser;
+                    else
+                        return durchmesser + hohe;
+                }
             }
-            public override float getMin()
-            {
-                if (klein)
-                    return durchmesser;
-                else
-                    return durchmesser + hohe;
-            }
-            public override float getMax()
-            {
-                return getMax();
-            }
-            public override void update()
+
+            public override float Max => Max;
+            public override void Update()
             {
             }
-            public override void setup(RectangleF box)
+            public override void Setup(RectangleF box)
             {
-                this.box = box;
+                this.Box = box;
                 PointF p1, p2;
                 if (klein)
                     p1 = p2 = new PointF(0, durchmesser + abstand);
@@ -87,21 +85,21 @@ namespace Werwolf.Karten
                 int i = 0;
                 foreach (var item in Symbole)
                 {
-                    item.setup(box);
+                    item.Setup(box);
                     box = box.move(i % 2 == 0 ? p1 : p2);
                     i++;
                 }
-                this.box.Width = getMin();
-                this.box.Height = box.Y - this.box.Y + abstand;
+                this.Box.Width = Min;
+                this.Box.Height = box.Y - this.Box.Y + abstand;
                 if (!klein)
-                    this.box.Height += (durchmesser + abstand) / 2;
+                    this.Box.Height += (durchmesser + abstand) / 2;
             }
-            public override void draw(DrawContext con)
+            public override void Draw(DrawContext con)
             {
                 foreach (var item in Symbole)
-                    item.draw(con);
+                    item.Draw(con);
             }
-            public override DrawBox clone()
+            public override DrawBox Clone()
             {
                 throw new NotImplementedException();
             }
@@ -145,7 +143,7 @@ namespace Werwolf.Karten
         {
             Bild FeldBild = this.FeldBild;
 
-            SizeF Rest = box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
+            SizeF Rest = Box.Size.sub(FeldBild.Size.mul(Faktor)).mul(0.5f, Oben ? 1 : 0).mul(Ppm / Faktor);
             Point P = new Point((int)Rest.Width, (int)(Rest.Height + 0.5f * Ppm));
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
@@ -156,7 +154,7 @@ namespace Werwolf.Karten
                 if (Quer)
                     g.RotateTransform(-90);
                 using (DrawContextGraphics dcg = new DrawContextGraphics(g))
-                    FixedBox.draw(dcg);
+                    FixedBox.Draw(dcg);
             }
         }
     }

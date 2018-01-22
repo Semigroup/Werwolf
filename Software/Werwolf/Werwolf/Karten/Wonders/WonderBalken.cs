@@ -24,7 +24,7 @@ namespace Werwolf.Karten
 
         }
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -33,17 +33,17 @@ namespace Werwolf.Karten
             return base.Visible() && HintergrundDarstellung.Existiert;
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = AussenBox;
-            this.box.Location = box.Location;
+            this.Box = AussenBox;
+            this.Box.Location = box.Location;
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             string tfp = Karte.Fraktion.HintergrundBild.TotalFilePath;
             if (tfp.Length == 0) return;
-            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
             if (!tfp.Equals(FilePath)
                 || !Karte.HintergrundDarstellung.Farbe.Equals(AlteFarbe))
             {

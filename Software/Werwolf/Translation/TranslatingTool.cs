@@ -179,20 +179,20 @@ namespace Translation
         private void MakeLegende()
         {
             Text t = new Text();
-            t.preferedFont = new FontGraphicsMeasurer(new Font("Calibri", 11));
+            t.PreferedFont = new FontGraphicsMeasurer(new Font("Calibri", 11));
             foreach (var item in karten[index].Aufgaben.GetTextBilder())
             {
-                t.add(new WolfTextBild(item, t.preferedFont));
-                t.addWort(" ::" + item.Name + "::");
-                t.addAbsatz();
+                t.Add(new WolfTextBild(item, t.PreferedFont));
+                t.AddWort(" ::" + item.Name + "::");
+                t.AddAbsatz();
             }
             Image img = new Bitmap(legendenBox.Width, legendenBox.Height);
             using (Graphics g = img.GetHighGraphics())
             using (DrawContext dc = new DrawContextGraphics(g))
             {
                 g.Clear(Color.White);
-                t.setup(legendenBox.Width);
-                t.draw(dc);
+                t.Setup(legendenBox.Width);
+                t.Draw(dc);
             }
             legendenBox.Image = img;
         }

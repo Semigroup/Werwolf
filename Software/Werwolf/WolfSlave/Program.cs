@@ -81,7 +81,7 @@ namespace WolfSlave
             string p = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + "." + JobNumber);
             Console.WriteLine(p);
             Console.WriteLine(wsp.Seite.div(WolfBox.Faktor) + "");
-            wsp.createPDF(p, wsp.getMin(), float.MaxValue, wsp.PageSize, Job.HintergrundFarbe);
+            wsp.CreatePDF(p, wsp.Min, float.MaxValue, wsp.PageSize, Job.HintergrundFarbe);
         }
         static void CreateImage()
         {
@@ -95,7 +95,7 @@ namespace WolfSlave
                         break;
                     }
             Text t = new Assistment.Texts.Text();
-            t.addRegex(Karte.Name);
+            t.AddRegex(Karte.Name);
             string s = t.ToString().ToFileName();
             s = s.Replace(" ", "");
             s = Path.Combine(Path.GetDirectoryName(JobPath), s + ".jpg");

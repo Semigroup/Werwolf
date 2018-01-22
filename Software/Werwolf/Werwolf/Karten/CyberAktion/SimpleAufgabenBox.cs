@@ -37,7 +37,7 @@ namespace Werwolf.Karten.CyberAktion
         {
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             if (Karte == null) return;
 
@@ -45,11 +45,11 @@ namespace Werwolf.Karten.CyberAktion
             if (boxs != null
                 && aufgabe.Equals(LastAufgabe)
                 && Darstellung.Rand.Equal(LastRand)
-                && box.Equals(this.box)
+                && box.Equals(this.Box)
                 && Darstellung.Font.Equals(LastFont)
                 && InnenRadius.Equals(LastInnRad)) return;
 
-            this.box = box;
+            this.Box = box;
             LastAufgabe = aufgabe;
             LastRand = Darstellung.Rand;
             LastFont = Darstellung.Font;
@@ -61,13 +61,13 @@ namespace Werwolf.Karten.CyberAktion
              boxs = Aufgabe.ProduceTexts(Darstellung.FontMeasurer).Map(x => x.Geometry(InnenRadius * Faktor)).ToArray();
             for (int i = 0; i < boxs.Length; i++)
             {
-                boxs[i].setup(subBox);
-                subBox = subBox.move(0, boxs[i].box.Height + rand.Height);
+                boxs[i].Setup(subBox);
+                subBox = subBox.move(0, boxs[i].Box.Height + rand.Height);
             }
-            this.box.Height = subBox.Y - rand.Height - this.box.Y;
+            this.Box.Height = subBox.Y - rand.Height - this.Box.Y;
         }
 
-        public override void update()
+        public override void Update()
         {
         }
         public override void Move(PointF ToMove)
@@ -76,12 +76,12 @@ namespace Werwolf.Karten.CyberAktion
             foreach (var item in boxs)
                 item.Move(ToMove);
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            base.draw(con);
-            con.drawImage(backGroundImage, box);
+            base.Draw(con);
+            con.drawImage(backGroundImage, Box);
             foreach (var item in boxs)
-                item.draw(con);
+                item.Draw(con);
         }
         public override void DrawRessources()
         {
@@ -98,14 +98,14 @@ namespace Werwolf.Karten.CyberAktion
             LastRandFarbe = Darstellung.RandFarbe;
             changed = false;
 
-            Size Size = box.Size.mul(ppm / Faktor).Max(new SizeF(1, 1)).ToPointF().Ceil().ToSize().ToSize();
+            Size Size = Box.Size.mul(ppm / Faktor).Max(new SizeF(1, 1)).ToPointF().Ceil().ToSize().ToSize();
             backGroundImage = new Bitmap(Size.Width, Size.Height);
             Region region = new Region();
             region.MakeEmpty();
             foreach (var item in boxs)
             {
-                RectangleF subBox = item.box.move(box.Location.mul(-1)).div(Faktor);
-                subBox.Width = box.Width / Faktor - 2 * LastRand.Width;
+                RectangleF subBox = item.Box.move(Box.Location.mul(-1)).div(Faktor);
+                subBox.Width = Box.Width / Faktor - 2 * LastRand.Width;
                 region.Union(subBox);
             }
             using (Graphics g = backGroundImage.GetHighGraphics(ppm))

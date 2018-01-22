@@ -30,7 +30,7 @@ namespace Werwolf.Karten
 
         }
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -41,52 +41,52 @@ namespace Werwolf.Karten
 
             Links = new Text(Karte.Fraktion.Schreibname + "\n" + Karte.Schreibname, font);
             Rechts = new Text("", font);
-            Rechts.addWort(Karte.Initiative);
-            Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Initiative, font));
+            Rechts.AddWort(Karte.Initiative);
+            Rechts.Add(new WolfTextBild(Karte.LayoutDarstellung.Initiative, font));
             //Rechts.addZoomedImage(InitiativeBild);
-            Rechts.addWhitespace(1);
+            Rechts.AddWhitespace(1);
             if (Karte.Felder > 0)
             {
-                Rechts.addWort(Karte.Felder);
-                Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Felder, font));
+                Rechts.AddWort(Karte.Felder);
+                Rechts.Add(new WolfTextBild(Karte.LayoutDarstellung.Felder, font));
                 //Rechts.addZoomedImage(FelderBild);
-                Rechts.addWhitespace(1);
+                Rechts.AddWhitespace(1);
             }
-            Rechts.addAbsatz();
+            Rechts.AddAbsatz();
 
             if (Karte.ReichweiteMax > 0)
             {
                 if (Karte.ReichweiteMin == 0)
-                    Rechts.addWort(Karte.ReichweiteMax + "m");
+                    Rechts.AddWort(Karte.ReichweiteMax + "m");
                 else
-                    Rechts.addWort(Karte.ReichweiteMin + "-" + Karte.ReichweiteMax + "m");
-                Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Reichweite, font));
+                    Rechts.AddWort(Karte.ReichweiteMin + "-" + Karte.ReichweiteMax + "m");
+                Rechts.Add(new WolfTextBild(Karte.LayoutDarstellung.Reichweite, font));
                 //Rechts.addZoomedImage(ReichweiteBild);
-                Rechts.addWhitespace(1);
+                Rechts.AddWhitespace(1);
             }
           
             if (Karte.Storung > 0)
             {
-                Rechts.addWort(Karte.Storung);
-                Rechts.add(new WolfTextBild(Karte.LayoutDarstellung.Storung, font));
+                Rechts.AddWort(Karte.Storung);
+                Rechts.Add(new WolfTextBild(Karte.LayoutDarstellung.Storung, font));
                 //Rechts.addZoomedImage(StorungBild);
-                Rechts.addWhitespace(1);
+                Rechts.AddWhitespace(1);
             }
 
             Kompositum = new CString(Links, Rechts);
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             if (Karte != null)
             {
                 Build();
 
-                this.box = InnenBox;
-                Kompositum.setup(this.box);
+                this.Box = InnenBox;
+                Kompositum.Setup(this.Box);
                 Rechts.Move(InnenBox.Right - Rechts.Right, 0);
                 this.Move(box.Location);
-                this.box.Height = Kompositum.box.Height;
+                this.Box.Height = Kompositum.Box.Height;
             }
         }
         public override void Move(PointF ToMove)
@@ -94,10 +94,10 @@ namespace Werwolf.Karten
             base.Move(ToMove);
             Kompositum.Move(ToMove);
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            con.fillRectangle(TitelDarstellung.Farbe.ToBrush(), box);
-            Kompositum.draw(con);
+            con.fillRectangle(TitelDarstellung.Farbe.ToBrush(), Box);
+            Kompositum.Draw(con);
         }
 
         public static PointF[] Dreieck(RectangleF r)

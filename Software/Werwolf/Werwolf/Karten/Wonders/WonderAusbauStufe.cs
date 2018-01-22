@@ -43,14 +43,14 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item != null)
                     item.Karte = Karte;
-            update();
+            Update();
         }
         public override void OnPpmChanged()
         {
             base.OnPpmChanged();
             foreach (var item in WolfBoxs)
                 item.OnPpmChanged();
-            update();
+            Update();
         }
 
         public override void Move(PointF ToMove)
@@ -62,44 +62,44 @@ namespace Werwolf.Karten
                     item.Move(ToMove);
             Kosten.Move(ToMove);
         }
-        public override void update()
+        public override void Update()
         {
             foreach (var item in WolfBoxs)
                 if (item != null)
-                    item.update();
+                    item.Update();
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             RectangleF MovedInnenBox = InnenBox.move(box.Location);
-            this.box = box;
-            this.box.Size = AussenBox.Size;
+            this.Box = box;
+            this.Box.Size = AussenBox.Size;
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
-                    item.setup(box);
+                    item.Setup(box);
 
             Kosten.Karte = Karte;
             Kosten.Ppm = ppm;
             if (Kosten.Visible())
             {
-                Kosten.setup(box);
+                Kosten.Setup(box);
                 float rest = Faktor * HintergrundDarstellung.Anker.X - Kosten.Size.Width;
                 Kosten.SetLot(new PointF(MovedInnenBox.Left + rest / 2,
                     MovedInnenBox.Top + HintergrundDarstellung.Anker.Y * Faktor));
             }
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            RectangleF MovedAussenBox = AussenBox.move(box.Location);
-            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
+            RectangleF MovedAussenBox = AussenBox.move(Box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
-                    item.draw(con);
+                    item.Draw(con);
             if (Kosten.Visible())
-                Kosten.draw(con);
+                Kosten.Draw(con);
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
             {
                 HintergrundDarstellung.MakeRandBild(ppm);

@@ -59,7 +59,7 @@ namespace Werwolf.Karten
         public virtual void DrawRessources()
         {
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             DrawRessources();
         }
@@ -68,22 +68,13 @@ namespace Werwolf.Karten
         {
             throw new NotImplementedException();
         }
-        public override DrawBox clone()
+        public override DrawBox Clone()
         {
             throw new NotImplementedException();
         }
 
-        public override float getMax()
-        {
-            throw new NotImplementedException();
-        }
-        public override float getMin()
-        {
-            throw new NotImplementedException();
-        }
-        public override float getSpace()
-        {
-            throw new NotImplementedException();
-        }
+        public override float Max => throw new NotImplementedException();
+        public override float Min => throw new NotImplementedException();
+        public override float Space => throw new NotImplementedException();
     }
 }

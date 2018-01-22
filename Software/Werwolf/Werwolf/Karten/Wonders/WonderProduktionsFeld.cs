@@ -39,23 +39,23 @@ namespace Werwolf.Karten
         {
             return base.Visible() && Produktion != null;
         }
-        public override void update()
+        public override void Update()
         {
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = box;
-            this.box.Size = Karte.HintergrundDarstellung.Size.mul(Faktor);
-            Produktion.setup(box);
+            this.Box = box;
+            this.Box.Size = Karte.HintergrundDarstellung.Size.mul(Faktor);
+            Produktion.Setup(box);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            con.fillRectangle(Karte.HintergrundDarstellung.Farbe.ToBrush(), box);
+            con.fillRectangle(Karte.HintergrundDarstellung.Farbe.ToBrush(), Box);
             using (Image Image = Karte.Fraktion.HintergrundBild.Image)
-                con.drawImage(Image, box);
-            Produktion.draw(con);
+                con.drawImage(Image, Box);
+            Produktion.Draw(con);
         }
     }
 }

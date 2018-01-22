@@ -49,14 +49,14 @@ namespace Werwolf.Inhalt
             public void AddDrawBox(DrawContainer Container)
             {
                 if (regex != null)
-                    Container.addRegex(regex);
+                    Container.AddRegex(regex);
                 else if (Bild != null)
-                    Container.add(new WolfTextBild(Bild, Container.preferedFont));
+                    Container.Add(new WolfTextBild(Bild, Container.PreferedFont));
                 else if (Fehler)
                 {
                     Image Image = Settings.NotFoundImage;
-                    float height = Container.preferedFont.yMass('_');
-                    Container.addImage(Image, Image.Size.Width * height / Image.Size.Height, height);
+                    float height = Container.PreferedFont.yMass('_');
+                    Container.AddImage(Image, Image.Size.Width * height / Image.Size.Height, height);
                 }
                 else
                     throw new NotImplementedException();

@@ -14,20 +14,11 @@ namespace Werwolf.Karten
 {
     public class StandardRuckseite : WolfBox
     {
-        public override float getSpace()
-        {
-            return AussenBox.Size.Inhalt();
-        }
-        public override float getMin()
-        {
-            return AussenBox.Size.Width;
-        }
-        public override float getMax()
-        {
-            return getMin();
-        }
+        public override float Space => AussenBox.Size.Inhalt();
+        public override float Min => AussenBox.Size.Width;
+        public override float Max => Min;
 
-        public override void update()
+        public override void Update()
         {
         }
 
@@ -37,15 +28,15 @@ namespace Werwolf.Karten
         }
 
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = box;
-            this.box.Size = AussenBox.Size;
+            this.Box = box;
+            this.Box.Size = AussenBox.Size;
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            RectangleF MovedAussenBox = AussenBox.move(box.Location);
-            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(-1, -1);
+            RectangleF MovedAussenBox = AussenBox.move(Box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
             if (HintergrundDarstellung.Rand.Inhalt() > 0)

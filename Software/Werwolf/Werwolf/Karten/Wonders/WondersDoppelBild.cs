@@ -30,7 +30,7 @@ namespace Werwolf.Karten
             return base.Visible() && BildDarstellung.Existiert;
         }
 
-        public override void update()
+        public override void Update()
         {
         }
         public override void OnPpmChanged()
@@ -80,18 +80,18 @@ namespace Werwolf.Karten
             }
             OnPpmChanged();
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            this.box = AussenBox.move(box.Location);
+            this.Box = AussenBox.move(box.Location);
         }
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
         }
 
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            RectangleF MovedInnenBox = InnenBox.move(box.Location).Inner(0, 0);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
             if (NeuZeichnen && Bild != null)
             {
                 ErstelleBild();

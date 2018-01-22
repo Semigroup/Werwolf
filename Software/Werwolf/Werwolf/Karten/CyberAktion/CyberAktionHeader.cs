@@ -33,11 +33,11 @@ namespace Werwolf.Karten.CyberAktion
             this[1, 0] = texts.Length > 1 ? texts[1].Geometry(InnenRadius.mul(Faktor)) : null;
             this[1, 1] = kosten.Length > 0 ? kosten[0].Geometry(InnenRadius.mul(Faktor)) : null;
             Text inRen = new Text("", Font);
-            inRen.addWort(Karte.Initiative.ToString("F1"));
-            inRen.add(new WolfTextBild(Layout.Initiative, Font));
-            inRen.addWort(" ");
-            inRen.addWort(Karte.Felder);
-            inRen.add(new WolfTextBild(Layout.Felder, Font));
+            inRen.AddWort(Karte.Initiative.ToString("F1"));
+            inRen.Add(new WolfTextBild(Layout.Initiative, Font));
+            inRen.AddWort(" ");
+            inRen.AddWort(Karte.Felder);
+            inRen.Add(new WolfTextBild(Layout.Felder, Font));
             this[2, 0] = inRen.Geometry(InnenRadius.mul(Faktor));
         }
     }

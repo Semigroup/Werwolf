@@ -60,7 +60,7 @@ namespace Werwolf.Karten
                 //    Text.addRange(Effekt);
                 //    Text.addWhitespace(EffektFont.getWhitespace());
                 //}
-                Text.addRegex(@"\c" + color + Entwicklung.Schreibname, SmallFont);
+                Text.AddRegex(@"\c" + color + Entwicklung.Schreibname, SmallFont);
                 DrawBox = Text.Geometry(0.5f * Faktor, 0.5f * Faktor, 2.5f * Faktor, 0.5f * Faktor);
                 DrawBoxChanged = true;
             }

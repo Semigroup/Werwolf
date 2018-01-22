@@ -38,41 +38,41 @@ namespace Werwolf.Karten.CyberAktion
             FormattedImpressum.Move(ToMove);
             //ZielBox.Move(ToMove);
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
             RectangleF movedInnenBox = InnenBox.move(box.Location);
-            Hoch.setup(movedInnenBox);
-            Tief.setup(movedInnenBox);
+            Hoch.Setup(movedInnenBox);
+            Tief.Setup(movedInnenBox);
             //ZielBox.setup(movedInnenBox);
             //ZielBox.Move((InnenBox.Width -ZielBox.box.Width)/2, Hoch.box.Height);
-            Tief.Move(0, InnenBox.Height - Tief.box.Height);
+            Tief.Move(0, InnenBox.Height - Tief.Box.Height);
 
             Mitte.CenterTop = Hoch.Bottom;
             Mitte.CenterBottom = Tief.Top;
-            Mitte.setup(box);
+            Mitte.Setup(box);
 
-            FormattedImpressum.setup(movedInnenBox);
+            FormattedImpressum.Setup(movedInnenBox);
             FormattedImpressum.Move(movedInnenBox.Right - FormattedImpressum.Right,
-                Tief.box.Top - FormattedImpressum.box.Bottom);
+                Tief.Box.Top - FormattedImpressum.Box.Bottom);
         }
-        public override void update()
+        public override void Update()
         {
-            Mitte.update();
-            Hoch.update();
-            Tief.update();
-            FormattedImpressum.update();
+            Mitte.Update();
+            Hoch.Update();
+            Tief.Update();
+            FormattedImpressum.Update();
             //ZielBox.update();
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
-            base.draw(con);
-            Mitte.draw(con);
-            Hoch.draw(con);
+            base.Draw(con);
+            Mitte.Draw(con);
+            Hoch.Draw(con);
             if (Karte.Modus != Karte.KartenModus.CyberSupportKarte)
-            FormattedImpressum.draw(con);
+            FormattedImpressum.Draw(con);
             //ZielBox.draw(con);
-            Tief.box = Tief.box.Inner(-1, -1);
-            Tief.draw(con);
+            Tief.Box = Tief.Box.Inner(-1, -1);
+            Tief.Draw(con);
         }
         public override void OnKarteChanged()
         {
@@ -92,8 +92,8 @@ namespace Werwolf.Karten.CyberAktion
             if (karte != null)
             {
                 Text impressum = new Text();
-                impressum.add(new WolfTextBild(Karte.Universe.TextBilder["Copyright"], InfoDarstellung.FontMeasurer));
-                impressum.add(new WolfTextBild(Karte.Fraktion.Symbol, InfoDarstellung.FontMeasurer));
+                impressum.Add(new WolfTextBild(Karte.Universe.TextBilder["Copyright"], InfoDarstellung.FontMeasurer));
+                impressum.Add(new WolfTextBild(Karte.Fraktion.Symbol, InfoDarstellung.FontMeasurer));
                 FormattedImpressum =
                 impressum.Geometry(InfoDarstellung.Rand.mul(Faktor)).Colorize(InfoDarstellung.Farbe);
 

@@ -81,8 +81,8 @@ namespace Werwolf.Forms
                 RectangleF r = new RectangleF();
                 r.Size = LastSize;
                 r.Size = r.Size.mul(ppm / WolfBox.Faktor);
-                WolfBox.setup(r);
-                WolfBox.draw(DrawContext);
+                WolfBox.Setup(r);
+                WolfBox.Draw(DrawContext);
                 //await Task.Run( () => );
                 Drawing = false;
             }

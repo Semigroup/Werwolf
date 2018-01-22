@@ -40,36 +40,36 @@ namespace Werwolf.Karten
                 {
                     if (karte.Value > 0)
                     {
-                        t.addAbsatz();
+                        t.AddAbsatz();
                         empty = false;
                     }
                     if (karte.Value > 1)
-                        t.addWort(karte.Value + "x ");
+                        t.AddWort(karte.Value + "x ");
                     if (karte.Value > 0)
                     {
-                        t.addRegex(karte.Key.Schreibname);
+                        t.AddRegex(karte.Key.Schreibname);
                         //Text.add(new StandardKarte(item.Key, Ppm));
                     }
                 }
                 if (!empty)
-                    cs.add(t.Geometry(10));
+                    cs.Add(t.Geometry(10));
             }
             Text = cs;
         }
 
-        public override void update()
+        public override void Update()
         {
-            Text.update();
+            Text.Update();
         }
 
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            Text.setup(box);
+            Text.Setup(box);
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             //con.fillRectangle(Brushes.White, 0,0,1000,1000);
-            Text.draw(con);
+            Text.Draw(con);
         }
         public override void Move(PointF ToMove)
         {
@@ -77,17 +77,8 @@ namespace Werwolf.Karten
             Text.Move(ToMove);
         }
 
-        public override float getMax()
-        {
-            return Text.getMax();
-        }
-        public override float getMin()
-        {
-            return Text.getMin();
-        }
-        public override float getSpace()
-        {
-            return Text.getSpace();
-        }
+        public override float Max => Text.Max;
+        public override float Min => Text.Min;
+        public override float Space => Text.Space;
     }
 }

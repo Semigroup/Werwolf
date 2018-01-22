@@ -45,18 +45,18 @@ namespace Werwolf.Karten
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
-            update();
+            Update();
         }
         public override void OnPpmChanged()
         {
             base.OnPpmChanged();
-            update();
+            Update();
         }
         public override bool Visible()
         {
             return base.Visible() && Karte.MeineAufgaben.Anzahl > 0 && Karte.TextDarstellung.Existiert;
         }
-        public override void update()
+        public override void Update()
         {
             if (!Visible())
                 return;
@@ -72,7 +72,7 @@ namespace Werwolf.Karten
 
             Texts = Aufgaben.ProduceTexts(TextDarstellung.FontMeasurer);
             foreach (var item in Texts)
-                item.setup(TextBox);
+                item.Setup(TextBox);
 
             float Bottom = TextBox.Bottom;
             for (int i = Texts.Length - 1; i >= 0; i--)
@@ -150,7 +150,7 @@ namespace Werwolf.Karten
                 Brush Brush = LastFarbe.ToBrush();
                 foreach (var item in Texts)
                 {
-                    RectangleF box = item.box.mul(1 / Faktor).move(Offset);
+                    RectangleF box = item.Box.mul(1 / Faktor).move(Offset);
                     box.Width = innBox.Width - 2 * InnenRadius;
                     OrientierbarerWeg = Rund(box, InnenRadius);
                     L = (int)OrientierbarerWeg.L;
@@ -173,21 +173,21 @@ namespace Werwolf.Karten
         }
         public override void Move(PointF ToMove)
         {
-            this.box = box.move(ToMove);
+            this.Box = Box.move(ToMove);
             foreach (var item in Texts)
                 item.Move(ToMove);
         }
-        public override void setup(RectangleF box)
+        public override void Setup(RectangleF box)
         {
-            Move(box.Location.sub(this.box.Location));
+            Move(box.Location.sub(this.Box.Location));
         }
-        public override void draw(DrawContext con)
+        public override void Draw(DrawContext con)
         {
             //base.draw(con);
 
-            con.drawImage(Back, OuterBox.move(box.Location));
+            con.drawImage(Back, OuterBox.move(Box.Location));
             foreach (var item in Texts)
-                item.draw(con);
+                item.Draw(con);
         }
     }
 }
