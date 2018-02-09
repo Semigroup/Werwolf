@@ -57,6 +57,8 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.CyberSupportKarte:
                         case Karte.KartenModus.CyberHackKarte:
                             return new WolfBox[] { HochBildTiefBox };
+                        case Karte.KartenModus.ModernWolfKarte:
+                            return new WolfBox[] { HauptBild };
                         default:
                             throw new NotImplementedException();
                     }
@@ -173,6 +175,9 @@ namespace Werwolf.Karten
                 case Karte.KartenModus.CyberSupportKarte:
                 case Karte.KartenModus.CyberWaffenKarte:
                     drawCyberAction(con);
+                    break;
+                case Karte.KartenModus.ModernWolfKarte:
+                    drawModernWolf(con);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -291,6 +296,29 @@ namespace Werwolf.Karten
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            if (HintergrundDarstellung.Existiert)
+            {
+                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
+            }
+
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.Draw(con);
+        }
+        public void drawModernWolf(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(Box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            float top = MovedInnenBox.Top;
+            float bottom = MovedInnenBox.Bottom;
+
+            HauptBild.CenterTop = top;
+            HauptBild.CenterBottom = bottom;
+            HauptBild.Setup(HauptBild.Box);
 
             if (HintergrundDarstellung.Existiert)
             {
