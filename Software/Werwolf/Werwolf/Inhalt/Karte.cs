@@ -92,7 +92,8 @@ namespace Werwolf.Inhalt
             WondersAuswahlKarte = 0x20,
             CyberWaffenKarte = 0x40,
             CyberSupportKarte = 0x80,
-            CyberHackKarte = 0x100
+            CyberHackKarte = 0x100,
+            ModernWolfKarte = 0x200
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
