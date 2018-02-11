@@ -129,6 +129,10 @@
       <Project>{0c5ce078-5b2a-4160-b9df-dbd11094422b}</Project>
       <Name>Assistment</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Designer\Designer.csproj">
+      <Project>{25354b17-28a2-4b9e-9409-f045e9ea9721}</Project>
+      <Name>Designer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Werwolf\Werwolf.csproj">
       <Project>{cddc6e7b-bc1e-4439-81ad-ab4891063771}</Project>
       <Name>Werwolf</Name>

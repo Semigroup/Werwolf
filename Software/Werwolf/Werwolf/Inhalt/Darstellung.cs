@@ -182,7 +182,7 @@ namespace Werwolf.Inhalt
 
                 //clip.Complement(aussen);
                 //g.Clip = clip;
-                g.FillPolygon(RandFarbe.ToBrush(), y.getPolygon((int)(100 * y.L), 0, 1));
+                g.FillPolygon(RandFarbe.ToBrush(), y.GetPolygon((int)(100 * y.L), 0, 1));
                 g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
                 g.FillRectangle(Color.FromArgb(0).ToBrush(), innen); //Color.FromArgb(0)
                 //g.FillRectangle(Color.FromArgb(0, 0, 0, 0).ToBrush(), innen); //Color.FromArgb(0)
@@ -197,6 +197,7 @@ namespace Werwolf.Inhalt
             OrientierbarerWeg Sektor1 = new OrientierbarerWeg(
                 t => new PointF(0, -1).rot(t * p).add(1, 1).mul(Rand.ToPointF()),
                 t => new PointF(0, -p).rot(t * p + p).mul(Rand.ToPointF()).linksOrtho(),
+                t => new PointF((float)(-p*Math.Cos(t*p)), (float)(p * Math.Sin(t * p))),
                 (Rand.Width + Rand.Height) * p / 2);
             OrientierbarerWeg Sektor2 = Sektor1.Spiegel(Horizontale) ^ -1;
             OrientierbarerWeg Sektor3 = Sektor2.Spiegel(Vertikale) ^ -1;

@@ -139,7 +139,7 @@ namespace Werwolf.Karten
                 if (!Rand.IsEmpty)
                 {
                     OrientierbarerWeg = Rund(innBox.move(Offset), BalkenDicke);
-                    Hohe h = t => OrientierbarerWeg.normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
+                    Hohe h = t => OrientierbarerWeg.Normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
                     L = (int)OrientierbarerWeg.L;
                     Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
                 }
@@ -154,7 +154,7 @@ namespace Werwolf.Karten
                     box.Width = innBox.Width - 2 * InnenRadius;
                     OrientierbarerWeg = Rund(box, InnenRadius);
                     L = (int)OrientierbarerWeg.L;
-                    g.FillPolygon(Brush, OrientierbarerWeg.getPolygon(L, 0, 1));
+                    g.FillPolygon(Brush, OrientierbarerWeg.GetPolygon(L, 0, 1));
                 }
             }
         }
