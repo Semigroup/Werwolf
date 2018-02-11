@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
@@ -131,50 +130,6 @@ namespace Werwolf.Forms
                 Dirty = false;
                 OnKarteChanged();
             }
-        }
-    }
-    public class ViewKarte : ViewBox
-    {
-        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
-        {
-            if (Karte == null)
-                return new StandardKarte(Karte, Ppm);
-            else
-                return Karte.GetVorderSeite(Ppm);
-        }
-    }
-    public class ViewRuckseitenBild : ViewBox
-    {
-        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
-        {
-            if (Karte == null)
-                return new StandardRuckseite(Karte, Ppm);
-            else
-                return Karte.GetRuckSeite(Ppm);
-        }
-    }
-    public class ViewDeck : ViewBox
-    {
-        public override void ChangeKarte(XmlElement ChangedElement)
-        {
-            ((StandardDeck)WolfBox).Deck = ChangedElement as Deck;
-            OnKarteChanged();
-        }
-        protected override WolfBox GetWolfBox(Karte Karte, float Ppm)
-        {
-            return new StandardDeck(Karte, Ppm);
-        }
-        protected override bool ChangeSize()
-        {
-            SizeF size = PictureBox.Size;
-            Size Size = size.Max(1, 1).ToSize();
-            if (Size.Equals(LastSize))
-                return false;
-            LastSize = Size;
-            PictureBox.Image = new Bitmap(Size.Width, Size.Height);
-            g = PictureBox.Image.GetHighGraphics(WolfBox.Faktor / ppm);
-            DrawContext = new DrawContextGraphics(g, Brushes.White);
-            return true;
         }
     }
 }

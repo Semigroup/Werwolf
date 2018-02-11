@@ -68,13 +68,23 @@
     <Compile Include="HintergrundTool.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RahmenCreator\MWRahmenCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RahmenCreator\MWRahmenCreator.Designer.cs">
+      <DependentUpon>MWRahmenCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RahmenCreator\State.cs" />
     <EmbeddedResource Include="FragmentTest.resx">
       <DependentUpon>FragmentTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HintergrundTool.resx">
       <DependentUpon>HintergrundTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RahmenCreator\MWRahmenCreator.resx">
+      <DependentUpon>MWRahmenCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -151,11 +151,23 @@
     <Compile Include="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ViewBild.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\ViewBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\ViewBox.Designer.cs">
       <DependentUpon>ViewBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ViewDeck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ViewKarte.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ViewRuckseitenBild.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Generating\HintergrundErsteller.cs" />
     <Compile Include="Generating\HintergrundErstellerForm.cs">
@@ -184,6 +196,7 @@
     <Compile Include="Karten\CyberAktion\HochBildTiefBox.cs" />
     <Compile Include="Karten\CyberAktion\LeftRightLine.cs" />
     <Compile Include="Karten\CyberAktion\SimpleAufgabenBox.cs" />
+    <Compile Include="Karten\StandardBild.cs" />
     <Compile Include="Karten\WolfHauptBild.cs" />
     <Compile Include="Karten\Wonders\WonderDoppelName.cs" />
     <Compile Include="Karten\Wonders\WonderProduktionsFeld.cs" />

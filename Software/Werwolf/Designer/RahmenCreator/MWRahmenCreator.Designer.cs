@@ -1,0 +1,371 @@
+﻿namespace Designer.RahmenCreator
+{
+    partial class MWRahmenCreator
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.enumBox1 = new Assistment.form.EnumBox();
+            this.ppmBox1 = new Assistment.form.PpmBox();
+            this.FragmentNumberBox = new Assistment.form.IntBox();
+            this.FragmentDickeBox = new Assistment.form.FloatBox();
+            this.RadiusBox = new Assistment.form.FloatBox();
+            this.MarginBottomBox = new Assistment.form.FloatBox();
+            this.MarginTopBox = new Assistment.form.FloatBox();
+            this.MarginRightBox = new Assistment.form.FloatBox();
+            this.MarginLeftBox = new Assistment.form.FloatBox();
+            this.penBox1 = new Assistment.form.PenBox();
+            this.SamplesBox = new Assistment.form.IntBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.FragmentHeight = new System.Windows.Forms.Label();
+            this.RightInversion = new System.Windows.Forms.CheckBox();
+            this.LeftInversion = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(762, 620);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(797, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(182, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Hintergrundbild Auswählen";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(817, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Margin Left";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(817, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Margin Right";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(817, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Margin Top";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(817, 123);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Margin Bottom";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(817, 173);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Radius";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(808, 226);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Fragment Dicke";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(804, 248);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Fragment Anzahl";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(807, 296);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Fragment Style";
+            // 
+            // enumBox1
+            // 
+            this.enumBox1.EnumType = null;
+            this.enumBox1.Location = new System.Drawing.Point(810, 311);
+            this.enumBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.enumBox1.Name = "enumBox1";
+            this.enumBox1.Size = new System.Drawing.Size(154, 20);
+            this.enumBox1.TabIndex = 18;
+            this.enumBox1.UserValue = null;
+            // 
+            // ppmBox1
+            // 
+            this.ppmBox1.Location = new System.Drawing.Point(807, 516);
+            this.ppmBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ppmBox1.Name = "ppmBox1";
+            this.ppmBox1.Ppm = 11.81102F;
+            this.ppmBox1.PpmMaximum = 1000F;
+            this.ppmBox1.PpmMinimum = 0.001F;
+            this.ppmBox1.Size = new System.Drawing.Size(133, 36);
+            this.ppmBox1.TabIndex = 16;
+            // 
+            // FragmentNumberBox
+            // 
+            this.FragmentNumberBox.Location = new System.Drawing.Point(896, 248);
+            this.FragmentNumberBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FragmentNumberBox.Name = "FragmentNumberBox";
+            this.FragmentNumberBox.Size = new System.Drawing.Size(37, 16);
+            this.FragmentNumberBox.TabIndex = 15;
+            this.FragmentNumberBox.UserValue = 10;
+            this.FragmentNumberBox.UserValueMaximum = 2147483647;
+            this.FragmentNumberBox.UserValueMinimum = 1;
+            // 
+            // FragmentDickeBox
+            // 
+            this.FragmentDickeBox.Location = new System.Drawing.Point(895, 221);
+            this.FragmentDickeBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FragmentDickeBox.Name = "FragmentDickeBox";
+            this.FragmentDickeBox.Size = new System.Drawing.Size(38, 18);
+            this.FragmentDickeBox.TabIndex = 12;
+            this.FragmentDickeBox.UserValue = 5F;
+            this.FragmentDickeBox.UserValueMaximum = 3.402823E+38F;
+            this.FragmentDickeBox.UserValueMinimum = -3.402823E+38F;
+            // 
+            // RadiusBox
+            // 
+            this.RadiusBox.Location = new System.Drawing.Point(895, 168);
+            this.RadiusBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RadiusBox.Name = "RadiusBox";
+            this.RadiusBox.Size = new System.Drawing.Size(38, 18);
+            this.RadiusBox.TabIndex = 10;
+            this.RadiusBox.UserValue = 2F;
+            this.RadiusBox.UserValueMaximum = 3.402823E+38F;
+            this.RadiusBox.UserValueMinimum = 0F;
+            // 
+            // MarginBottomBox
+            // 
+            this.MarginBottomBox.Location = new System.Drawing.Point(895, 118);
+            this.MarginBottomBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MarginBottomBox.Name = "MarginBottomBox";
+            this.MarginBottomBox.Size = new System.Drawing.Size(38, 18);
+            this.MarginBottomBox.TabIndex = 8;
+            this.MarginBottomBox.UserValue = 5F;
+            this.MarginBottomBox.UserValueMaximum = 3.402823E+38F;
+            this.MarginBottomBox.UserValueMinimum = -3.402823E+38F;
+            // 
+            // MarginTopBox
+            // 
+            this.MarginTopBox.Location = new System.Drawing.Point(895, 96);
+            this.MarginTopBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MarginTopBox.Name = "MarginTopBox";
+            this.MarginTopBox.Size = new System.Drawing.Size(38, 18);
+            this.MarginTopBox.TabIndex = 6;
+            this.MarginTopBox.UserValue = 5F;
+            this.MarginTopBox.UserValueMaximum = 3.402823E+38F;
+            this.MarginTopBox.UserValueMinimum = -3.402823E+38F;
+            // 
+            // MarginRightBox
+            // 
+            this.MarginRightBox.Location = new System.Drawing.Point(895, 74);
+            this.MarginRightBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MarginRightBox.Name = "MarginRightBox";
+            this.MarginRightBox.Size = new System.Drawing.Size(38, 18);
+            this.MarginRightBox.TabIndex = 4;
+            this.MarginRightBox.UserValue = 5F;
+            this.MarginRightBox.UserValueMaximum = 3.402823E+38F;
+            this.MarginRightBox.UserValueMinimum = -3.402823E+38F;
+            // 
+            // MarginLeftBox
+            // 
+            this.MarginLeftBox.Location = new System.Drawing.Point(895, 52);
+            this.MarginLeftBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MarginLeftBox.Name = "MarginLeftBox";
+            this.MarginLeftBox.Size = new System.Drawing.Size(38, 18);
+            this.MarginLeftBox.TabIndex = 2;
+            this.MarginLeftBox.UserValue = 5F;
+            this.MarginLeftBox.UserValueMaximum = 3.402823E+38F;
+            this.MarginLeftBox.UserValueMinimum = -3.402823E+38F;
+            // 
+            // penBox1
+            // 
+            this.penBox1.Location = new System.Drawing.Point(793, 444);
+            this.penBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.penBox1.Name = "penBox1";
+            this.penBox1.Size = new System.Drawing.Size(197, 42);
+            this.penBox1.TabIndex = 19;
+            // 
+            // SamplesBox
+            // 
+            this.SamplesBox.Location = new System.Drawing.Point(903, 584);
+            this.SamplesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SamplesBox.Name = "SamplesBox";
+            this.SamplesBox.Size = new System.Drawing.Size(37, 16);
+            this.SamplesBox.TabIndex = 21;
+            this.SamplesBox.UserValue = 1000;
+            this.SamplesBox.UserValueMaximum = 10000000;
+            this.SamplesBox.UserValueMinimum = 2;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(811, 584);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Anzahl Samples";
+            // 
+            // FragmentHeight
+            // 
+            this.FragmentHeight.AutoSize = true;
+            this.FragmentHeight.Location = new System.Drawing.Point(804, 272);
+            this.FragmentHeight.Name = "FragmentHeight";
+            this.FragmentHeight.Size = new System.Drawing.Size(86, 13);
+            this.FragmentHeight.TabIndex = 22;
+            this.FragmentHeight.Text = "Fragment Höhe: ";
+            // 
+            // RightInversion
+            // 
+            this.RightInversion.AutoSize = true;
+            this.RightInversion.Location = new System.Drawing.Point(842, 336);
+            this.RightInversion.Name = "RightInversion";
+            this.RightInversion.Size = new System.Drawing.Size(119, 17);
+            this.RightInversion.TabIndex = 23;
+            this.RightInversion.Text = "Rechts Invertieren?";
+            this.RightInversion.UseVisualStyleBackColor = true;
+            // 
+            // LeftInversion
+            // 
+            this.LeftInversion.AutoSize = true;
+            this.LeftInversion.Location = new System.Drawing.Point(842, 359);
+            this.LeftInversion.Name = "LeftInversion";
+            this.LeftInversion.Size = new System.Drawing.Size(110, 17);
+            this.LeftInversion.TabIndex = 24;
+            this.LeftInversion.Text = "Links Invertieren?";
+            this.LeftInversion.UseVisualStyleBackColor = true;
+            // 
+            // MWRahmenCreator
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1001, 644);
+            this.Controls.Add(this.LeftInversion);
+            this.Controls.Add(this.RightInversion);
+            this.Controls.Add(this.FragmentHeight);
+            this.Controls.Add(this.SamplesBox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.penBox1);
+            this.Controls.Add(this.enumBox1);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.ppmBox1);
+            this.Controls.Add(this.FragmentNumberBox);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.FragmentDickeBox);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.RadiusBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.MarginBottomBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.MarginTopBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.MarginRightBox);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.MarginLeftBox);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox1);
+            this.Name = "MWRahmenCreator";
+            this.Text = "MWRahmenCreator";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
+        private Assistment.form.FloatBox MarginLeftBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private Assistment.form.FloatBox MarginRightBox;
+        private System.Windows.Forms.Label label3;
+        private Assistment.form.FloatBox MarginTopBox;
+        private System.Windows.Forms.Label label4;
+        private Assistment.form.FloatBox MarginBottomBox;
+        private System.Windows.Forms.Label label5;
+        private Assistment.form.FloatBox RadiusBox;
+        private System.Windows.Forms.Label label6;
+        private Assistment.form.FloatBox FragmentDickeBox;
+        private System.Windows.Forms.Label label7;
+        private Assistment.form.IntBox FragmentNumberBox;
+        private Assistment.form.PpmBox ppmBox1;
+        private System.Windows.Forms.Label label8;
+        private Assistment.form.EnumBox enumBox1;
+        private Assistment.form.PenBox penBox1;
+        private Assistment.form.IntBox SamplesBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label FragmentHeight;
+        private System.Windows.Forms.CheckBox RightInversion;
+        private System.Windows.Forms.CheckBox LeftInversion;
+    }
+}
