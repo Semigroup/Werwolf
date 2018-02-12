@@ -321,14 +321,14 @@ namespace Werwolf.Karten
             HauptBild.Setup(HauptBild.Box);
 
             if (HintergrundDarstellung.Existiert)
-            {
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
-                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
-            }
 
-            foreach (var item in WolfBoxs)
+                foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.Draw(con);
+
+            if (HintergrundDarstellung.Existiert)
+                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
         }
     }
 }

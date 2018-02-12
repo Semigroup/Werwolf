@@ -16,6 +16,9 @@ using Assistment.Drawing;
 using Assistment.Drawing.Geometries;
 using Werwolf.Karten;
 
+using System.Xml.Serialization;
+using System.IO;
+
 namespace Designer.RahmenCreator
 {
     public partial class MWRahmenCreator : Form
@@ -31,10 +34,18 @@ namespace Designer.RahmenCreator
         private HintergrundDarstellung HintergrundDarstellung
             => Universe.Karten.Standard.HintergrundDarstellung;
 
+        private bool suppressKartenRand = false;
+
+        private XmlSerializer XmlSerializer;
+
         public MWRahmenCreator()
         {
             InitializeComponent();
             State = new State();
+            XmlSerializer = new XmlSerializer(typeof(State));
+
+            this.SaveButton.Enabled = false;
+            this.penBox1.Pen = new Pen(Color.Black, 0.3f);
 
             this.MarginBottomBox.UserValueChanged += Draw;
             this.MarginTopBox.UserValueChanged += Draw;
@@ -54,6 +65,7 @@ namespace Designer.RahmenCreator
             this.SamplesBox.UserValueChanged += Draw;
             this.LeftInversion.CheckedChanged += Draw;
             this.RightInversion.CheckedChanged += Draw;
+            this.checkBox1.CheckedChanged += Draw;
         }
         public void Init(Universe Universe)
         {
@@ -80,7 +92,7 @@ namespace Designer.RahmenCreator
 
         public void Draw(object sender, EventArgs e)
         {
-            State.Size = Universe.HintergrundDarstellungen.Standard.Size.mul(ppmBox1.Ppm).ToSize();
+            State.Size = HintergrundDarstellung.Size.mul(ppmBox1.Ppm).ToSize();
             State.FragmentDicke = FragmentDickeBox.UserValue;
             State.FragmentStyle = (Fragments.Style)enumBox1.UserValue;
             State.FragmentZahl = FragmentNumberBox.UserValue;
@@ -93,7 +105,8 @@ namespace Designer.RahmenCreator
             State.MarginLeft = MarginLeftBox.UserValue;
             State.MarginRight = MarginRightBox.UserValue;
             State.MarginTop = MarginTopBox.UserValue;
-            State.Pen = penBox1.Pen;
+            State.PenWidth = penBox1.Pen.Width;
+            State.PenColor = penBox1.Pen.Color;
             State.Samples = SamplesBox.UserValue;
             State.InvertLeft = LeftInversion.Checked;
             State.InvertRight = RightInversion.Checked;
@@ -119,7 +132,13 @@ namespace Designer.RahmenCreator
             Graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
             Graphics.FillPolygon(new SolidBrush(Color.FromArgb(0)), pts);
             Graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
-            Graphics.DrawPolygon(State.Pen, pts);
+            Graphics.DrawPolygon(penBox1.Pen, pts);
+
+            if (checkBox1.Checked && !suppressKartenRand)
+            {
+                HintergrundDarstellung.MakeRandBild(State.PPM);
+                Graphics.DrawImage(HintergrundDarstellung.RandBild, 0, 0, HintergrundDarstellung.Size.Width, HintergrundDarstellung.Size.Height);
+            }
 
             this.pictureBox1.Refresh();
         }
@@ -146,8 +165,8 @@ namespace Designer.RahmenCreator
 
             OrientierbarerWeg vieleFragmente = fragment;
             for (int i = 1; i < State.FragmentZahl; i++)
-                vieleFragmente = vieleFragmente 
-                    + (Fragments.IsRandom(State.FragmentStyle) ? GetSingleFragment(Rechts,Invertiert, fragBreite) : fragment);
+                vieleFragmente = vieleFragmente
+                    + (Fragments.IsRandom(State.FragmentStyle) ? GetSingleFragment(Rechts, Invertiert, fragBreite) : fragment);
             return vieleFragmente + startingPoint;
         }
         private OrientierbarerWeg GetWegMitRadius()
@@ -161,7 +180,7 @@ namespace Designer.RahmenCreator
 
             float fragBreite = (box.Height - 2 * State.Radius) / State.FragmentZahl;
             FragmentHeight.Text = "Fragment Höhe: " + fragBreite.ToString("G2");
-           
+
 
             OrientierbarerWeg ow = null;
             if (State.Radius > 0)
@@ -182,74 +201,38 @@ namespace Designer.RahmenCreator
                 ow = MakeFragmente(box, true, State.InvertRight, fragBreite) * MakeFragmente(box, false, State.InvertLeft, fragBreite);
             return ow;
         }
-        //private OrientierbarerWeg GetWegMitRadius()
-        //{
-        //    RectangleF box = new RectangleF(
-        //        State.MarginLeft,
-        //        State.MarginTop,
-        //        HintergrundDarstellung.Size.Width - State.MarginLeft - State.MarginRight,
-        //        HintergrundDarstellung.Size.Height - State.MarginTop - State.MarginBottom);
-        //    box = box.Inner(HintergrundDarstellung.Rand);
 
-        //    float fragBreite = (box.Height - 2 * State.Radius) / State.FragmentZahl;
-        //    FragmentHeight.Text = "Fragment Höhe: " + fragBreite.ToString("G2");
-        //    OrientierbarerWeg fragment = Fragments.GetFragment(State.FragmentStyle, fragBreite, State.FragmentDicke);
-        //    OrientierbarerWeg fragmentInvertiert = fragment.Trim(1, 0).Spiegel(new Gerade(fragBreite / 2, 0, 0, 1));
-        //    fragment = fragment ^ (-Math.PI / 2);
-        //    fragmentInvertiert = fragmentInvertiert ^ (-Math.PI / 2);
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            this.suppressKartenRand = true;
+            Draw(sender, e);
+            State.Name = textBox1.Text.ToFileName();
+            string FilePath = Path.GetTempPath() + "\\" + State.Name + ".png";
+            Bitmap.Save(FilePath);
 
-        //    OrientierbarerWeg fragmenteRechts, fragmenteLinks;
-        //    if (State.InvertRight)
-        //    {
-        //        fragmenteRechts = fragment;
-        //        for (int i = 1; i < State.FragmentZahl; i++)
-        //            fragmenteRechts = fragmenteRechts + fragment;
-        //    }
-        //    else
-        //    {
-        //        fragmenteRechts = fragmentInvertiert;
-        //        for (int i = 1; i < State.FragmentZahl; i++)
-        //            fragmenteRechts = fragmenteRechts + fragmentInvertiert;
-        //    }
+            HintergrundBild bild = new HintergrundBild();
+            bild.Init(Universe);
+            bild.SetFilePath(FilePath);
 
-        //    fragment = (fragment.Trim(1, 0)).Spiegel(new Gerade(fragment.Weg(1), new PointF(0, 1))) - new PointF(0, fragBreite);
-        //    fragmentInvertiert = (fragmentInvertiert.Trim(1, 0)).Spiegel(new Gerade(fragmentInvertiert.Weg(1), new PointF(0, 1))) - new PointF(0, fragBreite);
+            bild.SetAutoSize();
+            bild.Name = bild.Schreibname = Path.GetFileNameWithoutExtension(State.Name);
+            Universe.HintergrundBilder.AddPolymorph(bild);
 
-        //    if (State.InvertLeft)
-        //    {
-        //        fragmenteLinks = fragment;
-        //        for (int i = 1; i < State.FragmentZahl; i++)
-        //            fragmenteLinks = fragmenteLinks + fragment;
-        //    }
-        //    else
-        //    {
-        //        fragmenteLinks = fragmentInvertiert;
-        //        for (int i = 1; i < State.FragmentZahl; i++)
-        //            fragmenteLinks = fragmenteLinks + fragmentInvertiert;
-        //    }
+            string directory= Universe.DirectoryName + "\\CreationData\\MWRahmenCreator\\";
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+            XmlSerializer.Serialize(new FileStream(directory + "\\" + State.Name + ".xml", FileMode.Create), State);
 
-        //    OrientierbarerWeg ow = null;
-        //    if (State.Radius > 0)
-        //    {
-        //        OrientierbarerWeg kreis = OrientierbarerWeg.Kreisbogen(State.Radius, 0, 1);
+            this.suppressKartenRand = false;
 
-        //        ow = kreis.Trim(0.5f, 0.75f) + box.Location + new PointF(State.Radius, State.Radius);
-        //        ow = ow * (kreis.Trim(0.75f, 1) + box.Location + new PointF(box.Width - State.Radius, State.Radius));
+            Bitmap = null;
+            Graphics = null;
+            Draw(sender, e);
+        }
 
-        //        ow = ow + fragmenteRechts;
-
-        //        ow = ow + kreis.Trim(0, 0.25f);
-        //        ow = ow * (kreis.Trim(0.25f, 0.5f) + new PointF(box.Left + State.Radius, box.Bottom - State.Radius));
-
-        //        ow = ow + fragmenteLinks;
-        //    }
-        //    else
-        //    {
-        //        fragmenteRechts = fragmenteRechts + new PointF(box.Right, box.Top);
-        //        fragmenteLinks = fragmenteLinks + new PointF(box.Left, box.Bottom);
-        //        ow = fragmenteRechts * fragmenteLinks;
-        //    }
-        //    return ow;
-        //}
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.SaveButton.Enabled = textBox1.Text.Length > 0;
+        }
     }
 }

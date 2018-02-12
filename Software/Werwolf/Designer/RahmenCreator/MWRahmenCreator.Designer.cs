@@ -38,6 +38,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.FragmentHeight = new System.Windows.Forms.Label();
+            this.RightInversion = new System.Windows.Forms.CheckBox();
+            this.LeftInversion = new System.Windows.Forms.CheckBox();
+            this.SamplesBox = new Assistment.form.IntBox();
+            this.penBox1 = new Assistment.form.PenBox();
             this.enumBox1 = new Assistment.form.EnumBox();
             this.ppmBox1 = new Assistment.form.PpmBox();
             this.FragmentNumberBox = new Assistment.form.IntBox();
@@ -47,12 +53,10 @@
             this.MarginTopBox = new Assistment.form.FloatBox();
             this.MarginRightBox = new Assistment.form.FloatBox();
             this.MarginLeftBox = new Assistment.form.FloatBox();
-            this.penBox1 = new Assistment.form.PenBox();
-            this.SamplesBox = new Assistment.form.IntBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.FragmentHeight = new System.Windows.Forms.Label();
-            this.RightInversion = new System.Windows.Forms.CheckBox();
-            this.LeftInversion = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(817, 57);
+            this.label1.Location = new System.Drawing.Point(863, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 3;
@@ -87,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(817, 79);
+            this.label2.Location = new System.Drawing.Point(863, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 5;
@@ -96,7 +100,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(817, 101);
+            this.label3.Location = new System.Drawing.Point(863, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 7;
@@ -105,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(817, 123);
+            this.label4.Location = new System.Drawing.Point(863, 111);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 9;
@@ -114,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(817, 173);
+            this.label5.Location = new System.Drawing.Point(883, 133);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 11;
@@ -123,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(808, 226);
+            this.label6.Location = new System.Drawing.Point(827, 155);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 13;
@@ -132,7 +136,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(804, 248);
+            this.label7.Location = new System.Drawing.Point(823, 177);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(86, 13);
             this.label7.TabIndex = 14;
@@ -141,16 +145,75 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(807, 296);
+            this.label8.Location = new System.Drawing.Point(826, 225);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 17;
             this.label8.Text = "Fragment Style";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(815, 450);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Anzahl Samples";
+            // 
+            // FragmentHeight
+            // 
+            this.FragmentHeight.AutoSize = true;
+            this.FragmentHeight.Location = new System.Drawing.Point(823, 201);
+            this.FragmentHeight.Name = "FragmentHeight";
+            this.FragmentHeight.Size = new System.Drawing.Size(86, 13);
+            this.FragmentHeight.TabIndex = 22;
+            this.FragmentHeight.Text = "Fragment Höhe: ";
+            // 
+            // RightInversion
+            // 
+            this.RightInversion.AutoSize = true;
+            this.RightInversion.Checked = true;
+            this.RightInversion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.RightInversion.Location = new System.Drawing.Point(837, 265);
+            this.RightInversion.Name = "RightInversion";
+            this.RightInversion.Size = new System.Drawing.Size(119, 17);
+            this.RightInversion.TabIndex = 23;
+            this.RightInversion.Text = "Rechts Invertieren?";
+            this.RightInversion.UseVisualStyleBackColor = true;
+            // 
+            // LeftInversion
+            // 
+            this.LeftInversion.AutoSize = true;
+            this.LeftInversion.Location = new System.Drawing.Point(837, 288);
+            this.LeftInversion.Name = "LeftInversion";
+            this.LeftInversion.Size = new System.Drawing.Size(110, 17);
+            this.LeftInversion.TabIndex = 24;
+            this.LeftInversion.Text = "Links Invertieren?";
+            this.LeftInversion.UseVisualStyleBackColor = true;
+            // 
+            // SamplesBox
+            // 
+            this.SamplesBox.Location = new System.Drawing.Point(907, 450);
+            this.SamplesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SamplesBox.Name = "SamplesBox";
+            this.SamplesBox.Size = new System.Drawing.Size(37, 16);
+            this.SamplesBox.TabIndex = 21;
+            this.SamplesBox.UserValue = 10000;
+            this.SamplesBox.UserValueMaximum = 10000000;
+            this.SamplesBox.UserValueMinimum = 2;
+            // 
+            // penBox1
+            // 
+            this.penBox1.Location = new System.Drawing.Point(797, 310);
+            this.penBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.penBox1.Name = "penBox1";
+            this.penBox1.Size = new System.Drawing.Size(197, 42);
+            this.penBox1.TabIndex = 19;
+            // 
             // enumBox1
             // 
             this.enumBox1.EnumType = null;
-            this.enumBox1.Location = new System.Drawing.Point(810, 311);
+            this.enumBox1.Location = new System.Drawing.Point(829, 240);
             this.enumBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.enumBox1.Name = "enumBox1";
             this.enumBox1.Size = new System.Drawing.Size(154, 20);
@@ -159,10 +222,10 @@
             // 
             // ppmBox1
             // 
-            this.ppmBox1.Location = new System.Drawing.Point(807, 516);
+            this.ppmBox1.Location = new System.Drawing.Point(811, 382);
             this.ppmBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ppmBox1.Name = "ppmBox1";
-            this.ppmBox1.Ppm = 11.81102F;
+            this.ppmBox1.Ppm = 23F;
             this.ppmBox1.PpmMaximum = 1000F;
             this.ppmBox1.PpmMinimum = 0.001F;
             this.ppmBox1.Size = new System.Drawing.Size(133, 36);
@@ -170,7 +233,7 @@
             // 
             // FragmentNumberBox
             // 
-            this.FragmentNumberBox.Location = new System.Drawing.Point(896, 248);
+            this.FragmentNumberBox.Location = new System.Drawing.Point(915, 177);
             this.FragmentNumberBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.FragmentNumberBox.Name = "FragmentNumberBox";
             this.FragmentNumberBox.Size = new System.Drawing.Size(37, 16);
@@ -181,7 +244,7 @@
             // 
             // FragmentDickeBox
             // 
-            this.FragmentDickeBox.Location = new System.Drawing.Point(895, 221);
+            this.FragmentDickeBox.Location = new System.Drawing.Point(914, 150);
             this.FragmentDickeBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.FragmentDickeBox.Name = "FragmentDickeBox";
             this.FragmentDickeBox.Size = new System.Drawing.Size(38, 18);
@@ -192,7 +255,7 @@
             // 
             // RadiusBox
             // 
-            this.RadiusBox.Location = new System.Drawing.Point(895, 168);
+            this.RadiusBox.Location = new System.Drawing.Point(941, 128);
             this.RadiusBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RadiusBox.Name = "RadiusBox";
             this.RadiusBox.Size = new System.Drawing.Size(38, 18);
@@ -203,7 +266,7 @@
             // 
             // MarginBottomBox
             // 
-            this.MarginBottomBox.Location = new System.Drawing.Point(895, 118);
+            this.MarginBottomBox.Location = new System.Drawing.Point(941, 106);
             this.MarginBottomBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MarginBottomBox.Name = "MarginBottomBox";
             this.MarginBottomBox.Size = new System.Drawing.Size(38, 18);
@@ -214,99 +277,85 @@
             // 
             // MarginTopBox
             // 
-            this.MarginTopBox.Location = new System.Drawing.Point(895, 96);
+            this.MarginTopBox.Location = new System.Drawing.Point(941, 84);
             this.MarginTopBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MarginTopBox.Name = "MarginTopBox";
             this.MarginTopBox.Size = new System.Drawing.Size(38, 18);
             this.MarginTopBox.TabIndex = 6;
-            this.MarginTopBox.UserValue = 5F;
+            this.MarginTopBox.UserValue = 10F;
             this.MarginTopBox.UserValueMaximum = 3.402823E+38F;
             this.MarginTopBox.UserValueMinimum = -3.402823E+38F;
             // 
             // MarginRightBox
             // 
-            this.MarginRightBox.Location = new System.Drawing.Point(895, 74);
+            this.MarginRightBox.Location = new System.Drawing.Point(941, 62);
             this.MarginRightBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MarginRightBox.Name = "MarginRightBox";
             this.MarginRightBox.Size = new System.Drawing.Size(38, 18);
             this.MarginRightBox.TabIndex = 4;
-            this.MarginRightBox.UserValue = 5F;
+            this.MarginRightBox.UserValue = 3F;
             this.MarginRightBox.UserValueMaximum = 3.402823E+38F;
             this.MarginRightBox.UserValueMinimum = -3.402823E+38F;
             // 
             // MarginLeftBox
             // 
-            this.MarginLeftBox.Location = new System.Drawing.Point(895, 52);
+            this.MarginLeftBox.Location = new System.Drawing.Point(941, 40);
             this.MarginLeftBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MarginLeftBox.Name = "MarginLeftBox";
             this.MarginLeftBox.Size = new System.Drawing.Size(38, 18);
             this.MarginLeftBox.TabIndex = 2;
-            this.MarginLeftBox.UserValue = 5F;
+            this.MarginLeftBox.UserValue = 3F;
             this.MarginLeftBox.UserValueMaximum = 3.402823E+38F;
             this.MarginLeftBox.UserValueMinimum = -3.402823E+38F;
             // 
-            // penBox1
+            // checkBox1
             // 
-            this.penBox1.Location = new System.Drawing.Point(793, 444);
-            this.penBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.penBox1.Name = "penBox1";
-            this.penBox1.Size = new System.Drawing.Size(197, 42);
-            this.penBox1.TabIndex = 19;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(815, 481);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(145, 17);
+            this.checkBox1.TabIndex = 25;
+            this.checkBox1.Text = "Kartenrahmen Anzeigen?";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // SamplesBox
+            // SaveButton
             // 
-            this.SamplesBox.Location = new System.Drawing.Point(903, 584);
-            this.SamplesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.SamplesBox.Name = "SamplesBox";
-            this.SamplesBox.Size = new System.Drawing.Size(37, 16);
-            this.SamplesBox.TabIndex = 21;
-            this.SamplesBox.UserValue = 1000;
-            this.SamplesBox.UserValueMaximum = 10000000;
-            this.SamplesBox.UserValueMinimum = 2;
+            this.SaveButton.Location = new System.Drawing.Point(797, 583);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(155, 49);
+            this.SaveButton.TabIndex = 26;
+            this.SaveButton.Text = "Speichern";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // label9
+            // textBox1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(811, 584);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 13);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Anzahl Samples";
+            this.textBox1.Location = new System.Drawing.Point(797, 557);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(155, 20);
+            this.textBox1.TabIndex = 27;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // FragmentHeight
+            // label10
             // 
-            this.FragmentHeight.AutoSize = true;
-            this.FragmentHeight.Location = new System.Drawing.Point(804, 272);
-            this.FragmentHeight.Name = "FragmentHeight";
-            this.FragmentHeight.Size = new System.Drawing.Size(86, 13);
-            this.FragmentHeight.TabIndex = 22;
-            this.FragmentHeight.Text = "Fragment Höhe: ";
-            // 
-            // RightInversion
-            // 
-            this.RightInversion.AutoSize = true;
-            this.RightInversion.Location = new System.Drawing.Point(842, 336);
-            this.RightInversion.Name = "RightInversion";
-            this.RightInversion.Size = new System.Drawing.Size(119, 17);
-            this.RightInversion.TabIndex = 23;
-            this.RightInversion.Text = "Rechts Invertieren?";
-            this.RightInversion.UseVisualStyleBackColor = true;
-            // 
-            // LeftInversion
-            // 
-            this.LeftInversion.AutoSize = true;
-            this.LeftInversion.Location = new System.Drawing.Point(842, 359);
-            this.LeftInversion.Name = "LeftInversion";
-            this.LeftInversion.Size = new System.Drawing.Size(110, 17);
-            this.LeftInversion.TabIndex = 24;
-            this.LeftInversion.Text = "Links Invertieren?";
-            this.LeftInversion.UseVisualStyleBackColor = true;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(797, 538);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Name";
             // 
             // MWRahmenCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 644);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.SaveButton);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.LeftInversion);
             this.Controls.Add(this.RightInversion);
             this.Controls.Add(this.FragmentHeight);
@@ -367,5 +416,9 @@
         private System.Windows.Forms.Label FragmentHeight;
         private System.Windows.Forms.CheckBox RightInversion;
         private System.Windows.Forms.CheckBox LeftInversion;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label10;
     }
 }

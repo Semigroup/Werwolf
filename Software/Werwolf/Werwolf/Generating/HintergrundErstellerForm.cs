@@ -61,7 +61,7 @@ namespace Werwolf.Generating
 
         public void Make(object sender, EventArgs e)
         {
-            this.pictureBox1.Image = Draw(true, 1);
+            this.pictureBox1.Image = Draw(true, 5);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace Werwolf.Generating
 
             HintergrundSchema hs = new HintergrundSchema();
             hs.MeineArt = (HintergrundSchema.Art)this.enumBox1.UserValue;
-            hs.Size = GroseBox.UserSize.mul(5).ToSize();
+            hs.Size = GroseBox.UserSize.ToSize(); //.mul(5)
             hs.Schema = new FlachenSchema();
             hs.Schema.BackColor = BackColorBox.Color;
             hs.Schema.Flache = (u, v) => hs.Size.mul(u + burst * d.NextCenterd(), v + burst * d.NextCenterd()).ToPointF();

@@ -30,6 +30,7 @@ namespace Designer.RahmenCreator
         public bool InvertLeft;
         public bool InvertRight;
 
-        public Pen Pen;
+        public Color PenColor;
+        public float PenWidth;
     }
 }

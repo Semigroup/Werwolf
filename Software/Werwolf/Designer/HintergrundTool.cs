@@ -13,12 +13,21 @@ using Werwolf.Inhalt;
 using Assistment.Extensions;
 using Assistment.Texts;
 using Designer.RahmenCreator;
+using Assistment.Drawing;
+using System.Drawing.Imaging;
+using Assistment.Drawing.Style;
+using Assistment.Drawing.Geometries;
+
+using Assistment.Extensions;
+using Assistment.Mathematik;
+using Werwolf.Generating;
 
 namespace Designer
 {
     public class HintergrundTool : Form, ITool
     {
         private Button MWButton;
+        private Button button1;
         private Button FragmentButton;
 
         public string ToolDescription => "Hintergrund-Designer";
@@ -36,6 +45,7 @@ namespace Designer
         {
             this.FragmentButton = new System.Windows.Forms.Button();
             this.MWButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FragmentButton
@@ -58,9 +68,20 @@ namespace Designer
             this.MWButton.UseVisualStyleBackColor = true;
             this.MWButton.Click += new System.EventHandler(this.ModernWolfButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 108);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 33);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Hintergrund Erstellen";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // HintergrundTool
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.MWButton);
             this.Controls.Add(this.FragmentButton);
             this.Name = "HintergrundTool";
@@ -78,6 +99,11 @@ namespace Designer
             MWRahmenCreator mwrc = new MWRahmenCreator();
             mwrc.Init(Universe);
             mwrc.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new HintergrundErstellerForm().Show();
         }
     }
 }
