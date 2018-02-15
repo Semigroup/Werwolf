@@ -31,7 +31,7 @@ namespace Werwolf.Forms
             WerteListe.AddChainedSizeFBox(new SizeF(), "Randgröße in mm");
             WerteListe.AddColorBox(Color.Black, "Randfarbe");
             WerteListe.AddColorBox(Color.White, "Hintergrundfarbe");
-            //WerteListe.AddColorBox(Color.Black, "Textfarbe");
+            WerteListe.AddColorBox(Color.Black, "Textfarbe");
             WerteListe.AddFontBox(new Font("Calibri", 11), "Font");
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -43,7 +43,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Randgröße in mm", element.Rand);
             WerteListe.SetValue("Randfarbe", element.RandFarbe);
             WerteListe.SetValue("Hintergrundfarbe", element.Farbe);
-            //WerteListe.SetValue("Textfarbe", element.TextFarbe);
+            WerteListe.SetValue("Textfarbe", element.TextFarbe);
             WerteListe.SetValue("Font", element.Font);
             UpdatingWerteListe = false;
         }
@@ -55,8 +55,13 @@ namespace Werwolf.Forms
             element.Rand = WerteListe.GetValue<SizeF>("Randgröße in mm");
             element.RandFarbe = WerteListe.GetValue<Color>("Randfarbe");
             element.Farbe = WerteListe.GetValue<Color>("Hintergrundfarbe");
-            //element.TextFarbe = WerteListe.GetValue<Color>("Textfarbe");
+            element.TextFarbe = WerteListe.GetValue<Color>("Textfarbe");
             element.Font = WerteListe.GetValue<Font>("Font");
+        }
+
+        protected override void SetVisibles()
+        {
+            SetVisible(Karte.KartenModus.ModernWolfKarte, "Textfarbe");
         }
     }
 }

@@ -10,6 +10,7 @@ using Assistment.Texts;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten.CyberAktion;
+using Werwolf.Karten.Modern;
 
 namespace Werwolf.Karten
 {
@@ -32,6 +33,11 @@ namespace Werwolf.Karten
         public WonderDoppelName WonderDoppelName { get; set; }
 
         public HochBildTiefBox HochBildTiefBox { get; set; }
+
+        public ModernTitel ModernTitel { get; set; }
+        public ModernRahmen ModernRahmen { get; set; }
+        public ModernInfo ModernInfo { get; set; }
+        public ModernText ModernText { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -58,7 +64,7 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.CyberHackKarte:
                             return new WolfBox[] { HochBildTiefBox };
                         case Karte.KartenModus.ModernWolfKarte:
-                            return new WolfBox[] { HauptBild };
+                            return new WolfBox[] { HauptBild, ModernText, ModernRahmen, ModernTitel, ModernInfo };
                         default:
                             throw new NotImplementedException();
                     }
@@ -93,6 +99,10 @@ namespace Werwolf.Karten
             WondersDoppelBild = new WondersDoppelBild(Karte, ppm);
             WonderDoppelName = new WonderDoppelName(Karte, ppm);
             HochBildTiefBox = new HochBildTiefBox(Karte, ppm);
+            ModernTitel = new ModernTitel(Karte, ppm);
+            ModernRahmen = new ModernRahmen(Karte, ppm);
+            ModernInfo = new ModernInfo(Karte, ppm);
+            ModernText = new ModernText(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -323,12 +333,9 @@ namespace Werwolf.Karten
             if (HintergrundDarstellung.Existiert)
                 con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
 
-                foreach (var item in WolfBoxs)
+            foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.Draw(con);
-
-            if (HintergrundDarstellung.Existiert)
-                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
         }
     }
 }

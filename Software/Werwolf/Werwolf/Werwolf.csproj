@@ -196,6 +196,11 @@
     <Compile Include="Karten\CyberAktion\HochBildTiefBox.cs" />
     <Compile Include="Karten\CyberAktion\LeftRightLine.cs" />
     <Compile Include="Karten\CyberAktion\SimpleAufgabenBox.cs" />
+    <Compile Include="Karten\Modern\ModernRahmen.cs" />
+    <Compile Include="Karten\Modern\ModernInfo.cs" />
+    <Compile Include="Karten\Modern\ModernTitel.cs" />
+    <Compile Include="Karten\Modern\ShadowBox.cs" />
+    <Compile Include="Karten\Modern\ModernText.cs" />
     <Compile Include="Karten\StandardBild.cs" />
     <Compile Include="Karten\WolfHauptBild.cs" />
     <Compile Include="Karten\Wonders\WonderDoppelName.cs" />

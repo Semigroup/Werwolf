@@ -113,6 +113,10 @@ namespace Werwolf.Inhalt
         public SizeF Size { get; set; }
         public Color RuckseitenFarbe { get; set; }
         public PointF Anker { get; set; }
+        public float MarginLeft { get; set; }
+        public float MarginRight { get; set; }
+        public float MarginTop { get; set; }
+        public float MarginBottom { get; set; }
 
         public Image RandBild { get; private set; }
         private Size LastSize = new Size();
@@ -143,6 +147,10 @@ namespace Werwolf.Inhalt
             RundeEcken = Loader.XmlReader.getBoolean("RundeEcken");
             RuckseitenFarbe = Loader.XmlReader.getColorHexARGB("RuckseitenFarbe");
             Anker = Loader.XmlReader.getPointF("Anker");
+            MarginLeft = Loader.XmlReader.getFloat("MarginLeft");
+            MarginRight = Loader.XmlReader.getFloat("MarginRight");
+            MarginTop = Loader.XmlReader.getFloat("MarginTop");
+            MarginBottom = Loader.XmlReader.getFloat("MarginBottom");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -151,6 +159,10 @@ namespace Werwolf.Inhalt
             XmlWriter.writeBoolean("RundeEcken", RundeEcken);
             XmlWriter.writeColorHexARGB("RuckseitenFarbe", RuckseitenFarbe);
             XmlWriter.writePoint("Anker", Anker);
+            XmlWriter.writeFloat("MarginLeft", MarginLeft);
+            XmlWriter.writeFloat("MarginRight", MarginRight);
+            XmlWriter.writeFloat("MarginTop", MarginTop);
+            XmlWriter.writeFloat("MarginBottom", MarginBottom);
         }
 
         public void MakeRandBild(float ppm)
@@ -236,6 +248,10 @@ namespace Werwolf.Inhalt
             hg.LastSize = LastSize;
             hg.RuckseitenFarbe = RuckseitenFarbe;
             hg.Anker = Anker;
+            hg.MarginLeft = MarginLeft;
+            hg.MarginRight = MarginRight;
+            hg.MarginTop = MarginTop;
+            hg.MarginBottom = MarginBottom;
         }
     }
     public class TitelDarstellung : Darstellung

@@ -38,6 +38,12 @@ namespace Werwolf.Forms
             WerteListe.AddBoolBox(false, "Hat Runde Ecken?");
             WerteListe.AddChainedSizeFBox(new SizeF(), "Größe in mm", true, Settings.MaximumKarteSize);
             WerteListe.AddPointFBox(new PointF(), "Anker");
+
+            WerteListe.AddFloatBox(0, "Margin Links");
+            WerteListe.AddFloatBox(0, "Margin Rechts");
+            WerteListe.AddFloatBox(0, "Margin Oben");
+            WerteListe.AddFloatBox(0, "Margin Unten");
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -54,6 +60,12 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Hat Runde Ecken?", element.RundeEcken);
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Anker", element.Anker);
+
+            WerteListe.SetValue("Margin Links", element.MarginLeft);
+            WerteListe.SetValue("Margin Rechts", element.MarginRight);
+            WerteListe.SetValue("Margin Oben", element.MarginTop);
+            WerteListe.SetValue("Margin Unten", element.MarginBottom);
+
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -70,11 +82,17 @@ namespace Werwolf.Forms
             element.RundeEcken = WerteListe.GetValue<bool>("Hat Runde Ecken?");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
             element.Anker = WerteListe.GetValue<PointF>("Anker");
+
+            element.MarginLeft = WerteListe.GetValue<float>("Margin Links");
+            element.MarginRight = WerteListe.GetValue<float>("Margin Rechts");
+            element.MarginTop = WerteListe.GetValue<float>("Margin Oben");
+            element.MarginBottom = WerteListe.GetValue<float>("Margin Unten");
         }
 
         protected override void SetVisibles()
         {
             SetVisible(0, "Hat Runde Ecken?");
+            SetVisible(Karte.KartenModus.ModernWolfKarte, "Margin Links", "Margin Rechts", "Margin Oben", "Margin Unten");
         }
     }
 }
