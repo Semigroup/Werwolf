@@ -66,6 +66,8 @@ namespace Designer.RahmenCreator
             this.LeftInversion.CheckedChanged += Draw;
             this.RightInversion.CheckedChanged += Draw;
             this.checkBox1.CheckedChanged += Draw;
+
+            this.ShiftBox.UserValueChanged += Draw;
         }
         public void Init(Universe Universe)
         {
@@ -110,6 +112,7 @@ namespace Designer.RahmenCreator
             State.Samples = SamplesBox.UserValue;
             State.InvertLeft = LeftInversion.Checked;
             State.InvertRight = RightInversion.Checked;
+            State.Shift = ShiftBox.UserValue;
 
             if (Bitmap == null || Bitmap.Size != State.Size)
             {
@@ -146,6 +149,11 @@ namespace Designer.RahmenCreator
         public OrientierbarerWeg GetSingleFragment(bool Rechts, bool Invertiert, float fragBreite)
         {
             OrientierbarerWeg fragment = Fragments.GetFragment(State.FragmentStyle, fragBreite, State.FragmentDicke);
+            if (0<State.Shift && State.Shift <1)
+            {
+                fragment = fragment.Trim(State.Shift, 1) + fragment.Trim(0, State.Shift);
+                fragment.SetPosition(new PointF(0, fragment.Weg(0).Y));
+            }
             if (Invertiert)
                 fragment = fragment.Trim(1, 0).Spiegel(new Gerade(fragBreite / 2, 0, 0, 1));
             if (Rechts)

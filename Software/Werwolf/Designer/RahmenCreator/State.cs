@@ -29,6 +29,7 @@ namespace Designer.RahmenCreator
         public int Samples;
         public bool InvertLeft;
         public bool InvertRight;
+        public float Shift;
 
         public Color PenColor;
         public float PenWidth;

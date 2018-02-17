@@ -42,6 +42,12 @@
             this.FragmentHeight = new System.Windows.Forms.Label();
             this.RightInversion = new System.Windows.Forms.CheckBox();
             this.LeftInversion = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ShiftBox = new Assistment.form.FloatBox();
             this.SamplesBox = new Assistment.form.IntBox();
             this.penBox1 = new Assistment.form.PenBox();
             this.enumBox1 = new Assistment.form.EnumBox();
@@ -53,10 +59,6 @@
             this.MarginTopBox = new Assistment.form.FloatBox();
             this.MarginRightBox = new Assistment.form.FloatBox();
             this.MarginLeftBox = new Assistment.form.FloatBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.SaveButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +66,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(762, 620);
+            this.pictureBox1.Size = new System.Drawing.Size(762, 669);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -154,7 +156,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(815, 450);
+            this.label9.Location = new System.Drawing.Point(838, 497);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(82, 13);
             this.label9.TabIndex = 20;
@@ -174,7 +176,7 @@
             this.RightInversion.AutoSize = true;
             this.RightInversion.Checked = true;
             this.RightInversion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RightInversion.Location = new System.Drawing.Point(837, 265);
+            this.RightInversion.Location = new System.Drawing.Point(860, 312);
             this.RightInversion.Name = "RightInversion";
             this.RightInversion.Size = new System.Drawing.Size(119, 17);
             this.RightInversion.TabIndex = 23;
@@ -184,16 +186,75 @@
             // LeftInversion
             // 
             this.LeftInversion.AutoSize = true;
-            this.LeftInversion.Location = new System.Drawing.Point(837, 288);
+            this.LeftInversion.Location = new System.Drawing.Point(860, 335);
             this.LeftInversion.Name = "LeftInversion";
             this.LeftInversion.Size = new System.Drawing.Size(110, 17);
             this.LeftInversion.TabIndex = 24;
             this.LeftInversion.Text = "Links Invertieren?";
             this.LeftInversion.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(838, 528);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(131, 17);
+            this.checkBox1.TabIndex = 25;
+            this.checkBox1.Text = "Kartenrand Anzeigen?";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(820, 630);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(155, 49);
+            this.SaveButton.TabIndex = 26;
+            this.SaveButton.Text = "Speichern";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(820, 604);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(155, 20);
+            this.textBox1.TabIndex = 27;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(820, 585);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Name";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(827, 269);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 13);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Fragment Shift";
+            // 
+            // ShiftBox
+            // 
+            this.ShiftBox.Location = new System.Drawing.Point(914, 264);
+            this.ShiftBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ShiftBox.Name = "ShiftBox";
+            this.ShiftBox.Size = new System.Drawing.Size(38, 18);
+            this.ShiftBox.TabIndex = 29;
+            this.ShiftBox.UserValue = 0F;
+            this.ShiftBox.UserValueMaximum = 1F;
+            this.ShiftBox.UserValueMinimum = 0F;
+            // 
             // SamplesBox
             // 
-            this.SamplesBox.Location = new System.Drawing.Point(907, 450);
+            this.SamplesBox.Location = new System.Drawing.Point(930, 497);
             this.SamplesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SamplesBox.Name = "SamplesBox";
             this.SamplesBox.Size = new System.Drawing.Size(37, 16);
@@ -204,7 +265,7 @@
             // 
             // penBox1
             // 
-            this.penBox1.Location = new System.Drawing.Point(797, 310);
+            this.penBox1.Location = new System.Drawing.Point(820, 357);
             this.penBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.penBox1.Name = "penBox1";
             this.penBox1.Size = new System.Drawing.Size(197, 42);
@@ -222,7 +283,7 @@
             // 
             // ppmBox1
             // 
-            this.ppmBox1.Location = new System.Drawing.Point(811, 382);
+            this.ppmBox1.Location = new System.Drawing.Point(834, 429);
             this.ppmBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ppmBox1.Name = "ppmBox1";
             this.ppmBox1.Ppm = 23F;
@@ -308,50 +369,13 @@
             this.MarginLeftBox.UserValueMaximum = 3.402823E+38F;
             this.MarginLeftBox.UserValueMinimum = -3.402823E+38F;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(815, 481);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(145, 17);
-            this.checkBox1.TabIndex = 25;
-            this.checkBox1.Text = "Kartenrahmen Anzeigen?";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // SaveButton
-            // 
-            this.SaveButton.Location = new System.Drawing.Point(797, 583);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(155, 49);
-            this.SaveButton.TabIndex = 26;
-            this.SaveButton.Text = "Speichern";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(797, 557);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(155, 20);
-            this.textBox1.TabIndex = 27;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(797, 538);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(35, 13);
-            this.label10.TabIndex = 28;
-            this.label10.Text = "Name";
-            // 
             // MWRahmenCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 644);
+            this.ClientSize = new System.Drawing.Size(1060, 693);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.ShiftBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.SaveButton);
@@ -420,5 +444,7 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private Assistment.form.FloatBox ShiftBox;
     }
 }

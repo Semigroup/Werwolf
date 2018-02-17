@@ -323,7 +323,7 @@ namespace Werwolf.Inhalt
 
         public int CompareTo(Karte other)
         {
-            return this.Gesinnung.Name.CompareTo(other.Gesinnung.Name) * 10000
+            return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10000
                 //+this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10000000
                 + this.Name.CompareTo(other.Name);
         }
