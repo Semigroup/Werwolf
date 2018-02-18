@@ -117,7 +117,7 @@ namespace Werwolf.Karten
             float off = Text.Top - MovedAussenBox.Top;
             MovedAussenBox.Height -= off;
             MovedAussenBox.Y += off;
-            con.fillRectangle(TextDarstellung.Farbe.ToBrush(), MovedAussenBox);
+            con.FillRectangle(TextDarstellung.Farbe.ToBrush(), MovedAussenBox);
             FixedBox.Draw(con);
             if (Spieleranzahl != null)
                 Spieleranzahl.Draw(con);

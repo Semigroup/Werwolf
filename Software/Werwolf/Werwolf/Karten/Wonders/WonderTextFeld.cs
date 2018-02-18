@@ -133,7 +133,7 @@ namespace Werwolf.Karten
                 DrawBoxChanged = false;
                 Bearbeite();
             }
-            con.drawImage(BearbeitetesBild, Box);
+            con.DrawImage(BearbeitetesBild, Box);
         }
         public virtual void Bearbeite()
         {

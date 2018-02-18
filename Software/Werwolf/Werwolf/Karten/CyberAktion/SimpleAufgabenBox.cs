@@ -79,7 +79,7 @@ namespace Werwolf.Karten.CyberAktion
         public override void Draw(DrawContext con)
         {
             base.Draw(con);
-            con.drawImage(backGroundImage, Box);
+            con.DrawImage(backGroundImage, Box);
             foreach (var item in boxs)
                 item.Draw(con);
         }

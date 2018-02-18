@@ -112,7 +112,7 @@ namespace Werwolf.Karten
                 StandardKarte sk = (item as GeometryBox).DrawBox as StandardKarte;
                 Bitmap b = sk.Karte.GetImage(ppm, true);
                 b.Filter(HintergrundDarstellung.Farbe, HintergrundDarstellung.Farbe.A / 255f);
-                con.drawImage(b, sk.Box);
+                con.DrawImage(b, sk.Box);
                 sk.drawRand(con);
             }
             Text.Draw(con);

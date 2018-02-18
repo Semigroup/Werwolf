@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 using Werwolf.Inhalt;
 using Assistment.Texts;
@@ -15,12 +16,14 @@ namespace Werwolf.Karten
         public TextBild TextBild { get; private set; }
         private Size ImageSize;
         private xFont Font;
+        public ImageAttributes ImageAttributes { get; set; }
 
         public WolfTextBild(TextBild TextBild, xFont Font)
             : base(null, 1)
         {
             this.TextBild = TextBild;
-            this.Font = Font.getFont().GetMeasurer();
+            this.ImageAttributes = new ImageAttributes();
+            this.Font = Font.GetFont().GetMeasurer();
             this.Update();
         }
 
@@ -36,7 +39,7 @@ namespace Werwolf.Karten
         public override void Update()
         {
             ImageSize = TextBild.GetImageSize();
-            this.Box.Height = Font.yMass('_');
+            this.Box.Height = Font.YMass('_');
             this.Box.Width = ImageSize.Width * Box.Height / ImageSize.Height;
         }
         public override void Setup(RectangleF box)
@@ -48,7 +51,12 @@ namespace Werwolf.Karten
             Image img = TextBild.Image;
             if (img == null)
                 return;
-            con.drawImage(img, Box);
+            con.DrawImage(img, Box, ImageAttributes);
+        }
+
+        public override DrawBox Clone()
+        {
+            return new WolfTextBild(TextBild, Font);
         }
     }
 }

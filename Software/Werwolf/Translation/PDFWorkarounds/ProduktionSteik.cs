@@ -38,8 +38,8 @@ namespace Translation.PDFWorkarounds
             for (int i = 0; i < points.Length; i++)
             {
                 PointF p = points[i];
-                con.drawLine(pen, p.X - radius, p.Y, p.X + radius, p.Y);
-                con.drawLine(pen, p.X, p.Y - radius, p.X, p.Y +radius);
+                con.DrawLine(pen, p.X - radius, p.Y, p.X + radius, p.Y);
+                con.DrawLine(pen, p.X, p.Y - radius, p.X, p.Y +radius);
             }
         }
 

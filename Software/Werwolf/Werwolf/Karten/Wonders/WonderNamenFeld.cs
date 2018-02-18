@@ -41,10 +41,10 @@ namespace Werwolf.Karten
                 DrawBox = null;
                 return;
             }
-            else if (!Karte.Name.Equals(LastName) || !FontToUse.getFont().Equals(LastFont))
+            else if (!Karte.Name.Equals(LastName) || !FontToUse.GetFont().Equals(LastFont))
             {
                 this.LastName = Karte.Name;
-                this.LastFont = FontToUse.getFont();
+                this.LastFont = FontToUse.GetFont();
                 UpdateDrawBox();
             }
         }

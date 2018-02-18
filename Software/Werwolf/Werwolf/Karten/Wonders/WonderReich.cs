@@ -138,7 +138,7 @@ namespace Werwolf.Karten
                 //    r.X = Math.Min(r.X, Stufen[i + 1].Left - r.Width);
 
                 using (Image img = tb.Image)
-                    con.drawImage(img, r);
+                    con.DrawImage(img, r);
             }
 
             Text.Draw(con);

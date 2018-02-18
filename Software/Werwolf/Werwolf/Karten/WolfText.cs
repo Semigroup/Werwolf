@@ -185,7 +185,7 @@ namespace Werwolf.Karten
         {
             //base.draw(con);
 
-            con.drawImage(Back, OuterBox.move(Box.Location));
+            con.DrawImage(Back, OuterBox.move(Box.Location));
             foreach (var item in Texts)
                 item.Draw(con);
         }

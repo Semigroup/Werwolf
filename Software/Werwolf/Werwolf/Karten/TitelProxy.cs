@@ -65,7 +65,7 @@ namespace Werwolf.Karten
         public override void Draw(DrawContext con)
         {
             DrawImage();
-            con.drawImage(Image, Box);
+            con.DrawImage(Image, Box);
             Inhalt.Draw(con);
         }
 

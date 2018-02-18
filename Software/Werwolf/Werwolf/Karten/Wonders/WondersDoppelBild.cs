@@ -95,7 +95,7 @@ namespace Werwolf.Karten
             if (NeuZeichnen && Bild != null)
             {
                 ErstelleBild();
-                con.drawImage(Bild, MovedInnenBox);
+                con.DrawImage(Bild, MovedInnenBox);
             }
         }
         private void ErstelleBild()

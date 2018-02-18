@@ -154,16 +154,16 @@ namespace Werwolf.Printing
                     y1 = Math.Max(top, y1);
                     float y2 = item.Box.Bottom + 10 * Faktor;
                     y2 = Math.Min(bottom, y2);
-                    con.drawLine(LinePen, new PointF(x1, top), new PointF(x1, bottom));
-                    con.drawLine(LinePen, new PointF(x2, top), new PointF(x2, bottom));
-                    con.drawLine(LinePen, new PointF(left, y1), new PointF(right, y1));
-                    con.drawLine(LinePen, new PointF(left, y2), new PointF(right, y2));
+                    con.DrawLine(LinePen, new PointF(x1, top), new PointF(x1, bottom));
+                    con.DrawLine(LinePen, new PointF(x2, top), new PointF(x2, bottom));
+                    con.DrawLine(LinePen, new PointF(left, y1), new PointF(right, y1));
+                    con.DrawLine(LinePen, new PointF(left, y2), new PointF(right, y2));
                 }
             foreach (var item in ToPrint)
                 item.Draw(con);
             if (linie)
                 foreach (var item in ToPrint)
-                    con.drawRectangle(LinePen, item.Box);
+                    con.DrawRectangle(LinePen, item.Box);
         }
 
         /// <summary>

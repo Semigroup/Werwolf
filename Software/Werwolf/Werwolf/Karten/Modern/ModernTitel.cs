@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Assistment.Texts;
 using Werwolf.Inhalt;
 using Assistment.Drawing.LinearAlgebra;
+using Assistment.Extensions;
 
 namespace Werwolf.Karten.Modern
 {
@@ -50,14 +51,11 @@ namespace Werwolf.Karten.Modern
             text.Alignment = 0.5f;
             FixedBox fixedBox = new FixedBox(size, text);
             fixedBox.Alignment = new SizeF(0f, 0.5f);
-            ShadowBox = new ShadowBox(fixedBox, 
+            ShadowBox = new ShadowBox(fixedBox,
                 TitelDarstellung.TextFarbe.ToBrush(), 
                 TitelDarstellung.Farbe.ToBrush(), 
                 TitelDarstellung.Rand.mul(Faktor).ToPointF());
         }
-        public override void Draw(DrawContext con)
-        {
-            ShadowBox.Draw(con);
-        }
+        public override void Draw(DrawContext con) => ShadowBox.Draw(con);
     }
 }

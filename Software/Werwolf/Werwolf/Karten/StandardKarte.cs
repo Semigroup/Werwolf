@@ -213,7 +213,7 @@ namespace Werwolf.Karten
 
             if (HintergrundDarstellung.Existiert)
             {
-                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
 
@@ -240,7 +240,7 @@ namespace Werwolf.Karten
 
             if (HintergrundDarstellung.Existiert)
             {
-                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
 
@@ -259,7 +259,7 @@ namespace Werwolf.Karten
             if (HauptBild.Visible())
                 HauptBild.Setup(HauptBild.Box);
 
-            con.fillRectangle(Karte.TitelDarstellung.Farbe.ToBrush(), MovedInnenBox);
+            con.FillRectangle(Karte.TitelDarstellung.Farbe.ToBrush(), MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())
@@ -276,7 +276,7 @@ namespace Werwolf.Karten
             if (HauptBild.Visible())
                 HauptBild.Setup(HauptBild.Box);
 
-            con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);
+            con.FillRectangle(Color.White.ToBrush(), MovedInnenBox);
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.Draw(con);
@@ -287,7 +287,7 @@ namespace Werwolf.Karten
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
             PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
-            con.fillRectangle(Color.White.ToBrush(), MovedInnenBox);
+            con.FillRectangle(Color.White.ToBrush(), MovedInnenBox);
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.Draw(con);
@@ -298,7 +298,7 @@ namespace Werwolf.Karten
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
             {
                 HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+                con.DrawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
         }
         public void drawCyberAction(DrawContext con)
@@ -309,7 +309,7 @@ namespace Werwolf.Karten
 
             if (HintergrundDarstellung.Existiert)
             {
-                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
                 con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
             }
 
@@ -331,7 +331,7 @@ namespace Werwolf.Karten
             HauptBild.Setup(HauptBild.Box);
 
             if (HintergrundDarstellung.Existiert)
-                con.fillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())

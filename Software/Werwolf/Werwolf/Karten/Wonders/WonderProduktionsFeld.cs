@@ -52,9 +52,9 @@ namespace Werwolf.Karten
 
         public override void Draw(DrawContext con)
         {
-            con.fillRectangle(Karte.HintergrundDarstellung.Farbe.ToBrush(), Box);
+            con.FillRectangle(Karte.HintergrundDarstellung.Farbe.ToBrush(), Box);
             using (Image Image = Karte.Fraktion.HintergrundBild.Image)
-                con.drawImage(Image, Box);
+                con.DrawImage(Image, Box);
             Produktion.Draw(con);
         }
     }

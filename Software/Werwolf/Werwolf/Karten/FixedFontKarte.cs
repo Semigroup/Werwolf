@@ -44,14 +44,14 @@ namespace Werwolf.Karten
                 {
                     if (Rotieren)
                         image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    con.drawImage(image, Box);
+                    con.DrawImage(image, Box);
                 }
             else
                 using (Image image = Karte.GetImage(Ppm, true))
                 {
                     if (Rotieren)
                         image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    con.drawImage(image, Box);
+                    con.DrawImage(image, Box);
                 }
         }
         public override void Move(PointF ToMove)

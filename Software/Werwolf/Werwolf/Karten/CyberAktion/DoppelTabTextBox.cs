@@ -44,10 +44,10 @@ namespace Werwolf.Karten.CyberAktion
         public override void Draw(DrawContext con)
         {
             base.Draw(con);
-            con.fillRectangle(Darstellung.Farbe.ToBrush(), Box);
+            con.FillRectangle(Darstellung.Farbe.ToBrush(), Box);
             foreach (var item in Lines)
                 item.Draw(con);
-            con.drawRectangle(Darstellung.RandFarbe.ToPen(Darstellung.Rand.Width), Box);
+            con.DrawRectangle(Darstellung.RandFarbe.ToPen(Darstellung.Rand.Width), Box);
         }
         public override void Move(PointF ToMove)
         {

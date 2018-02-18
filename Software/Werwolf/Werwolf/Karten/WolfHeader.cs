@@ -37,7 +37,7 @@ namespace Werwolf.Karten
         public void Build()
         {
             xFont font = Karte.TitelDarstellung.FontMeasurer;
-            float h = font.getZeilenabstand();
+            float h = font.GetZeilenabstand();
 
             Links = new Text(Karte.Fraktion.Schreibname + "\n" + Karte.Schreibname, font);
             Rechts = new Text("", font);
@@ -96,7 +96,7 @@ namespace Werwolf.Karten
         }
         public override void Draw(DrawContext con)
         {
-            con.fillRectangle(TitelDarstellung.Farbe.ToBrush(), Box);
+            con.FillRectangle(TitelDarstellung.Farbe.ToBrush(), Box);
             Kompositum.Draw(con);
         }
 

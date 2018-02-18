@@ -55,7 +55,7 @@ namespace Werwolf.Inhalt
                 else if (Fehler)
                 {
                     Image Image = Settings.NotFoundImage;
-                    float height = Container.PreferedFont.yMass('_');
+                    float height = Container.PreferedFont.YMass('_');
                     Container.AddImage(Image, Image.Size.Width * height / Image.Size.Height, height);
                 }
                 else

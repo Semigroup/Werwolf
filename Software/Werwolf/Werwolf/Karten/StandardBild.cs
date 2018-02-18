@@ -47,9 +47,9 @@ namespace Werwolf.Karten
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
             {
                 HintergrundDarstellung.MakeRandBild(ppm);
-                con.drawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
+                con.DrawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
-            con.fillRectangle(HintergrundDarstellung.RuckseitenFarbe.ToBrush(), MovedInnenBox);
+            con.FillRectangle(HintergrundDarstellung.RuckseitenFarbe.ToBrush(), MovedInnenBox);
 
             if (bild != null && Bild.Image != null)
                 con.DrawCenteredImage(Bild, MovedAussenBoxCenter, MovedInnenBox);

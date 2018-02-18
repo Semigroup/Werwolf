@@ -33,22 +33,22 @@ namespace Werwolf.Karten.CyberAktion
         public DrawBox GetZielBox()
         {
             DrawBox inter = GetZielSicherheiten();
-            xFont small = Font.getFontOfSize(8);
-            FixedBox fBox = new FixedBox(new SizeF(InnenBox.Width, small.getZeilenabstand()*1.25f),true, true, inter);
+            xFont small = Font.GetFontOfSize(8);
+            FixedBox fBox = new FixedBox(new SizeF(InnenBox.Width, small.GetZeilenabstand()*1.25f),true, true, inter);
             fBox.Alignment = new SizeF(0.5f, 0.5f);
             return fBox.Colorize(Brushes.White);//new Pen(Color.Black,ppm/5),.Geometry(InnenRadius.mul(Faktor)).Colorize(Darstellung.RandFarbe.ToPen(Darstellung.Rand.Width),Darstellung.Farbe.ToBrush());
         }
 
         private Text GetZielSicherheiten()
         {
-            xFont small = Font.getFontOfSize(8);
+            xFont small = Font.GetFontOfSize(8);
             Text text = new Text("", small);
             //text.add(new WolfTextBild(Layout.ZielSicherheitenSchutze, Font));
             string pure = Karte.ZielSicherheiten.Replace(" ", "");
             for (int i = 0; i < pure.Length; i++)
             {
                 if (i % 4 == 0 && i > 0)
-                    text.AddWhitespace(Font.getWhitespace() * 1);
+                    text.AddWhitespace(Font.GetWhitespace() * 1);
                 text.Add(GetZielSicherheit(pure[i], small));
             }
             return text;
@@ -65,7 +65,7 @@ namespace Werwolf.Karten.CyberAktion
             else if (a == '-')
                 tb = Layout.ZielSicherheiten[8];
             else
-                return new ImageBox(Font.yMass('_') * Settings.NotFoundImage.Width / Settings.NotFoundImage.Height, Settings.NotFoundImage);
+                return new ImageBox(Font.YMass('_') * Settings.NotFoundImage.Width / Settings.NotFoundImage.Height, Settings.NotFoundImage);
 
             return new WolfTextBild(tb, Font);
         }
