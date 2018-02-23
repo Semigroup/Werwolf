@@ -94,36 +94,36 @@ namespace Werwolf.Printing
             base.ReadIntern(Loader);
 
             this.Deck = Loader.GetDeck();
-            this.HintergrundFarbe = Loader.XmlReader.getColorHexARGB("HintergrundFarbe");
-            this.TrennlinienFarbe = Loader.XmlReader.getColorHexARGB("TrennlinienFarbe");
-            this.Ppm = Loader.XmlReader.getFloat("Ppm");
-            this.Zwischenplatz = Loader.XmlReader.getBoolean("Zwischenplatz");
-            this.MyMode = Loader.XmlReader.getEnum<RuckBildMode>("MyMode");
-            this.FixedFont = Loader.XmlReader.getBoolean("FixedFont");
-            this.TrennlinieVorne = Loader.XmlReader.getBoolean("TrennlinieVorne");
-            this.TrennlinieHinten = Loader.XmlReader.getBoolean("TrennlinieHinten");
-            this.MaximaleGrose = Loader.XmlReader.getFloat("MaximaleGrose");
-            this.MachBilder = Loader.XmlReader.getBoolean("MachBilder");
-            this.Rotieren = Loader.XmlReader.getBoolean("Rotieren");
-            this.KonsolenAnzeigen = Loader.XmlReader.getBoolean("KonsolenAnzeigen");
+            this.HintergrundFarbe = Loader.XmlReader.GetColorHexARGB("HintergrundFarbe");
+            this.TrennlinienFarbe = Loader.XmlReader.GetColorHexARGB("TrennlinienFarbe");
+            this.Ppm = Loader.XmlReader.GetFloat("Ppm");
+            this.Zwischenplatz = Loader.XmlReader.GetBoolean("Zwischenplatz");
+            this.MyMode = Loader.XmlReader.GetEnum<RuckBildMode>("MyMode");
+            this.FixedFont = Loader.XmlReader.GetBoolean("FixedFont");
+            this.TrennlinieVorne = Loader.XmlReader.GetBoolean("TrennlinieVorne");
+            this.TrennlinieHinten = Loader.XmlReader.GetBoolean("TrennlinieHinten");
+            this.MaximaleGrose = Loader.XmlReader.GetFloat("MaximaleGrose");
+            this.MachBilder = Loader.XmlReader.GetBoolean("MachBilder");
+            this.Rotieren = Loader.XmlReader.GetBoolean("Rotieren");
+            this.KonsolenAnzeigen = Loader.XmlReader.GetBoolean("KonsolenAnzeigen");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
 
-            XmlWriter.writeAttribute("Deck", Deck.Name);
-            XmlWriter.writeColorHexARGB("HintergrundFarbe", HintergrundFarbe);
-            XmlWriter.writeColorHexARGB("TrennlinienFarbe", TrennlinienFarbe);
-            XmlWriter.writeFloat("Ppm", Ppm);
-            XmlWriter.writeBoolean("Zwischenplatz", Zwischenplatz);
-            XmlWriter.writeBoolean("FixedFont", FixedFont);
-            XmlWriter.writeEnum<RuckBildMode>("MyMode", MyMode);
-            XmlWriter.writeBoolean("TrennlinieVorne", TrennlinieVorne);
-            XmlWriter.writeBoolean("TrennlinieHinten", TrennlinieHinten);
-            XmlWriter.writeFloat("MaximaleGrose", MaximaleGrose);
-            XmlWriter.writeBoolean("MachBilder", MachBilder);
-            XmlWriter.writeBoolean("Rotieren", Rotieren);
-            XmlWriter.writeBoolean("KonsolenAnzeigen", KonsolenAnzeigen);
+            XmlWriter.WriteAttribute("Deck", Deck.Name);
+            XmlWriter.WriteColorHexARGB("HintergrundFarbe", HintergrundFarbe);
+            XmlWriter.WriteColorHexARGB("TrennlinienFarbe", TrennlinienFarbe);
+            XmlWriter.WriteFloat("Ppm", Ppm);
+            XmlWriter.WriteBoolean("Zwischenplatz", Zwischenplatz);
+            XmlWriter.WriteBoolean("FixedFont", FixedFont);
+            XmlWriter.WriteEnum<RuckBildMode>("MyMode", MyMode);
+            XmlWriter.WriteBoolean("TrennlinieVorne", TrennlinieVorne);
+            XmlWriter.WriteBoolean("TrennlinieHinten", TrennlinieHinten);
+            XmlWriter.WriteFloat("MaximaleGrose", MaximaleGrose);
+            XmlWriter.WriteBoolean("MachBilder", MachBilder);
+            XmlWriter.WriteBoolean("Rotieren", Rotieren);
+            XmlWriter.WriteBoolean("KonsolenAnzeigen", KonsolenAnzeigen);
         }
 
         public override void AdaptToCard(Karte Karte)

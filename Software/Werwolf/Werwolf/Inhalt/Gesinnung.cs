@@ -35,7 +35,7 @@ namespace Werwolf.Inhalt
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
-            XmlWriter.writeAttribute("Aufgabe", Aufgabe.ToString());
+            XmlWriter.WriteAttribute("Aufgabe", Aufgabe.ToString());
         }
 
         public override object Clone()

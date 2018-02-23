@@ -44,6 +44,8 @@ namespace Werwolf.Forms
             WerteListe.AddFloatBox(0, "Margin Oben");
             WerteListe.AddFloatBox(0, "Margin Unten");
 
+            WerteListe.AddBoolBox(false, "Bild ist quer?");
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -66,6 +68,8 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Margin Oben", element.MarginTop);
             WerteListe.SetValue("Margin Unten", element.MarginBottom);
 
+            WerteListe.SetValue("Bild ist quer?", element.Quer);
+
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -87,12 +91,16 @@ namespace Werwolf.Forms
             element.MarginRight = WerteListe.GetValue<float>("Margin Rechts");
             element.MarginTop = WerteListe.GetValue<float>("Margin Oben");
             element.MarginBottom = WerteListe.GetValue<float>("Margin Unten");
+
+            element.Quer = WerteListe.GetValue<bool>("Bild ist quer?");
         }
 
         protected override void SetVisibles()
         {
             SetVisible(0, "Hat Runde Ecken?");
             SetVisible(Karte.KartenModus.ModernWolfKarte, "Margin Links", "Margin Rechts", "Margin Oben", "Margin Unten");
+            SetVisible(Karte.KartenModus.ModernWolfKarte, "Bild ist quer?");
+
         }
     }
 }

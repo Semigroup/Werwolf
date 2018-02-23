@@ -30,6 +30,7 @@ namespace Werwolf.Inhalt
         public Aufgabe StandardAufgaben { get;  set; }
         public Titel.Art TitelArt { get;  set; }
         public HintergrundBild HintergrundBild { get; set; }
+        public HintergrundBild HintergrundBildQuer { get; set; }
         public RuckseitenBild RuckseitenBild { get; set; }
         public TextBild Symbol { get; set; }
         public RuckseitenArt RuckArt { get; set; }
@@ -45,6 +46,7 @@ namespace Werwolf.Inhalt
             this.StandardAufgaben = new Aufgabe();
             this.TitelArt = Titel.Art.Rund;
             this.HintergrundBild = Universe.HintergrundBilder.Standard;
+            this.HintergrundBildQuer = Universe.HintergrundBilder.Standard;
             this.RuckseitenBild = Universe.RuckseitenBilder.Standard;
             this.Symbol = Universe.TextBilder.Standard;
             this.RuckArt = RuckseitenArt.Normal;
@@ -54,22 +56,24 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
 
             StandardAufgaben = Loader.GetAufgabe("StandardAufgaben");
-            TitelArt = Loader.XmlReader.getEnum<Titel.Art>("TitelArt");
+            TitelArt = Loader.XmlReader.GetEnum<Titel.Art>("TitelArt");
             HintergrundBild = Loader.GetHintergrundBild();
+            HintergrundBildQuer = Loader.GetHintergrundBildQuer();
             RuckseitenBild = Loader.GetRuckseitenBild();
             Symbol = Loader.GetTextBild();
-            RuckArt = Loader.XmlReader.getEnum<RuckseitenArt>("RuckArt");
+            RuckArt = Loader.XmlReader.GetEnum<RuckseitenArt>("RuckArt");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
 
-            XmlWriter.writeAttribute("StandardAufgaben", StandardAufgaben.ToString());
-            XmlWriter.writeEnum<Titel.Art>("TitelArt", TitelArt);
-            XmlWriter.writeAttribute("HintergrundBild", HintergrundBild.Name);
-            XmlWriter.writeAttribute("RuckseitenBild", RuckseitenBild.Name);
-            XmlWriter.writeAttribute("TextBild", Symbol.Name);
-            XmlWriter.writeEnum<RuckseitenArt>("RuckArt", RuckArt);
+            XmlWriter.WriteAttribute("StandardAufgaben", StandardAufgaben.ToString());
+            XmlWriter.WriteEnum<Titel.Art>("TitelArt", TitelArt);
+            XmlWriter.WriteAttribute("HintergrundBild", HintergrundBild.Name);
+            XmlWriter.WriteAttribute("HintergrundBildQuer", HintergrundBildQuer.Name);
+            XmlWriter.WriteAttribute("RuckseitenBild", RuckseitenBild.Name);
+            XmlWriter.WriteAttribute("TextBild", Symbol.Name);
+            XmlWriter.WriteEnum<RuckseitenArt>("RuckArt", RuckArt);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -92,6 +96,7 @@ namespace Werwolf.Inhalt
             f.RuckseitenBild = RuckseitenBild;
             f.Symbol = Symbol;
             f.RuckArt = RuckArt;
+            f.HintergrundBildQuer = HintergrundBildQuer;
         }
 
         public int CompareTo(Fraktion other)
@@ -102,6 +107,7 @@ namespace Werwolf.Inhalt
         public override void Rescue()
         {
             Universe.HintergrundBilder.Rescue(HintergrundBild);
+            Universe.HintergrundBilder.Rescue(HintergrundBildQuer);
             Universe.RuckseitenBilder.Rescue(RuckseitenBild);
             Universe.TextBilder.Rescue(Symbol);
             StandardAufgaben.Rescue();

@@ -178,15 +178,21 @@
     </Compile>
     <Compile Include="Inhalt\Aufgabe.cs" />
     <Compile Include="Inhalt\Bild.cs" />
+    <Compile Include="Inhalt\BildDarstellung.cs" />
     <Compile Include="Inhalt\Darstellung.cs" />
     <Compile Include="Inhalt\Data\Konflikt.cs" />
     <Compile Include="Inhalt\Deck.cs" />
     <Compile Include="Inhalt\ElementMenge.cs" />
     <Compile Include="Inhalt\Fraktion.cs" />
     <Compile Include="Inhalt\Gesinnung.cs" />
+    <Compile Include="Inhalt\HintergrundDarstellung.cs" />
+    <Compile Include="Inhalt\InfoDarstellung.cs" />
+    <Compile Include="Inhalt\LayoutDarstellung.cs" />
     <Compile Include="Inhalt\Loader.cs" />
     <Compile Include="Inhalt\Karte.cs" />
     <Compile Include="Inhalt\Settings.cs" />
+    <Compile Include="Inhalt\TextDarstellung.cs" />
+    <Compile Include="Inhalt\TitelDarstellung.cs" />
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
     <Compile Include="Forms\ITool.cs" />
@@ -198,6 +204,7 @@
     <Compile Include="Karten\CyberAktion\SimpleAufgabenBox.cs" />
     <Compile Include="Karten\Modern\ModernRahmen.cs" />
     <Compile Include="Karten\Modern\ModernInfo.cs" />
+    <Compile Include="Karten\Modern\ModernTextQuer.cs" />
     <Compile Include="Karten\Modern\ModernTitel.cs" />
     <Compile Include="Karten\Modern\ShadowBox.cs" />
     <Compile Include="Karten\Modern\ModernText.cs" />

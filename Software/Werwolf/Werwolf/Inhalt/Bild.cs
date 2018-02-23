@@ -128,20 +128,20 @@ namespace Werwolf.Inhalt
         {
             base.ReadIntern(Loader);
 
-            this.FilePath = Loader.XmlReader.getString("FilePath");
-            this.Identifier = Loader.XmlReader.getString("Identifier");
-            this.Artist = Loader.XmlReader.getString("Artist");
-            this.Zentrum = Loader.XmlReader.getPointF("Zentrum");
-            this.Size = Loader.XmlReader.getSizeF("Size");
+            this.FilePath = Loader.XmlReader.GetString("FilePath");
+            this.Identifier = Loader.XmlReader.GetString("Identifier");
+            this.Artist = Loader.XmlReader.GetString("Artist");
+            this.Zentrum = Loader.XmlReader.GetPointF("Zentrum");
+            this.Size = Loader.XmlReader.GetSizeF("Size");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
-            XmlWriter.writeAttribute("Identifier", Identifier);
-            XmlWriter.writeAttribute("FilePath", FilePath);
-            XmlWriter.writeAttribute("Artist", Artist);
-            XmlWriter.writeSize("Size", Size);
-            XmlWriter.writePoint("Zentrum", Zentrum);
+            XmlWriter.WriteAttribute("Identifier", Identifier);
+            XmlWriter.WriteAttribute("FilePath", FilePath);
+            XmlWriter.WriteAttribute("Artist", Artist);
+            XmlWriter.WriteSize("Size", Size);
+            XmlWriter.WritePoint("Zentrum", Zentrum);
         }
 
         public override void Assimilate(XmlElement Element)

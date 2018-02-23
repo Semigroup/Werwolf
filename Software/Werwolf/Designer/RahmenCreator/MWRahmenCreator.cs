@@ -15,6 +15,7 @@ using Assistment.Extensions;
 using Assistment.Drawing;
 using Assistment.Drawing.Geometries;
 using Werwolf.Karten;
+using System.Drawing.Drawing2D;
 
 using System.Xml.Serialization;
 using System.IO;
@@ -68,6 +69,14 @@ namespace Designer.RahmenCreator
             this.checkBox1.CheckedChanged += Draw;
 
             this.ShiftBox.UserValueChanged += Draw;
+
+            this.TextBoxActive.CheckedChanged += Draw;
+            this.TextLocBox.PointChanged += Draw;
+            this.TextSizeBox.PointChanged += Draw;
+            this.TextRadiusBox.UserValueChanged += Draw;
+            this.TextBackColorBox.ColorChanged += Draw;
+            this.TextShadowColorBox.ColorChanged += Draw;
+            this.TextShadowOffsetBox.PointChanged += Draw;
         }
         public void Init(Universe Universe)
         {
@@ -114,6 +123,17 @@ namespace Designer.RahmenCreator
             State.InvertRight = RightInversion.Checked;
             State.Shift = ShiftBox.UserValue;
 
+            State.TextBoxActive = TextBoxActive.Checked;
+            State.TextBox.Location = TextLocBox.UserPoint;
+            State.TextBox.Size = TextSizeBox.UserSize;
+            State.TextColor = TextBackColorBox.Color;
+            State.TextShadowColor = TextShadowColorBox.Color;
+            State.TextBoxShadowOffset = TextShadowOffsetBox.UserPoint;
+            State.TextBoxRadius = TextRadiusBox.UserValue;
+
+            LabelSize.Text = "Kartengröße: " + HintergrundDarstellung.Size.Width + " mm x " + HintergrundDarstellung.Size.Height + " mm";
+            LabelRandSize.Text = "Kartenranddicke in mm: " + HintergrundDarstellung.Rand.Width + " mm x " + HintergrundDarstellung.Rand.Height + " mm";
+
             if (Bitmap == null || Bitmap.Size != State.Size)
             {
                 Bitmap = new Bitmap(State.Size.Width, State.Size.Height);
@@ -131,11 +151,13 @@ namespace Designer.RahmenCreator
 
             OrientierbarerWeg ow = GetWegMitRadius();
             PointF[] pts = ow.GetPolygon(State.Samples, 0, 1);
-
             Graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
             Graphics.FillPolygon(new SolidBrush(Color.FromArgb(0)), pts);
             Graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
             Graphics.DrawPolygon(penBox1.Pen, pts);
+
+            if (State.TextBoxActive)
+                MakeTextBox();
 
             if (checkBox1.Checked && !suppressKartenRand)
             {
@@ -146,10 +168,59 @@ namespace Designer.RahmenCreator
             this.pictureBox1.Refresh();
         }
 
+        public PointF[] GetExtraShadow()
+        {
+            PointF v = State.TextBoxShadowOffset;
+            PointF[] pts = new PointF[4];
+            if (v.X * v.Y > 0)
+            {
+                pts[0] = new PointF(State.TextBox.Left, State.TextBox.Bottom);
+                pts[1] = new PointF(State.TextBox.Right, State.TextBox.Top);
+            }
+            else
+            {
+                pts[0] = new PointF(State.TextBox.Left, State.TextBox.Top);
+                pts[1] = new PointF(State.TextBox.Right, State.TextBox.Bottom);
+            }
+            if (State.TextBoxRadius > 0)
+            {
+                float redux = (float)(State.TextBoxRadius / Math.Sqrt(2));
+                pts[0] = pts[0].add(redux, -redux);
+                pts[1] = pts[1].add(-redux, redux);
+            }
+            pts[2] = pts[1].add(v);
+            pts[3] = pts[0].add(v);
+
+            return pts;
+        }
+        public void MakeTextBox()
+        {
+            OrientierbarerWeg weg = State.TextBoxRadius > 0 ?
+                OrientierbarerWeg.RundesRechteck(State.TextBox, State.TextBoxRadius)
+                : OrientierbarerWeg.Rechteck(State.TextBox);
+            PointF[] pts = weg.GetPolygon(State.Samples, 0, 1);
+            Graphics.FillPolygon(State.TextColor.ToBrush(), pts);
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(pts);
+            Graphics.ExcludeClip(new Region(path));
+            weg += State.TextBoxShadowOffset;
+            pts = weg.GetPolygon(State.Samples, 0, 1);
+            Graphics.FillPolygon(State.TextShadowColor.ToBrush(), pts);
+            //weg -= State.TextBoxShadowOffset.mul(2);
+            //pts = weg.GetPolygon(State.Samples, 0, 1);
+            //Graphics.FillPolygon(Brushes.White, pts);
+            //weg += new PointF(0, -State.TextBoxShadowOffset.Y);
+            //pts = weg.GetPolygon(State.Samples, 0, 1);
+            //Graphics.FillPolygon(State.TextShadowColor.ToBrush(), pts);
+            //weg += new PointF(-State.TextBoxShadowOffset.X, State.TextBoxShadowOffset.Y);
+            //pts = weg.GetPolygon(State.Samples, 0, 1);
+            //Graphics.FillPolygon(State.TextShadowColor.ToBrush(), pts);
+            Graphics.ResetClip();
+        }
         public OrientierbarerWeg GetSingleFragment(bool Rechts, bool Invertiert, float fragBreite)
         {
             OrientierbarerWeg fragment = Fragments.GetFragment(State.FragmentStyle, fragBreite, State.FragmentDicke);
-            if (0<State.Shift && State.Shift <1)
+            if (0 < State.Shift && State.Shift < 1)
             {
                 fragment = fragment.Trim(State.Shift, 1) + fragment.Trim(0, State.Shift);
                 fragment.SetPosition(new PointF(0, fragment.Weg(0).Y));
@@ -162,7 +233,6 @@ namespace Designer.RahmenCreator
                 fragment = fragment ^ (Math.PI / 2);
             return fragment;
         }
-
         public OrientierbarerWeg MakeFragmente(RectangleF box, bool Rechts, bool Invertiert, float fragBreite)
         {
             PointF startingPoint = Rechts ? new PointF(box.Right, box.Top) : new PointF(box.Left, box.Bottom);
@@ -226,7 +296,7 @@ namespace Designer.RahmenCreator
             bild.Name = bild.Schreibname = Path.GetFileNameWithoutExtension(State.Name);
             Universe.HintergrundBilder.AddPolymorph(bild);
 
-            string directory= Universe.DirectoryName + "\\CreationData\\MWRahmenCreator\\";
+            string directory = Universe.DirectoryName + "\\CreationData\\MWRahmenCreator\\";
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
             XmlSerializer.Serialize(new FileStream(directory + "\\" + State.Name + ".xml", FileMode.Create), State);
@@ -237,7 +307,6 @@ namespace Designer.RahmenCreator
             Graphics = null;
             Draw(sender, e);
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.SaveButton.Enabled = textBox1.Text.Length > 0;

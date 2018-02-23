@@ -59,17 +59,17 @@ namespace Werwolf.Inhalt
             reader.Next();
             if (reader.Name != "Settings")
                 throw new NotImplementedException();
-            MaximumNumberOfCores = reader.getInt("MaximumNumberOfCores");
-            DelayTime = reader.getInt("DelayTime");
-            SleepTime = reader.getInt("SleepTime");
-            MaximumKarteSize = reader.getSizeF("MaximumKarteSize");
-            MaximumImageArea = reader.getInt("MaximumImageArea");
-            WolfBoxFaktor = reader.getFloat("WolfBoxFaktor");
-            MaximumPpm = reader.getFloat("MaximumPpm");
-            errorImagePath = reader.getString("ErrorImagePath");
-            notFoundImagePath = reader.getString("NotFoundImagePath");
-            ViewPpm = reader.getFloat("ViewPpm");
-            RefreshDirtyButtons = reader.getBoolean("RefreshDirtyButtons");
+            MaximumNumberOfCores = reader.GetInt("MaximumNumberOfCores");
+            DelayTime = reader.GetInt("DelayTime");
+            SleepTime = reader.GetInt("SleepTime");
+            MaximumKarteSize = reader.GetSizeF("MaximumKarteSize");
+            MaximumImageArea = reader.GetInt("MaximumImageArea");
+            WolfBoxFaktor = reader.GetFloat("WolfBoxFaktor");
+            MaximumPpm = reader.GetFloat("MaximumPpm");
+            errorImagePath = reader.GetString("ErrorImagePath");
+            notFoundImagePath = reader.GetString("NotFoundImagePath");
+            ViewPpm = reader.GetFloat("ViewPpm");
+            RefreshDirtyButtons = reader.GetBoolean("RefreshDirtyButtons");
 
             using (Image Image = Image.FromFile(ErrorImagePath))// Image.FromStream(fs))
                 ErrorImage = new Bitmap(Image);
@@ -83,19 +83,19 @@ namespace Werwolf.Inhalt
             XmlWriter writer = XmlWriter.Create(path);
             writer.WriteStartDocument();
             writer.WriteStartElement("Settings");
-            writer.writeInt("MaximumNumberOfCores", MaximumNumberOfCores);
-            writer.writeInt("DelayTime", DelayTime);
-            writer.writeInt("SleepTime", SleepTime);
-            writer.writeSize("MaximumKarteSize", MaximumKarteSize);
-            writer.writeInt("MaximumImageArea", MaximumImageArea);
-            writer.writeFloat("WolfBoxFaktor", WolfBoxFaktor);
-            writer.writeFloat("MaximumPpm", MaximumPpm);
-            writer.writeFloat("ViewPpm", ViewPpm);
+            writer.WriteInt("MaximumNumberOfCores", MaximumNumberOfCores);
+            writer.WriteInt("DelayTime", DelayTime);
+            writer.WriteInt("SleepTime", SleepTime);
+            writer.WriteSize("MaximumKarteSize", MaximumKarteSize);
+            writer.WriteInt("MaximumImageArea", MaximumImageArea);
+            writer.WriteFloat("WolfBoxFaktor", WolfBoxFaktor);
+            writer.WriteFloat("MaximumPpm", MaximumPpm);
+            writer.WriteFloat("ViewPpm", ViewPpm);
 
             ErrorImage.Save(ErrorImagePath);//Forced
-            writer.writeAttribute("ErrorImagePath", errorImagePath);
+            writer.WriteAttribute("ErrorImagePath", errorImagePath);
             NotFoundImage.Save(NotFoundImagePath);
-            writer.writeAttribute("NotFoundImagePath", notFoundImagePath);
+            writer.WriteAttribute("NotFoundImagePath", notFoundImagePath);
 
             writer.WriteEndElement();
             writer.WriteEndDocument();

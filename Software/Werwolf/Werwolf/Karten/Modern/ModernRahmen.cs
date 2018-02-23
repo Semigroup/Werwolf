@@ -38,7 +38,10 @@ namespace Werwolf.Karten.Modern
 
         public override void Draw(DrawContext con)
         {
-                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
+            HintergrundBild hintergrundBild = HintergrundDarstellung.Quer 
+                ? Karte.Fraktion.HintergrundBildQuer 
+                : Karte.Fraktion.HintergrundBild;
+            con.DrawCenteredImage(hintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
         }
     }
 }

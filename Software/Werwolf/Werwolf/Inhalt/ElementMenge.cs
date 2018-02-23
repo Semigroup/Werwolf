@@ -48,7 +48,7 @@ namespace Werwolf.Inhalt
         protected override void ReadIntern(Loader Loader)
         {
             base.ReadIntern(Loader);
-            string standardName = Loader.XmlReader.getString("Standard");
+            string standardName = Loader.XmlReader.GetString("Standard");
 
             Clear();
             int depth = Loader.XmlReader.Depth;
@@ -71,7 +71,7 @@ namespace Werwolf.Inhalt
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
-            XmlWriter.writeAttribute("Standard", Standard.Name);
+            XmlWriter.WriteAttribute("Standard", Standard.Name);
 
             foreach (var item in dictionary.Values)
                 item.Write(XmlWriter);

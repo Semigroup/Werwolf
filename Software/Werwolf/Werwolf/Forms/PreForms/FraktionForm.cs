@@ -30,6 +30,7 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
 
             BuildWertBox("Bild Hintergrund", Universe.HintergrundBilder);
+            BuildWertBox("Bild Hintergrund Quer", Universe.HintergrundBilder);
             WerteListe.AddEnumBox(Titel.Art.Rund, "Titel Art");
             BuildWertBox("Bild Rückseite", Universe.RuckseitenBilder);
             WerteListe.AddBigStringBox("", "Fraktionstext");
@@ -47,6 +48,7 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
 
             WerteListe.SetValue("Bild Hintergrund", element.HintergrundBild);
+            WerteListe.SetValue("Bild Hintergrund Quer", element.HintergrundBildQuer);
             WerteListe.SetValue("Titel Art", element.TitelArt as object);
             WerteListe.SetValue("Bild Rückseite", element.RuckseitenBild);
             WerteListe.SetValue("Fraktionstext", element.StandardAufgaben.ToString());
@@ -62,6 +64,7 @@ namespace Werwolf.Forms
                 return;
 
             element.HintergrundBild = WerteListe.GetValue<HintergrundBild>("Bild Hintergrund");
+            element.HintergrundBildQuer = WerteListe.GetValue<HintergrundBild>("Bild Hintergrund Quer");
             element.TitelArt = (Titel.Art)WerteListe.GetValue<object>("Titel Art");
             element.RuckseitenBild = WerteListe.GetValue<RuckseitenBild>("Bild Rückseite");
             element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"),Universe);
@@ -72,6 +75,7 @@ namespace Werwolf.Forms
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.Werwolfkarte, "Titel Art");
+            SetVisible(Karte.KartenModus.ModernWolfKarte, "Bild Hintergrund Quer");
             SetVisible(Karte.CyberIrgendwas, "Symbol");
         }
     }

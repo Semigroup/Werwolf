@@ -38,6 +38,7 @@ namespace Werwolf.Karten
         public ModernRahmen ModernRahmen { get; set; }
         public ModernInfo ModernInfo { get; set; }
         public ModernText ModernText { get; set; }
+        public ModernTextQuer ModernTextQuer { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -64,7 +65,7 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.CyberHackKarte:
                             return new WolfBox[] { HochBildTiefBox };
                         case Karte.KartenModus.ModernWolfKarte:
-                            return new WolfBox[] { HauptBild, ModernText, ModernRahmen, ModernTitel, ModernInfo };
+                            return new WolfBox[] { HauptBild, ModernText, ModernRahmen, ModernTitel, ModernInfo, ModernTextQuer };
                         default:
                             throw new NotImplementedException();
                     }
@@ -103,6 +104,7 @@ namespace Werwolf.Karten
             ModernRahmen = new ModernRahmen(Karte, ppm);
             ModernInfo = new ModernInfo(Karte, ppm);
             ModernText = new ModernText(Karte, ppm);
+            ModernTextQuer = new ModernTextQuer(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -166,35 +168,35 @@ namespace Werwolf.Karten
             switch (Karte.Modus)
             {
                 case Karte.KartenModus.Werwolfkarte:
-                    drawNormal(con);
+                    DrawNormal(con);
                     break;
                 case Karte.KartenModus.AktionsKarte:
-                    drawAction(con);
+                    DrawAction(con);
                     break;
                 case Karte.KartenModus.WondersKarte:
-                    drawWonders(con);
+                    DrawWonders(con);
                     break;
                 case Karte.KartenModus.WondersReichKarte:
                 case Karte.KartenModus.WonderGlobalesProjekt:
-                    drawWondersReich(con);
+                    DrawWondersReich(con);
                     break;
                 case Karte.KartenModus.WondersAuswahlKarte:
-                    drawWondersAuswahl(con);
+                    DrawWondersAuswahl(con);
                     break;
                 case Karte.KartenModus.CyberHackKarte:
                 case Karte.KartenModus.CyberSupportKarte:
                 case Karte.KartenModus.CyberWaffenKarte:
-                    drawCyberAction(con);
+                    DrawCyberAction(con);
                     break;
                 case Karte.KartenModus.ModernWolfKarte:
-                    drawModernWolf(con);
+                    DrawModernWolf(con);
                     break;
                 default:
                     throw new NotImplementedException();
             }
-            drawRand(con);
+            DrawRand(con);
         }
-        public void drawNormal(DrawContext con)
+        public void DrawNormal(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
@@ -221,7 +223,7 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.Draw(con);
         }
-        public void drawAction(DrawContext con)
+        public void DrawAction(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
@@ -248,7 +250,7 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.Draw(con);
         }
-        public void drawWonders(DrawContext con)
+        public void DrawWonders(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
@@ -265,7 +267,7 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.Draw(con);
         }
-        public void drawWondersReich(DrawContext con)
+        public void DrawWondersReich(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
@@ -281,7 +283,7 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.Draw(con);
         }
-        public void drawWondersAuswahl(DrawContext con)
+        public void DrawWondersAuswahl(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
@@ -292,7 +294,7 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.Draw(con);
         }
-        public void drawRand(DrawContext con)
+        public void DrawRand(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             if (HintergrundDarstellung.Rand.Inhalt() > 0)
@@ -301,7 +303,7 @@ namespace Werwolf.Karten
                 con.DrawImage(HintergrundDarstellung.RandBild, MovedAussenBox);
             }
         }
-        public void drawCyberAction(DrawContext con)
+        public void DrawCyberAction(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
@@ -317,7 +319,7 @@ namespace Werwolf.Karten
                 if (item.Visible())
                     item.Draw(con);
         }
-        public void drawModernWolf(DrawContext con)
+        public void DrawModernWolf(DrawContext con)
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);

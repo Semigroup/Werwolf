@@ -166,58 +166,58 @@ namespace Werwolf.Inhalt
             BildDarstellung = Loader.GetBildDarstellung();
             LayoutDarstellung = Loader.GetLayoutDarstellung();
 
-            Initiative = Loader.XmlReader.getFloat("Initiative");
-            ReichweiteMin = Loader.XmlReader.getInt("ReichweiteMin");
-            ReichweiteMax = Loader.XmlReader.getInt("ReichweiteMax");
-            Felder = Loader.XmlReader.getInt("Felder");
-            Storung = Loader.XmlReader.getInt("Storung");
+            Initiative = Loader.XmlReader.GetFloat("Initiative");
+            ReichweiteMin = Loader.XmlReader.GetInt("ReichweiteMin");
+            ReichweiteMax = Loader.XmlReader.GetInt("ReichweiteMax");
+            Felder = Loader.XmlReader.GetInt("Felder");
+            Storung = Loader.XmlReader.GetInt("Storung");
 
             Kosten = Loader.GetAufgabe("Kosten");
             Effekt = Loader.GetAufgabe("Effekt");
-            basen = Loader.XmlReader.getString("Basen")
+            basen = Loader.XmlReader.GetString("Basen")
                 .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
-            entwicklungen = Loader.XmlReader.getString("Entwicklungen")
+            entwicklungen = Loader.XmlReader.GetString("Entwicklungen")
                .Split(";".ToArray(), StringSplitOptions.RemoveEmptyEntries);
-            Modus = Loader.XmlReader.getEnum<KartenModus>("Modus");
+            Modus = Loader.XmlReader.GetEnum<KartenModus>("Modus");
             //Abwärtskompatibilität mit Daten, die keinen Kartenmodus definieren
             if (Modus == 0)
                Modus = KartenModus.Werwolfkarte;
 
             AktionsName = Loader.GetAufgabe("AktionsName");
-            ZielSicherheiten = Loader.XmlReader.getString("ZielSicherheiten");
-            Translatiert = Loader.XmlReader.getBoolean("Translatiert");
+            ZielSicherheiten = Loader.XmlReader.GetString("ZielSicherheiten");
+            Translatiert = Loader.XmlReader.GetBoolean("Translatiert");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
             base.WriteIntern(XmlWriter);
 
-            XmlWriter.writeAttribute("Fraktion", Fraktion.Name);
-            XmlWriter.writeAttribute("Gesinnung", Gesinnung.Name);
-            XmlWriter.writeAttribute("Aufgaben", Aufgaben.ToString());
-            XmlWriter.writeAttribute("HauptBild", HauptBild.Name);
+            XmlWriter.WriteAttribute("Fraktion", Fraktion.Name);
+            XmlWriter.WriteAttribute("Gesinnung", Gesinnung.Name);
+            XmlWriter.WriteAttribute("Aufgaben", Aufgaben.ToString());
+            XmlWriter.WriteAttribute("HauptBild", HauptBild.Name);
 
-            XmlWriter.writeAttribute("HintergrundDarstellung", HintergrundDarstellung.Name);
-            XmlWriter.writeAttribute("TextDarstellung", TextDarstellung.Name);
-            XmlWriter.writeAttribute("TitelDarstellung", TitelDarstellung.Name);
-            XmlWriter.writeAttribute("InfoDarstellung", InfoDarstellung.Name);
-            XmlWriter.writeAttribute("BildDarstellung", BildDarstellung.Name);
-            XmlWriter.writeAttribute("LayoutDarstellung", LayoutDarstellung.Name);
+            XmlWriter.WriteAttribute("HintergrundDarstellung", HintergrundDarstellung.Name);
+            XmlWriter.WriteAttribute("TextDarstellung", TextDarstellung.Name);
+            XmlWriter.WriteAttribute("TitelDarstellung", TitelDarstellung.Name);
+            XmlWriter.WriteAttribute("InfoDarstellung", InfoDarstellung.Name);
+            XmlWriter.WriteAttribute("BildDarstellung", BildDarstellung.Name);
+            XmlWriter.WriteAttribute("LayoutDarstellung", LayoutDarstellung.Name);
 
-            XmlWriter.writeFloat("Initiative", Initiative);
-            XmlWriter.writeInt("ReichweiteMin", ReichweiteMin);
-            XmlWriter.writeInt("ReichweiteMax", ReichweiteMax);
-            XmlWriter.writeInt("Felder", Felder);
-            XmlWriter.writeInt("Storung", Storung);
+            XmlWriter.WriteFloat("Initiative", Initiative);
+            XmlWriter.WriteInt("ReichweiteMin", ReichweiteMin);
+            XmlWriter.WriteInt("ReichweiteMax", ReichweiteMax);
+            XmlWriter.WriteInt("Felder", Felder);
+            XmlWriter.WriteInt("Storung", Storung);
 
-            XmlWriter.writeAttribute("Kosten", Kosten.ToString());
-            XmlWriter.writeAttribute("Effekt", Effekt.ToString());
-            XmlWriter.writeAttribute("Basen", Basen.Map(b => b.Name).SumText(";"));
-            XmlWriter.writeAttribute("Entwicklungen", Entwicklungen.Map(b => b.Name).SumText(";"));
-            XmlWriter.writeEnum<KartenModus>("Modus", Modus);
+            XmlWriter.WriteAttribute("Kosten", Kosten.ToString());
+            XmlWriter.WriteAttribute("Effekt", Effekt.ToString());
+            XmlWriter.WriteAttribute("Basen", Basen.Map(b => b.Name).SumText(";"));
+            XmlWriter.WriteAttribute("Entwicklungen", Entwicklungen.Map(b => b.Name).SumText(";"));
+            XmlWriter.WriteEnum<KartenModus>("Modus", Modus);
 
-            XmlWriter.writeAttribute("AktionsName", AktionsName.ToString());
-            XmlWriter.writeAttribute("ZielSicherheiten", ZielSicherheiten);
-            XmlWriter.writeBoolean("Translatiert", Translatiert);
+            XmlWriter.WriteAttribute("AktionsName", AktionsName.ToString());
+            XmlWriter.WriteAttribute("ZielSicherheiten", ZielSicherheiten);
+            XmlWriter.WriteBoolean("Translatiert", Translatiert);
         }
 
         public override void AdaptToCard(Karte Karte)

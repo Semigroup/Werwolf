@@ -33,5 +33,12 @@ namespace Designer.RahmenCreator
 
         public Color PenColor;
         public float PenWidth;
+
+        public RectangleF TextBox;
+        public PointF TextBoxShadowOffset;
+        public Color TextColor;
+        public Color TextShadowColor;
+        public bool TextBoxActive;
+        public float TextBoxRadius;
     }
 }

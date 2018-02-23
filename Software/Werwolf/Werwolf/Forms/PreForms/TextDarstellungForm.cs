@@ -35,6 +35,7 @@ namespace Werwolf.Forms
             WerteListe.AddFloatBox(1, "Balkendicke in mm");
             WerteListe.AddFloatBox(1, "Innenradius in mm");
             WerteListe.AddFontBox(new Font("Calibri", 8), "Effekt Font");
+            WerteListe.AddRectangleFBox(new RectangleF(), "Text Region");
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -49,6 +50,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Balkendicke in mm", element.BalkenDicke);
             WerteListe.SetValue("Innenradius in mm", element.InnenRadius);
             WerteListe.SetValue("Effekt Font", element.EffektFont);
+            WerteListe.SetValue("Text Region", element.TextRectangle);
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -63,11 +65,13 @@ namespace Werwolf.Forms
             element.EffektFont = WerteListe.GetValue<Font>("Effekt Font");
             element.BalkenDicke = WerteListe.GetValue<float>("Balkendicke in mm");
             element.InnenRadius = WerteListe.GetValue<float>("Innenradius in mm");
+            element.TextRectangle = WerteListe.GetValue<RectangleF>("Text Region");
         }
 
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.WondersKarte, "Effekt Font");
+            SetVisible(Karte.KartenModus.ModernWolfKarte, "Text Region");
         }
     }
 }
