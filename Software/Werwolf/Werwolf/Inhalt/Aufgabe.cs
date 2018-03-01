@@ -156,17 +156,35 @@ namespace Werwolf.Inhalt
             }
         }
 
+        public DrawContainer[] ProduceDrawContainers(xFont font, bool istKomplex)
+        {
+            if (istKomplex)
+                return ProduceCStrings(font);
+            else
+                return ProduceTexts(font);
+        }
+        private CString[] ProduceCStrings(xFont Font)
+        {
+            CString[] t = new CString[Anzahl];
+            t.SelfMap(x => new CString(Font));
+            AddToTexts(t);
+            return t;
+        }
         public Text[] ProduceTexts(xFont Font)
         {
             Text[] t = new Text[Anzahl];
             t.SelfMap(x => new Text("", Font));
+            AddToTexts(t);
+            return t;
+        }
+        private void AddToTexts(DrawContainer[] t)
+        {
             int i = 0;
             foreach (var item in Fragments)
                 if (item.BlockBreak)
                     i++;
                 else
                     item.AddDrawBox(t[i]);
-            return t;
         }
         public override string ToString()
         {

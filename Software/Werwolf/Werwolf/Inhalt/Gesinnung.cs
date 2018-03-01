@@ -59,8 +59,8 @@ namespace Werwolf.Inhalt
         {
             if (Aufgabe.Anzahl > 0)
                 return Aufgabe.ProduceTexts(Font)[0];
-            else 
-                return null;
+            else
+                return new Text("", Font);
         }
     }
 }

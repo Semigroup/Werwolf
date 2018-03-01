@@ -17,6 +17,7 @@ namespace Werwolf.Karten.Modern
         private GeometryBox[] Texts;
 
         private FontGraphicsMeasurer LastFont;
+        private FontGraphicsMeasurer LastFlavourFont;
         private string LastAufgabe;
 
         private RectangleF MovedInnenBox;
@@ -41,6 +42,19 @@ namespace Werwolf.Karten.Modern
         {
         }
 
+        public DrawContainer[] GetTexts()
+        {
+            DrawContainer[] raws = Karte.MeineAufgaben.ProduceDrawContainers(LastFont, Karte.Fraktion.IstKomplex);
+            if (Karte.Modus == Karte.KartenModus.ModernWolfEreignisKarte
+                && raws.Length >1)
+            {
+                DrawContainer[] italics = Karte.MeineAufgaben.ProduceDrawContainers(LastFlavourFont, Karte.Fraktion.IstKomplex);
+                italics[0].ForceWordStyle(style: Word.FONTSTYLE_ITALIC);
+                italics[0].Alignment = 0.5f;
+                raws[0] = italics[0];
+            }
+            return raws;
+        }
         public override void OnKarteChanged()
         {
             base.OnKarteChanged();
@@ -51,7 +65,8 @@ namespace Werwolf.Karten.Modern
             {
                 LastAufgabe = aufgabe;
                 LastFont = TextDarstellung.FontMeasurer as FontGraphicsMeasurer;
-                Text[] raws = Karte.MeineAufgaben.ProduceTexts(LastFont);
+                LastFlavourFont = LastFont * 0.5f;
+                DrawContainer[] raws = GetTexts();
                 Texts = new GeometryBox[raws.Length];
                 for (int i = 0; i < raws.Length; i++)
                     Texts[i] = raws[i].Geometry(TextDarstellung.Rand.mul(Faktor * 2));

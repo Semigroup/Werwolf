@@ -18,7 +18,8 @@ namespace Werwolf.Generating
         {
             ChaosRechteck,
             OldSchool,
-            Kreis
+            Kreis,
+            Stetig
         }
 
         public Art MeineArt { get; set; }

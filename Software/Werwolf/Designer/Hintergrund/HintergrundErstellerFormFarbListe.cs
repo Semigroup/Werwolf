@@ -14,6 +14,10 @@ using Assistment.Drawing;
 using Assistment.Mathematik;
 using Assistment.form;
 using Werwolf.Generating;
+using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries;
+using Assistment.Drawing.Style;
+using Assistment.Extensions;
 
 namespace Designer.Hintergrund
 {
@@ -111,7 +115,7 @@ namespace Designer.Hintergrund
                 if (!checkBox1.Checked)
                     hs.Schema.Pinsel = (u, v) =>
                     {
-                        float t = v * (colors.Length - 1);
+                        float t = v.Saturate() * (colors.Length - 1);
                         int n = (int)t;
                         t -= n;
                         return colors[n].tween(colors[Math.Min(colors.Length - 1, n + 1)], t).ToBrush();
@@ -140,6 +144,13 @@ namespace Designer.Hintergrund
                     hs.Schema.Flache = (u, v) => hs.Size.mul(FastMath.Sphere(u * Math.PI * 2)
                         .mul(sqr * (v + burst * d.NextFloat()) / 2).add(0.5f, 0.5f)).ToPointF();
                     Shadex.ChaosFlache(g, hs.Schema);
+                    break;
+                case HintergrundSchema.Art.Stetig:
+                    FlachenFunktion<PointF> feld = (u, v) => d.NextSpherical();
+                    feld = feld.KompaktDeterminieren(hs.Schema.Samples.X, hs.Schema.Samples.Y);
+                    FlachenFunktion<PointF> pot = feld.Potential(burst, 10);
+                    hs.Schema.Flache = (u, v) => pot(u, v).mul(hs.Size);
+                    Shadex.ChaosFlacheBase(g, hs.Schema);
                     break;
                 default:
                     throw new NotImplementedException();

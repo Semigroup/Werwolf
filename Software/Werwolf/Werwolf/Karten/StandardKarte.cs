@@ -65,6 +65,7 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.CyberHackKarte:
                             return new WolfBox[] { HochBildTiefBox };
                         case Karte.KartenModus.ModernWolfKarte:
+                        case Karte.KartenModus.ModernWolfEreignisKarte:
                             return new WolfBox[] { HauptBild, ModernText, ModernRahmen, ModernTitel, ModernInfo, ModernTextQuer };
                         default:
                             throw new NotImplementedException();
@@ -189,6 +190,7 @@ namespace Werwolf.Karten
                     DrawCyberAction(con);
                     break;
                 case Karte.KartenModus.ModernWolfKarte:
+                case Karte.KartenModus.ModernWolfEreignisKarte:
                     DrawModernWolf(con);
                     break;
                 default:

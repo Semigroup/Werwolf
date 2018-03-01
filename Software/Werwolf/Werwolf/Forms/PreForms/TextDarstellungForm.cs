@@ -71,7 +71,7 @@ namespace Werwolf.Forms
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.WondersKarte, "Effekt Font");
-            SetVisible(Karte.KartenModus.ModernWolfKarte, "Text Region");
+            SetVisible(Karte.ModernIrgendwas, "Text Region");
         }
     }
 }

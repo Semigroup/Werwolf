@@ -141,7 +141,7 @@ namespace Werwolf.Karten
                     OrientierbarerWeg = Rund(innBox.move(Offset), BalkenDicke);
                     Hohe h = t => OrientierbarerWeg.Normale(t).SKP(Rand.ToPointF()) * Random.NextFloat();
                     L = (int)OrientierbarerWeg.L;
-                    Shadex.malBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
+                    Shadex.MalBezierhulle(g, GetBrushes(), OrientierbarerWeg, h, L * 10, L);
                 }
                 else
                     g.Clear(TextDarstellung.RandFarbe);

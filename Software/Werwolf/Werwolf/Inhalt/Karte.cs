@@ -93,7 +93,8 @@ namespace Werwolf.Inhalt
             CyberWaffenKarte = 0x40,
             CyberSupportKarte = 0x80,
             CyberHackKarte = 0x100,
-            ModernWolfKarte = 0x200
+            ModernWolfKarte = 0x200,
+            ModernWolfEreignisKarte = 0x400
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
@@ -109,6 +110,13 @@ namespace Werwolf.Inhalt
             get
             {
                 return KartenModus.CyberWaffenKarte | KartenModus.CyberSupportKarte | KartenModus.CyberHackKarte;
+            }
+        }
+        public static KartenModus ModernIrgendwas
+        {
+            get
+            {
+                return KartenModus.ModernWolfKarte | KartenModus.ModernWolfEreignisKarte;
             }
         }
 

@@ -36,6 +36,7 @@ namespace Werwolf.Forms
             WerteListe.AddBigStringBox("", "Fraktionstext");
             BuildWertBox("Symbol", Universe.TextBilder);
             WerteListe.AddEnumBox(Fraktion.RuckseitenArt.Normal, "Rückseiten Art");
+            WerteListe.AddBoolBox(false, "Text hat komplexe Struktur?");
 
             UpdatingWerteListe = false;
             WerteListe.Setup();
@@ -54,6 +55,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Fraktionstext", element.StandardAufgaben.ToString());
             WerteListe.SetValue("Symbol", element.Symbol);
             WerteListe.SetValue("Rückseiten Art", element.RuckArt as object);
+            WerteListe.SetValue("Text hat komplexe Struktur?", element.IstKomplex);
 
             UpdatingWerteListe = false;
         }
@@ -70,6 +72,7 @@ namespace Werwolf.Forms
             element.StandardAufgaben = new Aufgabe(WerteListe.GetValue<string>("Fraktionstext"),Universe);
             element.Symbol = WerteListe.GetValue<TextBild>("Symbol");
             element.RuckArt = (Fraktion.RuckseitenArt)WerteListe.GetValue<object>("Rückseiten Art");
+            element.IstKomplex = WerteListe.GetValue<bool>("Text hat komplexe Struktur?");
         }
 
         protected override void SetVisibles()
@@ -77,6 +80,7 @@ namespace Werwolf.Forms
             SetVisible(Karte.KartenModus.Werwolfkarte, "Titel Art");
             SetVisible(Karte.KartenModus.ModernWolfKarte, "Bild Hintergrund Quer");
             SetVisible(Karte.CyberIrgendwas, "Symbol");
+            SetVisible(Karte.KartenModus.ModernWolfEreignisKarte, "Text hat komplexe Struktur?");
         }
     }
 }

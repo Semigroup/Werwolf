@@ -34,6 +34,7 @@ namespace Werwolf.Inhalt
         public RuckseitenBild RuckseitenBild { get; set; }
         public TextBild Symbol { get; set; }
         public RuckseitenArt RuckArt { get; set; }
+        public bool IstKomplex { get; set; }
 
         public Fraktion()
             : base("Fraktion", true)
@@ -50,6 +51,7 @@ namespace Werwolf.Inhalt
             this.RuckseitenBild = Universe.RuckseitenBilder.Standard;
             this.Symbol = Universe.TextBilder.Standard;
             this.RuckArt = RuckseitenArt.Normal;
+            this.IstKomplex = false;
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -62,6 +64,7 @@ namespace Werwolf.Inhalt
             RuckseitenBild = Loader.GetRuckseitenBild();
             Symbol = Loader.GetTextBild();
             RuckArt = Loader.XmlReader.GetEnum<RuckseitenArt>("RuckArt");
+            IstKomplex = Loader.XmlReader.GetBoolean("IstKomplex");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -74,6 +77,7 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteAttribute("RuckseitenBild", RuckseitenBild.Name);
             XmlWriter.WriteAttribute("TextBild", Symbol.Name);
             XmlWriter.WriteEnum<RuckseitenArt>("RuckArt", RuckArt);
+            XmlWriter.WriteBoolean("IstKomplex", IstKomplex);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -97,6 +101,7 @@ namespace Werwolf.Inhalt
             f.Symbol = Symbol;
             f.RuckArt = RuckArt;
             f.HintergrundBildQuer = HintergrundBildQuer;
+            f.IstKomplex = IstKomplex;
         }
 
         public int CompareTo(Fraktion other)
