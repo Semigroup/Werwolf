@@ -19,7 +19,8 @@ namespace Werwolf.Generating
             ChaosRechteck,
             OldSchool,
             Kreis,
-            Stetig
+            Stetig,
+            StetigerKreis
         }
 
         public Art MeineArt { get; set; }

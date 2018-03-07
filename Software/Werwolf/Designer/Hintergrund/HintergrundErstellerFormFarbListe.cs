@@ -152,6 +152,18 @@ namespace Designer.Hintergrund
                     hs.Schema.Flache = (u, v) => pot(u, v).mul(hs.Size);
                     Shadex.ChaosFlacheBase(g, hs.Schema);
                     break;
+                case HintergrundSchema.Art.StetigerKreis:
+                    FlachenFunktion<PointF> zufallsFeld = (u, v) => d.NextSpherical();
+                    zufallsFeld = zufallsFeld.KompaktDeterminieren(hs.Schema.Samples.X, hs.Schema.Samples.Y);
+                    FlachenFunktion<PointF> potenzial = zufallsFeld.Potential(burst, 10);
+                    hs.Schema.Flache = (u, v) =>
+                    {
+                        PointF p = potenzial(u, v);
+                        PointF s = new PointF(0, p.Y / FastMath.SQRT_2).rot(Math.PI * 2 * p.X);
+                        return s.add(0.5f, 0.5f).mul(hs.Size);
+                    };
+                    Shadex.ChaosFlacheBase(g, hs.Schema);
+                    break;
                 default:
                     throw new NotImplementedException();
             }

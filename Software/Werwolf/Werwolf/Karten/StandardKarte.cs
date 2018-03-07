@@ -67,6 +67,8 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.ModernWolfKarte:
                         case Karte.KartenModus.ModernWolfEreignisKarte:
                             return new WolfBox[] { HauptBild, ModernText, ModernRahmen, ModernTitel, ModernInfo, ModernTextQuer };
+                        case Karte.KartenModus.ModernWolfZeichenKarte:
+                            return new WolfBox[] { ModernRahmen, HauptBild, ModernText, ModernTitel, ModernInfo, ModernTextQuer };
                         default:
                             throw new NotImplementedException();
                     }
@@ -191,6 +193,7 @@ namespace Werwolf.Karten
                     break;
                 case Karte.KartenModus.ModernWolfKarte:
                 case Karte.KartenModus.ModernWolfEreignisKarte:
+                case Karte.KartenModus.ModernWolfZeichenKarte:
                     DrawModernWolf(con);
                     break;
                 default:

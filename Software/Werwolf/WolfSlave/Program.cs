@@ -94,7 +94,7 @@ namespace WolfSlave
                         Karte = item.Key;
                         break;
                     }
-            Text t = new Assistment.Texts.Text();
+            Text t = new Text();
             t.AddRegex(Karte.Name);
             string s = t.ToString().ToFileName();
             s = s.Replace(" ", "");

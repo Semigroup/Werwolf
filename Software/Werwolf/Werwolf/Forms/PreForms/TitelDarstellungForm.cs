@@ -61,7 +61,7 @@ namespace Werwolf.Forms
 
         protected override void SetVisibles()
         {
-            SetVisible(Karte.KartenModus.ModernWolfKarte, "Textfarbe");
+            SetVisible(Karte.ModernIrgendwas, "Textfarbe");
         }
     }
 }
