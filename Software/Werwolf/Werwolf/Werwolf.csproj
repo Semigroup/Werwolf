@@ -230,6 +230,8 @@
     <Compile Include="Karten\FixedFontKarte.cs" />
     <Compile Include="Karten\TitelProxy.cs" />
     <Compile Include="Karten\Wonders\WonderBalken.cs" />
+    <Compile Include="Printing\IJobTicker.cs" />
+    <Compile Include="Printing\JobTickerProgressBar.cs" />
     <Compile Include="Printing\WolfSinglePaper.cs" />
     <Compile Include="Karten\StandardDeck.cs" />
     <Compile Include="Karten\StandardRuckseite.cs" />

@@ -82,7 +82,6 @@ namespace Werwolf.Karten.Modern
             this.Box = box;
             this.Box.Size = AussenBox.Size;
 
-
             MovedInnenBox = InnenBox.move(box.Location);
             TextRegion = MovedInnenBox;
             TextRegion.X += HintergrundDarstellung.MarginLeft * Faktor;
@@ -116,18 +115,19 @@ namespace Werwolf.Karten.Modern
                     TextDarstellung.InnenRadius * Faktor, 0.5f, 0.25f);
                 OrientierbarerWeg ow2 = OrientierbarerWeg.Kreisbogen(
                     TextDarstellung.InnenRadius * Faktor, 0.25f, 0f);
-                PointF center = new PointF();
-                center.X = HintergrundDarstellung.MarginLeft
+                PointF center = new PointF
+                {
+                    X = HintergrundDarstellung.MarginLeft
                     + HintergrundDarstellung.Rand.Width
-                    + TextDarstellung.InnenRadius;
-                // + TextDarstellung.Rand.Width;
+                    + TextDarstellung.InnenRadius,
+                    Y = TextRegion.Y - Faktor * TextDarstellung.InnenRadius
+                };
                 center.X *= Faktor;
-                center.Y = TextRegion.Y - Faktor * TextDarstellung.InnenRadius;
                 ow1 += center;
                 center.X = AussenBox.Width - Faktor *
                     (HintergrundDarstellung.MarginRight
                     + HintergrundDarstellung.Rand.Width
-                    + TextDarstellung.InnenRadius);//+TextDarstellung.Rand.Width
+                    + TextDarstellung.InnenRadius);
                 ow2 += center;
 
                 PointF[] polygon = new PointF[10006];
@@ -139,7 +139,6 @@ namespace Werwolf.Karten.Modern
                 polygon[10004] = new PointF(TextRegion.Right, TextRegion.Bottom);
                 polygon[10005] = polygon[0];
                 con.FillPolygon(TextDarstellung.Farbe.ToBrush(), polygon);
-                //con.DrawPolygon(Pens.Red, polygon);
             }
             else
                 con.FillRectangle(TextDarstellung.Farbe.ToBrush(), TextRegion);
@@ -149,8 +148,6 @@ namespace Werwolf.Karten.Modern
             DrawBack(con);
             for (int i = 0; i < Texts.Length; i++)
                 Texts[i].Draw(con);
-            //for (int i = 1; i < Texts.Length; i++)
-            //    con.DrawLine(Pen, TextRegion.Left, Texts[i].Box.Top, TextRegion.Right, Texts[i].Box.Top);
         }
     }
 }

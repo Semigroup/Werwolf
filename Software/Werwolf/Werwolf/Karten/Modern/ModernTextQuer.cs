@@ -108,11 +108,8 @@ namespace Werwolf.Karten.Modern
         }
         public override void Draw(DrawContext con)
         {
-            //con.FillRectangle(TextDarstellung.Farbe.ToBrush(), TextRegion);
             for (int i = 0; i < Texts.Length; i++)
                 Texts[i].Draw(con);
-            //for (int i = 1; i < Texts.Length; i++)
-            //    con.DrawLine(Pen, TextRegion.Left, Texts[i].Box.Top, TextRegion.Right, Texts[i].Box.Top);
         }
     }
 }

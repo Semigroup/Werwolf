@@ -18,7 +18,6 @@ using System.Drawing.Imaging;
 using Assistment.Drawing.Style;
 using Assistment.Drawing.Geometries;
 
-using Assistment.Extensions;
 using Assistment.Mathematik;
 using Werwolf.Generating;
 using Designer.Hintergrund;

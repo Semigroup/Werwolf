@@ -47,10 +47,14 @@ namespace Werwolf.Karten.Modern
 
             SizeF size = new SizeF(InnenBox.Width, HintergrundDarstellung.MarginTop * Faktor);
 
-            Text text = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer);
-            text.Alignment = 0.5f;
-            FixedBox fixedBox = new FixedBox(size, text);
-            fixedBox.Alignment = new SizeF(0f, 0.5f);
+            Text text = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer)
+            {
+                Alignment = 0.5f
+            };
+            FixedBox fixedBox = new FixedBox(size, text)
+            {
+                Alignment = new SizeF(0f, 0.5f)
+            };
             ShadowBox = new ShadowBox(fixedBox,
                 TitelDarstellung.TextFarbe.ToBrush(), 
                 TitelDarstellung.Farbe.ToBrush(), 

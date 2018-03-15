@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using System.Xml;
-using System.Threading;
-using System.Diagnostics;
 
 using Assistment.Extensions;
 using Assistment.Drawing.LinearAlgebra;
-using Assistment.PDF;
-using Assistment.Mathematik;
 using Assistment.Texts;
 
 using Werwolf.Inhalt;
@@ -59,15 +50,15 @@ namespace Werwolf.Forms
             this.ppmBox1.PpmMaximum = Settings.MaximumPpm;
         }
 
-        private void FetchJob(bool MachBilder)
+        private void FetchJob(bool MachBilder, bool CleanJob)
         {
-            Job.RuckBildMode Mode = Printing.Job.RuckBildMode.Keine;
+            Job.RuckBildMode Mode = Job.RuckBildMode.Keine;
             if (radioButton1.Checked)
-                Mode = Printing.Job.RuckBildMode.Einzeln;
+                Mode = Job.RuckBildMode.Einzeln;
             else if (radioButton2.Checked)
-                Mode = Printing.Job.RuckBildMode.Gemeinsam;
+                Mode = Job.RuckBildMode.Gemeinsam;
             else if (radioButton4.Checked)
-                Mode = Printing.Job.RuckBildMode.Nur;
+                Mode = Job.RuckBildMode.Nur;
 
             Job.Init(deck,
                 colorBox1.GetValue(),
@@ -81,18 +72,20 @@ namespace Werwolf.Forms
                 dinA4ForcedBox.Checked,
                 floatBox1.UserValue,
                 MachBilder,
-                consoleBox.Checked);
+                consoleBox.Checked,
+                CleanJob);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
+            Job.MaxCPU = int.MaxValue;
         }
 
-        private void DruckenBilder_Click(object sender, System.EventArgs e)
+        private void DruckenBilder_Click(object sender, EventArgs e)
         {
             saveFileDialog1.FileName = Deck.Schreibname;
-            if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
 
-            FetchJob(true);
+            FetchJob(true, true);
 
             Printer.RunWorkerAsync();
         }
@@ -104,16 +97,16 @@ namespace Werwolf.Forms
                 deck,
                 new ViewDeck(),
                 false);
-            if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
                 Deck = form.Element;
         }
         private void Drucken_Click(object sender, EventArgs e)
         {
             saveFileDialog1.FileName = Deck.Schreibname;
-            if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
 
-            FetchJob(false);
+            FetchJob(false, true);
 
             Printer.RunWorkerAsync();
         }
@@ -121,7 +114,9 @@ namespace Werwolf.Forms
         {
             Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = false; });
             DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = false; });
-            Job.DistributedPrint(TargetPath, progressBar1);
+            string JobPath = Job.Save(TargetPath);
+            JobTickerProgressBar jobTickerProgressBar = new JobTickerProgressBar(progressBar1);
+            Job.DistributedPrint(JobPath, jobTickerProgressBar);
             Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = true; });
             DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = true; });
         }
@@ -130,9 +125,9 @@ namespace Werwolf.Forms
             e.Cancel = !Drucken.Enabled;
             base.OnClosing(e);
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            FetchJob(false);
+            FetchJob(false, true);
             WolfSinglePaper wsp = new WolfSinglePaper(Job);
             foreach (var item in deck.GetKarten(0, 9))
                 for (int i = 0; i < item.Value; i++)
@@ -141,7 +136,7 @@ namespace Werwolf.Forms
                     else
                         wsp.TryAdd(new StandardKarte(item.Key, Job.Ppm));
 
-            wsp.Swapped = Job.MyMode == Printing.Job.RuckBildMode.Nur;
+            wsp.Swapped = Job.MyMode == Job.RuckBildMode.Nur;
 
             if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
@@ -156,6 +151,17 @@ namespace Werwolf.Forms
                 wsp.Draw(dcg);
             }
             pictureBox1.Image = b;
+        }
+
+        private void DruckenJob_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = Deck.Schreibname;
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            FetchJob(false, false);
+            Job.MaxCPU = 1;
+            Job.Save(TargetPath);
         }
     }
 }

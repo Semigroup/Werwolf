@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Werwolf", "Werwolf\Werwolf.csproj", "{CDDC6E7B-BC1E-4439-81AD-AB4891063771}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{0AA011A5-54AE-4492-A2CB-849211B92A76}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation", "Translation\Translation.csproj", "{3C65E829-6DFE-4F99-813D-89FFA626D2A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skinner", "Skinner\Skinner.csproj", "{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -152,6 +154,22 @@ Global
 		{3C65E829-6DFE-4F99-813D-89FFA626D2A2}.Release|x64.Build.0 = Release|x64
 		{3C65E829-6DFE-4F99-813D-89FFA626D2A2}.Release|x86.ActiveCfg = Release|x86
 		{3C65E829-6DFE-4F99-813D-89FFA626D2A2}.Release|x86.Build.0 = Release|x86
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|x64.ActiveCfg = Debug|x64
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|x64.Build.0 = Debug|x64
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Debug|x86.Build.0 = Debug|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|x64.ActiveCfg = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|x64.Build.0 = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C6DB35F-C0F6-4D90-B280-8156F2116D2B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

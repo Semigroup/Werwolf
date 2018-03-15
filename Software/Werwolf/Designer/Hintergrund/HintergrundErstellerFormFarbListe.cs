@@ -14,10 +14,7 @@ using Assistment.Drawing;
 using Assistment.Mathematik;
 using Assistment.form;
 using Werwolf.Generating;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Drawing.Geometries;
-using Assistment.Drawing.Style;
-using Assistment.Extensions;
 
 namespace Designer.Hintergrund
 {

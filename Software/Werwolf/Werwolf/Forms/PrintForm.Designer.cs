@@ -54,6 +54,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dinA4ForcedBox = new System.Windows.Forms.CheckBox();
             this.consoleBox = new System.Windows.Forms.CheckBox();
+            this.DruckenJob = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,10 +188,10 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(638, 505);
+            this.progressBar1.Location = new System.Drawing.Point(640, 505);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(251, 19);
+            this.progressBar1.Size = new System.Drawing.Size(249, 19);
             this.progressBar1.Step = 1;
             this.progressBar1.TabIndex = 16;
             // 
@@ -241,14 +242,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(639, 529);
+            this.button1.Location = new System.Drawing.Point(640, 529);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 35);
+            this.button1.Size = new System.Drawing.Size(131, 35);
             this.button1.TabIndex = 18;
             this.button1.Text = "Vorschau: Erste Seite";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // checkBox2
             // 
@@ -329,11 +330,22 @@
             this.consoleBox.Text = "Konsolen anzeigen?";
             this.consoleBox.UseVisualStyleBackColor = true;
             // 
+            // DruckenJob
+            // 
+            this.DruckenJob.Location = new System.Drawing.Point(640, 564);
+            this.DruckenJob.Name = "DruckenJob";
+            this.DruckenJob.Size = new System.Drawing.Size(131, 35);
+            this.DruckenJob.TabIndex = 105;
+            this.DruckenJob.Text = "Nur Job Erstellen";
+            this.DruckenJob.UseVisualStyleBackColor = true;
+            this.DruckenJob.Click += new System.EventHandler(this.DruckenJob_Click);
+            // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 661);
+            this.Controls.Add(this.DruckenJob);
             this.Controls.Add(this.consoleBox);
             this.Controls.Add(this.dinA4ForcedBox);
             this.Controls.Add(this.label4);
@@ -395,5 +407,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox dinA4ForcedBox;
         private System.Windows.Forms.CheckBox consoleBox;
+        private System.Windows.Forms.Button DruckenJob;
     }
 }
