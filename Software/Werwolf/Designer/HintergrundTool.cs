@@ -30,6 +30,7 @@ namespace Designer
         private Button button1;
         private Button button2;
         private Button button3;
+        private Button button4;
         private Button FragmentButton;
 
         public string ToolDescription => "Hintergrund-Designer";
@@ -50,6 +51,7 @@ namespace Designer
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FragmentButton
@@ -102,9 +104,21 @@ namespace Designer
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.button4.Location = new System.Drawing.Point(12, 251);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(128, 42);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Schrift Testen";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // HintergrundTool
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 305);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -140,6 +154,11 @@ namespace Designer
         private void button3_Click(object sender, EventArgs e)
         {
             new HintergrundErstellerFormFarbListe().Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new TypingTest().Show();
         }
     }
 }

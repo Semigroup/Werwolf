@@ -89,6 +89,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RahmenCreator\State.cs" />
+    <Compile Include="TypingTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TypingTest.Designer.cs">
+      <DependentUpon>TypingTest.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Hintergrund\HintergrundErstellerFormFarbListe.resx">
       <DependentUpon>HintergrundErstellerFormFarbListe.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +120,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TypingTest.resx">
+      <DependentUpon>TypingTest.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
