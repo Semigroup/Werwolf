@@ -45,11 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Latex\LatexWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ranger.cs" />
     <Compile Include="Structures\Components.cs" />
+    <Compile Include="Structures\Range.cs" />
     <Compile Include="Structures\Spell.cs" />
+    <Compile Include="Structures\SpellType.cs" />
     <Compile Include="Structures\Time.cs" />
   </ItemGroup>
   <ItemGroup>
