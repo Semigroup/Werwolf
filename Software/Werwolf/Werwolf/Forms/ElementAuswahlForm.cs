@@ -191,9 +191,10 @@ namespace Werwolf.Forms
         {
             PreForm<T> pf = GetPreform(b.Element);
             CancelThread = true;
+            string oldElementName = b.Element.Name;
             if (pf.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ElementMenge.Change(b.Element.Name, pf.Element);
+                ElementMenge.Change(oldElementName, pf.Element);
                 Auswahlen(b.Element);
             }
             if (b.Element.Deep && Settings.RefreshDirtyButtons)

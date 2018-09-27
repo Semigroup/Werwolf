@@ -103,7 +103,7 @@ namespace Werwolf.Forms
         {
             UpdatingWerteListe = true;
             WerteListe.SetValue("Name", element.Schreibname);
-            this.Text = element.XmlName + " namens " + element.Schreibname + " bearbeiten...";
+            this.UpdateFormTitle();
             UpdatingWerteListe = false;
         }
         /// <summary>
@@ -114,7 +114,10 @@ namespace Werwolf.Forms
             if (element == null || UpdatingWerteListe)
                 return;
             element.Name = element.Schreibname = WerteListe.GetValue<string>("Name");
+            this.UpdateFormTitle();
         }
+        public void UpdateFormTitle()
+            => this.Text = element.XmlName + " namens " + element.Schreibname + " bearbeiten...";
 
         protected void BuildArrayBox<I>(string Name, ElementMenge<I> Menge) where I : XmlElement, new()
         {
