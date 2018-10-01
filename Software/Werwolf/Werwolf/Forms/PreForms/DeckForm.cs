@@ -23,8 +23,10 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
             foreach (var item in Universe.Karten)
             {
-                IntPlusMinusBox ipmBox = new IntPlusMinusBox();
-                ipmBox.UserValueMinimum = 0;
+                IntPlusMinusBox ipmBox = new IntPlusMinusBox
+                {
+                    UserValueMinimum = 0
+                };
                 WerteListe.AddWertePaar<int>(ipmBox, 0, item.Value.Name);
             }
             this.WerteListe.WertChanged += new WertEventHandler(WerteListe_WertChanged);

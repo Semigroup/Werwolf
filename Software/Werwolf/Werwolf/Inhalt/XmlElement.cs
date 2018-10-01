@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Assistment.Xml;
 using System.Xml;
+using System.Diagnostics;
 
 namespace Werwolf.Inhalt
 {
+    [DebuggerDisplay("{Name}, {ID}")]
     public abstract class XmlElement : ICloneable
     {
         public string XmlName { get; private set; }
@@ -15,11 +17,14 @@ namespace Werwolf.Inhalt
         public Universe Universe { get; private set; }
         public bool Unzerstorbar { get; set; }
         public bool Deep { get; private set; }
+        public int ID { get; private set; }
+        private static int idCont = 0;
 
         public XmlElement(string XmlName, bool Deep)
         {
             this.XmlName = XmlName;
             this.Deep = Deep;
+            this.ID = idCont++;
         }
 
         public virtual void Init(Universe Universe)
