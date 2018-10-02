@@ -103,6 +103,8 @@ namespace Werwolf.Karten.Modern
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
+            MovedInnenBox = MovedInnenBox.move(ToMove);
+            TextRegion = TextRegion.move(ToMove);
             for (int i = 0; i < Texts.Length; i++)
                 Texts[i].Move(ToMove);
         }

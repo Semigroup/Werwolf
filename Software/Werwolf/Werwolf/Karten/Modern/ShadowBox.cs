@@ -47,6 +47,12 @@ namespace Werwolf.Karten.Modern
             return new ShadowBox(DrawBox, ForeColor, BackColor, OffSet);
         }
 
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            ForeDrawBox.Move(ToMove);
+            BackDrawBox.Move(ToMove);
+        }
         public override void Setup(RectangleF box)
         {
             ForeDrawBox.Setup(box);

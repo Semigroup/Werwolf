@@ -104,6 +104,8 @@ namespace Werwolf.Karten.Modern
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
+            MovedInnenBox = MovedInnenBox.move(ToMove);
+            TextRegion = TextRegion.move(ToMove);
             for (int i = 0; i < Texts.Length; i++)
                 Texts[i].Move(ToMove);
         }
@@ -117,17 +119,19 @@ namespace Werwolf.Karten.Modern
                     TextDarstellung.InnenRadius * Faktor, 0.25f, 0f);
                 PointF center = new PointF
                 {
-                    X = HintergrundDarstellung.MarginLeft
+                    X =
+                    HintergrundDarstellung.MarginLeft
                     + HintergrundDarstellung.Rand.Width
                     + TextDarstellung.InnenRadius,
                     Y = TextRegion.Y - Faktor * TextDarstellung.InnenRadius
                 };
-                center.X *= Faktor;
+                center.X = center.X * Faktor + Box.X;
                 ow1 += center;
                 center.X = AussenBox.Width - Faktor *
                     (HintergrundDarstellung.MarginRight
                     + HintergrundDarstellung.Rand.Width
-                    + TextDarstellung.InnenRadius);
+                    + TextDarstellung.InnenRadius)
+                    + Box.X;
                 ow2 += center;
 
                 PointF[] polygon = new PointF[10006];

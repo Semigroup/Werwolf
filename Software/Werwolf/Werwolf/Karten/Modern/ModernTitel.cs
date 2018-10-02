@@ -28,7 +28,11 @@ namespace Werwolf.Karten.Modern
             RectangleF MovedInnenBox = InnenBox.move(Box.Location);
             ShadowBox.Setup(MovedInnenBox);
         }
-
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            ShadowBox.Move(ToMove);
+        }
         public override void Update()
         {
         }

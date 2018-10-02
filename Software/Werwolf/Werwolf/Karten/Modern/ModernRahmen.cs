@@ -36,6 +36,13 @@ namespace Werwolf.Karten.Modern
         {
         }
 
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            MovedInnenBox = MovedInnenBox.move(ToMove);
+            MovedAussenBoxCenter = MovedAussenBoxCenter.add(ToMove);
+        }
+
         public override void Draw(DrawContext con)
         {
             HintergrundBild hintergrundBild = HintergrundDarstellung.Quer 

@@ -30,7 +30,12 @@ namespace Werwolf.Karten.Modern
             LeftBox.Setup(BottomBox);
             RightBox.Setup(BottomBox);
         }
-
+        public override void Move(PointF ToMove)
+        {
+            base.Move(ToMove);
+            LeftBox.Move(ToMove);
+            RightBox.Move(ToMove);
+        }
         public override void Update()
         {
         }
