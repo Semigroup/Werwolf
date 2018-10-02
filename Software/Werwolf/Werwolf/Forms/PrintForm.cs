@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
 
 using Assistment.Extensions;
 using Assistment.Drawing.LinearAlgebra;
@@ -21,6 +22,7 @@ namespace Werwolf.Forms
 
         private Universe universe;
         private Deck deck;
+        private List<KeyValuePair<Karte, int>> fullSortedDeckList;
         public Deck Deck
         {
             get { return deck; }
@@ -28,6 +30,7 @@ namespace Werwolf.Forms
             {
                 deck = value;
                 label1.Text = deck.Schreibname;
+                fullSortedDeckList = deck.GetSortedList();
                 int n = deck.TotalCount();
                 if (n > 99 && !Environment.Is64BitProcess)
                     MessageBox.Show("Achtung. Das Deck " + deck.Schreibname + " besitzt " + n + " Karten.\r\n"
@@ -129,7 +132,7 @@ namespace Werwolf.Forms
         {
             FetchJob(false, true);
             WolfSinglePaper wsp = new WolfSinglePaper(Job);
-            foreach (var item in deck.GetKarten(0, 9))
+            foreach (var item in deck.GetKarten(fullSortedDeckList, 0, 9))
                 for (int i = 0; i < item.Value; i++)
                     if (Job.MyMode == Printing.Job.RuckBildMode.Nur)
                         wsp.TryAdd(new StandardRuckseite(item.Key, Job.Ppm));

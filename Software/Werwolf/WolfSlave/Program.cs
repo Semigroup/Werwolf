@@ -121,12 +121,12 @@ namespace WolfSlave
             switch (Job.MyMode)
             {
                 case Job.RuckBildMode.Keine:
-                    foreach (var item in Job.Deck.GetKarten(JobNumber * numberProSheet, numberProSheet))
+                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList,JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             wsp.TryAdd(GetKarte(item.Key, Job));
                     break;
                 case Job.RuckBildMode.Einzeln:
-                    foreach (var item in Job.Deck.GetKarten((JobNumber / 2) * numberProSheet, numberProSheet))
+                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList, (JobNumber / 2) * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             if (JobNumber % 2 == 0)
                                 wsp.TryAdd(GetKarte(item.Key, Job));
@@ -135,7 +135,7 @@ namespace WolfSlave
                     wsp.Swapped = JobNumber % 2 == 1;
                     break;
                 case Job.RuckBildMode.Nur:
-                    foreach (var item in Job.Deck.GetKarten(JobNumber * numberProSheet, numberProSheet))
+                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             wsp.TryAdd(GetRuckseite(item.Key, Job));
                     wsp.Swapped = true;

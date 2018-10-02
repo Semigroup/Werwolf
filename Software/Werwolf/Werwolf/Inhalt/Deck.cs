@@ -44,11 +44,11 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteRaw(sb.ToString());
         }
 
-        public List<KeyValuePair<Karte, int>> GetKarten(int ab, int Anzahl)
+        public List<KeyValuePair<Karte, int>> GetKarten(List<KeyValuePair<Karte, int>> fullSortedList, int ab, int Anzahl)
         {
             List<KeyValuePair<Karte, int>> l = new List<KeyValuePair<Karte, int>>();
             int selected = 0;
-            foreach (var item in Karten)
+            foreach (var item in fullSortedList)
             {
                 ab -= item.Value;
                 int take = FastMath.Min(Anzahl - selected, -ab, item.Value);
@@ -57,6 +57,14 @@ namespace Werwolf.Inhalt
                 if (selected >= Anzahl)
                     break;
             }
+            return l;
+        }
+        public List<KeyValuePair<Karte, int>> GetSortedList()
+        {
+            List<KeyValuePair<Karte, int>> l = new List<KeyValuePair<Karte, int>>();
+            foreach (var item in Karten)
+                l.Add(item);
+            l.Sort((x, y) => x.Key.OldCompareTo(y.Key));
             return l;
         }
         public int UniqueCount()

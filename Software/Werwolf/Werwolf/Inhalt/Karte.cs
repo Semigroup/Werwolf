@@ -331,11 +331,15 @@ namespace Werwolf.Inhalt
         }
 
         public int CompareTo(Karte other)
+            => this.ID - other.ID;
+        public int OldCompareTo(Karte other)
         {
-            return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10000
-                //+this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10000000
-                + this.Name.CompareTo(other.Name);
+            return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10000 + this.Name.CompareTo(other.Name);
+            //return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10000 
+            //    //+this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10000000
+            //    + this.Name.CompareTo(other.Name);
         }
+
         public override void Rescue()
         {
             Universe.BildDarstellungen.Rescue(BildDarstellung);

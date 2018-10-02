@@ -31,6 +31,7 @@ namespace Werwolf.Printing
         }
 
         public Deck Deck { get; set; }
+        public List<KeyValuePair<Karte, int>> FullSortedDeckList { get; set; }
         public Color HintergrundFarbe { get; set; }
         public Color TrennlinienFarbe { get; set; }
         public float Ppm { get; set; }
@@ -80,6 +81,7 @@ namespace Werwolf.Printing
             bool KonsolenAnzeigen, bool CleanJob)
         {
             this.Deck = Deck;
+            this.FullSortedDeckList = Deck.GetSortedList();
             this.HintergrundFarbe = HintergrundFarbe;
             this.TrennlinienFarbe = TrennlinienFarbe;
             this.Ppm = Ppm;
@@ -102,6 +104,7 @@ namespace Werwolf.Printing
             base.ReadIntern(Loader);
 
             this.Deck = Loader.GetDeck();
+            this.FullSortedDeckList = Deck.GetSortedList();
             this.HintergrundFarbe = Loader.XmlReader.GetColorHexARGB("HintergrundFarbe");
             this.TrennlinienFarbe = Loader.XmlReader.GetColorHexARGB("TrennlinienFarbe");
             this.Ppm = Loader.XmlReader.GetFloat("Ppm");
