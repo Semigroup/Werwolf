@@ -92,8 +92,11 @@ namespace Werwolf.Karten.Modern
 
         public override void Draw(DrawContext con)
         {
-            LeftBox.Draw(con);
-            RightBox.Draw(con);
+            if (InfoDarstellung.Existiert)
+            {
+                LeftBox.Draw(con);
+                RightBox.Draw(con);
+            }
         }
     }
 }
