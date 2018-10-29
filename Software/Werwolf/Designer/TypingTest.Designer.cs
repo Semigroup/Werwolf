@@ -44,6 +44,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.SamplesBox = new Assistment.form.IntBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -204,11 +205,22 @@
             this.SamplesBox.UserValueMaximum = 2147483647;
             this.SamplesBox.UserValueMinimum = -2147483648;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1060, 568);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "PDF";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TypingTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 603);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SamplesBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -252,5 +264,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private Assistment.form.IntBox SamplesBox;
+        private System.Windows.Forms.Button button1;
     }
 }

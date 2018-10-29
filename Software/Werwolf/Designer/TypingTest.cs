@@ -20,6 +20,7 @@ namespace Designer
     {
         string text = "";
         Alphabet alphabet;
+        Image Image;
 
         public TypingTest()
         {
@@ -42,6 +43,7 @@ namespace Designer
             int samplesPerLetter = SamplesBox.UserValue;
 
             e.Graphics.Clear(Color.White);
+            e.Graphics.Raise();
 
             DrawString(e.Graphics, text, new PointF(), Pens.Black,
                 box, alphabet, burst, linesLinks, linesRechts, breite, radius, samplesPerLetter);
@@ -83,6 +85,34 @@ namespace Designer
         {
             text = textBox1.Text;
             Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LetterBox box = LetterBox.GetGoldenCut(SizeBox.UserValue);
+            box.CornerStyle = (LetterBox.Style)enumBox1.GetValue();
+            float burst = BurstBox.UserValue;
+            int linesLinks = pointBox1.UserX;
+            int linesRechts = pointBox1.UserY;
+            float breite = BreiteBox.UserValue;
+            float radius = floatBox1.UserValue;
+            int samplesPerLetter = SamplesBox.UserValue;
+
+            int ppm = 23;
+            int dina = 4;
+            Size s = dina.DinA(false);
+            using (Bitmap bmp = new Bitmap(s.Width * ppm, s.Height * ppm))
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+                g.Raise();
+                g.ScaleTransform(6, 6);
+
+                DrawString(g, text, new PointF(), Pens.Black,
+                    box, alphabet, burst, linesLinks, linesRechts, breite, radius, samplesPerLetter);
+
+                bmp.savePdf("CyberFontTest", 4, false);
+            }
         }
     }
 }
