@@ -76,7 +76,9 @@ namespace Werwolf.Inhalt
             Reichweite = Universe.TextBilder[Loader.XmlReader.GetString("Reichweite")];
 
             string[] strings = Loader.XmlReader.GetStrings("ZielSicherheiten", ", ");
-            ZielSicherheiten = strings.Map(x => Universe.TextBilder[x]).ToArray();
+
+            for (int i = 0; i < strings.Length; i++)
+                ZielSicherheiten[i] = Universe.TextBilder[strings[i]];
             ZielSicherheitenSchutze = Universe.TextBilder[Loader.XmlReader.GetString("Schütze")];
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
@@ -108,7 +110,7 @@ namespace Werwolf.Inhalt
             ld.Storung = Storung;
             ld.Reichweite = Reichweite;
             ld.Felder = Felder;
-            for (int i = 0; i < ZielSicherheiten.Length; i++)
+            for (int i = 0; i < ld.ZielSicherheiten.Length; i++)
                 ld.ZielSicherheiten[i] = ZielSicherheiten[i];
             ld.ZielSicherheitenSchutze = ZielSicherheitenSchutze;
         }
