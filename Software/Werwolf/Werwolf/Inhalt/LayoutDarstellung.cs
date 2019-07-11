@@ -40,6 +40,10 @@ namespace Werwolf.Inhalt
         public TextBild Felder { get; set; }
         public TextBild Reichweite { get; set; }
 
+        public TextBild Leben { get; set; }
+        public TextBild LebenLeer { get; set; }
+        public TextBild Rustung { get; set; }
+
         /// <summary>
         /// ZielSicherheiten[x+9] lieftert ZielSicherheit x
         /// <para> x geht von -9 bis 9, beide Grenzen eingeschlossen </para>
@@ -57,7 +61,7 @@ namespace Werwolf.Inhalt
             GrossesNamenfeld = Universe.TextBilder.Standard;
             KleinesNamenfeld = Universe.TextBilder.Standard;
 
-            Storung = Initiative = Felder = Reichweite
+            Storung = Initiative = Felder = Reichweite = Leben = LebenLeer= Rustung
                 = Universe.TextBilder.Standard;
 
             for (int i = 0; i < ZielSicherheiten.Length; i++)
@@ -75,6 +79,10 @@ namespace Werwolf.Inhalt
             Felder = Universe.TextBilder[Loader.XmlReader.GetString("Felder")];
             Reichweite = Universe.TextBilder[Loader.XmlReader.GetString("Reichweite")];
 
+            Leben = Universe.TextBilder[Loader.XmlReader.GetString("Leben")];
+            LebenLeer = Universe.TextBilder[Loader.XmlReader.GetString("LebenLeer")];
+            Rustung = Universe.TextBilder[Loader.XmlReader.GetString("Rustung")];
+
             string[] strings = Loader.XmlReader.GetStrings("ZielSicherheiten", ", ");
 
             for (int i = 0; i < strings.Length; i++)
@@ -91,6 +99,10 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteAttribute("Initiative", Initiative.Name);
             XmlWriter.WriteAttribute("Felder", Felder.Name);
             XmlWriter.WriteAttribute("Reichweite", Reichweite.Name);
+
+            XmlWriter.WriteAttribute("Leben", Leben.Name);
+            XmlWriter.WriteAttribute("LebenLeer", LebenLeer.Name);
+            XmlWriter.WriteAttribute("Rustung", Rustung.Name);
 
             XmlWriter.WriteAttribute("ZielSicherheiten",ZielSicherheiten.SumText(","));
             XmlWriter.WriteAttribute("Schütze", ZielSicherheitenSchutze.Name);
@@ -110,6 +122,9 @@ namespace Werwolf.Inhalt
             ld.Storung = Storung;
             ld.Reichweite = Reichweite;
             ld.Felder = Felder;
+            ld.Leben = Leben;
+            ld.LebenLeer = LebenLeer;
+            ld.Rustung = Rustung;
             for (int i = 0; i < ld.ZielSicherheiten.Length; i++)
                 ld.ZielSicherheiten[i] = ZielSicherheiten[i];
             ld.ZielSicherheitenSchutze = ZielSicherheitenSchutze;
@@ -129,6 +144,9 @@ namespace Werwolf.Inhalt
             Universe.TextBilder.Rescue(Initiative);
             Universe.TextBilder.Rescue(Felder);
             Universe.TextBilder.Rescue(Reichweite);
+            Universe.TextBilder.Rescue(Leben);
+            Universe.TextBilder.Rescue(LebenLeer);
+            Universe.TextBilder.Rescue(Rustung);
             for (int i = 0; i < ZielSicherheiten.Length; i++)
                 Universe.TextBilder.Rescue(ZielSicherheiten[i]);
             Universe.TextBilder.Rescue(ZielSicherheitenSchutze);

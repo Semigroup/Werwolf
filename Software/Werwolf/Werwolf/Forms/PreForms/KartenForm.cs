@@ -48,6 +48,9 @@ namespace Werwolf.Forms
             WerteListe.AddIntBox(0, "Felder");
             WerteListe.AddIntBox(0, "Störung");
 
+            WerteListe.AddIntBox(0, "Leben");
+            WerteListe.AddIntBox(0, "Rüstung");
+
             WerteListe.AddStringBox("", "Kosten");
             WerteListe.AddStringBox("", "Effekt");
             BuildArrayBox("Basen", Universe.Karten);
@@ -85,6 +88,9 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Felder", element.Felder);
             WerteListe.SetValue("Störung", element.Storung);
 
+            WerteListe.SetValue("Leben", element.Leben);
+            WerteListe.SetValue("Rüstung", element.Rustung);
+
             WerteListe.SetValue("Kosten", element.Kosten.ToString());
             WerteListe.SetValue("Effekt", element.Effekt.ToString());
             WerteListe.SetValue("Basen", element.Basen);
@@ -120,6 +126,8 @@ namespace Werwolf.Forms
             element.Initiative = WerteListe.GetValue<float>("Initiative");
             element.Felder = WerteListe.GetValue<int>("Felder");
             element.Storung = WerteListe.GetValue<int>("Störung");
+            element.Leben = WerteListe.GetValue<int>("Leben");
+            element.Rustung = WerteListe.GetValue<int>("Rüstung");
 
             element.Kosten = new Aufgabe(WerteListe.GetValue<string>("Kosten"), Universe);
             element.Effekt = new Aufgabe(WerteListe.GetValue<string>("Effekt"), Universe);
@@ -135,6 +143,7 @@ namespace Werwolf.Forms
             SetVisible(Karte.KartenModus.AktionsKarte, "Störung");
             SetVisible(Karte.KartenModus.AktionsKarte | Karte.CyberIrgendwas,
                 "Initiative", "Reichweite", "Felder");
+            SetVisible(Karte.KartenModus.RollenspielFigur, "Leben", "Rüstung");
             SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.WondersReichKarte, "Basen");
             SetVisible(Karte.WondersIrgendwas, "Entwicklungen");
             SetVisible(Karte.KartenModus.WondersKarte | Karte.CyberIrgendwas, "Kosten", "Effekt");

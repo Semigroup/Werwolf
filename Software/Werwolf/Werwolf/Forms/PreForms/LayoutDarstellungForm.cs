@@ -37,6 +37,10 @@ namespace Werwolf.Forms
             BuildWertBox("Initiative", Universe.TextBilder);
             BuildWertBox("Felder", Universe.TextBilder);
 
+            BuildWertBox("Leben", Universe.TextBilder);
+            BuildWertBox("Leben Leer", Universe.TextBilder);
+            BuildWertBox("Rüstung", Universe.TextBilder);
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -55,6 +59,10 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Initiative", element.Initiative);
             WerteListe.SetValue("Felder", element.Felder);
 
+            WerteListe.SetValue("Leben", element.Leben);
+            WerteListe.SetValue("Leben Leer", element.LebenLeer);
+            WerteListe.SetValue("Rüstung", element.Rustung);
+
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -70,11 +78,16 @@ namespace Werwolf.Forms
             element.Reichweite = WerteListe.GetValue<TextBild>("Reichweite");
             element.Initiative = WerteListe.GetValue<TextBild>("Initiative");
             element.Felder = WerteListe.GetValue<TextBild>("Felder");
+
+            element.Leben = WerteListe.GetValue<TextBild>("Leben");
+            element.LebenLeer = WerteListe.GetValue<TextBild>("Leben Leer");
+            element.Rustung = WerteListe.GetValue<TextBild>("Rüstung");
         }
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.AktionsKarte, "Störung", "Reichweite", "Initiative", "Felder");
             SetVisible(Karte.WondersIrgendwas, "Kleines Namenfeld", "Großes Namenfeld");
+            SetVisible(Karte.KartenModus.RollenspielFigur, "Rüstung", "Leben", "Leben Leer");
         }
     }
 }

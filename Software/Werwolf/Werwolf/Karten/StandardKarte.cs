@@ -11,6 +11,7 @@ using Assistment.Texts;
 using Werwolf.Inhalt;
 using Werwolf.Karten.CyberAktion;
 using Werwolf.Karten.Modern;
+using Werwolf.Karten.Figur;
 
 namespace Werwolf.Karten
 {
@@ -39,6 +40,8 @@ namespace Werwolf.Karten
         public ModernInfo ModernInfo { get; set; }
         public ModernText ModernText { get; set; }
         public ModernTextQuer ModernTextQuer { get; set; }
+
+        public StatInfo StatInfo { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -69,6 +72,8 @@ namespace Werwolf.Karten
                             return new WolfBox[] { HauptBild, ModernText, ModernRahmen, ModernTitel, ModernInfo, ModernTextQuer };
                         case Karte.KartenModus.ModernWolfZeichenKarte:
                             return new WolfBox[] { ModernRahmen, HauptBild, ModernText, ModernTitel, ModernInfo, ModernTextQuer };
+                        case Karte.KartenModus.RollenspielFigur:
+                            return new WolfBox[] { HauptBild, ModernTitel, StatInfo };
                         default:
                             throw new NotImplementedException();
                     }
@@ -108,6 +113,7 @@ namespace Werwolf.Karten
             ModernInfo = new ModernInfo(Karte, ppm);
             ModernText = new ModernText(Karte, ppm);
             ModernTextQuer = new ModernTextQuer(Karte, ppm);
+            StatInfo = new StatInfo(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -195,6 +201,9 @@ namespace Werwolf.Karten
                 case Karte.KartenModus.ModernWolfEreignisKarte:
                 case Karte.KartenModus.ModernWolfZeichenKarte:
                     DrawModernWolf(con);
+                    break;
+                case Karte.KartenModus.RollenspielFigur:
+                    DrawFigur(con);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -339,6 +348,29 @@ namespace Werwolf.Karten
 
             if (HintergrundDarstellung.Existiert)
                 con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+
+            foreach (var item in WolfBoxs)
+                if (item.Visible())
+                    item.Draw(con);
+        }
+        public void DrawFigur(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(Box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            float top = MovedInnenBox.Top;
+            float bottom = MovedInnenBox.Bottom;
+
+            HauptBild.CenterTop = top;
+            HauptBild.CenterBottom = bottom;
+            HauptBild.Setup(HauptBild.Box);
+
+            if (HintergrundDarstellung.Existiert)
+            {
+                con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+                con.DrawCenteredImage(Karte.Fraktion.HintergrundBild, MovedAussenBoxCenter, MovedInnenBox);
+            }
 
             foreach (var item in WolfBoxs)
                 if (item.Visible())

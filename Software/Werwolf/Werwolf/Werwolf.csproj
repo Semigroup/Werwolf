@@ -202,6 +202,7 @@
     <Compile Include="Karten\CyberAktion\HochBildTiefBox.cs" />
     <Compile Include="Karten\CyberAktion\LeftRightLine.cs" />
     <Compile Include="Karten\CyberAktion\SimpleAufgabenBox.cs" />
+    <Compile Include="Karten\Figur\StatInfo.cs" />
     <Compile Include="Karten\Modern\ModernRahmen.cs" />
     <Compile Include="Karten\Modern\ModernInfo.cs" />
     <Compile Include="Karten\Modern\ModernTextQuer.cs" />

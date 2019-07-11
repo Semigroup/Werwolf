@@ -41,6 +41,9 @@ namespace Werwolf.Inhalt
         public int Felder { get; set; }
         public int Storung { get; set; }
 
+        public int Leben { get; set; }
+        public int Rustung { get; set; }
+
         public Aufgabe Kosten { get; set; }
         public Aufgabe Effekt { get; set; }
 
@@ -95,7 +98,8 @@ namespace Werwolf.Inhalt
             CyberHackKarte = 0x100,
             ModernWolfKarte = 0x200,
             ModernWolfEreignisKarte = 0x400,
-            ModernWolfZeichenKarte = 0x800
+            ModernWolfZeichenKarte = 0x800,
+            RollenspielFigur = 0x1000
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
@@ -181,6 +185,9 @@ namespace Werwolf.Inhalt
             Felder = Loader.XmlReader.GetInt("Felder");
             Storung = Loader.XmlReader.GetInt("Storung");
 
+            Leben = Loader.XmlReader.GetInt("Leben");
+            Rustung = Loader.XmlReader.GetInt("Rustung");
+
             Kosten = Loader.GetAufgabe("Kosten");
             Effekt = Loader.GetAufgabe("Effekt");
             basen = Loader.XmlReader.GetString("Basen")
@@ -218,6 +225,9 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteInt("Felder", Felder);
             XmlWriter.WriteInt("Storung", Storung);
 
+            XmlWriter.WriteInt("Leben", Leben);
+            XmlWriter.WriteInt("Rustung", Rustung);
+
             XmlWriter.WriteAttribute("Kosten", Kosten.ToString());
             XmlWriter.WriteAttribute("Effekt", Effekt.ToString());
             XmlWriter.WriteAttribute("Basen", Basen.Map(b => b.Name).SumText(";"));
@@ -254,6 +264,9 @@ namespace Werwolf.Inhalt
             Karte.ReichweiteMax = ReichweiteMax;
             Karte.Storung = Storung;
             Karte.Felder = Felder;
+
+            Karte.Leben = Leben;
+            Karte.Rustung = Rustung;
 
             Karte.Kosten = Kosten;
             Karte.Effekt = Effekt;
