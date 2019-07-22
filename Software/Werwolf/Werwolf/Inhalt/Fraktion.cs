@@ -24,7 +24,11 @@ namespace Werwolf.Inhalt
             /// <summary>
             /// Rückseite = Vorderseite gespiegelt
             /// </summary>
-            Deckungsgleich
+            Deckungsgleich,
+            /// <summary>
+            /// Rückseide = Vorderseite gespiegelt, aber Text ist nach Möglichkeiten normal
+            /// </summary>
+            Figur
         }
 
         public Aufgabe StandardAufgaben { get;  set; }

@@ -197,7 +197,7 @@ namespace Werwolf.Inhalt
             Modus = Loader.XmlReader.GetEnum<KartenModus>("Modus");
             //Abwärtskompatibilität mit Daten, die keinen Kartenmodus definieren
             if (Modus == 0)
-               Modus = KartenModus.Werwolfkarte;
+                Modus = KartenModus.Werwolfkarte;
 
             AktionsName = Loader.GetAufgabe("AktionsName");
             ZielSicherheiten = Loader.XmlReader.GetString("ZielSicherheiten");
@@ -301,37 +301,39 @@ namespace Werwolf.Inhalt
             switch (Fraktion.RuckArt)
             {
                 case Fraktion.RuckseitenArt.Normal:
-                    return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm), high);
+                    return GetImage(ppm, BackColor, new StandardRuckseite(this, ppm), high, false);
                 case Fraktion.RuckseitenArt.Identisch:
                     return GetImage(ppm, BackColor, high);
                 case Fraktion.RuckseitenArt.Deckungsgleich:
                     Image img = GetImage(ppm, BackColor, high);
                     img.RotateFlip(RotateFlipType.RotateNoneFlipX);
                     return img;
+                case Fraktion.RuckseitenArt.Figur:
+                    return GetImage(ppm, BackColor, new StandardKarte(this, ppm), high, true);
                 default:
                     throw new NotImplementedException();
             }
         }
-        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox, bool high)
+        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox, bool high, bool flipX)
         {
             Size s = GetPictureSize(ppm);
             Bitmap img = new Bitmap(s.Width, s.Height);
             using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, BackColor, high))
-            using (DrawContextGraphics dcg = new DrawContextGraphics(g))
+            using (DrawContextGraphicsFlip dcg = new DrawContextGraphicsFlip(g,
+                new RectangleF(new PointF(), HintergrundDarstellung.Size.mul(WolfBox.Faktor)),
+                ppm / WolfBox.Faktor))//
             {
+                if (flipX)
+                    dcg.FlipX();
                 WolfBox.Setup(0);
                 WolfBox.Draw(dcg);
             }
             return img;
         }
         public Bitmap GetImage(float ppm, Color BackColor, bool high)
-        {
-            return GetImage(ppm, BackColor, new StandardKarte(this, ppm), high);
-        }
+            => GetImage(ppm, BackColor, new StandardKarte(this, ppm), high, false);
         public Bitmap GetImage(float ppm, bool high)
-        {
-            return GetImage(ppm, Color.FromArgb(0), high);
-        }
+            => GetImage(ppm, Color.FromArgb(0), high);
         public Bitmap GetImageByHeight(float Height, bool high)
         {
             float ppm = Height / HintergrundDarstellung.Size.Height;
