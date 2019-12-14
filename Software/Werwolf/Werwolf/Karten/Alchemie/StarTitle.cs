@@ -15,6 +15,7 @@ namespace Werwolf.Karten.Alchemie
     {
         private StarBox StarBox;
         public int Stars { get; set; } = 4;
+        private float WidthOff;
 
         public StarTitle(Karte Karte, float PPm) : base(Karte, PPm)
         {
@@ -27,6 +28,8 @@ namespace Werwolf.Karten.Alchemie
             this.Box.Location = box.Location;
 
             RectangleF MovedInnenBox = InnenBox.move(Box.Location);
+            MovedInnenBox.Width -= WidthOff;
+            MovedInnenBox.X += WidthOff;
             StarBox.Setup(MovedInnenBox);
         }
         public override void Move(PointF ToMove)
@@ -50,7 +53,9 @@ namespace Werwolf.Karten.Alchemie
             if (Karte == null)
                 return;
 
-            SizeF size = new SizeF(InnenBox.Width, HintergrundDarstellung.MarginTop * Faktor);
+            WidthOff =( Karte.HintergrundDarstellung.MarginTop + Karte.HintergrundDarstellung.Rand.Height +HintergrundDarstellung.Anker.Y )* Faktor / 2;
+
+            SizeF size = new SizeF(InnenBox.Width - WidthOff, HintergrundDarstellung.MarginTop * Faktor);
 
             Text text = new Text(Karte.Schreibname, TitelDarstellung.FontMeasurer)
             {

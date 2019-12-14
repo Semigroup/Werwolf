@@ -78,7 +78,7 @@ namespace Werwolf.Forms
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.Werwolfkarte, "Titel Art");
-            SetVisible(Karte.KartenModus.ModernWolfKarte, "Bild Hintergrund Quer");
+            SetVisible(Karte.KartenModus.ModernWolfKarte | Karte.AlchemieIrgendwas, "Bild Hintergrund Quer");
             SetVisible(Karte.CyberIrgendwas, "Symbol");
             SetVisible(Karte.KartenModus.ModernWolfEreignisKarte, "Text hat komplexe Struktur?");
         }

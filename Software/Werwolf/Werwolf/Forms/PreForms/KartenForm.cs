@@ -146,7 +146,7 @@ namespace Werwolf.Forms
             SetVisible(Karte.KartenModus.RollenspielFigur, "Leben", "Rüstung");
             SetVisible(Karte.KartenModus.WondersKarte | Karte.KartenModus.WondersReichKarte, "Basen");
             SetVisible(Karte.WondersIrgendwas, "Entwicklungen");
-            SetVisible(Karte.KartenModus.WondersKarte | Karte.CyberIrgendwas, "Kosten", "Effekt");
+            SetVisible(Karte.KartenModus.WondersKarte | Karte.CyberIrgendwas | Karte.AlchemieIrgendwas, "Kosten", "Effekt");
             SetVisible(~Karte.KartenModus.Werwolfkarte, "Layout Darstellung");
             SetVisible(Karte.KartenModus.Werwolfkarte | Karte.KartenModus.WondersKarte | Karte.KartenModus.ModernWolfKarte, "Info Darstellung");
             SetVisible(~(Karte.KartenModus.WonderGlobalesProjekt | Karte.KartenModus.WondersAuswahlKarte), "Text");

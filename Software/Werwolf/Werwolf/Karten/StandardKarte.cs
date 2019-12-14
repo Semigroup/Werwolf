@@ -46,6 +46,7 @@ namespace Werwolf.Karten
         public StatInfo StatInfo { get; set; }
 
         public StarTitle StarTitle { get; set; }
+        public CostMarker CostMarker { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -79,7 +80,7 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.RollenspielFigur:
                             return new WolfBox[] { HauptBild, ModernTitel, StatInfo };
                         case Karte.KartenModus.AlchemieKarte:
-                            return new WolfBox[] { HauptBild, ModernText, ModernRahmen, StarTitle, ModernInfo, ModernTextQuer };
+                            return new WolfBox[] { HauptBild, ModernRahmen, ModernTextQuer, StarTitle, CostMarker };//
                         default:
                             throw new NotImplementedException();
                     }
@@ -121,6 +122,7 @@ namespace Werwolf.Karten
             ModernTextQuer = new ModernTextQuer(Karte, ppm);
             StatInfo = new StatInfo(Karte, ppm);
             StarTitle = new StarTitle(Karte, ppm);
+            CostMarker = new CostMarker(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -181,6 +183,7 @@ namespace Werwolf.Karten
         }
         public override void Draw(DrawContext con)
         {
+            bool drawRand = true;
             switch (Karte.Modus)
             {
                 case Karte.KartenModus.Werwolfkarte:
@@ -213,12 +216,14 @@ namespace Werwolf.Karten
                     DrawFigur(con);
                     break;
                 case Karte.KartenModus.AlchemieKarte:
-                    DrawModernWolf(con);
+                    DrawAlchemie(con);
+                    drawRand = false;
                     break;
                 default:
                     throw new NotImplementedException();
             }
-            DrawRand(con);
+            if (drawRand)
+                DrawRand(con);
         }
         public void DrawNormal(DrawContext con)
         {
@@ -385,6 +390,30 @@ namespace Werwolf.Karten
             foreach (var item in WolfBoxs)
                 if (item.Visible())
                     item.Draw(con);
+        }
+        public void DrawAlchemie(DrawContext con)
+        {
+            RectangleF MovedAussenBox = AussenBox.move(Box.Location);
+            RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
+            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+
+            float top = MovedInnenBox.Top;
+            float bottom = MovedInnenBox.Bottom;
+
+            HauptBild.CenterTop = top;
+            HauptBild.CenterBottom = bottom;
+            HauptBild.Setup(HauptBild.Box);
+
+            if (HintergrundDarstellung.Existiert)
+                con.FillRectangle(HintergrundDarstellung.Farbe.ToBrush(), MovedInnenBox);
+
+            var boxs = WolfBoxs;
+            for (int i = 0; i < boxs.Length - 1; i++)
+                if (boxs[i].Visible())
+                    boxs[i].Draw(con);
+            DrawRand(con);
+            if (boxs[boxs.Length - 1].Visible())
+                boxs[boxs.Length - 1].Draw(con);
         }
     }
 }
