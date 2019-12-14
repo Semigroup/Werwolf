@@ -98,7 +98,8 @@ namespace Werwolf.Forms
         protected override void SetVisibles()
         {
             SetVisible(0, "Hat Runde Ecken?");
-            SetVisible(Karte.ModernIrgendwas | Karte.KartenModus.RollenspielFigur, "Margin Links", "Margin Rechts", "Margin Oben", "Margin Unten");
+            SetVisible(Karte.ModernIrgendwas | Karte.KartenModus.RollenspielFigur | Karte.AlchemieIrgendwas,
+                "Margin Links", "Margin Rechts", "Margin Oben", "Margin Unten");
             SetVisible(Karte.ModernIrgendwas, "Bild ist quer?");
         }
     }

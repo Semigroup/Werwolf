@@ -99,31 +99,18 @@ namespace Werwolf.Inhalt
             ModernWolfKarte = 0x200,
             ModernWolfEreignisKarte = 0x400,
             ModernWolfZeichenKarte = 0x800,
-            RollenspielFigur = 0x1000
+            RollenspielFigur = 0x1000,
+            AlchemieKarte = 0x2000,
         }
         public KartenModus Modus { get; set; }
         public static KartenModus WondersIrgendwas
-        {
-            get
-            {
-                return KartenModus.WondersKarte | KartenModus.WondersReichKarte | KartenModus.WonderGlobalesProjekt
-                    | KartenModus.WondersAuswahlKarte;
-            }
-        }
+            => KartenModus.WondersKarte | KartenModus.WondersReichKarte | KartenModus.WonderGlobalesProjekt | KartenModus.WondersAuswahlKarte;
         public static KartenModus CyberIrgendwas
-        {
-            get
-            {
-                return KartenModus.CyberWaffenKarte | KartenModus.CyberSupportKarte | KartenModus.CyberHackKarte;
-            }
-        }
+            => KartenModus.CyberWaffenKarte | KartenModus.CyberSupportKarte | KartenModus.CyberHackKarte;
         public static KartenModus ModernIrgendwas
-        {
-            get
-            {
-                return KartenModus.ModernWolfKarte | KartenModus.ModernWolfEreignisKarte | KartenModus.ModernWolfZeichenKarte;
-            }
-        }
+            => KartenModus.ModernWolfKarte | KartenModus.ModernWolfEreignisKarte | KartenModus.ModernWolfZeichenKarte;
+        public static KartenModus AlchemieIrgendwas
+            => KartenModus.AlchemieKarte;
 
         public Karte()
             : base("Karte", true)

@@ -13,6 +13,8 @@ using Werwolf.Karten.CyberAktion;
 using Werwolf.Karten.Modern;
 using Werwolf.Karten.Figur;
 
+using Werwolf.Karten.Alchemie;
+
 namespace Werwolf.Karten
 {
     public class StandardKarte : WolfBox
@@ -42,6 +44,8 @@ namespace Werwolf.Karten
         public ModernTextQuer ModernTextQuer { get; set; }
 
         public StatInfo StatInfo { get; set; }
+
+        public StarTitle StarTitle { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -74,6 +78,8 @@ namespace Werwolf.Karten
                             return new WolfBox[] { ModernRahmen, HauptBild, ModernText, ModernTitel, ModernInfo, ModernTextQuer };
                         case Karte.KartenModus.RollenspielFigur:
                             return new WolfBox[] { HauptBild, ModernTitel, StatInfo };
+                        case Karte.KartenModus.AlchemieKarte:
+                            return new WolfBox[] { HauptBild, ModernText, ModernRahmen, StarTitle, ModernInfo, ModernTextQuer };
                         default:
                             throw new NotImplementedException();
                     }
@@ -114,6 +120,7 @@ namespace Werwolf.Karten
             ModernText = new ModernText(Karte, ppm);
             ModernTextQuer = new ModernTextQuer(Karte, ppm);
             StatInfo = new StatInfo(Karte, ppm);
+            StarTitle = new StarTitle(Karte, ppm);
         }
 
         public override void OnKarteChanged()
@@ -204,6 +211,9 @@ namespace Werwolf.Karten
                     break;
                 case Karte.KartenModus.RollenspielFigur:
                     DrawFigur(con);
+                    break;
+                case Karte.KartenModus.AlchemieKarte:
+                    DrawModernWolf(con);
                     break;
                 default:
                     throw new NotImplementedException();

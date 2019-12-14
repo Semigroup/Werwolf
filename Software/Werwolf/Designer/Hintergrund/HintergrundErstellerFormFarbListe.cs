@@ -198,7 +198,7 @@ namespace Designer.Hintergrund
                 d -= t;
                 t = t % n;
                 PointF p = edges[t].tween(edges[t + 1], d);
-                return M.saxpy( v * 2,p);
+                return M.saxpy(v * 2, p);
             };
         }
     }
