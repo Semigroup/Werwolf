@@ -20,6 +20,7 @@ namespace Werwolf.Generating
             OldSchool,
             Kreis,
             Stetig,
+            StetigeRaute,
             StetigerKreis
         }
 

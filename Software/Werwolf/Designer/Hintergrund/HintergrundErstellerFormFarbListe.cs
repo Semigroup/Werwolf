@@ -149,6 +149,19 @@ namespace Designer.Hintergrund
                     hs.Schema.Flache = (u, v) => pot(u, v).mul(hs.Size);
                     Shadex.ChaosFlacheBase(g, hs.Schema);
                     break;
+                case HintergrundSchema.Art.StetigeRaute:
+                    FlachenFunktion<PointF> rauteFeld = (u, v) => d.NextSpherical();
+                    rauteFeld = rauteFeld.KompaktDeterminieren(hs.Schema.Samples.X, hs.Schema.Samples.Y);
+                    FlachenFunktion<PointF> rautePot = rauteFeld.Potential(burst, 10);
+                    FlachenFunktion<PointF> glatteRaute = RegularPolyEder(4);
+                    hs.Schema.Flache = (u, v) =>
+                    {
+                        PointF p = rautePot(u, v);
+                        PointF s = glatteRaute(p.X, p.Y);
+                        return s.mul(hs.Size);
+                    };
+                    Shadex.ChaosFlacheBase(g, hs.Schema);
+                    break;
                 case HintergrundSchema.Art.StetigerKreis:
                     FlachenFunktion<PointF> zufallsFeld = (u, v) => d.NextSpherical();
                     zufallsFeld = zufallsFeld.KompaktDeterminieren(hs.Schema.Samples.X, hs.Schema.Samples.Y);
@@ -170,6 +183,23 @@ namespace Designer.Hintergrund
         public int GetDInA()
         {
             return 4;
+        }
+        public FlachenFunktion<PointF> RegularPolyEder(int numberEdges)
+        {
+            int n = numberEdges;
+            PointF[] edges = new PointF[n + 1];
+            edges.CountMap(i => new PointF(0, 0.5f).rot(2 * Math.PI * i / n));
+            PointF M = new PointF(0.5f, 0.5f);
+            //float scale = (float)(1 /Math.Sqrt(0.75));
+            return (u, v) =>
+            {
+                float d = u * n;
+                int t = (int)Math.Floor(d);
+                d -= t;
+                t = t % n;
+                PointF p = edges[t].tween(edges[t + 1], d);
+                return M.saxpy( v * 2,p);
+            };
         }
     }
 }
