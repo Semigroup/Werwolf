@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Werwolf.Inhalt;
 using Assistment.Drawing.Geometries;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Serialization;
+using Assistment.Drawing;
+using Assistment.Drawing.LinearAlgebra;
 
 namespace Designer.RahmenCreator
 {
@@ -36,9 +40,25 @@ namespace Designer.RahmenCreator
 
         public RectangleF TextBox;
         public PointF TextBoxShadowOffset;
-        public Color TextColor;
-        public Color TextShadowColor;
+
         public bool TextBoxActive;
         public float TextBoxRadius;
+
+        [XmlIgnore()]
+        public Color TextColor;
+        [XmlElement(ElementName = "TextColor")]
+        public String TextColor_XmlSurrogate
+        {
+            get => TextColor.ToHexString();
+            set { TextColor = value.ToColor(); }
+        }
+        [XmlIgnore()]
+        public Color TextShadowColor;
+        [XmlElement(ElementName = "TextShadowColor")]
+        public String TextShadowColor_XmlSurrogate
+        {
+            get => TextShadowColor.ToHexString();
+            set { TextShadowColor = value.ToColor(); }
+        }
     }
 }

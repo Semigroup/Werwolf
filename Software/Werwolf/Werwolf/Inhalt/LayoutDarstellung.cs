@@ -51,6 +51,9 @@ namespace Werwolf.Inhalt
         public TextBild[] ZielSicherheiten { get; set; } = new TextBild[19];
         public TextBild ZielSicherheitenSchutze { get; set; }
 
+        public TextBild KostenFeld { get; set; }
+
+
         public LayoutDarstellung()
             : base("LayoutDarstellung")
         {
@@ -67,6 +70,8 @@ namespace Werwolf.Inhalt
             for (int i = 0; i < ZielSicherheiten.Length; i++)
                 ZielSicherheiten[i] = Universe.TextBilder.Standard;
             ZielSicherheitenSchutze = Universe.TextBilder.Standard;
+
+            KostenFeld = Universe.TextBilder.Standard;
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -88,6 +93,8 @@ namespace Werwolf.Inhalt
             for (int i = 0; i < strings.Length; i++)
                 ZielSicherheiten[i] = Universe.TextBilder[strings[i]];
             ZielSicherheitenSchutze = Universe.TextBilder[Loader.XmlReader.GetString("Schütze")];
+
+            KostenFeld = Universe.TextBilder[Loader.XmlReader.GetString("KostenFeld")];
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -106,6 +113,8 @@ namespace Werwolf.Inhalt
 
             XmlWriter.WriteAttribute("ZielSicherheiten",ZielSicherheiten.SumText(","));
             XmlWriter.WriteAttribute("Schütze", ZielSicherheitenSchutze.Name);
+
+            XmlWriter.WriteAttribute("KostenFeld", KostenFeld.Name);
         }
 
         public override void AdaptToCard(Karte Karte)
@@ -128,6 +137,7 @@ namespace Werwolf.Inhalt
             for (int i = 0; i < ld.ZielSicherheiten.Length; i++)
                 ld.ZielSicherheiten[i] = ZielSicherheiten[i];
             ld.ZielSicherheitenSchutze = ZielSicherheitenSchutze;
+            ld.KostenFeld = KostenFeld;
         }
         public override object Clone()
         {
@@ -150,6 +160,7 @@ namespace Werwolf.Inhalt
             for (int i = 0; i < ZielSicherheiten.Length; i++)
                 Universe.TextBilder.Rescue(ZielSicherheiten[i]);
             Universe.TextBilder.Rescue(ZielSicherheitenSchutze);
+            Universe.TextBilder.Rescue(KostenFeld);
         }
 
         public TextBild GetGrossesNamenfeld(bool AufDemKopf)

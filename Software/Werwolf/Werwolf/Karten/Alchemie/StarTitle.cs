@@ -53,7 +53,9 @@ namespace Werwolf.Karten.Alchemie
             if (Karte == null)
                 return;
 
-            WidthOff =( Karte.HintergrundDarstellung.MarginTop + Karte.HintergrundDarstellung.Rand.Height +HintergrundDarstellung.Anker.Y )* Faktor / 2;
+            WidthOff = Karte.HintergrundDarstellung.MarginLeft
+                + HintergrundDarstellung.Anker.X;
+            WidthOff *= Faktor;
 
             SizeF size = new SizeF(InnenBox.Width - WidthOff, HintergrundDarstellung.MarginTop * Faktor);
 
@@ -66,8 +68,8 @@ namespace Werwolf.Karten.Alchemie
                 Alignment = new SizeF(0f, 0.5f)
             };
             StarBox = new StarBox(fixedBox,
-                TitelDarstellung.TextFarbe.ToBrush(), 
-                TitelDarstellung.Farbe.ToBrush(), 
+                TitelDarstellung.TextFarbe.ToBrush(),
+                TitelDarstellung.Farbe.ToBrush(),
                 TitelDarstellung.Rand.mul(Faktor).ToPointF(),
                 Stars);
         }

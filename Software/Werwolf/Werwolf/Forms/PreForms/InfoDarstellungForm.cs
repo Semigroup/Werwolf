@@ -32,6 +32,7 @@ namespace Werwolf.Forms
             WerteListe.AddColorBox(Color.White, "Hintergrundfarbe");
             WerteListe.AddColorBox(Color.Black, "Textfarbe");
             WerteListe.AddFontBox(new Font("Calibri", 4), "Font");
+            WerteListe.AddPointFBox(new PointF(), "Position");
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -43,7 +44,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Hintergrundfarbe", element.Farbe);
             WerteListe.SetValue("Textfarbe", element.TextFarbe);
             WerteListe.SetValue("Font", element.Font);
-
+            WerteListe.SetValue("Position", element.Position);
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -55,11 +56,13 @@ namespace Werwolf.Forms
             element.Farbe = WerteListe.GetValue<Color>("Hintergrundfarbe");
             element.TextFarbe = WerteListe.GetValue<Color>("Textfarbe");
             element.Font = WerteListe.GetValue<Font>("Font");
+            element.Position = WerteListe.GetValue<PointF>("Position");
         }
 
         protected override void SetVisibles()
         {
-            SetVisible(Karte.KartenModus.ModernWolfKarte, "Textfarbe");
+            SetVisible(Karte.KartenModus.ModernWolfKarte | Karte.AlchemieIrgendwas, "Textfarbe");
+            SetVisible(Karte.AlchemieIrgendwas, "Position");
         }
     }
 }

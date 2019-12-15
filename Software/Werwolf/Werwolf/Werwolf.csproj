@@ -196,6 +196,7 @@
     <Compile Include="Inhalt\Universe.cs" />
     <Compile Include="Inhalt\XmlElement.cs" />
     <Compile Include="Forms\ITool.cs" />
+    <Compile Include="Karten\Alchemie\AlchemieSubType.cs" />
     <Compile Include="Karten\Alchemie\CostMarker.cs" />
     <Compile Include="Karten\Alchemie\StarBox.cs" />
     <Compile Include="Karten\Alchemie\StarTitle.cs" />

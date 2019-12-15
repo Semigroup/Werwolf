@@ -41,6 +41,8 @@ namespace Werwolf.Forms
             BuildWertBox("Leben Leer", Universe.TextBilder);
             BuildWertBox("Rüstung", Universe.TextBilder);
 
+            BuildWertBox("KostenFeld", Universe.TextBilder);
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -63,6 +65,8 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Leben Leer", element.LebenLeer);
             WerteListe.SetValue("Rüstung", element.Rustung);
 
+            WerteListe.SetValue("KostenFeld", element.KostenFeld);
+
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -82,12 +86,16 @@ namespace Werwolf.Forms
             element.Leben = WerteListe.GetValue<TextBild>("Leben");
             element.LebenLeer = WerteListe.GetValue<TextBild>("Leben Leer");
             element.Rustung = WerteListe.GetValue<TextBild>("Rüstung");
+
+            element.KostenFeld = WerteListe.GetValue<TextBild>("KostenFeld");
         }
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.AktionsKarte, "Störung", "Reichweite", "Initiative", "Felder");
             SetVisible(Karte.WondersIrgendwas, "Kleines Namenfeld", "Großes Namenfeld");
             SetVisible(Karte.KartenModus.RollenspielFigur, "Rüstung", "Leben", "Leben Leer");
+
+            SetVisible(Karte.AlchemieIrgendwas, "KostenFeld");
         }
     }
 }

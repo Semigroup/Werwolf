@@ -31,6 +31,7 @@ namespace Werwolf.Inhalt
         public Color Farbe { get; set; }
         public Color RandFarbe { get; set; }
         public Color TextFarbe { get; set; }
+        public PointF Position { get; set; }
 
         private Font font;
         public xFont FontMeasurer { get; private set; }
@@ -48,6 +49,7 @@ namespace Werwolf.Inhalt
             Farbe = Color.FromArgb(0);
             RandFarbe = Color.Black;
             TextFarbe = Color.Black;
+            Position = new PointF();
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -62,6 +64,7 @@ namespace Werwolf.Inhalt
             Farbe = Loader.XmlReader.GetColorHexARGB("Farbe");
             RandFarbe = Loader.XmlReader.GetColorHexARGB("RandFarbe");
             TextFarbe = Loader.XmlReader.GetColorHexARGB("TextFarbe");
+            Position = Loader.XmlReader.GetPointF("Position");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -73,6 +76,7 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteColorHexARGB("Farbe", Farbe);
             XmlWriter.WriteColorHexARGB("RandFarbe", RandFarbe);
             XmlWriter.WriteColorHexARGB("TextFarbe", TextFarbe);
+            XmlWriter.WritePoint("Position", Position);
         }
         public override void Assimilate(XmlElement Element)
         {
@@ -84,6 +88,7 @@ namespace Werwolf.Inhalt
             Darstellung.Farbe = Farbe;
             Darstellung.RandFarbe = RandFarbe;
             Darstellung.TextFarbe = TextFarbe;
+            Darstellung.Position = Position;
         }
 
         public override void AdaptToCard(Karte Karte)
