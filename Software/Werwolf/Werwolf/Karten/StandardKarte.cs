@@ -48,6 +48,7 @@ namespace Werwolf.Karten
         public StarTitle StarTitle { get; set; }
         public CostMarker CostMarker { get; set; }
         public AlchemieSubType AlchemieSubType { get; set; }
+        public GoldBox GoldBox { get; set; }
 
         private WolfBox[] WolfBoxs
         {
@@ -81,7 +82,7 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.RollenspielFigur:
                             return new WolfBox[] { HauptBild, ModernTitel, StatInfo };
                         case Karte.KartenModus.AlchemieKarte:
-                            return new WolfBox[] { HauptBild, ModernRahmen, ModernTextQuer, StarTitle, AlchemieSubType, CostMarker };//
+                            return new WolfBox[] { HauptBild, ModernRahmen, ModernTextQuer, StarTitle, AlchemieSubType, GoldBox, CostMarker };//
                         default:
                             throw new NotImplementedException();
                     }
@@ -125,6 +126,7 @@ namespace Werwolf.Karten
             StarTitle = new StarTitle(Karte, ppm);
             CostMarker = new CostMarker(Karte, ppm);
             AlchemieSubType = new AlchemieSubType(Karte, ppm);
+            GoldBox = new GoldBox(Karte, ppm);
         }
 
         public override void OnKarteChanged()

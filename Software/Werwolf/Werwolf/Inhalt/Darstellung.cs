@@ -59,7 +59,7 @@ namespace Werwolf.Inhalt
             Existiert = Loader.XmlReader.GetBoolean("Existiert");
             Font = Loader.GetFont("Font");
             if (Font == null)
-                Font = new Font("Calibri", 11);
+                Font = new Font("Calibri", 8);
             Rand = Loader.XmlReader.GetSizeF("Rand");
             Farbe = Loader.XmlReader.GetColorHexARGB("Farbe");
             RandFarbe = Loader.XmlReader.GetColorHexARGB("RandFarbe");

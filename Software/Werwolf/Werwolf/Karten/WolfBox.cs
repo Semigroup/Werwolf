@@ -23,11 +23,12 @@ namespace Werwolf.Karten
         protected float ppm = 1;
         public float Ppm { get { return ppm; } set { ppm = value; OnPpmChanged(); } }
 
-        public TitelDarstellung TitelDarstellung { get { return karte.TitelDarstellung; } }
-        public HintergrundDarstellung HintergrundDarstellung { get { return karte.HintergrundDarstellung; } }
-        public TextDarstellung TextDarstellung { get { return karte.TextDarstellung; } }
-        public BildDarstellung BildDarstellung { get { return karte.BildDarstellung; } }
-        public InfoDarstellung InfoDarstellung { get { return karte.InfoDarstellung; } }
+        public TitelDarstellung TitelDarstellung => karte.TitelDarstellung;
+        public HintergrundDarstellung HintergrundDarstellung => karte.HintergrundDarstellung;
+        public TextDarstellung TextDarstellung => karte.TextDarstellung;
+        public BildDarstellung BildDarstellung => karte.BildDarstellung;
+        public InfoDarstellung InfoDarstellung => karte.InfoDarstellung;
+        public LayoutDarstellung LayoutDarstellung => karte.LayoutDarstellung;
 
         public RectangleF AussenBox { get; private set; }
         public RectangleF InnenBox { get; private set; }

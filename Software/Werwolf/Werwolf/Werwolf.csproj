@@ -198,6 +198,7 @@
     <Compile Include="Forms\ITool.cs" />
     <Compile Include="Karten\Alchemie\AlchemieSubType.cs" />
     <Compile Include="Karten\Alchemie\CostMarker.cs" />
+    <Compile Include="Karten\Alchemie\GoldBox.cs" />
     <Compile Include="Karten\Alchemie\StarBox.cs" />
     <Compile Include="Karten\Alchemie\StarTitle.cs" />
     <Compile Include="Karten\CyberAktion\CyberAktionHeader.cs" />
