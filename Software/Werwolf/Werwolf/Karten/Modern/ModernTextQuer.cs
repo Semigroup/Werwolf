@@ -20,6 +20,10 @@ namespace Werwolf.Karten.Modern
         private FontGraphicsMeasurer LastFlavourFont;
         private string LastAufgabe;
 
+        private PointF LastShadowOffset { get; set; }
+        private Color LastShadowColor { get; set; }
+        private bool LastShadowIsActive { get; set; }
+
         private RectangleF MovedInnenBox;
         private RectangleF TextRegion;
 
@@ -46,7 +50,7 @@ namespace Werwolf.Karten.Modern
         {
             DrawContainer[] raws = Karte.MeineAufgaben.ProduceDrawContainers(LastFont, Karte.Fraktion.IstKomplex);
             if (Karte.Modus == Karte.KartenModus.ModernWolfEreignisKarte
-                && raws.Length >1)
+                && raws.Length > 1)
             {
                 DrawContainer[] italics = Karte.MeineAufgaben.ProduceDrawContainers(LastFlavourFont, Karte.Fraktion.IstKomplex);
                 italics[0].ForceWordStyle(style: Word.FONTSTYLE_ITALIC);
@@ -60,13 +64,41 @@ namespace Werwolf.Karten.Modern
             base.OnKarteChanged();
             if (Karte == null)
                 return;
-            string aufgabe = Karte.MeineAufgaben.ToString();
-            if (!(LastAufgabe == aufgabe && LastFont == TextDarstellung.FontMeasurer))
+            bool fontChanged = LastFont != TextDarstellung.FontMeasurer;
+            if (fontChanged)
             {
-                LastAufgabe = aufgabe;
                 LastFont = TextDarstellung.FontMeasurer as FontGraphicsMeasurer;
                 LastFlavourFont = LastFont * 0.5f;
-                DrawContainer[] raws = GetTexts();
+            }
+            bool shadowChanged =
+                LastShadowColor != TextDarstellung.ShadowColor
+                || LastShadowIsActive != TextDarstellung.ShadowIsActive
+                || LastShadowOffset != TextDarstellung.ShadowOffset;
+            if (shadowChanged)
+            {
+                LastShadowColor = TextDarstellung.ShadowColor;
+                LastShadowIsActive = TextDarstellung.ShadowIsActive;
+                LastShadowOffset = TextDarstellung.ShadowOffset;
+            }
+            string aufgabe = Karte.MeineAufgaben.ToString();
+            bool aufgabeChanged = fontChanged || shadowChanged || LastAufgabe != aufgabe;
+            if (aufgabeChanged)
+            {
+                LastAufgabe = aufgabe;
+
+                DrawBox[] raws = GetTexts();
+                if (LastShadowIsActive)
+                {
+                    var shadows = new ShadowBox[raws.Length];
+                    for (int i = 0; i < raws.Length; i++)
+                        shadows[i] = new ShadowBox(
+                            raws[i],
+                            null, 
+                            TextDarstellung.ShadowColor.ToBrush(), 
+                            TextDarstellung.ShadowOffset.mul(Faktor));
+                    raws = shadows;
+                }
+
                 Texts = new GeometryBox[raws.Length];
                 for (int i = 0; i < raws.Length; i++)
                     Texts[i] = raws[i].Geometry(TextDarstellung.Rand.mul(Faktor * 2));

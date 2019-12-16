@@ -36,6 +36,11 @@ namespace Werwolf.Forms
             WerteListe.AddFloatBox(1, "Innenradius in mm");
             WerteListe.AddFontBox(new Font("Calibri", 8), "Effekt Font");
             WerteListe.AddRectangleFBox(new RectangleF(), "Text Region");
+            WerteListe.AddLabelBox("", "");
+            WerteListe.AddColorBox(Color.Black, "Schattenfarbe");
+            WerteListe.AddChainedSizeFBox(new SizeF(), "Shattenversatz");
+            WerteListe.AddBoolBox(false, "Textschatten Aktiv");
+
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
@@ -51,6 +56,9 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Innenradius in mm", element.InnenRadius);
             WerteListe.SetValue("Effekt Font", element.EffektFont);
             WerteListe.SetValue("Text Region", element.TextRectangle);
+            WerteListe.SetValue("Schattenfarbe", element.ShadowColor);
+            WerteListe.SetValue("Shattenversatz", element.ShadowOffset.ToSize());
+            WerteListe.SetValue("Textschatten Aktiv", element.ShadowIsActive);
             UpdatingWerteListe = false;
         }
         public override void UpdateElement()
@@ -66,12 +74,17 @@ namespace Werwolf.Forms
             element.BalkenDicke = WerteListe.GetValue<float>("Balkendicke in mm");
             element.InnenRadius = WerteListe.GetValue<float>("Innenradius in mm");
             element.TextRectangle = WerteListe.GetValue<RectangleF>("Text Region");
+            element.ShadowColor = WerteListe.GetValue<Color>("Schattenfarbe");
+            element.ShadowOffset = WerteListe.GetValue<SizeF>("Shattenversatz").ToPointF();
+            element.ShadowIsActive = WerteListe.GetValue<bool>("Textschatten Aktiv");
         }
 
         protected override void SetVisibles()
         {
             SetVisible(Karte.KartenModus.WondersKarte, "Effekt Font");
             SetVisible(Karte.ModernIrgendwas | Karte.AlchemieIrgendwas, "Text Region");
+            SetVisible(Karte.ModernIrgendwas | Karte.AlchemieIrgendwas, 
+                "Schattenfarbe", "Shattenversatz", "Textschatten Aktiv");
         }
     }
 }

@@ -27,6 +27,10 @@ namespace Werwolf.Inhalt
         private Font effektFont;
         public xFont EffektFontMeasurer { get; private set; }
 
+        public PointF ShadowOffset { get; set; }
+        public Color ShadowColor { get; set; }
+        public bool ShadowIsActive { get; set; }
+
         public TextDarstellung()
             : base("TextDarstellung")
         {
@@ -40,6 +44,9 @@ namespace Werwolf.Inhalt
             Farbe = Color.FromArgb(128, Color.White);
             EffektFont = new Font("Calibri", 11);
             TextRectangle = new RectangleF(5, 48.1f, 53, 34);
+            this.ShadowOffset = new PointF();
+            this.ShadowColor = Color.Black;
+            this.ShadowIsActive = false;
         }
         protected override void ReadIntern(Loader Loader)
         {
@@ -50,6 +57,10 @@ namespace Werwolf.Inhalt
             if (EffektFont == null)
                 EffektFont = new Font("Calibri", 11);
             TextRectangle = Loader.XmlReader.GetRectangle("TextRectangle");
+
+            ShadowOffset = Loader.XmlReader.GetPointF("ShadowOffset");
+            ShadowColor = Loader.XmlReader.GetColorHexARGB("ShadowColor");
+            ShadowIsActive = Loader.XmlReader.GetBoolean("ShadowIsActive");
         }
         protected override void WriteIntern(XmlWriter XmlWriter)
         {
@@ -58,6 +69,10 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteFloat("InnenRadius", InnenRadius);
             XmlWriter.WriteFont("EffektFont", EffektFont);
             XmlWriter.WriteRectangle("TextRectangle", TextRectangle);
+
+            XmlWriter.WritePoint("ShadowOffset", ShadowOffset);
+            XmlWriter.WriteColorHexARGB("ShadowColor", ShadowColor);
+            XmlWriter.WriteBoolean("ShadowIsActive", ShadowIsActive);
         }
         public override void AdaptToCard(Karte Karte)
         {
@@ -77,6 +92,10 @@ namespace Werwolf.Inhalt
             hg.InnenRadius = InnenRadius;
             hg.EffektFont = EffektFont.Clone() as Font;
             hg.TextRectangle = TextRectangle;
+
+            hg.ShadowOffset = this.ShadowOffset;
+            hg.ShadowColor = this.ShadowColor;
+            hg.ShadowIsActive = this.ShadowIsActive;
         }
     }
 }

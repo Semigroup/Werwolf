@@ -11,7 +11,6 @@ namespace Werwolf.Karten.Modern
 {
     public class ShadowBox : WrappingBox
     {
-        public DrawBox ForeDrawBox;
         public DrawBox BackDrawBox;
 
         public Brush ForeColor;
@@ -30,38 +29,39 @@ namespace Werwolf.Karten.Modern
             this.ForeColor = ForeColor;
             this.BackColor = BackColor;
             this.OffSet = OffSet;
+
             this.Update();
         }
 
         public override void Update()
         {
             base.Update();
-            this.ForeDrawBox = DrawBox.Clone();
             this.BackDrawBox = DrawBox.Clone();
-            this.ForeDrawBox.ForceWordStyle(ForeColor);
-            this.BackDrawBox.ForceWordStyle(BackColor);
+            if (ForeColor != null)
+                this.DrawBox.ForceWordStyle(ForeColor);
+            if (BackColor != null)
+                this.BackDrawBox.ForceWordStyle(BackColor);
         }
 
         public override DrawBox Clone()
         {
-            return new ShadowBox(DrawBox, ForeColor, BackColor, OffSet);
+            return new ShadowBox(DrawBox.Clone(), ForeColor, BackColor, OffSet);
         }
 
         public override void Move(PointF ToMove)
         {
             base.Move(ToMove);
-            ForeDrawBox.Move(ToMove);
             BackDrawBox.Move(ToMove);
         }
         public override void Setup(RectangleF box)
         {
-            ForeDrawBox.Setup(box);
+            base.Setup(box);
             BackDrawBox.Setup(box.move(OffSet));
         }
         public override void Draw(DrawContext con)
         {
             BackDrawBox.Draw(con);
-            ForeDrawBox.Draw(con);
+            base.Draw(con);
         }
     }
 }
