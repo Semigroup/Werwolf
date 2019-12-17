@@ -43,7 +43,7 @@ namespace Werwolf.Inhalt
 
         public int Leben { get; set; }
         public int Rustung { get; set; }
-        public int Geldkosten { get; set; }
+        public string Geldkosten { get; set; }
 
         public Aufgabe Kosten { get; set; }
         public Aufgabe Effekt { get; set; }
@@ -152,7 +152,7 @@ namespace Werwolf.Inhalt
 
             this.Leben = 0;
             this.Rustung = 0;
-            this.Geldkosten = -1;
+            this.Geldkosten = "";
         }
 
         protected override void ReadIntern(Loader Loader)
@@ -179,7 +179,7 @@ namespace Werwolf.Inhalt
 
             Leben = Loader.XmlReader.GetInt("Leben");
             Rustung = Loader.XmlReader.GetInt("Rustung");
-            Geldkosten = Loader.XmlReader.GetInt("Geldkosten");
+            Geldkosten = Loader.XmlReader.GetString("Geldkosten");
 
             Kosten = Loader.GetAufgabe("Kosten");
             Effekt = Loader.GetAufgabe("Effekt");
@@ -220,7 +220,7 @@ namespace Werwolf.Inhalt
 
             XmlWriter.WriteInt("Leben", Leben);
             XmlWriter.WriteInt("Rustung", Rustung);
-            XmlWriter.WriteInt("Geldkosten", Geldkosten);
+            XmlWriter.WriteAttribute("Geldkosten", Geldkosten);
 
             XmlWriter.WriteAttribute("Kosten", Kosten.ToString());
             XmlWriter.WriteAttribute("Effekt", Effekt.ToString());

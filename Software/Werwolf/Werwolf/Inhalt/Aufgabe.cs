@@ -67,6 +67,7 @@ namespace Werwolf.Inhalt
 
         private IEnumerable<Fragment> Fragments;
         public int Anzahl { get; private set; }
+        public bool IsEmpty => Anzahl == 0;
 
         public Aufgabe()
             : this("", null)

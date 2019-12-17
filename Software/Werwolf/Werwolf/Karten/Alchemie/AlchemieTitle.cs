@@ -11,13 +11,14 @@ using Assistment.Extensions;
 
 namespace Werwolf.Karten.Alchemie
 {
-    public class StarTitle : WolfBox
+    public class AlchemieTitle : WolfBox
     {
         private StarBox StarBox;
         public int Stars { get; set; } = 4;
         private float WidthOff;
 
-        public StarTitle(Karte Karte, float PPm) : base(Karte, PPm)
+        public AlchemieTitle(Karte Karte, float PPm) 
+            : base(Karte, PPm)
         {
 
         }
@@ -53,8 +54,9 @@ namespace Werwolf.Karten.Alchemie
             if (Karte == null)
                 return;
 
-            WidthOff = Karte.HintergrundDarstellung.MarginLeft
-                + HintergrundDarstellung.Anker.X;
+            WidthOff = Karte.HintergrundDarstellung.MarginLeft;
+            if (!Karte.Kosten.IsEmpty)
+                WidthOff += HintergrundDarstellung.Anker.X;
             WidthOff *= Faktor;
 
             SizeF size = new SizeF(InnenBox.Width - WidthOff, HintergrundDarstellung.MarginTop * Faktor);

@@ -45,7 +45,7 @@ namespace Werwolf.Karten
 
         public StatInfo StatInfo { get; set; }
 
-        public StarTitle StarTitle { get; set; }
+        public AlchemieTitle StarTitle { get; set; }
         public CostMarker CostMarker { get; set; }
         public AlchemieSubType AlchemieSubType { get; set; }
         public GoldBox GoldBox { get; set; }
@@ -123,7 +123,7 @@ namespace Werwolf.Karten
             ModernText = new ModernText(Karte, ppm);
             ModernTextQuer = new ModernTextQuer(Karte, ppm);
             StatInfo = new StatInfo(Karte, ppm);
-            StarTitle = new StarTitle(Karte, ppm);
+            StarTitle = new AlchemieTitle(Karte, ppm);
             CostMarker = new CostMarker(Karte, ppm);
             AlchemieSubType = new AlchemieSubType(Karte, ppm);
             GoldBox = new GoldBox(Karte, ppm);

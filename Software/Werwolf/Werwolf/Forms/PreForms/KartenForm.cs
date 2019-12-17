@@ -50,7 +50,7 @@ namespace Werwolf.Forms
 
             WerteListe.AddIntBox(0, "Leben");
             WerteListe.AddIntBox(0, "Rüstung");
-            WerteListe.AddIntBox(-1, "Geldkosten");
+            WerteListe.AddStringBox("", "Geldkosten");
 
             WerteListe.AddStringBox("", "Kosten");
             WerteListe.AddStringBox("", "Effekt");
@@ -130,7 +130,7 @@ namespace Werwolf.Forms
             element.Storung = WerteListe.GetValue<int>("Störung");
             element.Leben = WerteListe.GetValue<int>("Leben");
             element.Rustung = WerteListe.GetValue<int>("Rüstung");
-            element.Geldkosten = WerteListe.GetValue<int>("Geldkosten");
+            element.Geldkosten = WerteListe.GetValue<string>("Geldkosten");
 
             element.Kosten = new Aufgabe(WerteListe.GetValue<string>("Kosten"), Universe);
             element.Effekt = new Aufgabe(WerteListe.GetValue<string>("Effekt"), Universe);

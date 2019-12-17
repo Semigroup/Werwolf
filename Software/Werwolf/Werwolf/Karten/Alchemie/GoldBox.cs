@@ -42,7 +42,7 @@ namespace Werwolf.Karten.Alchemie
         {
             return base.Visible()
                 && LayoutDarstellung.KostenFeld != null
-                && Karte.Geldkosten >= 0
+                && Karte.Geldkosten.Length > 0
                 && DrawBox != null;
         }
         public override void OnKarteChanged()
