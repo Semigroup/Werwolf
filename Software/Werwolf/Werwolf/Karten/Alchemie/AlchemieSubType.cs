@@ -60,7 +60,7 @@ namespace Werwolf.Karten.Alchemie
                 if (containsSubtypes)
                     textType.AddWort(", ");
                 else
-                    textType.AddWort(" – ");
+                    textType.AddWort(" –");
                 textType.AddRange(item);
             }
 
