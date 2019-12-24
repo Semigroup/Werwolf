@@ -107,7 +107,22 @@ namespace Werwolf.Inhalt
                 if (TotalFilePath.Length == 0)
                     return LeerBild.Clone() as Image;
                 if (File.Exists(tfp))
-                    return Image.FromFile(tfp);
+                    try
+                    {
+                        return Image.FromFile(tfp);
+                    }
+                    catch (Exception e)
+                    {
+                        System.Windows.Forms.MessageBox.Show(
+                            "Es gab einen Fehler beim Laden des Bildes:\r\n"
+                            + tfp + "\r\n\r\n"
+                            + "Die Bilddatei ist vielleicht zu groß oder kaputt.\r\n"
+                            +"(Manchmal werden Bilder unter einem falschen Dateitypen abgespeichert (.jpg statt .heic z.Bsp.)," +
+                            "was sie korrumpiert.\r\n" +
+                            "Dieses Problem kann man lösen, indem man die betroffenen Bilddateien mit Paint öffnet und unter einem anderen Dateityp abspeichert.)"
+                            );
+                        return FehlerBild;
+                    }
                 else
                     return FehlerBild;
             }
