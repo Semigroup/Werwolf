@@ -131,7 +131,7 @@ namespace Werwolf.Forms
         private void Button1_Click(object sender, EventArgs e)
         {
             FetchJob(false, true);
-            WolfSinglePaper wsp = new WolfSinglePaper(Job);
+            WolfSinglePaper wsp = new WolfSinglePaper(Job,"");
             foreach (var item in deck.GetKarten(fullSortedDeckList, 0, 9))
                 for (int i = 0; i < item.Value; i++)
                     if (Job.MyMode == Printing.Job.RuckBildMode.Nur)

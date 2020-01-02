@@ -9,6 +9,8 @@ using Assistment.Texts;
 
 using Werwolf.Karten;
 using Werwolf.Inhalt;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Werwolf.Printing
 {
@@ -38,14 +40,17 @@ namespace Werwolf.Printing
 
         private Size NumberOfCards = new Size();
 
-        public WolfSinglePaper(Universe Universe, float ppm)
+        public string FileName { get; set; }
+
+        public WolfSinglePaper(Universe Universe, float ppm, string FileName)
             : base(Universe.Karten.Standard, ppm)
         {
             this.PageSize = iTextSharp.text.PageSize.A4;
             this.FillUpRemainder = true;
+            this.FileName = FileName;
         }
-        public WolfSinglePaper(Job Job)
-            : this(Job.Universe, Job.Ppm)
+        public WolfSinglePaper(Job Job, string FileName)
+            : this(Job.Universe, Job.Ppm, FileName)
         {
             this.Zwischenplatz = Job.Zwischenplatz;
             this.TrennlinienFarbe = Job.TrennlinienFarbe;
@@ -147,7 +152,7 @@ namespace Werwolf.Printing
                 foreach (var item in ToPrint)
                 {
                     float x1 = item.Box.Left - 10 * Faktor;
-                    x1 = Math.Max(x1, left); 
+                    x1 = Math.Max(x1, left);
                     float x2 = item.Box.Right + 10 * Faktor;
                     x2 = Math.Min(x2, right);
                     float y1 = item.Box.Top - 10 * Faktor;
@@ -159,11 +164,27 @@ namespace Werwolf.Printing
                     con.DrawLine(LinePen, new PointF(left, y1), new PointF(right, y1));
                     con.DrawLine(LinePen, new PointF(left, y2), new PointF(right, y2));
                 }
+            List<string> toDelete = new List<string>();
+            int i = 0;
             foreach (var item in ToPrint)
-                item.Draw(con);
+                //if (con is DrawContextDocument)
+                //{
+                //    string file = FileName + "." + i;
+                //    i++;
+                //    item.CreateImage(file, ImageFormat.Jpeg);
+                //    file = file + ".jpg";
+                //    using (Image img = Image.FromFile(file))
+                //        con.DrawImage(img, item.Box);
+                //    toDelete.Add(file);
+                //    System.Windows.Forms.MessageBox.Show("Test");
+                //}
+                //else
+                    item.Draw(con);
             if (linie)
                 foreach (var item in ToPrint)
                     con.DrawRectangle(LinePen, item.Box);
+            foreach (var item in toDelete)
+                File.Delete(item);
         }
 
         /// <summary>

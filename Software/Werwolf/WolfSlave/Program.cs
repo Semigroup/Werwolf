@@ -75,10 +75,11 @@ namespace WolfSlave
 
         static void CreatePDF()
         {
-            WolfSinglePaper wsp = new WolfSinglePaper(Job);
+            string p = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + "." + JobNumber);
+
+            WolfSinglePaper wsp = new WolfSinglePaper(Job, p);
             AddKarten(Job, JobNumber, wsp);
 
-            string p = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + "." + JobNumber);
             Console.WriteLine(p);
             Console.WriteLine(wsp.Seite.div(WolfBox.Faktor) + "");
             wsp.CreatePDF(p, wsp.Min, float.MaxValue, wsp.PageSize, Job.HintergrundFarbe);
