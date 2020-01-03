@@ -97,7 +97,7 @@ namespace WolfSlave
                     }
             Text t = new Text();
             t.AddRegex(Karte.Name);
-            string s = t.ToString().ToFileName();
+            string s = t.ToString().ToFileName("_");
             s = s.Replace(" ", "");
             s = Path.Combine(Path.GetDirectoryName(JobPath), s + ".jpg");
             using (Image img = Karte.GetImage(Job.Ppm, true))
