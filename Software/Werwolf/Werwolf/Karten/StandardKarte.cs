@@ -80,7 +80,7 @@ namespace Werwolf.Karten
                         case Karte.KartenModus.ModernWolfZeichenKarte:
                             return new WolfBox[] { ModernRahmen, HauptBild, ModernText, ModernTitel, ModernInfo, ModernTextQuer };
                         case Karte.KartenModus.RollenspielFigur:
-                            return new WolfBox[] { HauptBild, ModernTitel, StatInfo };
+                            return new WolfBox[] { HauptBild, StarTitle, StatInfo };
                         case Karte.KartenModus.AlchemieKarte:
                             return new WolfBox[] { HauptBild, ModernRahmen, ModernTextQuer, StarTitle, AlchemieSubType, GoldBox, CostMarker };//
                         default:

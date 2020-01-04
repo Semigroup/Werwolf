@@ -71,9 +71,10 @@ namespace Werwolf.Karten.Figur
                 string s = Karte.Leben.ToString();
                 SizeF fontSize = font.Size(s);
                 PointF p2 = p.sub(fontSize.Width / 2, fontSize.Height / 2);
-                con.DrawString(s, font.GetFont(), Brushes.Black, p2, fontSize.Height);
+                con.DrawString(s, font.GetFont(), Karte.TextDarstellung.Farbe.ToBrush(), p2, fontSize.Height);
 
                 p.Y += Leben.Size.Width * Faktor/ 2 + LebenLeer.Size.Height * Faktor / 2;
+                p.Y += HintergrundDarstellung.MarginBottom * Faktor;
                 con.DrawCenteredImage(LebenLeer, p, InnenBox);
             }
         }

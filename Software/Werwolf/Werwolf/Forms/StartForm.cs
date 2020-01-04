@@ -259,9 +259,9 @@ namespace Werwolf.Forms
                         tooBig.Add(bild);
                     else
                     {
-                        bild.Zentrum = new PointF(0.5f, 0.37f);
-                        if (bild.GetType() == typeof(HintergrundBild))
                         bild.Zentrum = new PointF(0.5f, 0.5f);
+                        if (bild.GetType() == typeof(HauptBild))
+                            bild.Zentrum = new PointF(0.5f, 0.37f);
                         bild.Size = s;
                         bild.SetAutoSize();
                         bild.Name = bild.Schreibname = Path.GetFileNameWithoutExtension(item);
