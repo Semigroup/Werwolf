@@ -344,12 +344,15 @@ namespace Werwolf.Inhalt
             => this.ID - other.ID;
         public int OldCompareTo(Karte other)
         {
-            return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 100
-                + this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10
+            int val = this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 100
+                + this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10
                 + this.Name.CompareTo(other.Name);
-            //return this.Fraktion.Name.CompareTo(other.Fraktion.Name) * 10000 
-            //    //+this.HintergrundDarstellung.Name.CompareTo(other.HintergrundDarstellung.Name) * 10000000
-            //    + this.Name.CompareTo(other.Name);
+            if (val > 0)
+                return 1;
+            else if (val < 0)
+                return -1;
+            else
+                return 0;
         }
 
         public override void Rescue()
