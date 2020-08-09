@@ -7,12 +7,23 @@ using Werwolf.Forms;
 using Werwolf.Inhalt;
 using Translation.PDFWorkarounds;
 using Designer;
-
+using System.Runtime.InteropServices;
 
 namespace Translation
 {
     static class Program
     {
+        [DllImport("Shcore.dll")]
+        static extern int SetProcessDpiAwareness(int PROCESS_DPI_AWARENESS);
+
+        // According to https://msdn.microsoft.com/en-us/library/windows/desktop/dn280512(v=vs.85).aspx
+        private enum DpiAwareness
+        {
+            None = 0,
+            SystemAware = 1,
+            PerMonitorAware = 2
+        }
+
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
@@ -21,6 +32,10 @@ namespace Translation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            SetProcessDpiAwareness((int)DpiAwareness.PerMonitorAware);
+
+
             Application.Run(new StartForm<Universe>(new TranslatingTool(),
                 new HintergrundTool()));//, new ProduktionSteik()
         }
