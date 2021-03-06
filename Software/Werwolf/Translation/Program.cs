@@ -34,7 +34,8 @@ namespace Translation
             Application.SetCompatibleTextRenderingDefault(false);
 
             SetProcessDpiAwareness((int)DpiAwareness.PerMonitorAware);
-
+            //(int)DpiAwareness.PerMonitorAware makes the line height of fonts higher. Why?
+            //Has been fixed by changes in FontGraphicsMeasurer in Assistment.Texts
 
             Application.Run(new StartForm<Universe>(new TranslatingTool(),
                 new HintergrundTool()));//, new ProduktionSteik()

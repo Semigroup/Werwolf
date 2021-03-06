@@ -304,7 +304,7 @@ namespace Werwolf.Karten
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
-            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+            //PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
             HauptBild.CenterTop = MovedInnenBox.Top;
             HauptBild.CenterBottom = MovedInnenBox.Bottom;
@@ -320,7 +320,7 @@ namespace Werwolf.Karten
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(0, 0);
-            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+            //PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
             con.FillRectangle(Color.White.ToBrush(), MovedInnenBox);
             foreach (var item in WolfBoxs)
@@ -356,7 +356,7 @@ namespace Werwolf.Karten
         {
             RectangleF MovedAussenBox = AussenBox.move(Box.Location);
             RectangleF MovedInnenBox = InnenBox.move(Box.Location).Inner(-1, -1);
-            PointF MovedAussenBoxCenter = MovedAussenBox.Center();
+            //PointF MovedAussenBoxCenter = MovedAussenBox.Center();
 
             float top = MovedInnenBox.Top;
             float bottom = MovedInnenBox.Bottom;

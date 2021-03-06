@@ -36,11 +36,25 @@ namespace WolfSlave
         static string JobPath;
         static Universe Universe;
 
+        [DllImport("Shcore.dll")]
+        static extern int SetProcessDpiAwareness(int PROCESS_DPI_AWARENESS);
+
+        // According to https://msdn.microsoft.com/en-us/library/windows/desktop/dn280512(v=vs.85).aspx
+        private enum DpiAwareness
+        {
+            None = 0,
+            SystemAware = 1,
+            PerMonitorAware = 2
+        }
+
         static void Main(string[] args)
         {
-//#if !DEBUG
-//            HideConsole();
-//#endif
+            //#if !DEBUG
+            //            HideConsole();
+            //#endif
+
+            SetProcessDpiAwareness((int)DpiAwareness.None); //PerMonitorAware makes the Line Height higher (why?)
+            //Has been fixed by changes in FontGraphicsMeasurer in Assistment.Texts
 
             string UniversePath = args[0];
             JobPath = args[1];
