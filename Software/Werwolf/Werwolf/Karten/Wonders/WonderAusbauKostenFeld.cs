@@ -9,6 +9,7 @@ using Assistment.Extensions;
 using Werwolf.Inhalt;
 using Assistment.Texts;
 using Assistment.Drawing.LinearAlgebra;
+using System.IO;
 
 namespace Werwolf.Karten
 {
@@ -148,8 +149,13 @@ namespace Werwolf.Karten
             BearbeitetesBild = new Bitmap(Size.Width, Size.Height);
             using (Graphics g = BearbeitetesBild.GetHighGraphics())
             {
-                using (Image img = Image.FromFile(FeldBild.TotalFilePath))
-                    g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
+                if (File.Exists(FeldBild.TotalFilePath))
+                    using (Image img = Image.FromFile(FeldBild.TotalFilePath))
+                        g.DrawImage(img, new Rectangle(P, FeldBild.Size.mul(Ppm).ToSize()));
+                else
+                {
+                    //TODO draw error image here
+                }
                 g.ScaleTransform(Ppm / Faktor, Ppm / Faktor);
                 if (Quer)
                     g.RotateTransform(-90);
