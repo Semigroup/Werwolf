@@ -20,6 +20,7 @@ namespace Werwolf.Forms
     {
         protected BallPointFBox ball;
         protected ImageSelectBox image;
+        protected ArtLibrarySelectionButton libImage;
         protected Point MouseDownPoint;
 
         protected Timer timer;
@@ -34,13 +35,19 @@ namespace Werwolf.Forms
             UpdatingWerteListe = true;
 
             image = new ImageSelectBox();
+            libImage = new ArtLibrarySelectionButton();
             ball = new BallPointFBox();
 
             WerteListe.AddStringBox("", "Name");
+
             image.ShowImage = false;
             image.ImageChanged += new EventHandler(image_ImageChanged);
             image.MaximumImageSize = Settings.MaximumImageArea;
             WerteListe.AddWertePaar<string>(image, "", "Datei");
+
+            libImage.ImageChanged += LibImage_ImageChanged;
+            WerteListe.AddWertePaar<string>(libImage, "", "Lib-Datei");
+
             WerteListe.AddStringBox("", "Artist");
             WerteListe.AddChainedSizeFBox(new SizeF(1, 1), "Größe in mm", true);
             WerteListe.AddWertePaar<PointF>(ball, new PointF(), "Point of Interest");
@@ -52,10 +59,11 @@ namespace Werwolf.Forms
             ViewBox.MouseDown += ViewBox_MouseDown;
             ViewBox.MouseUp += ViewBox_MouseUp;
 
-
             UpdatingWerteListe = false;
             WerteListe.Setup();
         }
+
+  
 
         private void ViewBox_MouseUp(object sender, MouseEventArgs e)
         {
@@ -89,6 +97,14 @@ namespace Werwolf.Forms
             ball.SetImage(image.ImagePath);
             WerteListe.SetValue("Größe in mm", element.StandardSize(ball.Image));
         }
+        private void LibImage_ImageChanged(object sender, EventArgs e)
+        {
+            if (UpdatingWerteListe)
+                return;
+            image.ImagePath = libImage.ImagePath;
+            ball.SetImage(libImage.ImagePath);
+            WerteListe.SetValue("Größe in mm", element.StandardSize(ball.Image));
+        }
         public override void UpdateWerteListe()
         {
             if (element == null)
@@ -97,6 +113,7 @@ namespace Werwolf.Forms
             this.Text = element.XmlName + " namens " + element.Schreibname + " bearbeiten...";
             WerteListe.SetValue("Name", element.Schreibname);
             WerteListe.SetValue("Datei", element.TotalFilePath);
+            WerteListe.SetValue("Lib-Datei", element.TotalFilePath);
             WerteListe.SetValue("Artist", element.Artist);
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Point of Interest", element.Zentrum);

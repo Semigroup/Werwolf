@@ -8,6 +8,7 @@ using System.IO;
 
 using Assistment.Xml;
 using Assistment.Extensions;
+using ArtOfMagicCrawler;
 
 namespace Werwolf.Inhalt
 {
@@ -49,6 +50,8 @@ namespace Werwolf.Inhalt
         }
         public static Image NotFoundImage { get; set; }
         public static bool RefreshDirtyButtons { get; set; }
+        public static string ArtOfMtgLibraryPath { get; set; }
+        public static ArtLibrary ArtOfMtgLibrary { get; set; }
 
         static Settings()
         {
@@ -70,6 +73,8 @@ namespace Werwolf.Inhalt
             notFoundImagePath = reader.GetString("NotFoundImagePath");
             ViewPpm = reader.GetFloat("ViewPpm");
             RefreshDirtyButtons = reader.GetBoolean("RefreshDirtyButtons");
+            ArtOfMtgLibraryPath = reader.GetString("ArtOfMtgLibrary");
+            TryLoadArtOfMtgLibrary();
 
             using (Image Image = Image.FromFile(ErrorImagePath))// Image.FromStream(fs))
                 ErrorImage = new Bitmap(Image);
@@ -78,6 +83,21 @@ namespace Werwolf.Inhalt
 
             reader.Close();
         }
+
+        public static bool TryLoadArtOfMtgLibrary()
+        {
+            try
+            {
+                ArtOfMtgLibrary = ArtLibrary.ReadLibrary(Path.GetDirectoryName(ArtOfMtgLibraryPath));
+                return true;
+            }
+            catch (Exception)
+            {
+                ArtOfMtgLibrary = null;
+                return false;
+            }
+        }
+
         public static void Save()
         {
             XmlWriter writer = XmlWriter.Create(path);
@@ -91,6 +111,8 @@ namespace Werwolf.Inhalt
             writer.WriteFloat("WolfBoxFaktor", WolfBoxFaktor);
             writer.WriteFloat("MaximumPpm", MaximumPpm);
             writer.WriteFloat("ViewPpm", ViewPpm);
+            writer.WriteBoolean("RefreshDirtyButtons", RefreshDirtyButtons);
+            writer.WriteAttribute("ArtOfMtgLibrary", ArtOfMtgLibraryPath);
 
             ErrorImage.Save(ErrorImagePath);//Forced
             writer.WriteAttribute("ErrorImagePath", errorImagePath);

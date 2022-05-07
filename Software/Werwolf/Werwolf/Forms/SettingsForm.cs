@@ -43,6 +43,7 @@ namespace Werwolf.Forms
             werteListe1.AddFloatBox(Settings.WolfBoxFaktor, "WolfBoxFaktor");
             werteListe1.AddFloatBox(Settings.ViewPpm, "ViewPpm");
             werteListe1.AddImageBox(Settings.ErrorImagePath, "ErrorImagePath");
+            werteListe1.AddFileBox(Settings.ArtOfMtgLibraryPath, "ArtOfMtgLibrary");
 
             werteListe1.AddListener(UserChangedValue);
             werteListe1.AddInvalidListener(UserChangedValue);
@@ -80,6 +81,9 @@ namespace Werwolf.Forms
                 Settings.ViewPpm = werteListe1.GetValue<float>("ViewPpm");
                 Settings.MaximumKarteSize = werteListe1.GetValue<SizeF>("MaximumKarteSize");
                 Settings.MaximumImageArea = werteListe1.GetValue<int>("MaximumImageArea");
+                Settings.ArtOfMtgLibraryPath = werteListe1.GetValue<string>("ArtOfMtgLibrary");
+                Settings.TryLoadArtOfMtgLibrary();
+
                 string s = werteListe1.GetValue<string>("ErrorImagePath");
                 werteListe1.Dispose();
                 if (File.Exists(s))

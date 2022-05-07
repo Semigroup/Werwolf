@@ -59,9 +59,11 @@ namespace Werwolf.Forms
         private TextBox textBox1 = new TextBox();
         private Button SettingsButton = new Button();
         private Button PrintDeck = new Button();
+
         protected ViewKarte ViewKarte;
 
         private OpenFileDialog OpenFileDialog = new OpenFileDialog();
+        private OpenFileDialog OpenLibraryDialog = new OpenFileDialog();
 
         public StartForm(params ITool[] Tools)
         {
@@ -125,7 +127,7 @@ namespace Werwolf.Forms
             PrintDeck.Text = "Ein Kartendeck in eine PDF-Datei verwandeln";
             PrintDeck.Click += new EventHandler(PrintDeck_Click);
 
-            ScrollList.AddControl(textBox1, BilderButtons, ElementMengenButtons,
+            ScrollList.AddControl( textBox1, BilderButtons, ElementMengenButtons,
                 PrintDeck, BildMengenButtons, DarstellungenButtons);
             ScrollList.AddControl(Tools.Map(tool =>
             {
@@ -150,6 +152,8 @@ namespace Werwolf.Forms
 
             OpenFileDialog.Filter = "Bilder|*.jpg; *.jpeg; *.png; *.bmp; *.gif; *.tiff; *.tif; *.wmf";
             OpenFileDialog.Multiselect = true;
+
+            OpenLibraryDialog.Filter = "Bibliothek|*.library";
 
             this.ClientSize = new Size(1200, 800);
         }
@@ -430,18 +434,5 @@ namespace Werwolf.Forms
                 this.Text = Universe.Schreibname;
             PrintDeck.Enabled = !changed;
         }
-
-        //public void AppendTool(ITool Tool)
-        //{
-        //    Button b = new Button()
-        //    {
-        //        Text = Tool.Name,
-        //        AutoSize = true,
-        //    };
-        //    b.Click += (o, e) => Tool.EditUniverse(universe);
-        //    ScrollList.AddControl(b);
-        //    ScrollList.SetUp();
-        //    this.Refresh();
-        //}
     }
 }
