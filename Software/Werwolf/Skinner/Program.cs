@@ -31,6 +31,21 @@ namespace Skinner
         static void Main(string[] args)
         {
             Ticker = new MyJobTicker();
+            var root = args[0];
+            var jobs = Directory.EnumerateFiles(root, "*.job.xml", SearchOption.AllDirectories).ToArray();
+            for (int i = 0; i < jobs.Length; i++)
+            {
+                var path = jobs[i];
+                Console.WriteLine("Starting to process job " + (i + 1) + " of " + jobs.Length);
+                Console.WriteLine(path);
+                if (!ProcessJob(path))
+                    LogError("Job failed!");
+            }
+        }
+
+        static void Main2()
+        {
+            Ticker = new MyJobTicker();
 
             JobDirectory = Directory.GetCurrentDirectory() + "\\Jobs\\";
             UniverseDirectory = Directory.GetCurrentDirectory() + "\\Universes\\";
@@ -48,6 +63,13 @@ namespace Skinner
             Console.ReadKey();
         }
 
+        static void LogError(object o)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("[Error] " + o);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
         public static bool ProcessJob(string jobFile)
         {
             Job job = new Job();
@@ -56,18 +78,17 @@ namespace Skinner
                 loader.XmlReader.Next();
                 job.Read(loader);
             }
-            string universe = job.UniversePath.FileName() + ".xml";
-            universe = UniverseDirectory + universe;
+            //string universe = job.UniversePath.FileName() + ".xml";
+            //universe = UniverseDirectory + universe;
             Universe Universe = null;
             try
             {
-                Universe = new Universe(universe);
+                Universe = new Universe(job.UniversePath);
             }
             catch (Exception e)
             {
-                Console.WriteLine("FEHLER: Das Spiel <" + universe + "> konnte nicht geladen werden.");
-                Console.WriteLine("Fehlermeldung:");
-                Console.WriteLine(e.Message);
+                LogError("Couldnt load " + job.UniversePath + "!");
+                LogError(e);
             }
             if (Universe == null)
                 return false;
@@ -79,9 +100,8 @@ namespace Skinner
             }
             catch (Exception e)
             {
-                Console.WriteLine("FEHLER: Der Job <" + jobFile + "> konnte nicht erstellt werden.");
-                Console.WriteLine("Fehlermeldung:");
-                Console.WriteLine(e.Message);
+                LogError("Couldnt print " + jobFile + "!");
+                LogError(e);
             }
 
             return !Ticker.ErrorOccured;
@@ -96,7 +116,7 @@ namespace Skinner
             }
             if (!Directory.Exists(UniverseDirectory))
             {
-                Console.WriteLine("Universe-Ordner bei " + JobDirectory + " existiert nicht!");
+                Console.WriteLine("Universe-Ordner bei " + UniverseDirectory + " existiert nicht!");
                 return false;
             }
             //if (!Directory.Exists(PDFDirectory))

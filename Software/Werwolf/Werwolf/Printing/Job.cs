@@ -55,6 +55,10 @@ namespace Werwolf.Printing
         /// </summary>
         public bool CleanJob { get; set; }
         public int MaxCPU { get; set; } = 1;
+        /// <summary>
+        /// Löscht alle Dateien mit diesen File Endungen bevor der Job ausgeführt wird.
+        /// </summary>
+        public string[] CleanFiles { get; set; }
 
         public string UniversePath { get; set; }
 
@@ -95,6 +99,7 @@ namespace Werwolf.Printing
             this.Rotieren = Rotieren;
             this.KonsolenAnzeigen = KonsolenAnzeigen;
             this.CleanJob = CleanJob;
+            this.CleanFiles = new string[0];
 
             this.Init(Deck.Universe);
             this.Name = this.Schreibname = Deck.Name + "-Job";
@@ -118,6 +123,9 @@ namespace Werwolf.Printing
             this.Rotieren = Loader.XmlReader.GetBoolean("Rotieren");
             this.KonsolenAnzeigen = Loader.XmlReader.GetBoolean("KonsolenAnzeigen");
             this.CleanJob = Loader.XmlReader.GetBoolean("CleanJob");
+            this.MaxCPU = Loader.XmlReader.GetInt("MaxCPU");
+            MaxCPU = Math.Max(MaxCPU, 1);
+            this.CleanFiles = Loader.XmlReader.GetStrings("CleanFiles", "|");
 
             this.UniversePath = Loader.XmlReader.GetString("Universe_Path");//For Skinner
         }
@@ -139,6 +147,8 @@ namespace Werwolf.Printing
             XmlWriter.WriteBoolean("Rotieren", Rotieren);
             XmlWriter.WriteBoolean("KonsolenAnzeigen", KonsolenAnzeigen);
             XmlWriter.WriteBoolean("CleanJob", CleanJob);
+            XmlWriter.WriteInt("MaxCPU", MaxCPU);
+            XmlWriter.WriteAttribute("CleanFiles", CleanFiles.SumText("|"));
 
             XmlWriter.WriteAttribute("Universe_Path", Universe.Pfad);//For Skinner
         }
@@ -163,92 +173,14 @@ namespace Werwolf.Printing
                 kartenSize = kartenSize.permut();
             return WolfSinglePaper.GetNumberOfCards(kartenSize).Inhalt();
         }
-        //public void DistributedPrint(string JobPath, ProgressBar ProgressBar)
-        //    => DistributedPrint(JobPath, new JobTickerProgressBar(ProgressBar));
-        //{
-        //    int solvedJobs = 0;
-        //    int numberOfJobs;
-        //    if (MachBilder)
-        //        numberOfJobs = Deck.UniqueCount();
-        //    else
-        //    {
-        //        int numberProSheet = GetNumberProSheet();
-        //        int numberOfCards = Deck.TotalCount();
-        //        numberOfJobs = (int)Math.Ceiling(numberOfCards * 1f / numberProSheet);
-        //        if (MyMode == Job.RuckBildMode.Einzeln)
-        //            numberOfJobs *= 2;
-        //    }
-
-        //    if (progressBar1 != null)
-        //        progressBar1.Invoke((MethodInvoker)delegate
-        //        {
-        //            progressBar1.Value = 0;
-        //            progressBar1.Maximum = numberOfJobs;
-        //        });
-
-        //    Queue<int> jobs = new Queue<int>();
-        //    for (int i = 0; i < numberOfJobs; i++)
-        //        jobs.Enqueue(i);
-
-        //    int maxWorkers = FastMath.Min(Settings.MaximumNumberOfCores, MaxCPU, numberOfJobs, Environment.ProcessorCount);
-        //    Process[] workers = new Process[maxWorkers];
-
-        //    ProcessStartInfo psi = new ProcessStartInfo();
-        //    psi.FileName = Path.Combine(Directory.GetCurrentDirectory(), "WolfSlave.exe");
-        //    psi.Arguments = '"' + Universe.Pfad + "\" \"" + JobPath + "\"";
-
-        //    while (solvedJobs < numberOfJobs)
-        //    {
-        //        for (int i = 0; i < maxWorkers; i++)
-        //            if (workers[i] == null && jobs.Count > 0)
-        //                workers[i] = Process.Start(psi.FileName, psi.Arguments + " " + jobs.Dequeue());
-        //            else if (workers[i] != null && workers[i].HasExited)
-        //            {
-        //                solvedJobs++;
-        //                workers[i].Close();
-        //                workers[i] = null;
-        //                if (progressBar1 != null)
-        //                    progressBar1.Invoke((MethodInvoker)delegate { progressBar1.PerformStep(); });
-        //            }
-        //        Thread.Sleep(500);
-        //    }
-        //    if (!MachBilder)
-        //    {
-        //        string[] files = new string[numberOfJobs];
-        //        for (int i = 0; i < numberOfJobs; i++)
-        //            files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
-
-        //        bool pdfCreated = false;
-        //        while (!pdfCreated)
-        //        {
-        //            try
-        //            {
-        //                if (MyMode == RuckBildMode.Einzeln)
-        //                    PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-        //                else
-        //                    PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-        //                pdfCreated = true;
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                DialogResult dr = MessageBox.Show("Datei " + Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + ".pdf")
-        //                      + " kann nicht erstellt werden. Bitte schließen Sie das Dokument und führen Sie diesen Vorgang nochmal aus."
-        //                      + "\r\nFehlernachricht:\r\n"
-        //                      + e.Message,
-        //                    "Dokument muss geschlossen werden",
-        //                    MessageBoxButtons.AbortRetryIgnore);
-        //                if (dr != DialogResult.Retry)
-        //                    pdfCreated = true;
-        //            }
-        //        }
-        //        foreach (var item in files)
-        //            File.Delete(item);
-        //    }
-        //    if (CleanJob)
-        //        File.Delete(JobPath);
-        //}
         public void DistributedPrint(string JobPath, IJobTicker Ticker)
         {
+            var directory = Path.GetDirectoryName(JobPath);
+            foreach (var extension in CleanFiles)
+                foreach (var file in 
+                    Directory.EnumerateFiles(directory, "*." + extension, SearchOption.AllDirectories))
+                    File.Delete(file);
+
             int solvedJobs = 0;
             int numberOfJobs;
             if (MachBilder)
