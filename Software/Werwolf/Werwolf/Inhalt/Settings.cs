@@ -50,7 +50,7 @@ namespace Werwolf.Inhalt
         }
         public static Image NotFoundImage { get; set; }
         public static bool RefreshDirtyButtons { get; set; }
-        public static string ArtOfMtgLibraryPath { get; set; }
+        public static string ArtOfMtgLibraryRoot { get; set; }
         public static ArtLibrary ArtOfMtgLibrary { get; set; }
 
         static Settings()
@@ -73,7 +73,7 @@ namespace Werwolf.Inhalt
             notFoundImagePath = reader.GetString("NotFoundImagePath");
             ViewPpm = reader.GetFloat("ViewPpm");
             RefreshDirtyButtons = reader.GetBoolean("RefreshDirtyButtons");
-            ArtOfMtgLibraryPath = reader.GetString("ArtOfMtgLibrary");
+            ArtOfMtgLibraryRoot = reader.GetString("ArtOfMtgLibraryRoot");
             TryLoadArtOfMtgLibrary();
 
             using (Image Image = Image.FromFile(ErrorImagePath))// Image.FromStream(fs))
@@ -88,7 +88,7 @@ namespace Werwolf.Inhalt
         {
             try
             {
-                ArtOfMtgLibrary = ArtLibrary.ReadLibrary(Path.GetDirectoryName(ArtOfMtgLibraryPath));
+                ArtOfMtgLibrary = ArtLibrary.ReadLibrary(ArtOfMtgLibraryRoot);
                 return true;
             }
             catch (Exception)
@@ -112,7 +112,7 @@ namespace Werwolf.Inhalt
             writer.WriteFloat("MaximumPpm", MaximumPpm);
             writer.WriteFloat("ViewPpm", ViewPpm);
             writer.WriteBoolean("RefreshDirtyButtons", RefreshDirtyButtons);
-            writer.WriteAttribute("ArtOfMtgLibrary", ArtOfMtgLibraryPath);
+            writer.WriteAttribute("ArtOfMtgLibraryRoot", ArtOfMtgLibraryRoot);
 
             ErrorImage.Save(ErrorImagePath);//Forced
             writer.WriteAttribute("ErrorImagePath", errorImagePath);

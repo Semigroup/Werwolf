@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
@@ -16,7 +13,9 @@ using Werwolf.Inhalt;
 using Werwolf.Inhalt.Data;
 using Werwolf.Forms.Data;
 
-using System.Threading;
+using ArtOfMagicCrawler;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Werwolf.Forms
 {
@@ -58,12 +57,13 @@ namespace Werwolf.Forms
         private CheckBox checkBox2 = new CheckBox();
         private TextBox textBox1 = new TextBox();
         private Button SettingsButton = new Button();
+        private Button LibraryButton = new Button();
         private Button PrintDeck = new Button();
 
         protected ViewKarte ViewKarte;
 
         private OpenFileDialog OpenFileDialog = new OpenFileDialog();
-        private OpenFileDialog OpenLibraryDialog = new OpenFileDialog();
+        private FolderBrowserDialog OpenLibraryDialog = new FolderBrowserDialog();
 
         public StartForm(params ITool[] Tools)
         {
@@ -127,7 +127,7 @@ namespace Werwolf.Forms
             PrintDeck.Text = "Ein Kartendeck in eine PDF-Datei verwandeln";
             PrintDeck.Click += new EventHandler(PrintDeck_Click);
 
-            ScrollList.AddControl( textBox1, BilderButtons, ElementMengenButtons,
+            ScrollList.AddControl(textBox1, BilderButtons, ElementMengenButtons,
                 PrintDeck, BildMengenButtons, DarstellungenButtons);
             ScrollList.AddControl(Tools.Map(tool =>
             {
@@ -150,12 +150,31 @@ namespace Werwolf.Forms
             SettingsButton.Click += new EventHandler(SettingsButton_Click);
             Controls.Add(SettingsButton);
 
+            LibraryButton.AutoSize = true;
+            LibraryButton.Text = "Magic-Bilderbibliothek Neu Erstellen";
+            LibraryButton.Click += LibraryButton_Click;
+            Controls.Add(LibraryButton);
+
             OpenFileDialog.Filter = "Bilder|*.jpg; *.jpeg; *.png; *.bmp; *.gif; *.tiff; *.tif; *.wmf";
             OpenFileDialog.Multiselect = true;
 
-            OpenLibraryDialog.Filter = "Bibliothek|*.library";
+            //OpenLibraryDialog.Filter = "Bibliothek|*.library";
 
             this.ClientSize = new Size(1200, 800);
+        }
+
+        private void LibraryButton_Click(object sender, EventArgs e)
+        {
+            Process p = new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = "ArtOfMagicCrawler.exe",
+                    Arguments = '"' + Settings.ArtOfMtgLibraryRoot + '"',
+                    UseShellExecute = false,
+                }
+            };
+            p.Start();
         }
 
         private void PrintDeck_Click(object sender, EventArgs e)
@@ -403,6 +422,7 @@ namespace Werwolf.Forms
             checkBox1.Location = new Point(SteuerBox.Right - 250, ClientSize.Height - 120);
             checkBox2.Location = new Point(SteuerBox.Right - 250, ClientSize.Height - 100);
             SettingsButton.Location = new Point(ViewKarte.Right + 20, ClientSize.Height - 50);
+            LibraryButton.Location = new Point(SettingsButton.Right + 20, ClientSize.Height - 50);
 
             ScrollList.Location = new Point(ViewKarte.Right + 20, 20);
             ScrollList.Size = new Size(ClientSize.Width - ScrollList.Left - 20, SteuerBox.Top - 40);
