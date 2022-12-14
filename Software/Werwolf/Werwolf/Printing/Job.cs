@@ -14,6 +14,7 @@ using Assistment.Extensions;
 using Assistment.Mathematik;
 using Assistment.PDF;
 using Assistment.Drawing.LinearAlgebra;
+using Assistment.Texts;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;
@@ -30,6 +31,22 @@ namespace Werwolf.Printing
             Gemeinsam
         }
 
+        public enum OutputType
+        {
+            /// <summary>
+            /// All cards are embedded into one pdf file
+            /// </summary>
+            PDFDocument,
+            /// <summary>
+            /// One jpg image is created per card
+            /// </summary>
+            JPGImages,
+            /// <summary>
+            /// One big jpg file is created that contains all images (seamless, for TTS)
+            /// </summary>
+            JPGAtlas
+        }
+
         public Deck Deck { get; set; }
         public List<KeyValuePair<Karte, int>> FullSortedDeckList { get; set; }
         public Color HintergrundFarbe { get; set; }
@@ -44,10 +61,15 @@ namespace Werwolf.Printing
         /// Dateigröße in MB
         /// </summary>
         public float MaximaleGrose { get; set; }
+        ///// <summary>
+        ///// Macht Bilder statt Pdf, falls true
+        ///// </summary>
+        //public bool MachBilder { get; set; }
         /// <summary>
-        /// Macht Bilder statt Pdf, falls true
+        /// What kind of artifact shall be produced by this job?
+        /// (PDF, PNGs, one PNG atlas?)
         /// </summary>
-        public bool MachBilder { get; set; }
+        public OutputType OutputFileType { get; set; }
         public bool Rotieren { get; set; }
         public bool KonsolenAnzeigen { get; set; }
         /// <summary>
@@ -81,7 +103,9 @@ namespace Werwolf.Printing
             float Ppm, bool Zwischenplatz, RuckBildMode MyMode,
             bool FixedFont, bool TrennlinieVorne, bool TrennlinieHinten,
             bool Rotieren,
-            float MaximaleGrose, bool MachBilder,
+            float MaximaleGrose,
+            OutputType OutputFileType,
+            //bool MachBilder,
             bool KonsolenAnzeigen, bool CleanJob)
         {
             this.Deck = Deck;
@@ -95,7 +119,8 @@ namespace Werwolf.Printing
             this.TrennlinieVorne = TrennlinieVorne;
             this.TrennlinieHinten = TrennlinieHinten;
             this.MaximaleGrose = MaximaleGrose;
-            this.MachBilder = MachBilder;
+            //this.MachBilder = MachBilder;
+            this.OutputFileType = OutputFileType;
             this.Rotieren = Rotieren;
             this.KonsolenAnzeigen = KonsolenAnzeigen;
             this.CleanJob = CleanJob;
@@ -119,7 +144,10 @@ namespace Werwolf.Printing
             this.TrennlinieVorne = Loader.XmlReader.GetBoolean("TrennlinieVorne");
             this.TrennlinieHinten = Loader.XmlReader.GetBoolean("TrennlinieHinten");
             this.MaximaleGrose = Loader.XmlReader.GetFloat("MaximaleGrose");
-            this.MachBilder = Loader.XmlReader.GetBoolean("MachBilder");
+
+            //this.MachBilder = Loader.XmlReader.GetBoolean("MachBilder");
+            this.OutputFileType = Loader.XmlReader.GetEnum<OutputType>("OutputFileType");
+
             this.Rotieren = Loader.XmlReader.GetBoolean("Rotieren");
             this.KonsolenAnzeigen = Loader.XmlReader.GetBoolean("KonsolenAnzeigen");
             this.CleanJob = Loader.XmlReader.GetBoolean("CleanJob");
@@ -143,7 +171,8 @@ namespace Werwolf.Printing
             XmlWriter.WriteBoolean("TrennlinieVorne", TrennlinieVorne);
             XmlWriter.WriteBoolean("TrennlinieHinten", TrennlinieHinten);
             XmlWriter.WriteFloat("MaximaleGrose", MaximaleGrose);
-            XmlWriter.WriteBoolean("MachBilder", MachBilder);
+            //XmlWriter.WriteBoolean("MachBilder", MachBilder);
+            XmlWriter.WriteEnum<OutputType>("OutputFileType", OutputFileType);
             XmlWriter.WriteBoolean("Rotieren", Rotieren);
             XmlWriter.WriteBoolean("KonsolenAnzeigen", KonsolenAnzeigen);
             XmlWriter.WriteBoolean("CleanJob", CleanJob);
@@ -177,21 +206,29 @@ namespace Werwolf.Printing
         {
             var directory = Path.GetDirectoryName(JobPath);
             foreach (var extension in CleanFiles)
-                foreach (var file in 
+                foreach (var file in
                     Directory.EnumerateFiles(directory, "*." + extension, SearchOption.AllDirectories))
                     File.Delete(file);
 
             int solvedJobs = 0;
             int numberOfJobs;
-            if (MachBilder)
-                numberOfJobs = Deck.UniqueCount();
-            else
+            switch (OutputFileType)
             {
-                int numberProSheet = GetNumberProSheet();
-                int numberOfCards = Deck.TotalCount();
-                numberOfJobs = (int)Math.Ceiling(numberOfCards * 1f / numberProSheet);
-                if (MyMode == Job.RuckBildMode.Einzeln)
-                    numberOfJobs *= 2;
+                case OutputType.PDFDocument:
+                    int numberProSheet = GetNumberProSheet();
+                    int numberOfCards = Deck.TotalCount();
+                    numberOfJobs = (int)Math.Ceiling(numberOfCards * 1f / numberProSheet);
+                    if (MyMode == Job.RuckBildMode.Einzeln)
+                        numberOfJobs *= 2;
+                    break;
+                case OutputType.JPGImages:
+                    numberOfJobs = Deck.UniqueCount();
+                    break;
+                case OutputType.JPGAtlas:
+                    numberOfJobs = 1;
+                    break;
+                default:
+                    throw new NotImplementedException("Unknown enum for OutputType: " + OutputFileType);
             }
             Ticker.Reset(numberOfJobs);
 
@@ -213,7 +250,18 @@ namespace Werwolf.Printing
                     if (workers[i] == null && jobs.Count > 0)
                     {
                         jobIDs[i] = jobs.Dequeue();
-                        workers[i] = Process.Start(psi.FileName, psi.Arguments + " " + jobIDs[i]);
+
+                        try
+                        {
+                            workers[i] = Process.Start(psi.FileName, psi.Arguments + " " + jobIDs[i]);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());    
+                            solvedJobs++;
+                            Ticker.Exited(jobIDs[i], -1);
+                            workers[i] = null;
+                        }
                     }
                     else if (workers[i] != null && workers[i].HasExited)
                     {
@@ -224,41 +272,56 @@ namespace Werwolf.Printing
                     }
                 Thread.Sleep(500);
             }
-            if (!MachBilder)
-            {
-                string[] files = new string[numberOfJobs];
-                for (int i = 0; i < numberOfJobs; i++)
-                    files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
 
-                bool pdfCreated = false;
-                while (!pdfCreated)
-                {
-                    try
-                    {
-                        if (MyMode == RuckBildMode.Einzeln)
-                            PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-                        else
-                            PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
-                        pdfCreated = true;
-                    }
-                    catch (Exception e)
-                    {
-                        DialogResult dr = MessageBox.Show("Datei " + Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + ".pdf")
-                              + " kann nicht erstellt werden. Bitte schließen Sie das Dokument und führen Sie diesen Vorgang nochmal aus."
-                              + "\r\nFehlernachricht:\r\n"
-                              + e.Message,
-                            "Dokument muss geschlossen werden",
-                            MessageBoxButtons.AbortRetryIgnore);
-                        if (dr != DialogResult.Retry)
-                            pdfCreated = true;
-                    }
-                }
-                foreach (var item in files)
-                    File.Delete(item);
+            switch (OutputFileType)
+            {
+                case OutputType.PDFDocument:
+                    MergePagesToDocument(numberOfJobs, JobPath);
+                    break;
+                case OutputType.JPGImages:
+                case OutputType.JPGAtlas:
+                    break;
+                default:
+                    throw new NotImplementedException("Unknown enum for OutputType: " + OutputFileType);
             }
             if (CleanJob)
                 File.Delete(JobPath);
         }
+
+        private void MergePagesToDocument(int numberOfJobs, string JobPath)
+        {
+            string[] files = new string[numberOfJobs];
+            for (int i = 0; i < numberOfJobs; i++)
+                files[i] = Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + "." + i + ".pdf");
+
+            bool pdfCreated = false;
+            while (!pdfCreated)
+            {
+                try
+                {
+                    if (MyMode == RuckBildMode.Einzeln)
+                        PDFHelper.ConcatSplitDoppelseitig(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                    else
+                        PDFHelper.ConcatSplit(Path.Combine(Path.GetDirectoryName(JobPath), Schreibname), (long)(MaximaleGrose * (1 << 20)), files);
+                    pdfCreated = true;
+                }
+                catch (Exception e)
+                {
+                    DialogResult dr = MessageBox.Show("Datei " + Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + ".pdf")
+                          + " kann nicht erstellt werden. Bitte schließen Sie das Dokument und führen Sie diesen Vorgang nochmal aus."
+                          + "\r\nFehlernachricht:\r\n"
+                          + e.Message,
+                        "Dokument muss geschlossen werden",
+                        MessageBoxButtons.AbortRetryIgnore);
+                    if (dr != DialogResult.Retry)
+                        pdfCreated = true;
+                }
+            }
+
+            foreach (var item in files)
+                File.Delete(item);
+        }
+
         public string Save(string TargetPath)
         {
             string JobPath = Path.Combine(Path.GetDirectoryName(TargetPath), Schreibname + ".job.xml");
@@ -270,6 +333,16 @@ namespace Werwolf.Printing
                 writer.Close();
             }
             return JobPath;
+        }
+
+        public static string MapCardNameToFileName(Karte Karte, string JobPath)
+        {
+            Text t = new Text();
+            t.AddRegex(Karte.Name);
+            string s = t.ToString().ToFileName("_");
+            s = s.Replace(" ", "");
+            s = Path.Combine(Path.GetDirectoryName(JobPath), s + ".jpg");
+            return s;
         }
     }
 }

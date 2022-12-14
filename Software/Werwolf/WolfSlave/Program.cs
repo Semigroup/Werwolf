@@ -17,6 +17,7 @@ using Werwolf.Karten;
 using Werwolf.Printing;
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
+using iTextSharp.text;
 
 namespace WolfSlave
 {
@@ -28,8 +29,8 @@ namespace WolfSlave
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
-        const int SW_HIDE = 0;
-        const int SW_SHOW = 5;
+        //const int SW_HIDE = 0;
+        //const int SW_SHOW = 5;
 
         static Job Job;
         static int JobNumber;
@@ -68,23 +69,109 @@ namespace WolfSlave
             Console.WriteLine("Universe read");
             Job = new Job(Universe, JobPath);
             Console.WriteLine("Job read");
-            if (!Job.KonsolenAnzeigen)
-                HideConsole();
+            //if (!Job.KonsolenAnzeigen)
+            //    HideConsole();
 
             try
             {
                 Console.WriteLine(Job.MyMode + ", " + JobNumber);
-                Console.WriteLine(Job.MachBilder ? "Bilder" : "PDF");
-                if (Job.MachBilder)
-                    CreateImage();
-                else
-                    CreatePDF();
+                //Console.WriteLine(Job.MachBilder ? "Bilder" : "PDF");
+                Console.WriteLine(Job.OutputFileType);
+                switch (Job.OutputFileType)
+                {
+                    case Job.OutputType.PDFDocument:
+                        CreatePDF();
+                        break;
+                    case Job.OutputType.JPGImages:
+                        CreateImage();
+                        break;
+                    case Job.OutputType.JPGAtlas:
+                        CreateAtlas();
+                        break;
+                    default:
+                        throw new NotImplementedException("Unknown enum for OutputType: " + Job.OutputFileType);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
                 Console.ReadKey();
             }
+        }
+
+        private static void CreateAtlas()
+        {
+            int numberCards = Job.Deck.TotalCount();
+            double a = Math.Sqrt(numberCards / (16.0 * 9.0));
+            int columns = (int)Math.Ceiling(16 * a);
+            int rows = (int)Math.Ceiling(9 * a);
+
+            bool changed = true;
+            while (changed)
+            {
+                changed = false;
+                if ((columns - 1) * rows >= numberCards)
+                {
+                    columns--;
+                    changed = true;
+                }
+                if (columns * (rows - 1) >= numberCards)
+                {
+                    rows--;
+                    changed = true;
+                }
+            }
+
+
+            //Console.WriteLine(columns.ToString());
+            //Console.WriteLine(rows.ToString());
+
+            SizeF sizeCard = Job.Deck.GetKartenSize().mul(Job.Ppm);
+            //Console.WriteLine(sizeCard.ToString());
+            Size sizeAtlas = sizeCard.mul(columns, rows).ToSize();
+            Console.WriteLine("Trying to create a bitmap of size " + sizeAtlas.ToString());
+            Bitmap atlas = new Bitmap(sizeAtlas.Width, sizeAtlas.Height);
+            Console.WriteLine("Success!");
+
+            using (Graphics g = atlas.GetGraphics(Job.Ppm / WolfBox.Faktor, Job.HintergrundFarbe, true))
+            using (DrawContextGraphics context = new DrawContextGraphics(g))
+            {
+                Point index = new Point(0, 0);
+                int itemNumber = 0;
+                foreach (var item in Job.Deck.Karten)
+                    if (item.Value > 0)
+                    {
+                        Console.WriteLine(itemNumber + " of " + Job.Deck.TotalCount());
+                        itemNumber++;
+                        var card = item.Key;
+                        var sprite = new StandardKarte(card, Job.Ppm);
+                        sprite.Setup(0);
+                        for (int i = 0; i < item.Value; i++)
+                        {
+                            var offset = sizeCard.mul(index).mul(WolfBox.Faktor / Job.Ppm).ToPointF();
+                            //Console.WriteLine("index: " + index.ToString());
+                            //Console.WriteLine(offset.ToString());
+                            g.TranslateTransform(offset.X, offset.Y);
+                            g.SetClip(new RectangleF(new PointF(), sizeCard.mul(WolfBox.Faktor / Job.Ppm)));
+                            //sprite.Move(offset);
+                            sprite.Draw(context);
+                            //card.DrawOnGraphics(g, Job.Ppm, sprite, false);
+                            g.TranslateTransform(-offset.X, -offset.Y);
+
+                            index.X++;
+                            if (index.X == columns)
+                            {
+                                index.X = 0;
+                                index.Y++;
+                            }
+                        }
+                    }
+
+            }
+
+
+            var atlasFilePath = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + ".jpg");
+            atlas.Save(atlasFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
         static void CreatePDF()
@@ -109,25 +196,22 @@ namespace WolfSlave
                         Karte = item.Key;
                         break;
                     }
-            Text t = new Text();
-            t.AddRegex(Karte.Name);
-            string s = t.ToString().ToFileName("_");
-            s = s.Replace(" ", "");
-            s = Path.Combine(Path.GetDirectoryName(JobPath), s + ".jpg");
-            using (Image img = Karte.GetImage(Job.Ppm, true))
-                img.Save(s, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            var filepath = Job.MapCardNameToFileName(Karte, JobPath);
+            using (System.Drawing.Image img = Karte.GetImage(Job.Ppm, true))
+                img.Save(filepath, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
-        static void HideConsole()
-        {
-            var handle = GetConsoleWindow();
+        //static void HideConsole()
+        //{
+        //    var handle = GetConsoleWindow();
 
-            // Hide
-            ShowWindow(handle, SW_HIDE);
+        //    Hide
+        //    ShowWindow(handle, SW_HIDE);
 
-            // Show
-            //ShowWindow(handle, SW_SHOW);
-        }
+        //    Show
+        //    ShowWindow(handle, SW_SHOW);
+        //}
 
         static void AddKarten(Job Job, int JobNumber, WolfSinglePaper wsp)
         {
@@ -136,7 +220,7 @@ namespace WolfSlave
             switch (Job.MyMode)
             {
                 case Job.RuckBildMode.Keine:
-                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList,JobNumber * numberProSheet, numberProSheet))
+                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             wsp.TryAdd(GetKarte(item.Key, Job));
                     break;

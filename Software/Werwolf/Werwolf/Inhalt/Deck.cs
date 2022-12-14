@@ -144,8 +144,8 @@ namespace Werwolf.Inhalt
         }
 
         /// <summary>
-        /// erste karte, in ppm
-        /// <para> sind keine Karten da, wird (0,0) gegeben</para>
+        /// returns the size of the first card of the deck in millimeters
+        /// <para>if this deck is empty, (0,0) will be returned</para>
         /// </summary>
         /// <returns></returns>
         public SizeF GetKartenSize()

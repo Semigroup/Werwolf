@@ -18,7 +18,7 @@ namespace Werwolf.Forms
     public partial class PrintForm : Form
     {
         private string TargetPath;
-        private Job Job = new Job();
+        private readonly Job Job = new Job();
 
         private Universe universe;
         private Deck deck;
@@ -53,7 +53,19 @@ namespace Werwolf.Forms
             this.ppmBox1.PpmMaximum = Settings.MaximumPpm;
         }
 
-        private void FetchJob(bool MachBilder, bool CleanJob)
+        private void DeckButton_Click(object sender, EventArgs e)
+        {
+            ElementAuswahlForm<Deck> form = new ElementAuswahlForm<Deck>(
+                Universe.Karten.Standard,
+                Universe.Decks,
+                deck,
+                new ViewDeck(),
+                false);
+            if (form.ShowDialog() == DialogResult.OK)
+                Deck = form.Element;
+        }
+
+        private void FetchJob(Job.OutputType outputType, bool CleanJob)
         {
             Job.RuckBildMode Mode = Job.RuckBildMode.Keine;
             if (radioButton1.Checked)
@@ -74,12 +86,38 @@ namespace Werwolf.Forms
                 checkBox3.Checked,
                 dinA4ForcedBox.Checked,
                 floatBox1.UserValue,
-                MachBilder,
+                outputType,
                 consoleBox.Checked,
                 CleanJob);
             TargetPath = Path.Combine(saveFileDialog1.FileName);
             Job.Schreibname = Path.GetFileNameWithoutExtension(TargetPath);
             Job.MaxCPU = int.MaxValue;
+        }
+
+        private void Printer_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = false; });
+            DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = false; });
+            PrintButtonAtlas.Invoke((MethodInvoker)delegate { PrintButtonAtlas.Enabled = false; });
+
+            string JobPath = Job.Save(TargetPath);
+            JobTickerProgressBar jobTickerProgressBar = new JobTickerProgressBar(progressBar1);
+            Job.DistributedPrint(JobPath, jobTickerProgressBar);
+
+            Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = true; });
+            DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = true; });
+            PrintButtonAtlas.Invoke((MethodInvoker)delegate { PrintButtonAtlas.Enabled = true; });
+        }
+
+        private void Drucken_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = Deck.Schreibname;
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            FetchJob(Job.OutputType.PDFDocument, true);
+
+            Printer.RunWorkerAsync();
         }
 
         private void DruckenBilder_Click(object sender, EventArgs e)
@@ -88,50 +126,37 @@ namespace Werwolf.Forms
             if (saveFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
 
-            FetchJob(true, true);
+            FetchJob(Job.OutputType.JPGImages, true);
 
             Printer.RunWorkerAsync();
         }
-        private void DeckButton_Click(object sender, EventArgs e)
-        {
-            ElementAuswahlForm<Deck> form = new ElementAuswahlForm<Deck>(
-                Universe.Karten.Standard,
-                Universe.Decks,
-                deck,
-                new ViewDeck(),
-                false);
-            if (form.ShowDialog() == DialogResult.OK)
-                Deck = form.Element;
-        }
-        private void Drucken_Click(object sender, EventArgs e)
+
+        private void DruckenJob_Click(object sender, EventArgs e)
         {
             saveFileDialog1.FileName = Deck.Schreibname;
             if (saveFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
 
-            FetchJob(false, true);
+            FetchJob(Job.OutputType.PDFDocument, false);
+            Job.MaxCPU = 1;
+            Job.Save(TargetPath);
+        }
+
+        private void PrintButtonAtlas_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = Deck.Schreibname;
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            FetchJob(Job.OutputType.JPGAtlas, true);
 
             Printer.RunWorkerAsync();
         }
-        private void Printer_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = false; });
-            DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = false; });
-            string JobPath = Job.Save(TargetPath);
-            JobTickerProgressBar jobTickerProgressBar = new JobTickerProgressBar(progressBar1);
-            Job.DistributedPrint(JobPath, jobTickerProgressBar);
-            Drucken.Invoke((MethodInvoker)delegate { Drucken.Enabled = true; });
-            DruckenBilder.Invoke((MethodInvoker)delegate { DruckenBilder.Enabled = true; });
-        }
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            e.Cancel = !Drucken.Enabled;
-            base.OnClosing(e);
-        }
+
         private void Button1_Click(object sender, EventArgs e)
         {
-            FetchJob(false, true);
-            WolfSinglePaper wsp = new WolfSinglePaper(Job,"");
+            FetchJob(Job.OutputType.PDFDocument, true);
+            WolfSinglePaper wsp = new WolfSinglePaper(Job, "");
             foreach (var item in deck.GetKarten(fullSortedDeckList, 0, 9))
                 for (int i = 0; i < item.Value; i++)
                     if (Job.MyMode == Printing.Job.RuckBildMode.Nur)
@@ -141,8 +166,7 @@ namespace Werwolf.Forms
 
             wsp.Swapped = Job.MyMode == Job.RuckBildMode.Nur;
 
-            if (pictureBox1.Image != null)
-                pictureBox1.Image.Dispose();
+            pictureBox1.Image?.Dispose();
 
             Size s = wsp.Seite.Size.mul(Job.Ppm / WolfBox.Faktor).ToSize();
             Bitmap b = new Bitmap(s.Width, s.Height);
@@ -156,15 +180,10 @@ namespace Werwolf.Forms
             pictureBox1.Image = b;
         }
 
-        private void DruckenJob_Click(object sender, EventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            saveFileDialog1.FileName = Deck.Schreibname;
-            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
-                return;
-
-            FetchJob(false, false);
-            Job.MaxCPU = 1;
-            Job.Save(TargetPath);
+            e.Cancel = !Drucken.Enabled;
+            base.OnClosing(e);
         }
     }
 }

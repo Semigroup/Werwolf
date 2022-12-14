@@ -309,20 +309,26 @@ namespace Werwolf.Inhalt
                     throw new NotImplementedException();
             }
         }
-        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox, bool high, bool flipX)
+
+        public void DrawOnGraphics(Graphics g, float ppm, WolfBox WolfBox, bool flipX)
         {
-            Size s = GetPictureSize(ppm);
-            Bitmap img = new Bitmap(s.Width, s.Height);
-            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, BackColor, high))
             using (DrawContextGraphicsFlip dcg = new DrawContextGraphicsFlip(g,
                 new RectangleF(new PointF(), HintergrundDarstellung.Size.mul(WolfBox.Faktor)),
-                ppm / WolfBox.Faktor))//
+                ppm / WolfBox.Faktor))
             {
                 if (flipX)
                     dcg.FlipX();
                 WolfBox.Setup(0);
                 WolfBox.Draw(dcg);
             }
+        }
+        public Bitmap GetImage(float ppm, Color BackColor, WolfBox WolfBox, bool high, bool flipX)
+        {
+            Size s = GetPictureSize(ppm);
+            Bitmap img = new Bitmap(s.Width, s.Height);
+            using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, BackColor, high))
+                DrawOnGraphics(g, ppm, WolfBox, flipX);
+
             return img;
         }
         public Bitmap GetImage(float ppm, Color BackColor, bool high)

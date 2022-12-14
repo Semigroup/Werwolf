@@ -55,6 +55,7 @@
             this.dinA4ForcedBox = new System.Windows.Forms.CheckBox();
             this.consoleBox = new System.Windows.Forms.CheckBox();
             this.DruckenJob = new System.Windows.Forms.Button();
+            this.PrintButtonAtlas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,10 +63,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(639, 48);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton1.Location = new System.Drawing.Point(852, 59);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(143, 17);
+            this.radioButton1.Size = new System.Drawing.Size(175, 20);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Eine Rückseite pro Karte";
@@ -74,10 +75,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(639, 114);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton2.Location = new System.Drawing.Point(852, 140);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(210, 17);
+            this.radioButton2.Size = new System.Drawing.Size(266, 20);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "Eine gemeinsame Rückseite pro Papier";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -86,10 +87,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(639, 70);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton3.Location = new System.Drawing.Point(852, 86);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(109, 17);
+            this.radioButton3.Size = new System.Drawing.Size(132, 20);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.Text = "Keine Rückseiten";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -100,19 +101,19 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(622, 661);
+            this.pictureBox1.Size = new System.Drawing.Size(829, 814);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
             // DeckButton
             // 
-            this.DeckButton.Location = new System.Drawing.Point(639, 10);
-            this.DeckButton.Margin = new System.Windows.Forms.Padding(2);
+            this.DeckButton.Location = new System.Drawing.Point(852, 12);
+            this.DeckButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DeckButton.Name = "DeckButton";
-            this.DeckButton.Size = new System.Drawing.Size(104, 33);
+            this.DeckButton.Size = new System.Drawing.Size(139, 41);
             this.DeckButton.TabIndex = 4;
             this.DeckButton.Text = "Deck Auswählen";
             this.DeckButton.UseVisualStyleBackColor = true;
@@ -121,30 +122,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(748, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(997, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.Size = new System.Drawing.Size(126, 16);
             this.label1.TabIndex = 5;
             this.label1.Text = "Ausgewähltes Deck";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(637, 160);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(849, 197);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.Size = new System.Drawing.Size(107, 16);
             this.label2.TabIndex = 7;
             this.label2.Text = "Hintergrundfarbe";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(637, 184);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(849, 226);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.Size = new System.Drawing.Size(112, 16);
             this.label3.TabIndex = 9;
             this.label3.Text = "Farbe Trennlinien";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -152,20 +150,20 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(639, 92);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton4.Location = new System.Drawing.Point(852, 113);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(99, 17);
+            this.radioButton4.Size = new System.Drawing.Size(119, 20);
             this.radioButton4.TabIndex = 10;
             this.radioButton4.Text = "Nur Rückseiten";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // Drucken
             // 
-            this.Drucken.Location = new System.Drawing.Point(775, 529);
-            this.Drucken.Margin = new System.Windows.Forms.Padding(2);
+            this.Drucken.Location = new System.Drawing.Point(1033, 651);
+            this.Drucken.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Drucken.Name = "Drucken";
-            this.Drucken.Size = new System.Drawing.Size(114, 35);
+            this.Drucken.Size = new System.Drawing.Size(152, 43);
             this.Drucken.TabIndex = 11;
             this.Drucken.Text = "PDF erstellen";
             this.Drucken.UseVisualStyleBackColor = true;
@@ -173,10 +171,10 @@
             // 
             // DruckenBilder
             // 
-            this.DruckenBilder.Location = new System.Drawing.Point(775, 564);
-            this.DruckenBilder.Margin = new System.Windows.Forms.Padding(2);
+            this.DruckenBilder.Location = new System.Drawing.Point(1033, 694);
+            this.DruckenBilder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DruckenBilder.Name = "DruckenBilder";
-            this.DruckenBilder.Size = new System.Drawing.Size(114, 35);
+            this.DruckenBilder.Size = new System.Drawing.Size(152, 43);
             this.DruckenBilder.TabIndex = 102;
             this.DruckenBilder.Text = "Bilder erstellen";
             this.DruckenBilder.UseVisualStyleBackColor = true;
@@ -188,20 +186,20 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(640, 505);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
+            this.progressBar1.Location = new System.Drawing.Point(853, 622);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(249, 19);
+            this.progressBar1.Size = new System.Drawing.Size(332, 23);
             this.progressBar1.Step = 1;
             this.progressBar1.TabIndex = 16;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(639, 251);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox1.Location = new System.Drawing.Point(852, 309);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(136, 17);
+            this.checkBox1.Size = new System.Drawing.Size(163, 20);
             this.checkBox1.TabIndex = 17;
             this.checkBox1.Text = "Platz zwischen Karten?";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -213,39 +211,39 @@
             // 
             // ppmBox1
             // 
-            this.ppmBox1.Location = new System.Drawing.Point(638, 399);
-            this.ppmBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ppmBox1.Location = new System.Drawing.Point(851, 491);
+            this.ppmBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ppmBox1.Name = "ppmBox1";
             this.ppmBox1.Ppm = 24F;
             this.ppmBox1.PpmMaximum = 1000F;
             this.ppmBox1.PpmMinimum = 0.001F;
-            this.ppmBox1.Size = new System.Drawing.Size(133, 36);
+            this.ppmBox1.Size = new System.Drawing.Size(177, 44);
             this.ppmBox1.TabIndex = 15;
             // 
             // colorBox2
             // 
             this.colorBox2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.colorBox2.Location = new System.Drawing.Point(728, 184);
-            this.colorBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.colorBox2.Location = new System.Drawing.Point(971, 226);
+            this.colorBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorBox2.Name = "colorBox2";
-            this.colorBox2.Size = new System.Drawing.Size(163, 19);
+            this.colorBox2.Size = new System.Drawing.Size(217, 23);
             this.colorBox2.TabIndex = 8;
             // 
             // colorBox1
             // 
             this.colorBox1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.colorBox1.Location = new System.Drawing.Point(728, 160);
-            this.colorBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.colorBox1.Location = new System.Drawing.Point(971, 197);
+            this.colorBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.colorBox1.Name = "colorBox1";
-            this.colorBox1.Size = new System.Drawing.Size(163, 19);
+            this.colorBox1.Size = new System.Drawing.Size(217, 23);
             this.colorBox1.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(640, 529);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(853, 651);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 35);
+            this.button1.Size = new System.Drawing.Size(175, 43);
             this.button1.TabIndex = 18;
             this.button1.Text = "Vorschau: Erste Seite";
             this.button1.UseVisualStyleBackColor = true;
@@ -256,10 +254,10 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(639, 357);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox2.Location = new System.Drawing.Point(852, 439);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(72, 17);
+            this.checkBox2.Size = new System.Drawing.Size(88, 20);
             this.checkBox2.TabIndex = 19;
             this.checkBox2.Text = "FixedFont";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -268,10 +266,10 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(639, 229);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox3.Location = new System.Drawing.Point(852, 282);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(147, 17);
+            this.checkBox3.Size = new System.Drawing.Size(179, 20);
             this.checkBox3.TabIndex = 20;
             this.checkBox3.Text = "Trennlinie auf Rückseite?";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -279,20 +277,20 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(639, 207);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox4.Location = new System.Drawing.Point(852, 255);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(152, 17);
+            this.checkBox4.Size = new System.Drawing.Size(189, 20);
             this.checkBox4.TabIndex = 21;
             this.checkBox4.Text = "Trennlinie auf Vorderseite?";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // floatBox1
             // 
-            this.floatBox1.Location = new System.Drawing.Point(753, 449);
-            this.floatBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.floatBox1.Location = new System.Drawing.Point(1004, 553);
+            this.floatBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.floatBox1.Name = "floatBox1";
-            this.floatBox1.Size = new System.Drawing.Size(38, 18);
+            this.floatBox1.Size = new System.Drawing.Size(51, 22);
             this.floatBox1.TabIndex = 22;
             this.floatBox1.UserValue = 300F;
             this.floatBox1.UserValueMaximum = 3.402823E+38F;
@@ -301,10 +299,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(636, 449);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(848, 553);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 13);
+            this.label4.Size = new System.Drawing.Size(142, 16);
             this.label4.TabIndex = 23;
             this.label4.Text = "Maximale Größe in MB";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -312,10 +309,10 @@
             // dinA4ForcedBox
             // 
             this.dinA4ForcedBox.AutoSize = true;
-            this.dinA4ForcedBox.Location = new System.Drawing.Point(639, 272);
-            this.dinA4ForcedBox.Margin = new System.Windows.Forms.Padding(2);
+            this.dinA4ForcedBox.Location = new System.Drawing.Point(852, 335);
+            this.dinA4ForcedBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dinA4ForcedBox.Name = "dinA4ForcedBox";
-            this.dinA4ForcedBox.Size = new System.Drawing.Size(137, 17);
+            this.dinA4ForcedBox.Size = new System.Drawing.Size(164, 20);
             this.dinA4ForcedBox.TabIndex = 103;
             this.dinA4ForcedBox.Text = "Karten um 90° rotieren?";
             this.dinA4ForcedBox.UseVisualStyleBackColor = true;
@@ -323,28 +320,42 @@
             // consoleBox
             // 
             this.consoleBox.AutoSize = true;
-            this.consoleBox.Location = new System.Drawing.Point(639, 294);
+            this.consoleBox.Location = new System.Drawing.Point(852, 362);
+            this.consoleBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.consoleBox.Name = "consoleBox";
-            this.consoleBox.Size = new System.Drawing.Size(122, 17);
+            this.consoleBox.Size = new System.Drawing.Size(150, 20);
             this.consoleBox.TabIndex = 104;
             this.consoleBox.Text = "Konsolen anzeigen?";
             this.consoleBox.UseVisualStyleBackColor = true;
             // 
             // DruckenJob
             // 
-            this.DruckenJob.Location = new System.Drawing.Point(640, 564);
+            this.DruckenJob.Location = new System.Drawing.Point(853, 694);
+            this.DruckenJob.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DruckenJob.Name = "DruckenJob";
-            this.DruckenJob.Size = new System.Drawing.Size(131, 35);
+            this.DruckenJob.Size = new System.Drawing.Size(175, 43);
             this.DruckenJob.TabIndex = 105;
             this.DruckenJob.Text = "Nur Job Erstellen";
             this.DruckenJob.UseVisualStyleBackColor = true;
             this.DruckenJob.Click += new System.EventHandler(this.DruckenJob_Click);
             // 
+            // PrintButtonAtlas
+            // 
+            this.PrintButtonAtlas.Location = new System.Drawing.Point(1033, 741);
+            this.PrintButtonAtlas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PrintButtonAtlas.Name = "PrintButtonAtlas";
+            this.PrintButtonAtlas.Size = new System.Drawing.Size(152, 43);
+            this.PrintButtonAtlas.TabIndex = 106;
+            this.PrintButtonAtlas.Text = "Atlas erstellen";
+            this.PrintButtonAtlas.UseVisualStyleBackColor = true;
+            this.PrintButtonAtlas.Click += new System.EventHandler(this.PrintButtonAtlas_Click);
+            // 
             // PrintForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 661);
+            this.ClientSize = new System.Drawing.Size(1200, 814);
+            this.Controls.Add(this.PrintButtonAtlas);
             this.Controls.Add(this.DruckenJob);
             this.Controls.Add(this.consoleBox);
             this.Controls.Add(this.dinA4ForcedBox);
@@ -370,7 +381,7 @@
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PrintForm";
             this.Text = "PrintForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -408,5 +419,6 @@
         private System.Windows.Forms.CheckBox dinA4ForcedBox;
         private System.Windows.Forms.CheckBox consoleBox;
         private System.Windows.Forms.Button DruckenJob;
+        private System.Windows.Forms.Button PrintButtonAtlas;
     }
 }
