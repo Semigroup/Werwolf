@@ -208,12 +208,7 @@ namespace Werwolf.Inhalt
             var texts = ProduceTexts(font);
             StringBuilder sb = new StringBuilder(texts.Length);
             foreach (var text in texts)
-            {
                 sb.AppendLine(text.ToString());
-                //Console.WriteLine(text.Explain());
-                //Console.WriteLine();
-            }
-            //Console.ReadKey();
             return sb.ToString();
         }
         public static Aufgabe operator +(Aufgabe Aufgabe1, Aufgabe Aufgabe2)

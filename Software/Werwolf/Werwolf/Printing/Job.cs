@@ -362,7 +362,7 @@ namespace Werwolf.Printing
                     string kosten = card.Kosten.ToString();
                     string rarity = card.HintergrundDarstellung.Schreibname;
                     string type = card.Fraktion.Schreibname;
-                    string description = card.Aufgaben.GetFlatString().Replace("\r", "").Replace("\n", "\\n");
+                    string description = card.Aufgaben.GetFlatString().Replace("\r", "").Trim('\n').Replace("\n", "\\n");
 
                     if (isEmpty)
                         isEmpty = false;
