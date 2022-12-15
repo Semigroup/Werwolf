@@ -56,6 +56,7 @@
             this.consoleBox = new System.Windows.Forms.CheckBox();
             this.DruckenJob = new System.Windows.Forms.Button();
             this.PrintButtonAtlas = new System.Windows.Forms.Button();
+            this.PrintButtonTTS = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,7 +166,7 @@
             this.Drucken.Name = "Drucken";
             this.Drucken.Size = new System.Drawing.Size(152, 43);
             this.Drucken.TabIndex = 11;
-            this.Drucken.Text = "PDF erstellen";
+            this.Drucken.Text = "PDF Erstellen";
             this.Drucken.UseVisualStyleBackColor = true;
             this.Drucken.Click += new System.EventHandler(this.Drucken_Click);
             // 
@@ -176,7 +177,7 @@
             this.DruckenBilder.Name = "DruckenBilder";
             this.DruckenBilder.Size = new System.Drawing.Size(152, 43);
             this.DruckenBilder.TabIndex = 102;
-            this.DruckenBilder.Text = "Bilder erstellen";
+            this.DruckenBilder.Text = "Bilder Erstellen";
             this.DruckenBilder.UseVisualStyleBackColor = true;
             this.DruckenBilder.Click += new System.EventHandler(this.DruckenBilder_Click);
             // 
@@ -321,7 +322,7 @@
             // 
             this.consoleBox.AutoSize = true;
             this.consoleBox.Location = new System.Drawing.Point(852, 362);
-            this.consoleBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.consoleBox.Margin = new System.Windows.Forms.Padding(4);
             this.consoleBox.Name = "consoleBox";
             this.consoleBox.Size = new System.Drawing.Size(150, 20);
             this.consoleBox.TabIndex = 104;
@@ -331,7 +332,7 @@
             // DruckenJob
             // 
             this.DruckenJob.Location = new System.Drawing.Point(853, 694);
-            this.DruckenJob.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DruckenJob.Margin = new System.Windows.Forms.Padding(4);
             this.DruckenJob.Name = "DruckenJob";
             this.DruckenJob.Size = new System.Drawing.Size(175, 43);
             this.DruckenJob.TabIndex = 105;
@@ -346,15 +347,27 @@
             this.PrintButtonAtlas.Name = "PrintButtonAtlas";
             this.PrintButtonAtlas.Size = new System.Drawing.Size(152, 43);
             this.PrintButtonAtlas.TabIndex = 106;
-            this.PrintButtonAtlas.Text = "Atlas erstellen";
+            this.PrintButtonAtlas.Text = "Atlanten Erstellen";
             this.PrintButtonAtlas.UseVisualStyleBackColor = true;
             this.PrintButtonAtlas.Click += new System.EventHandler(this.PrintButtonAtlas_Click);
+            // 
+            // PrintButtonTTS
+            // 
+            this.PrintButtonTTS.Location = new System.Drawing.Point(853, 741);
+            this.PrintButtonTTS.Margin = new System.Windows.Forms.Padding(4);
+            this.PrintButtonTTS.Name = "PrintButtonTTS";
+            this.PrintButtonTTS.Size = new System.Drawing.Size(175, 43);
+            this.PrintButtonTTS.TabIndex = 107;
+            this.PrintButtonTTS.Text = "TTSDaten Erstellen";
+            this.PrintButtonTTS.UseVisualStyleBackColor = true;
+            this.PrintButtonTTS.Click += new System.EventHandler(this.PrintButtonTTS_Click);
             // 
             // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 814);
+            this.Controls.Add(this.PrintButtonTTS);
             this.Controls.Add(this.PrintButtonAtlas);
             this.Controls.Add(this.DruckenJob);
             this.Controls.Add(this.consoleBox);
@@ -420,5 +433,6 @@
         private System.Windows.Forms.CheckBox consoleBox;
         private System.Windows.Forms.Button DruckenJob;
         private System.Windows.Forms.Button PrintButtonAtlas;
+        private System.Windows.Forms.Button PrintButtonTTS;
     }
 }

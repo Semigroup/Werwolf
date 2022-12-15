@@ -78,6 +78,7 @@ namespace Skinner
                 loader.XmlReader.Next();
                 job.Read(loader);
             }
+
             //string universe = job.UniversePath.FileName() + ".xml";
             //universe = UniverseDirectory + universe;
             Universe Universe = null;

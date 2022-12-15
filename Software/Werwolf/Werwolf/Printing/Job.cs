@@ -44,7 +44,13 @@ namespace Werwolf.Printing
             /// <summary>
             /// One big jpg file is created that contains all images (seamless, for TTS)
             /// </summary>
-            JPGAtlas
+            JPGAtlas,
+            /// <summary>
+            /// A collection of jpg images (like JPGImages) together with .json 
+            /// file that contains necessary information for each card 
+            /// (title, description, location preface, location backface, size)
+            /// </summary>
+            TTSData
         }
 
         public Deck Deck { get; set; }
@@ -221,11 +227,13 @@ namespace Werwolf.Printing
                     if (MyMode == Job.RuckBildMode.Einzeln)
                         numberOfJobs *= 2;
                     break;
+                case OutputType.TTSData:
                 case OutputType.JPGImages:
                     numberOfJobs = Deck.UniqueCount();
                     break;
                 case OutputType.JPGAtlas:
-                    numberOfJobs = 1;
+                    //ToDo: make max numbers of cards per atlas configurable
+                    numberOfJobs = (int)Math.Ceiling(Deck.TotalCount() * 1f / 24);
                     break;
                 default:
                     throw new NotImplementedException("Unknown enum for OutputType: " + OutputFileType);
@@ -257,7 +265,7 @@ namespace Werwolf.Printing
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.ToString());    
+                            Console.WriteLine(e.ToString());
                             solvedJobs++;
                             Ticker.Exited(jobIDs[i], -1);
                             workers[i] = null;
@@ -280,6 +288,9 @@ namespace Werwolf.Printing
                     break;
                 case OutputType.JPGImages:
                 case OutputType.JPGAtlas:
+                    break;
+                case OutputType.TTSData:
+                    CreateTTSJsonFile(JobPath);
                     break;
                 default:
                     throw new NotImplementedException("Unknown enum for OutputType: " + OutputFileType);
@@ -322,6 +333,60 @@ namespace Werwolf.Printing
                 File.Delete(item);
         }
 
+        private void CreateTTSJsonFile(string JobPath)
+        {
+            using (TextWriter writer = File.CreateText(GetTTSJsonFileName(JobPath)))
+            {
+                writer.WriteLine("{");
+                writer.WriteLine("\"job_path\": \"" + JobPath.Replace("\\", "\\\\") + "\",");
+                writer.WriteLine("\"universe_path\": \"" + Universe.Pfad.Replace("\\", "\\\\") + "\",");
+                writer.WriteLine("\"deck_name\": \"" + Deck.Schreibname + "\",");
+                writer.WriteLine("\"cards\": {");
+
+
+                bool isEmpty = true;
+                foreach (var item in Deck.Karten)
+                {
+                    Karte card = item.Key;
+                    int count = item.Value;
+                    if (count <= 0)
+                        continue;
+
+                    string prefacePath = MapCardNameToFileName(card, JobPath);
+                    string backfacePath = card.Fraktion.RuckseitenBild.TotalFilePath;
+
+                    string name = card.Name;
+                    string title = card.Schreibname;
+                    string subtype = card.Effekt.ToString();
+                    string geldkosten = card.Geldkosten;
+                    string kosten = card.Kosten.ToString();
+                    string rarity = card.HintergrundDarstellung.Schreibname;
+                    string type = card.Fraktion.Schreibname;
+                    string description = card.Aufgaben.GetFlatString().Replace("\r", "").Replace("\n", "\\n");
+
+                    if (isEmpty)
+                        isEmpty = false;
+                    else
+                        writer.WriteLine(",");
+
+                    writer.WriteLine("\"" + name + "\": {");
+                    writer.WriteLine("\"title\": \"" + title + "\",");
+                    writer.WriteLine("\"description\": \"" + description + "\",");
+                    writer.WriteLine("\"price_coins\": \"" + geldkosten + "\",");
+                    writer.WriteLine("\"energy_cost\": \"" + kosten + "\",");
+                    writer.WriteLine("\"rarity\": \"" + rarity + "\",");
+                    writer.WriteLine("\"type\": \"" + type + "\",");
+                    writer.WriteLine("\"subtype\": \"" + subtype + "\",");
+                    writer.WriteLine("\"preface\": \"" + prefacePath.Replace("\\", "\\\\") + "\",");
+                    writer.WriteLine("\"backface\": \"" + backfacePath.Replace("\\", "\\\\") + "\"");
+                    writer.Write("}");
+                }
+
+                writer.WriteLine("}");
+                writer.WriteLine("}");
+            }
+        }
+
         public string Save(string TargetPath)
         {
             string JobPath = Path.Combine(Path.GetDirectoryName(TargetPath), Schreibname + ".job.xml");
@@ -343,6 +408,10 @@ namespace Werwolf.Printing
             s = s.Replace(" ", "");
             s = Path.Combine(Path.GetDirectoryName(JobPath), s + ".jpg");
             return s;
+        }
+        public string GetTTSJsonFileName(string JobPath)
+        {
+            return Path.Combine(Path.GetDirectoryName(JobPath), Schreibname + ".json");
         }
     }
 }

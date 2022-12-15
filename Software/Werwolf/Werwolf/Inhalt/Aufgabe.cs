@@ -10,6 +10,7 @@ using Assistment.Xml;
 using Assistment.Texts;
 
 using Werwolf.Karten;
+using Assistment.Texts.Fonts;
 
 namespace Werwolf.Inhalt
 {
@@ -199,6 +200,20 @@ namespace Werwolf.Inhalt
                     sb.Append("::" + item.FehlerhafteName + "::");
                 else
                     sb.Append(item.regex);
+            return sb.ToString();
+        }
+        public string GetFlatString()
+        {
+            var font = new MonoFont(1, 1);
+            var texts = ProduceTexts(font);
+            StringBuilder sb = new StringBuilder(texts.Length);
+            foreach (var text in texts)
+            {
+                sb.AppendLine(text.ToString());
+                //Console.WriteLine(text.Explain());
+                //Console.WriteLine();
+            }
+            //Console.ReadKey();
             return sb.ToString();
         }
         public static Aufgabe operator +(Aufgabe Aufgabe1, Aufgabe Aufgabe2)

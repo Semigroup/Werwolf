@@ -9,6 +9,7 @@ using Assistment.Xml;
 using Assistment.Extensions;
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Mathematik;
+using Org.BouncyCastle.Crypto.Modes.Gcm;
 
 namespace Werwolf.Inhalt
 {
@@ -44,21 +45,35 @@ namespace Werwolf.Inhalt
             XmlWriter.WriteRaw(sb.ToString());
         }
 
-        public List<KeyValuePair<Karte, int>> GetKarten(List<KeyValuePair<Karte, int>> fullSortedList, int ab, int Anzahl)
+        /// <summary>
+        /// Returns an ordered sub-multi-set of fullSortedList that contains the span starting at start (including)
+        /// and has count subsequent elements
+        /// </summary>
+        /// <param name="fullSortedList"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static List<KeyValuePair<Karte, int>> GetKarten(List<KeyValuePair<Karte, int>> fullSortedList, int start, int count)
         {
             List<KeyValuePair<Karte, int>> l = new List<KeyValuePair<Karte, int>>();
             int selected = 0;
             foreach (var item in fullSortedList)
-            {
-                ab -= item.Value;
-                int take = FastMath.Min(Anzahl - selected, -ab, item.Value);
-                l.Add(new KeyValuePair<Karte, int>(item.Key, take));
-                selected += take;
-                if (selected >= Anzahl)
-                    break;
-            }
+                if(start >= item.Value)
+                    start -= item.Value;
+                else
+                {
+                    int take = item.Value - start;
+                    start = 0;
+                    if (take + selected > count)
+                        take = count - selected;
+                    l.Add(new KeyValuePair<Karte, int>(item.Key, take));
+                    selected += take;
+                    if (selected == count)
+                        break;
+                }
             return l;
         }
+
         public List<KeyValuePair<Karte, int>> GetSortedList()
         {
             List<KeyValuePair<Karte, int>> l = new List<KeyValuePair<Karte, int>>();
@@ -104,7 +119,7 @@ namespace Werwolf.Inhalt
             }
             else
                 if (Karten.ContainsKey(Karte))
-                    Karten.Remove(Karte);
+                Karten.Remove(Karte);
         }
 
         public override void AdaptToCard(Karte Karte)

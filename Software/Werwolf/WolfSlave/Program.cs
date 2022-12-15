@@ -83,6 +83,7 @@ namespace WolfSlave
                         CreatePDF();
                         break;
                     case Job.OutputType.JPGImages:
+                    case Job.OutputType.TTSData:
                         CreateImage();
                         break;
                     case Job.OutputType.JPGAtlas:
@@ -99,9 +100,62 @@ namespace WolfSlave
             }
         }
 
-        private static void CreateAtlas()
+        private static (int rows, int columns) Distribute(int numberCards)
         {
-            int numberCards = Job.Deck.TotalCount();
+
+            switch (numberCards)
+            {
+                case 0:
+                    return (0, 0);
+                case 1:
+                case 2:
+                case 3:
+                case 5:
+                    return (1, numberCards);
+
+                case 4:
+                case 6:
+                case 7:
+                case 8:
+                case 10:
+                    return (2, (numberCards + 1) / 2);
+
+                case 9:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 17:
+                case 18:
+                case 21:
+                    return (3, (numberCards + 2) / 3);
+
+                case 16:
+                case 19:
+                case 20:
+                case 22:
+                case 23:
+                case 24:
+                case 26:
+                case 27:
+                case 28:
+                case 31:
+                case 32:
+                    return (4, (numberCards + 3) / 4);
+
+                case 25:
+                case 29:
+                case 30:
+                case 33:
+                case 34:
+                case 35:
+                    return (5, (numberCards + 4) / 5);
+
+                case 36:
+                    return (6, (numberCards + 4) / 5);
+            }
+
             double a = Math.Sqrt(numberCards / (16.0 * 9.0));
             int columns = (int)Math.Ceiling(16 * a);
             int rows = (int)Math.Ceiling(9 * a);
@@ -122,9 +176,18 @@ namespace WolfSlave
                 }
             }
 
+            return (rows, columns);
+        }
+        private static void CreateAtlas()
+        {
+            //ToDo
+            int numberProSheet = 24;
 
-            //Console.WriteLine(columns.ToString());
-            //Console.WriteLine(rows.ToString());
+            var cards = Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet);
+
+            var numberCards = 24;// cards.Map(item => item.Value).Sum();
+
+            (int rows, int columns) = Distribute(numberCards);
 
             SizeF sizeCard = Job.Deck.GetKartenSize().mul(Job.Ppm);
             //Console.WriteLine(sizeCard.ToString());
@@ -138,10 +201,10 @@ namespace WolfSlave
             {
                 Point index = new Point(0, 0);
                 int itemNumber = 0;
-                foreach (var item in Job.Deck.Karten)
+                foreach (var item in cards)
                     if (item.Value > 0)
                     {
-                        Console.WriteLine(itemNumber + " of " + Job.Deck.TotalCount());
+                        Console.WriteLine(itemNumber + " of " + numberCards);
                         itemNumber++;
                         var card = item.Key;
                         var sprite = new StandardKarte(card, Job.Ppm);
@@ -166,11 +229,9 @@ namespace WolfSlave
                             }
                         }
                     }
-
             }
 
-
-            var atlasFilePath = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + ".jpg");
+            var atlasFilePath = Path.Combine(Path.GetDirectoryName(JobPath), Job.Schreibname + (JobNumber + 1) + ".jpg");
             atlas.Save(atlasFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
@@ -220,12 +281,12 @@ namespace WolfSlave
             switch (Job.MyMode)
             {
                 case Job.RuckBildMode.Keine:
-                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet))
+                    foreach (var item in Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             wsp.TryAdd(GetKarte(item.Key, Job));
                     break;
                 case Job.RuckBildMode.Einzeln:
-                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList, (JobNumber / 2) * numberProSheet, numberProSheet))
+                    foreach (var item in Deck.GetKarten(Job.FullSortedDeckList, (JobNumber / 2) * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             if (JobNumber % 2 == 0)
                                 wsp.TryAdd(GetKarte(item.Key, Job));
@@ -234,7 +295,7 @@ namespace WolfSlave
                     wsp.Swapped = JobNumber % 2 == 1;
                     break;
                 case Job.RuckBildMode.Nur:
-                    foreach (var item in Job.Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet))
+                    foreach (var item in Deck.GetKarten(Job.FullSortedDeckList, JobNumber * numberProSheet, numberProSheet))
                         for (int i = 0; i < item.Value; i++)
                             wsp.TryAdd(GetRuckseite(item.Key, Job));
                     wsp.Swapped = true;
