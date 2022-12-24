@@ -36,7 +36,7 @@ namespace Werwolf.Karten
 
         public void Build()
         {
-            xFont font = Karte.TitelDarstellung.FontMeasurer;
+            IFontMeasurer font = Karte.TitelDarstellung.FontMeasurer;
             float h = font.GetZeilenabstand();
 
             Links = new Text(Karte.Fraktion.Schreibname + "\n" + Karte.Schreibname, font);

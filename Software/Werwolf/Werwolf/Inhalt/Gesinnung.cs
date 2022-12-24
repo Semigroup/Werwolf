@@ -55,7 +55,7 @@ namespace Werwolf.Inhalt
             Aufgabe.Rescue();
         }
 
-        public Text GetText(xFont Font)
+        public Text GetText(IFontMeasurer Font)
         {
             if (Aufgabe.Anzahl > 0)
                 return Aufgabe.ProduceTexts(Font)[0];

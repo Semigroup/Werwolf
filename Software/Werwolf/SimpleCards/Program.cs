@@ -16,8 +16,8 @@ namespace SimpleCards
         public static Pen Rand = new Pen(Color.Black, 2);
         public static Pen Linie = new Pen(Color.Black, 0.1f);
 
-        public static xFont[] Fonts = { new FontGraphicsMeasurer("Exocet", 14), new FontGraphicsMeasurer("Calibri", 8) };
-        public static xFont[] FontsKlein = { new FontGraphicsMeasurer("Exocet", 11), new FontGraphicsMeasurer("Calibri", 8) };
+        public static IFontMeasurer[] Fonts = { new FontGraphicsMeasurer("Exocet", 14), new FontGraphicsMeasurer("Calibri", 8) };
+        public static IFontMeasurer[] FontsKlein = { new FontGraphicsMeasurer("Exocet", 11), new FontGraphicsMeasurer("Calibri", 8) };
 
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
@@ -171,7 +171,7 @@ Danach darf er entscheiden X Ladungen seines Plasmagewehrs zu benutzen, um X Mit
             ((Text)t[1, 0]).AddWhitespace(0, 50);
             for (int i = 1; i < Text.Length; i++)
             {
-                xFont[] fs = Fonts;// Text[i].Length > 100 ? FontsKlein : Fonts;
+                IFontMeasurer[] fs = Fonts;// Text[i].Length > 100 ? FontsKlein : Fonts;
                 t[i + 1, 0] = new Text(Text[i], i < fs.Length ? fs[i] : fs.Last()).Geometry(2);
             }
             t.setRowPen(Text.Length, null);

@@ -49,7 +49,7 @@ namespace Werwolf.Karten.Figur
         }
         public override void Draw(DrawContext con)
         {
-            xFont font = Karte.InfoDarstellung.FontMeasurer;
+            IFontMeasurer font = Karte.InfoDarstellung.FontMeasurer;
 
             if (Karte.Rustung != 0)
             {

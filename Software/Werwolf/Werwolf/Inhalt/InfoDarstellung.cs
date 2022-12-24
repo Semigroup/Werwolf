@@ -35,7 +35,7 @@ namespace Werwolf.Inhalt
             }
         }
         private Font font2;
-        public xFont FontMeasurer2 { get; private set; }
+        public IFontMeasurer FontMeasurer2 { get; private set; }
 
         public InfoDarstellung()
             : base("InfoDarstellung")

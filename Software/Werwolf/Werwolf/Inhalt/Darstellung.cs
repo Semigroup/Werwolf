@@ -34,7 +34,7 @@ namespace Werwolf.Inhalt
         public PointF Position { get; set; }
 
         private Font font;
-        public xFont FontMeasurer { get; private set; }
+        public IFontMeasurer FontMeasurer { get; private set; }
 
         public Darstellung(string XmlName)
             : base(XmlName, false)

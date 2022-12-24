@@ -42,7 +42,7 @@ namespace Werwolf.Karten
             if (Karte == null)
                 return;
 
-            xFont font = Karte.TitelDarstellung.FontMeasurer;
+            IFontMeasurer font = Karte.TitelDarstellung.FontMeasurer;
 
             if (Karte.Entwicklungen.Length > 0)
             {

@@ -12,7 +12,7 @@ namespace Werwolf.Karten.CyberAktion
 {
     public abstract class CyberAktionHeader : DoppelTabTextBox
     {
-        public xFont Font => Karte.TitelDarstellung.FontMeasurer;
+        public IFontMeasurer Font => Karte.TitelDarstellung.FontMeasurer;
         public LayoutDarstellung Layout => Karte.LayoutDarstellung;
         public override Darstellung Darstellung => Karte.TitelDarstellung;
         public virtual SizeF InnenRadius => Darstellung.Rand;

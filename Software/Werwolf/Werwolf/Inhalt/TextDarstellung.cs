@@ -25,7 +25,7 @@ namespace Werwolf.Inhalt
         public RectangleF TextRectangle { get; set; }
 
         private Font effektFont;
-        public xFont EffektFontMeasurer { get; private set; }
+        public IFontMeasurer EffektFontMeasurer { get; private set; }
 
         public PointF ShadowOffset { get; set; }
         public Color ShadowColor { get; set; }

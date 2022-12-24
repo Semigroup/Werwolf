@@ -15,10 +15,10 @@ namespace Werwolf.Karten
     {
         public TextBild TextBild { get; private set; }
         private Size ImageSize;
-        private xFont Font;
+        private IFontMeasurer Font;
         public ImageAttributes ImageAttributes { get; set; }
 
-        public WolfTextBild(TextBild TextBild, xFont Font)
+        public WolfTextBild(TextBild TextBild, IFontMeasurer Font)
             : base(null, 1)
         {
             this.TextBild = TextBild;

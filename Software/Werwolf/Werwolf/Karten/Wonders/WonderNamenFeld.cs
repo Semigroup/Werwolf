@@ -14,8 +14,8 @@ namespace Werwolf.Karten
             get { return Karte.LayoutDarstellung.GetGrossesNamenfeld(AufKopf); }
         }
         private string LastName;
-        public xFont Font;
-        public xFont FontToUse
+        public IFontMeasurer Font;
+        public IFontMeasurer FontToUse
         {
             get
             {

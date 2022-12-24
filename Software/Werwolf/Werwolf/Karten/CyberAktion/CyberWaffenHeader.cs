@@ -33,7 +33,7 @@ namespace Werwolf.Karten.CyberAktion
         public DrawBox GetZielBox()
         {
             DrawBox inter = GetZielSicherheiten();
-            xFont small = Font.GetFontOfSize(8);
+            IFontMeasurer small = Font.GetFontOfSize(8);
             FixedBox fBox = new FixedBox(new SizeF(InnenBox.Width, small.GetZeilenabstand()*1.25f),true, true, inter);
             fBox.Alignment = new SizeF(0.5f, 0.5f);
             return fBox.Colorize(Brushes.White);//new Pen(Color.Black,ppm/5),.Geometry(InnenRadius.mul(Faktor)).Colorize(Darstellung.RandFarbe.ToPen(Darstellung.Rand.Width),Darstellung.Farbe.ToBrush());
@@ -41,7 +41,7 @@ namespace Werwolf.Karten.CyberAktion
 
         private Text GetZielSicherheiten()
         {
-            xFont small = Font.GetFontOfSize(8);
+            IFontMeasurer small = Font.GetFontOfSize(8);
             Text text = new Text("", small);
             //text.add(new WolfTextBild(Layout.ZielSicherheitenSchutze, Font));
             string pure = Karte.ZielSicherheiten.Replace(" ", "");
@@ -53,7 +53,7 @@ namespace Werwolf.Karten.CyberAktion
             }
             return text;
         }
-        private DrawBox GetZielSicherheit(char a, xFont Font)
+        private DrawBox GetZielSicherheit(char a, IFontMeasurer Font)
         {
             TextBild tb;
             if ('0' <= a && a <= '9')
