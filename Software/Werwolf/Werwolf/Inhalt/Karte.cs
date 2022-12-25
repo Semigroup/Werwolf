@@ -326,6 +326,7 @@ namespace Werwolf.Inhalt
         {
             Size s = GetPictureSize(ppm);
             Bitmap img = new Bitmap(s.Width, s.Height);
+            img.CleanResolution();
             using (Graphics g = img.GetGraphics(ppm / WolfBox.Faktor, BackColor, high))
                 DrawOnGraphics(g, ppm, WolfBox, flipX);
 

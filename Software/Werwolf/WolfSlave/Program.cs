@@ -53,8 +53,9 @@ namespace WolfSlave
             //#if !DEBUG
             //            HideConsole();
             //#endif
+            Application.SetCompatibleTextRenderingDefault(false);
 
-            SetProcessDpiAwareness((int)DpiAwareness.None); //PerMonitorAware makes the Line Height higher (why?)
+            SetProcessDpiAwareness((int)DpiAwareness.PerMonitorAware); //PerMonitorAware makes the Line Height higher (why?)
             //Has been fixed by changes in FontGraphicsMeasurer in Assistment.Texts
 
             string UniversePath = args[0];
