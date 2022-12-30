@@ -88,7 +88,16 @@ namespace Werwolf.Printing
         /// </summary>
         public string[] CleanFiles { get; set; }
 
+        /// <summary>
+        /// Path to Universe
+        /// </summary>
         public string UniversePath { get; set; }
+        /// <summary>
+        /// Alternative to UniversePath:
+        /// 
+        /// A job can specify the name of its universe and the UniverseManager finds the correct universe.
+        /// </summary>
+        public string UniverseName { get; set; }
 
         public Job(Universe Universe, string Pfad)
             : this()
@@ -151,7 +160,6 @@ namespace Werwolf.Printing
             this.TrennlinieHinten = Loader.XmlReader.GetBoolean("TrennlinieHinten");
             this.MaximaleGrose = Loader.XmlReader.GetFloat("MaximaleGrose");
 
-            //this.MachBilder = Loader.XmlReader.GetBoolean("MachBilder");
             this.OutputFileType = Loader.XmlReader.GetEnum<OutputType>("OutputFileType");
 
             this.Rotieren = Loader.XmlReader.GetBoolean("Rotieren");
@@ -162,6 +170,7 @@ namespace Werwolf.Printing
             this.CleanFiles = Loader.XmlReader.GetStrings("CleanFiles", "|");
 
             this.UniversePath = Loader.XmlReader.GetString("Universe_Path");//For Skinner
+            this.UniverseName = Loader.XmlReader.GetString("Universe_Name");
         }
         protected override void WriteIntern(System.Xml.XmlWriter XmlWriter)
         {
@@ -177,7 +186,6 @@ namespace Werwolf.Printing
             XmlWriter.WriteBoolean("TrennlinieVorne", TrennlinieVorne);
             XmlWriter.WriteBoolean("TrennlinieHinten", TrennlinieHinten);
             XmlWriter.WriteFloat("MaximaleGrose", MaximaleGrose);
-            //XmlWriter.WriteBoolean("MachBilder", MachBilder);
             XmlWriter.WriteEnum<OutputType>("OutputFileType", OutputFileType);
             XmlWriter.WriteBoolean("Rotieren", Rotieren);
             XmlWriter.WriteBoolean("KonsolenAnzeigen", KonsolenAnzeigen);
@@ -186,6 +194,7 @@ namespace Werwolf.Printing
             XmlWriter.WriteAttribute("CleanFiles", CleanFiles.SumText("|"));
 
             XmlWriter.WriteAttribute("Universe_Path", Universe.Pfad);//For Skinner
+            XmlWriter.WriteAttribute("Universe_Name", Universe.Name);
         }
 
         public override void AdaptToCard(Karte Karte)
