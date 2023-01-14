@@ -118,10 +118,7 @@ namespace Werwolf.Forms
             WerteListe.SetValue("Größe in mm", element.Size);
             WerteListe.SetValue("Point of Interest", element.Zentrum);
             ball.Image = element.Image;
-            image.DesiredInternetSize = element.Size;
             UpdatingWerteListe = false;
-            //if (image.InternetResultsDirectory == null)
-            //    image.InternetResultsDirectory = element.GetInternetDirectory();
         }
         public override void UpdateElement()
         {
@@ -131,7 +128,6 @@ namespace Werwolf.Forms
             element.SetFilePath(WerteListe.GetString("Datei"));
             element.Artist = WerteListe.GetValue<string>("Artist");
             element.Size = WerteListe.GetValue<SizeF>("Größe in mm");
-            image.DesiredInternetSize = element.Size;
             element.Zentrum = WerteListe.GetValue<PointF>("Point of Interest");
             element.TryNewIdentifier = true;
         }
