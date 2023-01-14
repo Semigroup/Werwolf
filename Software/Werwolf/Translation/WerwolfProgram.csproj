@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3C65E829-6DFE-4F99-813D-89FFA626D2A2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Translation</RootNamespace>
-    <AssemblyName>Translation</AssemblyName>
+    <RootNamespace>WerwolfProgram</RootNamespace>
+    <AssemblyName>WerwolfProgram</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
