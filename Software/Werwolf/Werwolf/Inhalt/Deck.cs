@@ -9,7 +9,6 @@ using Assistment.Xml;
 using Assistment.Extensions;
 using Assistment.Drawing.LinearAlgebra;
 using Assistment.Mathematik;
-using Org.BouncyCastle.Crypto.Modes.Gcm;
 
 namespace Werwolf.Inhalt
 {

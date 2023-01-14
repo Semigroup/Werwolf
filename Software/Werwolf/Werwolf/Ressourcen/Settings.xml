@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings
+  WolfBoxFaktor ="4,724266418258034"
+  MaximumNumberOfCores ="15"
+  DelayTime ="10"
+  SleepTime ="100"
+  MaximumKarteSize_X ="210"
+  MaximumKarteSize_Y ="297"
+  MaximumImageArea ="1000000000"
+  MaximumPpm ="50"
+  ViewPpm ="8"
+  ErrorImagePath ="Ressourcen/Bilder/FehlerBilder/Fehlerbild.png"
+  NotFoundImagePath ="Ressourcen/Bilder/FehlerBilder/Nicht Gefunden.png"
+  ArtOfMtgLibraryRoot="E:/ArtOfMagicLibrary"
+  >
+</Settings>
