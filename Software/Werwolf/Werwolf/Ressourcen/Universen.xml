@@ -4,7 +4,7 @@
      Name="00_Neues Werwolfspiel"
      Schreibname="Neues Werwolfspiel"
     Beschreibung = "Wählen Sie diese Option aus, wenn Sie ein werwolf-ähnliches Spiel machen wollen.">
-     >
+    >
     <Hintergrunddarstellungen
         Name="Standard"
         Schreibname="Standard"
@@ -55,145 +55,13 @@
         Schreibname="Standard"
         Standard="Standard">
       <TitelDarstellung
-          Name="Schwarz, 15"
-          Schreibname="Schwarz, 15"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="15"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ffffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000" />
-      <TitelDarstellung
-          Name="Schwarz, 17"
-          Schreibname="Schwarz, 17"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="17,25"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ffffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000" />
-      <TitelDarstellung
-          Name="Schwarz, 21"
-          Schreibname="Schwarz, 21"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="21"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ffffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000" />
-      <TitelDarstellung
-          Name="Schwarz, 23"
-          Schreibname="Schwarz, 23"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="23,25"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ffffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000" />
-      <TitelDarstellung
           Name="Standard"
           Schreibname="Standard"
           Unzerstorbar="True"
           Existiert="True"
-          Font_name="Exocet"
+          Font_name="Blackadder ITC"
           Font_style="Regular"
-          Font_size="24"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ffffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000" />
-      <TitelDarstellung
-          Name="Standard, Weiß"
-          Schreibname="Standard, Weiß"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="24"
-          Rand_X="0,5"
-          Rand_Y="0,3"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff" />
-      <TitelDarstellung
-          Name="Weiß, 15"
-          Schreibname="Weiß, 15"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="15"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff" />
-      <TitelDarstellung
-          Name="Weiß, 17"
-          Schreibname="Weiß, 17"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="17,25"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff" />
-      <TitelDarstellung
-          Name="Weiß, 19"
-          Schreibname="Weiß, 19"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="18,75"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff" />
-      <TitelDarstellung
-          Name="Weiß, 21"
-          Schreibname="Weiß, 21"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="21"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff" />
-      <TitelDarstellung
-          Name="Weiß, 22"
-          Schreibname="Weiß, 22"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="21,75"
-          Rand_X="0,3"
-          Rand_Y="0,3"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff" />
-      <TitelDarstellung
-          Name="Weiß, 23"
-          Schreibname="Weiß, 23"
-          Existiert="True"
-          Font_name="Exocet"
-          Font_style="Regular"
-          Font_size="23,25"
+          Font_size="19,2"
           Rand_X="0,3"
           Rand_Y="0,3"
           Farbe="ff000000"
@@ -226,396 +94,13 @@
         Schreibname="Standard"
         Standard="Standard">
       <TextDarstellung
-          Name="10 Text, 1mm Rand"
-          Schreibname="10 Text, 1mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="9,75"
-          Rand_X="1"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="5"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="53"
-          TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 1-0mm Rand"
-          Schreibname="11 Text, 1-0mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="5"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="53"
-          TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 1mm Rand"
-          Schreibname="11 Text, 1mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="1"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="5"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="53"
-          TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 2mm Rand"
-          Schreibname="11 Text, 2mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="2"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 4mm Rand"
-          Schreibname="11 Text, 4mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="4"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 5mm Rand"
-          Schreibname="11 Text, 5mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="5"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 6mm Rand"
-          Schreibname="11 Text, 6mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="6"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="11 Text, 7mm Rand"
-          Schreibname="11 Text, 7mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="7"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="12 Text, 1mm Rand"
-          Schreibname="12 Text, 1mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="12"
-          Rand_X="1"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="5"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="53"
-          TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="12 Text, 6mm Rand"
-          Schreibname="12 Text, 6mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="12"
-          Rand_X="6"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="13 Text, 1mm Rand"
-          Schreibname="13 Text, 1mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="12,75"
-          Rand_X="1"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="5"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="53"
-          TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="14 Text, 1mm Rand"
-          Schreibname="14 Text, 1mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="14,25"
-          Rand_X="1"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="5"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="53"
-          TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="6 Text, 4mm Rand"
-          Schreibname="6 Text, 4mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="6"
-          Rand_X="4"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="6 Text, 5mm Rand"
-          Schreibname="6 Text, 5mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="6"
-          Rand_X="5"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="8 Text, 1mm Rand"
-          Schreibname="8 Text, 1mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="1"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="8 Text, 2mm Rand"
-          Schreibname="8 Text, 2mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="2"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="8 Text, 3,3mm Rand"
-          Schreibname="8 Text, 3,3mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="3,3"
-          Rand_Y="0,5"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="8 Text, 4mm Rand"
-          Schreibname="8 Text, 4mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="4"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="8 Text, 5mm Rand"
-          Schreibname="8 Text, 5mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="5"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="8 Text, 6mm Rand"
-          Schreibname="8 Text, 6mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="6"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="9 Text, 1-0mm Rand"
-          Schreibname="9 Text, 1-0mm Rand"
+          Name="Kleiner"
+          Schreibname="Kleiner"
           Existiert="True"
           Font_name="Calibri"
           Font_style="Regular"
           Font_size="9"
-          Rand_X="1"
+          Rand_X="2"
           Farbe="64ffffff"
           RandFarbe="ff000000"
           TextFarbe="ff000000"
@@ -628,42 +113,6 @@
           TextRectangle_Y="48,1"
           TextRectangle_Width="53"
           TextRectangle_Height="34"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="9 Text, 5mm Rand"
-          Schreibname="9 Text, 5mm Rand"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="9"
-          Rand_X="5"
-          Rand_Y="1"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="0,3"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          ShadowColor="00000000" />
-      <TextDarstellung
-          Name="Klein"
-          Schreibname="Klein"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8,25"
-          Rand_X="3"
-          Rand_Y="3"
-          Farbe="64ffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="1"
-          InnenRadius="4"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
           ShadowColor="00000000" />
       <TextDarstellung
           Name="Standard"
@@ -672,49 +121,35 @@
           Existiert="True"
           Font_name="Calibri"
           Font_style="Regular"
-          Font_size="11,25"
-          Rand_X="3"
-          Rand_Y="3"
+          Font_size="12"
+          Rand_X="2"
+          Rand_Y="2"
           Farbe="64ffffff"
           RandFarbe="ff000000"
           TextFarbe="ff000000"
-          BalkenDicke="1"
+          BalkenDicke="0,3"
           InnenRadius="4"
           EffektFont_name="Calibri"
           EffektFont_style="Regular"
           EffektFont_size="11"
+          TextRectangle_X="5"
+          TextRectangle_Y="48,1"
+          TextRectangle_Width="53"
+          TextRectangle_Height="34"
           ShadowColor="00000000" />
     </Textdarstellungen>
     <Infodarstellungen
         Name="Standard"
         Schreibname="Standard"
-        Standard="Schwarz">
+        Standard="Standard">
       <InfoDarstellung
-          Name="Schwarz"
-          Schreibname="Schwarz"
+          Name="Standard"
+          Schreibname="Standard"
           Unzerstorbar="True"
           Existiert="True"
-          Font_name="Beleren Small Caps"
-          Font_style="Bold"
-          Font_size="9,75"
-          Rand_X="0,3"
-          Rand_Y="0,2"
-          Farbe="ffffffff"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          Farbe2="00000000"
-          RandFarbe2="00000000"
-          TextFarbe2="00000000"
-          Font2_name="Calibri"
-          Font2_style="Regular"
-          Font2_size="8" />
-      <InfoDarstellung
-          Name="Weiß"
-          Schreibname="Weiß"
-          Existiert="True"
-          Font_name="Beleren Small Caps"
-          Font_style="Bold"
-          Font_size="9,75"
+          Font_name="Book Antiqua"
+          Font_style="Regular"
+          Font_size="10,2"
           Rand_X="0,3"
           Rand_Y="0,2"
           Farbe="ff000000"
@@ -730,552 +165,43 @@
     <Hauptbilder
         Name="Standard"
         Schreibname="Standard"
-        Standard="Standard">
+        Standard="Dorfbewohner">
       <HauptBild
-          Name="Abbadon"
-          Schreibname="Abbadon"
-          Identifier="Abbadon.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Abbadon.jpg"
-          Artist="Internet"
-          Size_X="57,14286"
+          Name="Dorfbewohner"
+          Schreibname="Dorfbewohner"
+          Identifier="peasant.jpg"
+          FilePath="Bilder\HauptBilder\peasant.jpg"
+          Size_X="80"
           Size_Y="80"
-          Zentrum_X="0,482"
-          Zentrum_Y="0,1730449" />
-      <HauptBild
-          Name="Amor"
-          Schreibname="Amor"
-          Identifier="Amor.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Amor.jpg"
-          Artist="Internet"
-          Size_X="55"
-          Size_Y="98,80881"
-          Zentrum_X="0,482"
-          Zentrum_Y="0,1730449" />
-      <HauptBild
-          Name="Blutmagier"
-          Schreibname="Blutmagier"
-          Identifier="Blutmagier.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Blutmagier.jpg"
-          Size_X="55"
-          Size_Y="41,525"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,36" />
-      <HauptBild
-          Name="Blutmagierin"
-          Schreibname="Blutmagierin"
-          Identifier="Blutmagierin.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Blutmagierin.jpg"
-          Size_X="53,8"
-          Size_Y="80"
-          Zentrum_X="0,504"
-          Zentrum_Y="0,2246404" />
-      <HauptBild
-          Name="Blutrünstiger Werwolf"
-          Schreibname="Blutrünstiger Werwolf"
-          Identifier="Blutrünstiger Werwolf.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Blutrünstiger Werwolf.jpg"
-          Artist="Rüstü"
-          Size_X="63"
-          Size_Y="86,18147"
-          Zentrum_X="0,46"
-          Zentrum_Y="0,1339102" />
-      <HauptBild
-          Name="Dieb"
-          Schreibname="Dieb"
-          Identifier="Dieb.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dieb.jpg"
-          Size_X="56,66666"
-          Size_Y="85"
-          Zentrum_X="0,502"
-          Zentrum_Y="0,2568427" />
-      <HauptBild
-          Name="Dirne"
-          Schreibname="Dirne"
-          Identifier="Dirne.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dirne.jpg"
-          Size_X="63"
-          Size_Y="42,69098"
-          Zentrum_X="0,496"
-          Zentrum_Y="0,3321123" />
-      <HauptBild
-          Name="Doppelgänger"
-          Schreibname="Doppelgänger"
-          Identifier="Doppelgänger.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Doppelgänger.jpg"
-          Artist="Internet"
-          Size_X="55"
-          Size_Y="40,01464"
-          Zentrum_X="0,478"
-          Zentrum_Y="0,3415402" />
-      <HauptBild
-          Name="Dorfbewohner01"
-          Schreibname="Dorfbewohner01"
-          Identifier="Dorfbewohner01.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner01.jpg"
-          Size_X="63"
-          Size_Y="83,97949"
           Zentrum_X="0,5"
           Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Dorfbewohner02"
-          Schreibname="Dorfbewohner02"
-          Identifier="Dorfbewohner02.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner02.jpg"
-          Size_X="55"
-          Size_Y="82,55159"
-          Zentrum_X="0,486"
-          Zentrum_Y="0,1678876" />
-      <HauptBild
-          Name="Dorfbewohner03"
-          Schreibname="Dorfbewohner03"
-          Identifier="Dorfbewohner03.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner03.jpg"
-          Size_X="99,48186"
-          Size_Y="75"
-          Zentrum_X="0,414"
-          Zentrum_Y="0,1806291" />
-      <HauptBild
-          Name="Dorfbewohner04"
-          Schreibname="Dorfbewohner04"
-          Identifier="Dorfbewohner04.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner04.jpg"
-          Size_X="112,5437"
-          Size_Y="75"
-          Zentrum_X="0,57"
-          Zentrum_Y="0,201865" />
-      <HauptBild
-          Name="Dorfbewohner05"
-          Schreibname="Dorfbewohner05"
-          Identifier="Dorfbewohner05.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner05.jpg"
-          Size_X="114,5357"
-          Size_Y="75"
-          Zentrum_X="0,258"
-          Zentrum_Y="0,2089436" />
-      <HauptBild
-          Name="Dorfbewohner06"
-          Schreibname="Dorfbewohner06"
-          Identifier="Dorfbewohner06.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner06.jpg"
-          Size_X="91,58878"
-          Size_Y="75"
-          Zentrum_X="0,366"
-          Zentrum_Y="0,2032806" />
-      <HauptBild
-          Name="Dorfbewohner07"
-          Schreibname="Dorfbewohner07"
-          Identifier="Dorfbewohner07.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Dorfbewohner07.jpg"
-          Size_X="91,58878"
-          Size_Y="75"
-          Zentrum_X="0,6940001"
-          Zentrum_Y="0,2018647" />
-      <HauptBild
-          Name="Druide"
-          Schreibname="Druide"
-          Identifier="Druide.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Druide.jpg"
-          Size_X="55"
-          Size_Y="42,67084"
-          Zentrum_X="0,494"
-          Zentrum_Y="0,2599101" />
-      <HauptBild
-          Name="Exorzismus"
-          Schreibname="Exorzismus"
-          Identifier="Exorzismus.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Exorzismus.jpg"
-          Artist="Rüstü"
-          Size_X="63"
-          Size_Y="39,375"
-          Zentrum_X="0,518"
-          Zentrum_Y="0,291056" />
-      <HauptBild
-          Name="Fluch"
-          Schreibname="Fluch"
-          Identifier="Fluch.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Fluch.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="82,13334"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Foltermeister"
-          Schreibname="Foltermeister"
-          Identifier="Foltermeister.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Foltermeister.jpg"
-          Size_X="55"
-          Size_Y="41,0831"
-          Zentrum_X="0,492"
-          Zentrum_Y="0,296719" />
-      <HauptBild
-          Name="Freya"
-          Schreibname="Freya"
-          Identifier="Freya.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Freya.jpg"
-          Size_X="55"
-          Size_Y="82,5"
-          Zentrum_X="0,49"
-          Zentrum_Y="0,1763821" />
-      <HauptBild
-          Name="Freyr"
-          Schreibname="Freyr"
-          Identifier="Freyr.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Freyr.png"
-          Size_X="92,39131"
-          Size_Y="85"
-          Zentrum_X="0,452"
-          Zentrum_Y="0,2103596" />
-      <HauptBild
-          Name="Heimlicher Verehrer"
-          Schreibname="Heimlicher Verehrer"
-          Identifier="Heimlicher Verehrer.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Heimlicher Verehrer.jpg"
-          Artist="Internet"
-          Size_X="55"
-          Size_Y="41,25"
-          Zentrum_X="0,504"
-          Zentrum_Y="0,3726627" />
       <HauptBild
           Name="Hexe"
           Schreibname="Hexe"
-          Identifier="Hexe.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Hexe.jpg"
-          Artist="Rüstü"
-          Size_X="58,58421"
-          Size_Y="80"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Hirtin"
-          Schreibname="Hirtin"
-          Identifier="Hirtin.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Hirtin.jpg"
-          Artist="Rüstü"
-          Size_X="55,96666"
-          Size_Y="73"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,1593933" />
-      <HauptBild
-          Name="Hoffnarr"
-          Schreibname="Hoffnarr"
-          Identifier="Hoffnarr.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Hoffnarr.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="41,14"
-          Zentrum_X="0,494"
-          Zentrum_Y="0,370337" />
-      <HauptBild
-          Name="Inquisitor"
-          Schreibname="Inquisitor"
-          Identifier="Inquisitor.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Inquisitor.png"
-          Artist="Rüstü"
-          Size_X="56,56"
-          Size_Y="80"
-          Zentrum_X="0,522"
-          Zentrum_Y="0,1905394" />
-      <HauptBild
-          Name="Inquisitor_2"
-          Schreibname="Inquisitor"
-          Identifier="Inquisitor_2.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Inquisitor_2.jpg"
-          Size_X="56,25"
-          Size_Y="75"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,213191" />
-      <HauptBild
-          Name="Inquisitorin"
-          Schreibname="Inquisitorin"
-          Identifier="Inquisitorin.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Inquisitorin.jpg"
-          Size_X="55"
-          Size_Y="77,83019"
-          Zentrum_X="0,482"
-          Zentrum_Y="0,1730449" />
-      <HauptBild
-          Name="Isolde"
-          Schreibname="Isolde"
-          Identifier="Isolde.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Isolde.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="38,96764"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,3816628" />
-      <HauptBild
-          Name="Jäger"
-          Schreibname="Jäger"
-          Identifier="Jäger.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Jäger.jpg"
+          Identifier="witch.jpg"
+          FilePath="Bilder\HauptBilder\witch.jpg"
           Size_X="57"
-          Size_Y="75"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,213191" />
-      <HauptBild
-          Name="Julia"
-          Schreibname="Julia"
-          Identifier="Julia.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Julia.jpg"
-          Size_X="55"
-          Size_Y="41,71752"
-          Zentrum_X="0,514"
-          Zentrum_Y="0,2910559" />
-      <HauptBild
-          Name="Junker"
-          Schreibname="Junker"
-          Identifier="Junker.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Junker.jpg"
-          Size_X="63"
-          Size_Y="76,69565"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,165" />
-      <HauptBild
-          Name="Märtyrerin"
-          Schreibname="Märtyrerin"
-          Identifier="Märtyrerin.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Märtyrerin.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="78,78096"
-          Zentrum_X="0,504"
-          Zentrum_Y="0,1622246" />
-      <HauptBild
-          Name="Pazifist"
-          Schreibname="Pazifist"
-          Identifier="Pazifist.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Pazifist.jpg"
-          Size_X="55"
-          Size_Y="41,30729"
-          Zentrum_X="0,494"
-          Zentrum_Y="0,2839775" />
-      <HauptBild
-          Name="Prediger"
-          Schreibname="Prediger"
-          Identifier="Prediger.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Prediger.jpg"
-          Size_X="55"
-          Size_Y="41,525"
-          Zentrum_X="0,5190001"
-          Zentrum_Y="0,3259502" />
-      <HauptBild
-          Name="Psychopath"
-          Schreibname="Psychopath"
-          Identifier="Psychopath.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Psychopath.jpg"
-          Size_X="63"
-          Size_Y="77,175"
-          Zentrum_X="0,516"
-          Zentrum_Y="0,2324944" />
-      <HauptBild
-          Name="Ritter"
-          Schreibname="Ritter"
-          Identifier="Ritter.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Ritter.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="81,88125"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Romeo"
-          Schreibname="Romeo"
-          Identifier="Romeo.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Romeo.jpg"
-          Size_X="131,8391"
-          Size_Y="100"
-          Zentrum_X="0,386"
-          Zentrum_Y="0,1848763" />
-      <HauptBild
-          Name="Schamane"
-          Schreibname="Schamane"
-          Identifier="Schamane.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Schamane.jpg"
-          Size_X="55"
-          Size_Y="82,80219"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
+          Size_Y="57"
+          Zentrum_X="0,505"
+          Zentrum_Y="0,44" />
       <HauptBild
           Name="Seher"
           Schreibname="Seher"
-          Identifier="Seher.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Seher.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="43,945"
-          Zentrum_X="0,51"
-          Zentrum_Y="0,3273866" />
-      <HauptBild
-          Name="Spiegelmagier"
-          Schreibname="Spiegelmagier"
-          Identifier="Spiegelmagier.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Spiegelmagier.jpg"
-          Size_X="55"
-          Size_Y="40,31319"
-          Zentrum_X="0,512"
-          Zentrum_Y="0,2882247" />
-      <HauptBild
-          Name="Standard"
-          Schreibname="Standard"
-          Unzerstorbar="True"
-          Identifier="Standard"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Standard"
-          Artist="Hier könnte dein Name stehen"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Strolch_2"
-          Schreibname="Strolch"
-          Identifier="Strolch_2.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Strolch_2.jpg"
-          Size_X="120,0751"
-          Size_Y="80"
-          Zentrum_X="0,348"
-          Zentrum_Y="0,1728315" />
-      <HauptBild
-          Name="Tristan"
-          Schreibname="Tristan"
-          Identifier="Tristan.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Tristan.jpg"
-          Size_X="55"
-          Size_Y="79,44444"
-          Zentrum_X="0,504"
-          Zentrum_Y="0,2174382" />
-      <HauptBild
-          Name="Unheimlicher Verehrer"
-          Schreibname="Unheimlicher Verehrer"
-          Identifier="Unheimlicher Verehrer.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Unheimlicher Verehrer.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="55"
-          Zentrum_X="0,504"
-          Zentrum_Y="0,4113933" />
-      <HauptBild
-          Name="Vampir"
-          Schreibname="Vampir"
-          Identifier="Vampir.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Vampir.jpg"
-          Size_X="112,5"
-          Size_Y="75"
-          Zentrum_X="0,7"
-          Zentrum_Y="0,1707191" />
-      <HauptBild
-          Name="Vampirbiss"
-          Schreibname="Vampirbiss"
-          Identifier="Vampirbiss.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Vampirbiss.png"
-          Artist="Ulrich"
-          Size_X="63"
-          Size_Y="88,28222"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,255" />
-      <HauptBild
-          Name="Vampirin"
-          Schreibname="Vampirin"
-          Identifier="Vampirin.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Vampirin.jpg"
-          Size_X="109,7142"
-          Size_Y="80"
-          Zentrum_X="0,346"
-          Zentrum_Y="0,1820449" />
-      <HauptBild
-          Name="Vampirin_2"
-          Schreibname="Vampirin"
-          Identifier="Vampirin_2.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Vampirin_2.jpg"
-          Size_X="102,5641"
-          Size_Y="75"
-          Zentrum_X="0,346"
-          Zentrum_Y="0,1820449" />
-      <HauptBild
-          Name="Vampirpriesterin"
-          Schreibname="Vampirpriesterin"
-          Identifier="Vampirpriesterin.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Vampirpriesterin.jpg"
-          Size_X="63"
-          Size_Y="91,3585"
-          Zentrum_X="0,502"
-          Zentrum_Y="0,3179551" />
+          Identifier="soothsayer.jpg"
+          FilePath="Bilder\HauptBilder\soothsayer.jpg"
+          Size_X="57"
+          Size_Y="57"
+          Zentrum_X="0,495"
+          Zentrum_Y="0,32" />
       <HauptBild
           Name="Werwolf"
           Schreibname="Werwolf"
-          Identifier="Werwolf.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Werwolf.jpg"
-          Artist="Rüstü"
-          Size_X="120"
-          Size_Y="75"
-          Zentrum_X="0,6789999"
-          Zentrum_Y="0,1515506" />
-      <HauptBild
-          Name="Werwolf_2"
-          Schreibname="Werwolf"
-          Identifier="Werwolf_2.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Werwolf_2.jpg"
-          Artist="Rüstü"
-          Size_X="98,6087"
-          Size_Y="72"
-          Zentrum_X="0,5629999"
-          Zentrum_Y="0,1572135" />
-      <HauptBild
-          Name="Werwolf3"
-          Schreibname="Werwolf3"
-          Identifier="Werwolf3.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Werwolf3.jpg"
-          Size_X="58"
-          Size_Y="75,49667"
-          Zentrum_X="0,536"
-          Zentrum_Y="0,1777977" />
-      <HauptBild
-          Name="Werwolfswelpe"
-          Schreibname="Werwolfswelpe"
-          Identifier="Werwolfswelpe.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Werwolfswelpe.jpg"
-          Artist="Rüstü"
-          Size_X="55"
-          Size_Y="50,75682"
-          Zentrum_X="0,5020001"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="Wutbürger"
-          Schreibname="Wutbürger"
-          Identifier="Wutbürger.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Wutbürger.jpg"
-          Size_X="55"
-          Size_Y="36,65236"
-          Zentrum_X="0,512"
-          Zentrum_Y="0,3363594" />
-      <HauptBild
-          Name="WW-Akolyth"
-          Schreibname="WW-Akolyth"
-          Identifier="WW Akolyth.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\WW Akolyth.jpg"
-          Size_X="55"
-          Size_Y="41,23413"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,2866536" />
-      <HauptBild
-          Name="Zauberer"
-          Schreibname="Zauberer"
-          Identifier="Zauberer.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Zauberer.jpg"
-          Artist="Rüstü"
-          Size_X="57,14286"
-          Size_Y="80"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Zensor"
-          Schreibname="Zensor"
-          Identifier="Zensor.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HauptBilder\Zensor.jpg"
-          Size_X="55"
-          Size_Y="40,16146"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
+          Identifier="bloody-werwolf.jpg"
+          FilePath="Bilder\HauptBilder\bloody-werwolf.jpg"
+          Size_X="57"
+          Size_Y="57"
+          Zentrum_X="0,53"
+          Zentrum_Y="0,41" />
     </Hauptbilder>
     <Hintergrundbilder
         Name="Standard"
@@ -1285,7 +211,7 @@
           Name="Besonders2RahmenKlein"
           Schreibname="Besonders2RahmenKlein"
           Identifier="Besonders2RahmenKlein.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Besonders2RahmenKlein.png"
+          FilePath="Bilder\HintergrundBilder\Besonders2RahmenKlein.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1294,7 +220,7 @@
           Name="BesondersRahmen"
           Schreibname="BesondersRahmen"
           Identifier="BesondersRahmen.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\BesondersRahmen.png"
+          FilePath="Bilder\HintergrundBilder\BesondersRahmen.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1303,25 +229,7 @@
           Name="Dorf_2"
           Schreibname="Dorf"
           Identifier="Dorf_2.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Dorf_2.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Dorf2Rahmen"
-          Schreibname="Dorf2Rahmen"
-          Identifier="Dorf2Rahmen.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Dorf2Rahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Dorf2RahmenKlein"
-          Schreibname="Dorf2RahmenKlein"
-          Identifier="Dorf2RahmenKlein.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Dorf2RahmenKlein.png"
+          FilePath="Bilder\HintergrundBilder\Dorf_2.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1330,7 +238,7 @@
           Name="Inquisition2RahmenKlein"
           Schreibname="Inquisition2RahmenKlein"
           Identifier="Inquisition2RahmenKlein.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Inquisition2RahmenKlein.png"
+          FilePath="Bilder\HintergrundBilder\Inquisition2RahmenKlein.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1339,7 +247,7 @@
           Name="InquisitionRahmen"
           Schreibname="InquisitionRahmen"
           Identifier="InquisitionRahmen.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\InquisitionRahmen.png"
+          FilePath="Bilder\HintergrundBilder\InquisitionRahmen.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1348,7 +256,7 @@
           Name="MagierRahmen_2"
           Schreibname="MagierRahmen"
           Identifier="MagierRahmen_2.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\MagierRahmen_2.png"
+          FilePath="Bilder\HintergrundBilder\MagierRahmen_2.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1357,7 +265,7 @@
           Name="MagierRahmenKlein"
           Schreibname="MagierRahmenKlein"
           Identifier="MagierRahmenKlein.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\MagierRahmenKlein.png"
+          FilePath="Bilder\HintergrundBilder\MagierRahmenKlein.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1367,7 +275,7 @@
           Schreibname="Standard"
           Unzerstorbar="True"
           Identifier="Standard"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Standard"
+          FilePath="Bilder\HintergrundBilder\Standard"
           Artist="Artist"
           Size_X="63"
           Size_Y="89,1"
@@ -1377,7 +285,7 @@
           Name="TarnRahmen"
           Schreibname="TarnRahmen"
           Identifier="TarnRahmen.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\TarnRahmen.png"
+          FilePath="Bilder\HintergrundBilder\TarnRahmen.png"
           Size_X="63"
           Size_Y="89,08695"
           Zentrum_X="0,5"
@@ -1386,7 +294,7 @@
           Name="Vampir_2"
           Schreibname="Vampir"
           Identifier="Vampir_2.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Vampir_2.png"
+          FilePath="Bilder\HintergrundBilder\Vampir_2.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1395,7 +303,7 @@
           Name="VampirRahmenKlein"
           Schreibname="VampirRahmenKlein"
           Identifier="VampirRahmenKlein.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\VampirRahmenKlein.png"
+          FilePath="Bilder\HintergrundBilder\VampirRahmenKlein.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1404,7 +312,7 @@
           Name="Werwolf"
           Schreibname="Werwolf"
           Identifier="Werwolf.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\Werwolf.png"
+          FilePath="Bilder\HintergrundBilder\Werwolf.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="89,08695"
@@ -1414,7 +322,7 @@
           Name="WerwolfRahmenKlein"
           Schreibname="WerwolfRahmenKlein"
           Identifier="WerwolfRahmenKlein.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\HintergrundBilder\WerwolfRahmenKlein.png"
+          FilePath="Bilder\HintergrundBilder\WerwolfRahmenKlein.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -1425,20 +333,11 @@
         Schreibname="Standard"
         Standard="Standard">
       <RuckseitenBild
-          Name="CoverRollen"
-          Schreibname="CoverRollen"
-          Identifier="CoverRollen.jpg"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\RuckseitenBilder\CoverRollen.jpg"
-          Size_X="63"
-          Size_Y="88,88405"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <RuckseitenBild
           Name="Standard"
           Schreibname="Standard"
           Unzerstorbar="True"
-          Identifier="Standard"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\RuckseitenBilder\Standard"
+          Identifier="BlackBackside.png"
+          FilePath="Bilder\RuckseitenBilder\BlackBackside.png"
           Artist="Artist"
           Size_X="63"
           Size_Y="89,1"
@@ -1450,20 +349,11 @@
         Schreibname="Standard"
         Standard="Standard">
       <TextBild
-          Name="C"
-          Schreibname="Standard"
-          Identifier="C.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\TextBilder\C.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
           Name="Daumen Oben"
           Schreibname="Daumen Oben"
           Unzerstorbar="True"
           Identifier="Daumen Oben.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\TextBilder\Daumen Oben.png"
+          FilePath="Bilder\TextBilder\Daumen Oben.png"
           Artist="Artist"
           Size_X="63"
           Size_Y="89,1"
@@ -1474,7 +364,7 @@
           Schreibname="Daumen Quer"
           Unzerstorbar="True"
           Identifier="Daumen Quer.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\TextBilder\Daumen Quer.png"
+          FilePath="Bilder\TextBilder\Daumen Quer.png"
           Artist="Artist"
           Size_X="63"
           Size_Y="89,1"
@@ -1485,7 +375,7 @@
           Schreibname="Daumen Unten"
           Unzerstorbar="True"
           Identifier="Daumen Unten.png"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\TextBilder\Daumen Unten.png"
+          FilePath="Bilder\TextBilder\Daumen Unten.png"
           Artist="Artist"
           Size_X="63"
           Size_Y="89,1"
@@ -1496,7 +386,7 @@
           Schreibname="Standard"
           Unzerstorbar="True"
           Identifier="Standard"
-          FilePath="D:\Github\PrivateKarten\Deutsch\Bilder\TextBilder\Standard"
+          FilePath="Bilder\TextBilder\Standard"
           Artist="Artist"
           Size_X="63"
           Size_Y="89,1"
@@ -1543,7 +433,7 @@
           TitelArt="Triskelen"
           HintergrundBild="BesondersRahmen"
           HintergrundBildQuer="Besonders2RahmenKlein"
-          RuckseitenBild="CoverRollen"
+          RuckseitenBild="Standard"
           TextBild="Standard"
           RuckArt="Normal" />
       <Fraktion
@@ -1553,7 +443,7 @@
           TitelArt="Rund"
           HintergrundBild="Dorf_2"
           HintergrundBildQuer="TarnRahmen"
-          RuckseitenBild="CoverRollen"
+          RuckseitenBild="Standard"
           TextBild="Standard"
           RuckArt="Normal" />
       <Fraktion
@@ -1562,7 +452,7 @@
           TitelArt="Kreuz"
           HintergrundBild="InquisitionRahmen"
           HintergrundBildQuer="Inquisition2RahmenKlein"
-          RuckseitenBild="CoverRollen"
+          RuckseitenBild="Standard"
           TextBild="Standard"
           RuckArt="Normal" />
       <Fraktion
@@ -1571,7 +461,7 @@
           TitelArt="Wellen"
           HintergrundBild="MagierRahmen_2"
           HintergrundBildQuer="MagierRahmenKlein"
-          RuckseitenBild="CoverRollen"
+          RuckseitenBild="Standard"
           TextBild="Standard"
           RuckArt="Normal" />
       <Fraktion
@@ -1580,7 +470,7 @@
           TitelArt="Stachel"
           HintergrundBild="Vampir_2"
           HintergrundBildQuer="VampirRahmenKlein"
-          RuckseitenBild="CoverRollen"
+          RuckseitenBild="Standard"
           TextBild="Standard"
           RuckArt="Normal" />
       <Fraktion
@@ -1589,7 +479,7 @@
           TitelArt="Sagezahn"
           HintergrundBild="Werwolf"
           HintergrundBildQuer="WerwolfRahmenKlein"
-          RuckseitenBild="CoverRollen"
+          RuckseitenBild="Standard"
           TextBild="Standard"
           RuckArt="Normal" />
     </Fraktionen>
@@ -1597,10 +487,6 @@
         Name="Standard"
         Schreibname="Standard"
         Standard="Gut">
-      <Gesinnung
-          Name="2 Edelsteine"
-          Schreibname="2 Edelsteine"
-          Aufgabe="::C::::C::" />
       <Gesinnung
           Name="Böse"
           Schreibname="Böse"
@@ -1618,320 +504,18 @@
     <Karten
         Name="Standard"
         Schreibname="Standard"
-        Standard="Dorfbewohnerin">
-      <Karte
-          Name="Abbadon"
-          Schreibname="Abbadon"
-          Fraktion="Ausgestoßener"
-          Gesinnung="Neutral"
-          Aufgaben="Du bist der Engel der Apokalypse und verweilst nur auf der Erde, um jene vorzubereiten.&#xD;&#xA;\+&#xD;&#xA;Dein Ziel ist es, das Spiel mindestens vier Tage lang zu verschleppen. Lebst Du zu Beginn des fünften Tages, so geht die Welt unter und alle außer Dir verlieren."
-          HauptBild="Abbadon"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="8 Text, 4mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Amor"
-          Schreibname="Amor"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Dir werden in der ersten Nacht zwei Spieler gezeigt, die ein Liebespaar bilden."
-          HauptBild="Amor"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Blutmagierin"
-          Schreibname="Blutmagierin"
-          Fraktion="Ausgestoßener"
-          Gesinnung="Neutral"
-          Aufgaben="Dein Ziel ist es, alle Anderen zu töten.&#xD;&#xA;\+&#xD;&#xA;Stirbt tagsüber ein Spieler, so darfst Du in der folgenden Nacht einen Spieler töten.&#xD;&#xA;\+&#xD;&#xA;Stirbt über Nacht ein Spieler so hast Du am nächsten Tag dreifaches Stimmgewicht.&#xD;&#xA;\+&#xD;&#xA;Du bist immun gegen Vampirbisse."
-          HauptBild="Blutmagier"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="10 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 23"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Blutpriesterin"
-          Schreibname="Blutpriesterin"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          Aufgaben="Du kannst einmal im Spiel nachts einen Mitspieler auswählen, der ein Zeichen des Blutes erhält."
-          HauptBild="Vampirpriesterin"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="12 Text, 6mm Rand"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Blutrünstiger Werwolf"
-          Schreibname="Blutrünstiger Werwolf"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          Aufgaben="Du musst in jeder Abstimmung über Leben und Tod mit ::Daumen Unten:: stimmen."
-          HauptBild="Blutrünstiger Werwolf"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="12 Text, 6mm Rand"
-          TitelDarstellung="Weiß, 15"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dieb"
-          Schreibname="Dieb"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du darfst in jeder Nacht einen Mitspieler auswählen, welchem Du einen Edelstein klaust, soweit vorhanden."
-          HauptBild="Dieb"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 2mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dirne"
-          Schreibname="Dirne"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="In jeder Nacht wählst Du einen anderen Mitspieler aus. Du wirst in der Nacht nur von den Effekten betroffen, von denen auch die jeweils gewählte Person betroffen wird."
-          HauptBild="Dirne"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="13 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Doppelgänger"
-          Schreibname="Doppelgänger"
-          Fraktion="Ausgestoßener"
-          Gesinnung="Neutral"
-          Aufgaben="In jeder Nacht ab der zweiten darfst Du einen Mitspieler auswählen, um ihn zu töten.&#xD;&#xA;\+&#xD;&#xA;Stirbt der gewählte Spieler tatsächlich, so tauschst Du alle Deine Gegenstände, Deine Rolle und Dein Zeichen mit ihm.&#xD;&#xA;\+&#xD;&#xA;Hast Du am Ende des Spiels Deine Rolle nicht getauscht, verlierst Du."
-          HauptBild="Doppelgänger"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="10 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 23"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
+        Standard="Dorfbewohner">
       <Karte
           Name="Dorfbewohner"
           Schreibname="Dorfbewohner"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          HauptBild="Dorfbewohner02"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dorfbewohner_2"
-          Schreibname="Dorfbewohner"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          HauptBild="Dorfbewohner03"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dorfbewohner_3"
-          Schreibname="Dorfbewohner"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          HauptBild="Dorfbewohner04"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dorfbewohner_4"
-          Schreibname="Dorfbewohner"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          HauptBild="Dorfbewohner05"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dorfbewohner_5"
-          Schreibname="Dorfbewohner"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          HauptBild="Dorfbewohner06"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dorfbewohnerin"
-          Schreibname="Dorfbewohnerin"
           Unzerstorbar="True"
           Fraktion="Dorf"
           Gesinnung="Gut"
           HauptBild="Dorfbewohner01"
           HintergrundDarstellung="Standard"
           TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Dorfbewohnerin_2"
-          Schreibname="Dorfbewohnerin"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          HauptBild="Dorfbewohner07"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Druide"
-          Schreibname="Druide"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du darfst in jeder Nacht einen Spieler auswählen, um zu erfahren, ob er in dieser Nacht eine Rollenfähigkeit eingesetzt hat (\dja: ::Daumen Oben::, \dnein: ::Daumen Unten::)."
-          HauptBild="Druide"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="13 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Exorzist"
-          Schreibname="Exorzist"
-          Fraktion="Inquisition"
-          Gesinnung="Gut"
-          Aufgaben="Du darfst einmal im Spiel nachts einen Spieler auswählen. Ist die gewählte Person ein Vampir oder Werwolf, so stirbt sie. Anderenfalls tauscht sie ihre Rollenkarte gegen eine Dorfbewohnerkarte und ihr Zeichen gegen ein Zeichen des Dorfes."
-          HauptBild="Exorzismus"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="11 Text, 1mm Rand"
           TitelDarstellung="Standard"
-          InfoDarstellung="Schwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Foltermeister"
-          Schreibname="Foltermeister"
-          Fraktion="Inquisition"
-          Gesinnung="Gut"
-          Aufgaben="Du darfst in jeder Nacht einen Mitspieler auswählen. Der Spielleiter zeigt Dir dann einen anderen Mitspieler, der dasselbe Zeichen besitzt, falls vorhanden."
-          HauptBild="Foltermeister"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="13 Text, 1mm Rand"
-          TitelDarstellung="Schwarz, 21"
-          InfoDarstellung="Schwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Freya"
-          Schreibname="Freya"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          Aufgaben="Du und Freyr bilden ein Liebespaar, d.h. ihr seht euch beide in der ersten Nacht und stirbt einer von Euch, so stirbt auch der andere."
-          HauptBild="Freya"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 6mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Freyr"
-          Schreibname="Freyr"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          Aufgaben="Du und Freya bilden ein Liebespaar, d.h. ihr seht euch beide in der ersten Nacht und stirbt einer von Euch, so stirbt auch der andere."
-          HauptBild="Freyr"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 6mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Geheiminquisitor"
-          Schreibname="Geheiminquisitor"
-          Fraktion="Inquisition"
-          Gesinnung="Gut"
-          Aufgaben="Stirbst Du, so gewinnen die anderen Inquisitoren zwei Tage nach Deinem Tod."
-          HauptBild="Inquisitor"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 5mm Rand"
-          TitelDarstellung="Schwarz, 17"
-          InfoDarstellung="Schwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Gutbürger"
-          Schreibname="Gutbürger"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du musst in jeder Abstimmung über Leben und Tod mit ::Daumen Oben:: stimmen."
-          HauptBild="Pazifist"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Heimlicher Verehrer"
-          Schreibname="Heimlicher Verehrer"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Dir werden in der ersten Nacht zuerst Romeo und dann Julia gezeigt.&#xD;&#xA;\+&#xD;&#xA;Wenn Romeo stirbt, tauschst Du diese Rollenkarte gegen Romeos Rollenkarte.&#xD;&#xA;\+&#xD;&#xA;Besitzt Du diese Rollenkarte am Ende des Spiels, so verlierst Du."
-          HauptBild="Heimlicher Verehrer"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="11 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 15"
-          InfoDarstellung="Weiß"
+          InfoDarstellung="Standard"
           BildDarstellung="Standard"
           LayoutDarstellung="Standard"
           Modus="ModernWolfKarte" />
@@ -1940,178 +524,12 @@
           Schreibname="Hexe"
           Fraktion="Dorf"
           Gesinnung="Gut"
-          Aufgaben="Einmal im Spiel kannst Du in einer beliebigen Nacht --außer der ersten-- einen Mitspieler töten.&#xD;&#xA;\+&#xD;&#xA;Du kannst einmal im Spiel in der Morgendämmerung den Tod eines Spielers verhindern.&#xD;&#xA;"
+          Aufgaben="Einmal im Spiel kannst Du nachts einen Mitspieler vergiften.&#xD;&#xA;\+&#xD;&#xA;Einmal im Spiel kannst Du nachst einen Spieler, der sterben würde, vor dem Tod bewahren.&#xD;&#xA;"
           HauptBild="Hexe"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Hirtin"
-          Schreibname="Hirtin"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Dir wird in der ersten Nacht ein Spieler guter Gesinnung gezeigt."
-          HauptBild="Hirtin"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 2mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Hoffnarr"
-          Schreibname="Hoffnarr"
-          Fraktion="Ausgestoßener"
-          Gesinnung="Neutral"
-          Aufgaben="Du gewinnst sofort, wenn Du am ersten Tag durch eine Abstimmung zum Tode verurteilt wirst.&#xD;&#xA;\+&#xD;&#xA;In der zweiten Nacht wird Deine Rolle durch die eines Dorfbewohners und Dein Zeichen durch das des Dorfes ausgetauscht."
-          HauptBild="Hoffnarr"
           HintergrundDarstellung="Quer"
-          TextDarstellung="11 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Inquisitor"
-          Schreibname="Inquisitor"
-          Fraktion="Inquisition"
-          Gesinnung="Gut"
-          HauptBild="Inquisitor_2"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Klein"
+          TextDarstellung="Standard"
           TitelDarstellung="Standard"
-          InfoDarstellung="Schwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Inquisitorin"
-          Schreibname="Inquisitorin"
-          Fraktion="Inquisition"
-          Gesinnung="Gut"
-          HauptBild="Inquisitorin"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Klein"
-          TitelDarstellung="Standard"
-          InfoDarstellung="Schwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Isolde"
-          Schreibname="Isolde"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          Aufgaben="Du und Tristan bilden ein Liebespaar, d.h. ihr seht euch beide in der ersten Nacht und stirbt einer von Euch, so stirbt auch der andere."
-          HauptBild="Isolde"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Jäger"
-          Schreibname="Jäger"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="In der ersten Nacht verabredest Du ein geheimes Zeichen mit dem Spielleiter.&#xD;&#xA;\+&#xD;&#xA;In jeder Nacht darsft Du einen Mitspieler auswählen.&#xD;&#xA;\+&#xD;&#xA;Einmal im Spiel darfst Du tagsüber das verabredete Zeichen machen. Kann der Spielleiter das Zeichen erkennen, so wird der ausgewählte Mitspieler von Dir sofort erschoßen."
-          HauptBild="Jäger"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="8 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Julia"
-          Schreibname="Julia"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du und Romeo bilden ein Liebespaar, d.h. ihr seht euch beide in der ersten Nacht und stirbt einer von Euch, so stirbt auch der andere."
-          HauptBild="Julia"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Junker"
-          Schreibname="Junker"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du erhälst in jeder Nacht einen Edelstein."
-          HauptBild="Junker"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 2mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Pfarrer"
-          Schreibname="Pfarrer"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du wählst in jeder Nacht einen anderen Mitspieler aus, um ihn vor allen negativen Effekten dieser Nacht zu schützen."
-          HauptBild="Prediger"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Psychopath"
-          Schreibname="Psychopath"
-          Fraktion="Ausgestoßener"
-          Gesinnung="Neutral"
-          Aufgaben="Du darfst in jeder Nacht --außer der ersten-- einen Mitspieler töten. Tust Du dies, so kannst Du diese Fähigkeit in der nächsten Nacht nicht einsetzen.\+&#xD;&#xA;Du gewinntst, wenn am Ende des Spiels höchstens drei Spieler am Leben sind."
-          HauptBild="Psychopath"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="8 Text, 4mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Ritter"
-          Schreibname="Ritter"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Einmal im Spiel darfst Du tagsüber eine Person auswählen und hinrichten lassen. Weder die Rolle noch das Zeichen der hingerichteten Person werden offengelegt und alle Artefakte und Edelsteine, die ihr gehört haben, werden unwiederbringlich zerstört."
-          HauptBild="Ritter"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="8 Text, 2mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Romeo"
-          Schreibname="Romeo"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du und Julia bilden ein Liebespaar, d.h. ihr seht euch beide in der ersten Nacht und stirbt einer von Euch, so stirbt auch der andere."
-          HauptBild="Julia"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
+          InfoDarstellung="Standard"
           BildDarstellung="Standard"
           LayoutDarstellung="Standard"
           Modus="ModernWolfKarte" />
@@ -2120,135 +538,12 @@
           Schreibname="Seherin"
           Fraktion="Dorf"
           Gesinnung="Gut"
-          Aufgaben="&#xD;&#xA;Du darfst in jeder Nacht einen Spieler auswählen, um seine Gesinnung zu sehen&#xD;&#xA;(\dgut: ::Daumen Oben::, \dneutral: ::Daumen Quer::, \dböse: ::Daumen Unten::)."
+          Aufgaben="Du darfst in jeder Nacht einen Spieler auswählen, um seine Gesinnung zu sehen&#xD;&#xA;(\dgut: ::Daumen Oben::, \dneutral: ::Daumen Quer::, \dböse: ::Daumen Unten::)."
           HauptBild="Seher"
           HintergrundDarstellung="Quer"
-          TextDarstellung="13 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Seherlehrling"
-          Schreibname="Seherlehrling"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="&#xD;&#xA;Du erfährst in der ersten Nacht, wer der Seher ist."
-          HauptBild="Fluch"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="13 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 22"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Spiegelmagier"
-          Schreibname="Spiegelmagier"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Zweimal im Spiel kannst Du in der Morgendämmerung den Tod einer Person verhindern, indem Du eine andere Person auswählst, die stattdessen sterben soll (du kannst keine Person auswählen, die ohnehin sterben würde)."
-          HauptBild="Spiegelmagier"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="11 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 23"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Strolch"
-          Schreibname="Strolch"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du wählst in der ersten Nacht zwei Spieler aus.&#xD;&#xA;\+&#xD;&#xA;Wann immer einer der gewählten Spieler stirbt, erhälst Du zwei Edelsteine."
-          HauptBild="Strolch_2"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 2mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Tristan"
-          Schreibname="Tristan"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          Aufgaben="Du und Isolde bilden ein Liebespaar, d.h. ihr seht euch beide in der ersten Nacht und stirbt einer von Euch, so stirbt auch der andere."
-          HauptBild="Tristan"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 6mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Unheimlicher Verehrer"
-          Schreibname="Unheimlicher Verehrer"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du wählst in der ersten Nacht ein Opfer aus.&#xD;&#xA;\+&#xD;&#xA;Würde das Opfer über Nacht sterben, stirbst Du stattdessen.&#xD;&#xA;\+&#xD;&#xA;Dein Ziel ist es, das Opfer tagsüber zu töten."
-          HauptBild="Unheimlicher Verehrer"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="12 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 17"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Vampir"
-          Schreibname="Vampir"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          HauptBild="Vampir"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Klein"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Vampirin"
-          Schreibname="Vampirin"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          HauptBild="Vampirin"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Klein"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Vampirin_2"
-          Schreibname="Vampirin"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          HauptBild="Vampirin_2"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Klein"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Welpe"
-          Schreibname="Welpe"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          Aufgaben="Stirbst Du, so können die Werwölfe in der nächsten Abenddämmerung eine zusätzliche Person beißen.&#xD;&#xA;\+&#xD;&#xA;Die Werwölfe können Dich in der Abenddämmerung opfern, um zwei Spieler zu beißen."
-          HauptBild="Werwolfswelpe"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="11 Text, 1-0mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
+          TextDarstellung="Standard"
+          TitelDarstellung="Standard"
+          InfoDarstellung="Standard"
           BildDarstellung="Standard"
           LayoutDarstellung="Standard"
           Modus="ModernWolfKarte" />
@@ -2257,107 +552,12 @@
           Schreibname="Werwolf"
           Fraktion="Werwolf"
           Gesinnung="Böse"
+          Aufgaben="Alle Werwölfe machen gemeinsam in jeder Nacht auf.&#xD;&#xA;\+&#xD;&#xA;Beginnend mit der zweiten Nacht wählen die Werwölfe gemeinsam eine Person aus, die in dieser Nacht sterben soll.&#xD;&#xA;\+&#xD;&#xA;Die Werwölfe gewinnen, wenn alle Nicht-Werwölfe tot sind."
           HauptBild="Werwolf"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Werwolf_2"
-          Schreibname="Werwolf"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          HauptBild="Werwolf_2"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Werwolf_3"
-          Schreibname="Werwolf"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          HauptBild="Werwolf3"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="Standard"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Werwolf-Akolyth"
-          Schreibname="Werwolf-Akolyth"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          Aufgaben="Stirbt der Werwolf-Akolyth, so jagen die Werwölfe in der nächsten Abenddämmerung nicht."
-          HauptBild="WW-Akolyth"
           HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 17"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Wolfsschamanin"
-          Schreibname="Wolfsschamanin"
-          Fraktion="Werwolf"
-          Gesinnung="Böse"
-          Aufgaben="Du kannst einmal im Spiel nachts einen anderen Mitspieler auswählen, der ein Zeichen des Wolfes erhält."
-          HauptBild="Schamane"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="11 Text, 6mm Rand"
-          TitelDarstellung="Weiß, 19"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Wutbürger"
-          Schreibname="Wutbürger"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="Du musst in jeder Abstimmung über Leben und Tod mit ::Daumen Unten:: stimmen."
-          HauptBild="Wutbürger"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="14 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Zauberer"
-          Schreibname="Zauberer"
-          Fraktion="Dorf"
-          Gesinnung="Gut"
-          Aufgaben="In jeder Nacht ab der zweiten kannst Du einen Mitspieler auswählen. Der gewählte Mitspieler muss zu Beginn des nächsten Tages den Raum verlassen und kehrt am Ende der folgenden Nacht wieder zurück."
-          HauptBild="Zauberer"
-          HintergrundDarstellung="Standard"
-          TextDarstellung="10 Text, 1mm Rand"
-          TitelDarstellung="Weiß, 22"
-          InfoDarstellung="Weiß"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Modus="ModernWolfKarte" />
-      <Karte
-          Name="Zensor"
-          Schreibname="Zensor"
-          Fraktion="Vampir"
-          Gesinnung="Böse"
-          Aufgaben="Du darfst in jeder Nacht einen Mitspieler, der kein Vampir ist, auswählen. Über diesen Spieler darf am nächsten Tag weder geredet noch darf er nominiert werden. Wer diese Regel bricht, verliert sein Stimm- und Nominierrecht für den Rest des Tages."
-          HauptBild="Zensor"
-          HintergrundDarstellung="Quer"
-          TextDarstellung="11 Text, 1mm Rand"
-          TitelDarstellung="Standard, Weiß"
-          InfoDarstellung="Weiß"
+          TextDarstellung="Kleiner"
+          TitelDarstellung="Standard"
+          InfoDarstellung="Standard"
           BildDarstellung="Standard"
           LayoutDarstellung="Standard"
           Modus="ModernWolfKarte" />
@@ -2365,68 +565,15 @@
     <Decks
         Name="Standard"
         Schreibname="Standard"
-        Standard="Nichts">
+        Standard="Standard-Set">
       <Deck
-          Name="Nichts"
-          Schreibname="Nichts"
-          Unzerstorbar="True" />
-      <Deck
-          Name="Rollen"
-          Schreibname="Rollen">
-        1 Abbadon
-        1 Amor
-        1 Blutmagierin
-        1 Blutpriesterin
-        1 Blutrünstiger Werwolf
-        1 Dieb
-        1 Dirne
-        1 Doppelgänger
-        1 Dorfbewohner
-        1 Dorfbewohner_2
-        1 Dorfbewohner_3
-        1 Dorfbewohner_4
-        1 Dorfbewohner_5
-        1 Dorfbewohnerin
-        1 Dorfbewohnerin_2
-        1 Druide
-        1 Exorzist
-        1 Foltermeister
-        1 Freya
-        1 Freyr
-        1 Geheiminquisitor
-        1 Gutbürger
-        1 Heimlicher Verehrer
+          Name="Standard-Set"
+          Schreibname="Standard-Set"
+          Unzerstorbar="True">
+        11 Dorfbewohner
         1 Hexe
-        1 Hirtin
-        1 Hoffnarr
-        1 Inquisitor
-        1 Inquisitorin
-        1 Isolde
-        1 Jäger
-        1 Julia
-        1 Junker
-        1 Pfarrer
-        1 Psychopath
-        1 Ritter
-        1 Romeo
         1 Seherin
-        1 Seherlehrling
-        1 Spiegelmagier
-        1 Strolch
-        1 Tristan
-        1 Unheimlicher Verehrer
-        1 Vampir
-        1 Vampirin
-        1 Vampirin_2
-        1 Welpe
-        1 Werwolf
-        1 Werwolf_2
-        1 Werwolf_3
-        1 Werwolf-Akolyth
-        1 Wolfsschamanin
-        1 Wutbürger
-        1 Zauberer
-        1 Zensor
+        5 Werwolf
       </Deck>
     </Decks>
   </Universe>
@@ -2465,7 +612,7 @@
           Schreibname="Standard"
           Unzerstorbar="True"
           Existiert="True"
-          Font_name="Exocet"
+          Font_name="Calibri"
           Font_style="Regular"
           Font_size="18"
           Rand_X="2"
@@ -2515,7 +662,8 @@
           InnenRadius="1"
           EffektFont_name="Calibri"
           EffektFont_style="Regular"
-          EffektFont_size="11" />
+          EffektFont_size="11"
+          ShadowColor="00000000" />
       <TextDarstellung
           Name="Standard"
           Schreibname="Standard"
@@ -2533,7 +681,8 @@
           InnenRadius="1"
           EffektFont_name="Calibri"
           EffektFont_style="Regular"
-          EffektFont_size="11" />
+          EffektFont_size="11"
+          ShadowColor="00000000" />
     </Textdarstellungen>
     <Infodarstellungen
         Name="Standard"
@@ -2544,14 +693,20 @@
           Schreibname="Standard"
           Unzerstorbar="True"
           Existiert="True"
-          Font_name="Exocet"
+          Font_name="Calibri"
           Font_style="Regular"
           Font_size="6"
           Rand_X="1"
           Rand_Y="1"
           Farbe="64ffffff"
           RandFarbe="ff000000"
-          TextFarbe="ff000000" />
+          TextFarbe="ff000000"
+          Farbe2="00000000"
+          RandFarbe2="00000000"
+          TextFarbe2="00000000"
+          Font2_name="Calibri"
+          Font2_style="Regular"
+          Font2_size="8" />
     </Infodarstellungen>
     <Hauptbilder
         Name="Standard"
@@ -2560,8 +715,8 @@
       <HauptBild
           Name="Dorfbewohner"
           Schreibname="Dorfbewohner"
-          FilePath="Bilder/HauptBilder/Dorfbewohner.png"
-          Artist="Rüstü"
+          Identifier="Dorfbewohner"
+          FilePath="Bilder\HauptBilder\Dorfbewohner.png"
           Size_X="63"
           Size_Y="88,28222"
           Zentrum_X="0,5"
@@ -2569,8 +724,8 @@
       <HauptBild
           Name="Hexe"
           Schreibname="Hexe"
-          FilePath="Bilder/HauptBilder/Hexe.png"
-          Artist="Rüstü"
+          Identifier="Hexe"
+          FilePath="Bilder\HauptBilder\Hexe.png"
           Size_X="63"
           Size_Y="88,28222"
           Zentrum_X="0,5"
@@ -2578,8 +733,8 @@
       <HauptBild
           Name="Seher"
           Schreibname="Seher"
-          FilePath="Bilder/HauptBilder/Seher.png"
-          Artist="Rüstü"
+          Identifier="Seher"
+          FilePath="Bilder\HauptBilder\Seher.png"
           Size_X="63"
           Size_Y="88,28222"
           Zentrum_X="0,5"
@@ -2588,6 +743,8 @@
           Name="Standard"
           Schreibname="Standard"
           Unzerstorbar="True"
+          Identifier="Standard"
+          FilePath="Bilder\HauptBilder\Standard"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -2595,8 +752,8 @@
       <HauptBild
           Name="Werwolf"
           Schreibname="Werwolf"
-          FilePath="Bilder/HauptBilder/Werwolf.png"
-          Artist="Rüstü"
+          Identifier="Werwolf"
+          FilePath="Bilder\HauptBilder\Werwolf.png"
           Size_X="63"
           Size_Y="88,28222"
           Zentrum_X="0,5"
@@ -2609,7 +766,8 @@
       <HintergrundBild
           Name="Artefakt"
           Schreibname="Artefakt"
-          FilePath="Bilder/HintergrundBilder/Artefakt.png"
+          Identifier="Artefakt.png"
+          FilePath="Bilder\HintergrundBilder\Artefakt.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2618,7 +776,8 @@
       <HintergrundBild
           Name="Dorf"
           Schreibname="Dorf"
-          FilePath="Bilder/HintergrundBilder/Dorf.png"
+          Identifier="Dorf.png"
+          FilePath="Bilder\HintergrundBilder\Dorf.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2627,7 +786,8 @@
       <HintergrundBild
           Name="Einzelgänger"
           Schreibname="Einzelgänger"
-          FilePath="Bilder/HintergrundBilder/Einzelgänger.png"
+          Identifier="Einzelgänger.png"
+          FilePath="Bilder\HintergrundBilder\Einzelgänger.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2636,7 +796,8 @@
       <HintergrundBild
           Name="Fähigkeit"
           Schreibname="Fähigkeit"
-          FilePath="Bilder/HintergrundBilder/Fähigkeit.png"
+          Identifier="Fähigkeit.png"
+          FilePath="Bilder\HintergrundBilder\Fähigkeit.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2645,7 +806,8 @@
       <HintergrundBild
           Name="Gefallen"
           Schreibname="Gefallen"
-          FilePath="Bilder/HintergrundBilder/Gefallen.png"
+          Identifier="Gefallen.png"
+          FilePath="Bilder\HintergrundBilder\Gefallen.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2654,7 +816,8 @@
       <HintergrundBild
           Name="Geister"
           Schreibname="Geister"
-          FilePath="Bilder/HintergrundBilder/Geister.Png"
+          Identifier="Geister.Png"
+          FilePath="Bilder\HintergrundBilder\Geister.Png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="89,0064"
@@ -2663,7 +826,8 @@
       <HintergrundBild
           Name="Hybridwesen"
           Schreibname="Hybridwesen"
-          FilePath="Bilder/HintergrundBilder/Hybridwesen.png"
+          Identifier="Hybridwesen.png"
+          FilePath="Bilder\HintergrundBilder\Hybridwesen.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2672,7 +836,8 @@
       <HintergrundBild
           Name="Inquisition"
           Schreibname="Inquisition"
-          FilePath="Bilder/HintergrundBilder/Inquisition.png"
+          Identifier="Inquisition.png"
+          FilePath="Bilder\HintergrundBilder\Inquisition.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2682,6 +847,8 @@
           Name="Standard"
           Schreibname="Standard"
           Unzerstorbar="True"
+          Identifier="Standard"
+          FilePath="Bilder\HintergrundBilder\Standard"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -2689,7 +856,8 @@
       <HintergrundBild
           Name="Vampire"
           Schreibname="Vampire"
-          FilePath="Bilder/HintergrundBilder/Vampire.png"
+          Identifier="Vampire.png"
+          FilePath="Bilder\HintergrundBilder\Vampire.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2698,7 +866,8 @@
       <HintergrundBild
           Name="Verfluchtes Artefakt"
           Schreibname="Verfluchtes Artefakt"
-          FilePath="Bilder/HintergrundBilder/Verfluchtes Artefakt.png"
+          Identifier="Verfluchtes Artefakt.png"
+          FilePath="Bilder\HintergrundBilder\Verfluchtes Artefakt.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2707,7 +876,8 @@
       <HintergrundBild
           Name="Werwölfe"
           Schreibname="Werwölfe"
-          FilePath="Bilder/HintergrundBilder/Werwölfe.png"
+          Identifier="Werwölfe.png"
+          FilePath="Bilder\HintergrundBilder\Werwölfe.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2716,7 +886,8 @@
       <HintergrundBild
           Name="Zauber"
           Schreibname="Zauber"
-          FilePath="Bilder/HintergrundBilder/Zauber.png"
+          Identifier="Zauber.png"
+          FilePath="Bilder\HintergrundBilder\Zauber.png"
           Artist="Rüstü"
           Size_X="63"
           Size_Y="88,28222"
@@ -2726,31 +897,13 @@
     <Rückseitenbilder
         Name="Standard"
         Schreibname="Standard"
-        Standard="Ruckseite Rot">
+        Standard="Ruckseite Schwarz">
       <RuckseitenBild
-          Name="Ruckseite Blau"
-          Schreibname="Ruckseite Blau"
-          FilePath="Bilder/RuckseitenBilder/Ruckseite Blau.jpg"
-          Artist="Ulrich Pirling"
-          Size_X="63"
-          Size_Y="88,28222"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <RuckseitenBild
-          Name="Ruckseite Gruen"
-          Schreibname="Ruckseite Gruen"
-          FilePath="Bilder/RuckseitenBilder/Ruckseite Gruen.jpg"
-          Artist="Ulrich Pirling"
-          Size_X="63"
-          Size_Y="88,28222"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <RuckseitenBild
-          Name="Ruckseite Rot"
-          Schreibname="Ruckseite Rot"
+          Name="Ruckseite Schwarz"
+          Schreibname="Ruckseite Schwarz"
           Unzerstorbar="True"
-          FilePath="Bilder/RuckseitenBilder/Ruckseite Rot.jpg"
-          Artist="Ulrich Pirling"
+          Identifier="Ruckseite Schwarz"
+          FilePath="Bilder\RuckseitenBilder\BlackBackside.png"
           Size_X="63"
           Size_Y="88,28222"
           Zentrum_X="0,5"
@@ -2764,7 +917,8 @@
           Name="Daumen Oben"
           Schreibname="Daumen Oben"
           Unzerstorbar="True"
-          FilePath="Bilder/TextBilder/Daumen Oben.png"
+          Identifier="Daumen Oben.png"
+          FilePath="Bilder\TextBilder\Daumen Oben.png"
           Artist="Rüstü"
           Size_X="5"
           Size_Y="5"
@@ -2774,7 +928,8 @@
           Name="Daumen Quer"
           Schreibname="Daumen Quer"
           Unzerstorbar="True"
-          FilePath="Bilder/TextBilder/Daumen Quer.png"
+          Identifier="Daumen Quer.png"
+          FilePath="Bilder\TextBilder\Daumen Quer.png"
           Artist="Rüstü"
           Size_X="5"
           Size_Y="5"
@@ -2784,7 +939,8 @@
           Name="Daumen Unten"
           Schreibname="Daumen Unten"
           Unzerstorbar="True"
-          FilePath="Bilder/TextBilder/Daumen Unten.png"
+          Identifier="Daumen Unten.png"
+          FilePath="Bilder\TextBilder\Daumen Unten.png"
           Artist="Rüstü"
           Size_X="5"
           Size_Y="5"
@@ -2813,7 +969,13 @@
           Storung="Daumen Oben"
           Initiative="Daumen Oben"
           Felder="Daumen Oben"
-          Reichweite="Daumen Oben" />
+          Reichweite="Daumen Oben"
+          Leben="Daumen Oben"
+          LebenLeer="Daumen Oben"
+          Rustung="Daumen Oben"
+          ZielSicherheiten=",,,,,,,,,,,,,,,,,,"
+          Schütze="Daumen Oben"
+          KostenFeld="Daumen Oben" />
     </Layoutdarstellungen>
     <Fraktionen
         Name="Standard"
@@ -2825,56 +987,38 @@
           Unzerstorbar="True"
           TitelArt="Rund"
           HintergrundBild="Dorf"
-          RuckseitenBild="Ruckseite Rot" />
+          HintergrundBildQuer="Standard"
+          RuckseitenBild="Ruckseite Schwarz"
+          TextBild="Daumen Oben"
+          RuckArt="Normal" />
       <Fraktion
           Name="Werwölfe"
           Schreibname="Werwölfe"
           StandardAufgaben="In jeder Nacht erwachen alle Werwölfe gleichzeitig. Ab der zweiten Nacht wählen sie gemeinsam eine Person aus, die sterben soll."
           TitelArt="Sagezahn"
           HintergrundBild="Werwölfe"
-          RuckseitenBild="Ruckseite Rot" />
+          HintergrundBildQuer="Standard"
+          RuckseitenBild="Ruckseite Schwarz"
+          TextBild="Daumen Oben"
+          RuckArt="Normal" />
     </Fraktionen>
     <Gesinnungen
         Name="Standard"
         Schreibname="Standard"
-        Standard="Rechtschaffen Gut">
+        Standard="Gut">
       <Gesinnung
-          Name="Chaotisch Böse"
-          Schreibname="Chaotisch Böse"
-          Aufgabe="Chaotisch Böse" />
+          Name="Böse"
+          Schreibname="Böse"
+          Aufgabe="Böse" />
       <Gesinnung
-          Name="Chaotisch Gut"
-          Schreibname="Chaotisch Gut"
-          Aufgabe="Chaotisch Gut" />
-      <Gesinnung
-          Name="Chaotisch Neutral"
-          Schreibname="Chaotisch Neutral"
-          Aufgabe="Chaotisch Neutral" />
-      <Gesinnung
-          Name="Neutral Böse"
-          Schreibname="Neutral Böse"
-          Aufgabe="Neutral Böse" />
-      <Gesinnung
-          Name="Neutral Gut"
-          Schreibname="Neutral Gut"
-          Aufgabe="Neutral Gut" />
-      <Gesinnung
-          Name="Rechtschaffen Böse"
-          Schreibname="Rechtschaffen Böse"
-          Aufgabe="Rechtschaffen Böse" />
-      <Gesinnung
-          Name="Rechtschaffen Gut"
-          Schreibname="Rechtschaffen Gut"
+          Name="Gut"
+          Schreibname="Gut"
           Unzerstorbar="True"
-          Aufgabe="Rechtschaffen Gut" />
+          Aufgabe="Gut" />
       <Gesinnung
-          Name="Rechtschaffen Neutral"
-          Schreibname="Rechtschaffen Neutral"
-          Aufgabe="Rechtschaffen Neutral" />
-      <Gesinnung
-          Name="Wahrhaft Neutral"
-          Schreibname="Wahrhaft Neutral"
-          Aufgabe="Wahrhaft Neutral" />
+          Name="Neutral"
+          Schreibname="Neutral"
+          Aufgabe="Neutral" />
     </Gesinnungen>
     <Karten
         Name="Standard"
@@ -2885,7 +1029,7 @@
           Schreibname="Dorfbewohner"
           Unzerstorbar="True"
           Fraktion="Dorf"
-          Gesinnung="Rechtschaffen Gut"
+          Gesinnung="Gut"
           HauptBild="Dorfbewohner"
           HintergrundDarstellung="Standard"
           TextDarstellung="Standard"
@@ -2898,7 +1042,7 @@
           Name="Hexe"
           Schreibname="Hexe"
           Fraktion="Dorf"
-          Gesinnung="Chaotisch Gut"
+          Gesinnung="Gut"
           Aufgaben="Der Hexe werden am Ende jeder Nacht alle Personen angezeigt, die in dieser Nacht sterben würden. Sie kann einmal im Spiel eine dieser Personen auswählen, um deren Tod zu verhindern.&#xD;&#xA;\+&#xD;&#xA;Die kann einmal im Spiel nachts eine Person auswählen, die sterben soll."
           HauptBild="Hexe"
           HintergrundDarstellung="Standard"
@@ -2912,7 +1056,7 @@
           Name="Seher"
           Schreibname="Seher"
           Fraktion="Dorf"
-          Gesinnung="Neutral Gut"
+          Gesinnung="Gut"
           Aufgaben="Über Rollen, die in ihrem Namen das Wort \iSeher\i enthalten, darf nicht gesprochen werden.&#xD;&#xA;\+&#xD;&#xA;Der Seher darf in jeder Nacht eine Person auswählen, um den zweiten Teil ihrer Gesinnung zu erfahren (\dgut: ::Daumen Oben::, \dneutral: ::Daumen Quer::, \dböse: ::Daumen Unten::)."
           HauptBild="Seher"
           HintergrundDarstellung="Standard"
@@ -2926,7 +1070,7 @@
           Name="Werwolf"
           Schreibname="Werwolf"
           Fraktion="Werwölfe"
-          Gesinnung="Chaotisch Böse"
+          Gesinnung="Böse"
           HauptBild="Werwolf"
           HintergrundDarstellung="Standard"
           TextDarstellung="Standard"
@@ -2939,18 +1083,15 @@
     <Decks
         Name="Standard"
         Schreibname="Standard"
-        Standard="Nichts">
+        Standard="Standard Deck">
       <Deck
-          Name="Nichts"
-          Schreibname="Nichts"
-          Unzerstorbar="True" />
-      <Deck
-          Name="Standardset"
-          Schreibname="Standardset">
-        4 Werwolf
+          Name="Standard Deck"
+          Schreibname="Standard Deck"
+          Unzerstorbar="True">
+        11 Dorfbewohner
         1 Hexe
         1 Seher
-        9 Dorfbewohner
+        5 Werwolf
       </Deck>
     </Decks>
   </Universe>
@@ -2961,12 +1102,12 @@
     Beschreibung = "Wählen Sie diese Option aus, wenn Sie ein Deck mit Aktionskarten erstellen wollen für Tabletop RPGs.">
     >
     <Hintergrunddarstellungen
-        Name="Standard"
-        Schreibname="Standard"
-        Standard="Common">
+          Name="Standard"
+          Schreibname="Standard"
+          Standard="Standard">
       <HintergrundDarstellung
-          Name="Common"
-          Schreibname="Common"
+          Name="Standard"
+          Schreibname="Standard"
           Unzerstorbar="True"
           Existiert="True"
           Font_name="Calibri"
@@ -2980,49 +1121,7 @@
           Size_X="63"
           Size_Y="89,1"
           RuckseitenFarbe="00000000"
-          Anker_X="5"
-          Anker_Y="12"
-          MarginLeft="2"
-          MarginRight="2"
-          MarginTop="6"
-          Quer="True" />
-      <HintergrundDarstellung
-          Name="Rare"
-          Schreibname="Rare"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8"
-          Rand_X="2"
-          Rand_Y="2"
-          Farbe="ffffffff"
-          RandFarbe="ffccac00"
-          TextFarbe="ff000000"
-          Size_X="63"
-          Size_Y="89,1"
-          RuckseitenFarbe="00000000"
-          Anker_X="5"
-          Anker_Y="12"
-          MarginLeft="2"
-          MarginRight="2"
-          MarginTop="6"
-          Quer="True" />
-      <HintergrundDarstellung
-          Name="Uncommon"
-          Schreibname="Uncommon"
-          Existiert="True"
-          Font_name="Calibri"
-          Font_style="Regular"
-          Font_size="8"
-          Rand_X="2"
-          Rand_Y="2"
-          Farbe="ffffffff"
-          RandFarbe="ffb4b4b4"
-          TextFarbe="ff000000"
-          Size_X="63"
-          Size_Y="89,1"
-          RuckseitenFarbe="00000000"
-          Anker_X="5"
+          Anker_X="6"
           Anker_Y="12"
           MarginLeft="2"
           MarginRight="2"
@@ -3034,37 +1133,13 @@
         Schreibname="Standard"
         Standard="WeißAufSchwarz">
       <TitelDarstellung
-          Name="BlauAufSchwarz"
-          Schreibname="BlauAufSchwarz"
-          Existiert="True"
-          Font_name="JaceBeleren"
-          Font_style="Bold"
-          Font_size="15,75"
-          Rand_X="0,2"
-          Rand_Y="0,2"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ff32dcff" />
-      <TitelDarstellung
-          Name="GrümAufSchwarz"
-          Schreibname="GrümAufSchwarz"
-          Existiert="True"
-          Font_name="JaceBeleren"
-          Font_style="Bold"
-          Font_size="15,75"
-          Rand_X="0,2"
-          Rand_Y="0,2"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ff32ff32" />
-      <TitelDarstellung
           Name="WeißAufSchwarz"
           Schreibname="WeißAufSchwarz"
           Unzerstorbar="True"
           Existiert="True"
-          Font_name="JaceBeleren"
-          Font_style="Bold"
-          Font_size="15,75"
+          Font_name="Cambria"
+          Font_style="Italic"
+          Font_size="16,2"
           Rand_X="0,2"
           Rand_Y="0,2"
           Farbe="ff000000"
@@ -3097,88 +1172,13 @@
         Schreibname="Standard"
         Standard="Standard">
       <TextDarstellung
-          Name="Kleiner_10"
-          Schreibname="Kleiner_10"
-          Existiert="True"
-          Font_name="Cambria"
-          Font_style="Regular"
-          Font_size="9,75"
-          Rand_X="2"
-          Rand_Y="2"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="1"
-          InnenRadius="1"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="4"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="55"
-          TextRectangle_Height="37"
-          ShadowOffset_X="0,1"
-          ShadowOffset_Y="0,1"
-          ShadowColor="96000000"
-          ShadowIsActive="True" />
-      <TextDarstellung
-          Name="Kleiner_13"
-          Schreibname="Kleiner_13"
-          Existiert="True"
-          Font_name="Cambria"
-          Font_style="Bold"
-          Font_size="12,75"
-          Rand_X="2"
-          Rand_Y="2"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="1"
-          InnenRadius="1"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="4"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="55"
-          TextRectangle_Height="37"
-          ShadowOffset_X="0,12"
-          ShadowOffset_Y="0,12"
-          ShadowColor="96000000"
-          ShadowIsActive="True" />
-      <TextDarstellung
-          Name="Kleiner_14"
-          Schreibname="Kleiner_14"
-          Existiert="True"
-          Font_name="Cambria"
-          Font_style="Bold"
-          Font_size="14,25"
-          Rand_X="2"
-          Rand_Y="2"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ff000000"
-          BalkenDicke="1"
-          InnenRadius="1"
-          EffektFont_name="Calibri"
-          EffektFont_style="Regular"
-          EffektFont_size="11"
-          TextRectangle_X="4"
-          TextRectangle_Y="48,1"
-          TextRectangle_Width="55"
-          TextRectangle_Height="37"
-          ShadowOffset_X="0,12"
-          ShadowOffset_Y="0,12"
-          ShadowColor="96000000"
-          ShadowIsActive="True" />
-      <TextDarstellung
           Name="Standard"
           Schreibname="Standard"
           Unzerstorbar="True"
           Existiert="True"
           Font_name="Cambria"
           Font_style="Bold"
-          Font_size="15,75"
+          Font_size="16,2"
           Rand_X="2"
           Rand_Y="2"
           Farbe="ff000000"
@@ -3207,35 +1207,9 @@
           Schreibname="WeißAufSchwarz"
           Unzerstorbar="True"
           Existiert="True"
-          Font_name="JaceBeleren"
+          Font_name="Franklin Gothic Book"
           Font_style="Bold"
-          Font_size="11,25"
-          Rand_X="0,15"
-          Rand_Y="0,15"
-          Farbe="ff000000"
-          RandFarbe="ff000000"
-          TextFarbe="ffffffff"
-          Position_X="2,5"
-          Position_Y="41,5"
-          Position2_X="47"
-          Position2_Y="82"
-          Rand2_X="13"
-          Rand2_Y="5"
-          Farbe2="ff000000"
-          RandFarbe2="00000000"
-          TextFarbe2="ff000000"
-          Font2_name="Cambria"
-          Font2_style="Bold"
-          Font2_size="12"
-          Grosse2_X="3"
-          Grosse2_Y="1" />
-      <InfoDarstellung
-          Name="WeißAufSchwarz_10"
-          Schreibname="WeißAufSchwarz_10"
-          Existiert="True"
-          Font_name="JaceBeleren"
-          Font_style="Bold"
-          Font_size="10,2"
+          Font_size="10,8"
           Rand_X="0,15"
           Rand_Y="0,15"
           Farbe="ff000000"
@@ -3261,943 +1235,70 @@
         Schreibname="Standard"
         Standard="Standard">
       <HauptBild
-          Name="Act-of-Treason-MtG-Art"
-          Schreibname="Act-of-Treason-MtG-Art"
-          Identifier="Act of Treason MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Act of Treason MtG Art.jpg"
-          Size_X="56"
-          Size_Y="42,24889"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="Act-of-Treason-MtG-Art_2"
-          Schreibname="Act-of-Treason-MtG-Art"
-          Identifier="Act of Treason MtG Art_2.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Act of Treason MtG Art_2.jpg"
-          Size_X="55"
-          Size_Y="40,11765"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="Akroan-Crusader-Art"
-          Schreibname="Akroan-Crusader-Art"
-          Identifier="Akroan Crusader Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Akroan Crusader Art.jpg"
+          Name="fireball"
+          Schreibname="fireball"
+          Identifier="fireball.jpg"
+          FilePath="Bilder\HauptBilder\fireball.jpg"
           Size_X="63"
-          Size_Y="44,53448"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="all_out_attack"
-          Schreibname="all_out_attack"
-          Identifier="all_out_attack.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\all_out_attack.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Angel-of-Finality-MtG-Art"
-          Schreibname="Angel-of-Finality-MtG-Art"
-          Identifier="Angel of Finality MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Angel of Finality MtG Art.jpg"
-          Size_X="55"
-          Size_Y="40,205"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="anger"
-          Schreibname="anger"
-          Identifier="anger.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\anger.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="backstab"
-          Schreibname="backstab"
-          Identifier="backstab.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\backstab.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="bash"
-          Schreibname="bash"
-          Identifier="bash.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\bash.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,39" />
-      <HauptBild
-          Name="Battlewise-Hoplite-Art"
-          Schreibname="Battlewise-Hoplite-Art"
-          Identifier="Battlewise Hoplite Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Battlewise Hoplite Art.jpg"
-          Size_X="55"
-          Size_Y="40,19232"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="bite"
-          Schreibname="bite"
-          Identifier="bite.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\bite.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="blade_dance"
-          Schreibname="blade_dance"
-          Identifier="blade_dance.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\blade_dance.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="blood_for_blood"
-          Schreibname="blood_for_blood"
-          Identifier="blood_for_blood.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\blood_for_blood.png"
-          Size_X="57"
-          Size_Y="43,32"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="Blood-Feud-MtG-Art"
-          Schreibname="Blood-Feud-MtG-Art"
-          Identifier="Blood Feud MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Blood Feud MtG Art.jpg"
-          Size_X="63"
-          Size_Y="45,82813"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="bludgeon"
-          Schreibname="bludgeon"
-          Identifier="bludgeon.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\bludgeon.png"
-          Size_X="57"
-          Size_Y="43,32"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="body_slam"
-          Schreibname="body_slam"
-          Identifier="body_slam.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\body_slam.png"
-          Size_X="60"
-          Size_Y="45,6"
+          Size_Y="63"
           Zentrum_X="0,5"
           Zentrum_Y="0,37" />
       <HauptBild
-          Name="carnage"
-          Schreibname="carnage"
-          Identifier="carnage.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\carnage.png"
+          Name="potion"
+          Schreibname="potion"
+          Identifier="potion.jpg"
+          FilePath="Bilder\HauptBilder\potion.jpg"
           Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Chief-of-the-Edge-MtG-Art"
-          Schreibname="Chief-of-the-Edge-MtG-Art"
-          Identifier="Chief of the Edge MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Chief of the Edge MtG Art.jpg"
-          Size_X="63"
-          Size_Y="47,25"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="clash"
-          Schreibname="clash"
-          Identifier="clash.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\clash.png"
-          Size_X="60"
-          Size_Y="45,6"
+          Size_Y="63"
           Zentrum_X="0,5"
           Zentrum_Y="0,37" />
       <HauptBild
-          Name="cleave"
-          Schreibname="cleave"
-          Identifier="cleave.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\cleave.png"
+          Name="long-sword"
+          Schreibname="long-sword"
+          Identifier="long-sword.jpg"
+          FilePath="Bilder\HauptBilder\long-sword.jpg"
           Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="clothesline"
-          Schreibname="clothesline"
-          Identifier="clothesline.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\clothesline.png"
-          Size_X="60"
-          Size_Y="45,6"
+          Size_Y="63"
           Zentrum_X="0,5"
           Zentrum_Y="0,37" />
-      <HauptBild
-          Name="Coordinated-Assault-Art"
-          Schreibname="Coordinated-Assault-Art"
-          Identifier="Coordinated Assault Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Coordinated Assault Art.jpg"
-          Size_X="63"
-          Size_Y="46,032"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="dagger_spray"
-          Schreibname="dagger_spray"
-          Identifier="dagger_spray.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\dagger_spray.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="dagger_throw"
-          Schreibname="dagger_throw"
-          Identifier="dagger_throw.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\dagger_throw.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="Daxos-of-Meletis-Art"
-          Schreibname="Daxos-of-Meletis-Art"
-          Identifier="Daxos of Meletis Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Daxos of Meletis Art.jpg"
-          Size_X="63"
-          Size_Y="38,89565"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Defiant-Strike-MtG-Art"
-          Schreibname="Defiant-Strike-MtG-Art"
-          Identifier="Defiant Strike MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Defiant Strike MtG Art.jpg"
-          Size_X="63"
-          Size_Y="48,68182"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="deflect"
-          Schreibname="deflect"
-          Identifier="deflect.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\deflect.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="die_die_die"
-          Schreibname="die_die_die"
-          Identifier="die_die_die.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\die_die_die.png"
-          Size_X="57"
-          Size_Y="43,32"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="Doom-Blade-MtG-Art"
-          Schreibname="Doom-Blade-MtG-Art"
-          Identifier="Doom Blade MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Doom Blade MtG Art.jpg"
-          Size_X="55"
-          Size_Y="39,84905"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="Dragons-of-Tarkir-Art-by-David-Gaillet"
-          Schreibname="Dragons-of-Tarkir-Art-by-David-Gaillet"
-          Identifier="Dragons of Tarkir Art by David Gaillet.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Dragons of Tarkir Art by David Gaillet.jpg"
-          Size_X="63"
-          Size_Y="40,5"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="drop_kick"
-          Schreibname="drop_kick"
-          Identifier="drop_kick.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\drop_kick.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="dual_wield"
-          Schreibname="dual_wield"
-          Identifier="dual_wield.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\dual_wield.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="eviscerate"
-          Schreibname="eviscerate"
-          Identifier="eviscerate.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\eviscerate.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="feed"
-          Schreibname="feed"
-          Identifier="feed.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\feed.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="fiend_fire"
-          Schreibname="fiend_fire"
-          Identifier="fiend_fire.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\fiend_fire.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="finisher"
-          Schreibname="finisher"
-          Identifier="finisher.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\finisher.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="finte_strike"
-          Schreibname="finte_strike"
-          Identifier="finte_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\finte_strike.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="flash_of_steel"
-          Schreibname="flash_of_steel"
-          Identifier="flash_of_steel.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\flash_of_steel.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,38" />
-      <HauptBild
-          Name="flechettes"
-          Schreibname="flechettes"
-          Identifier="flechettes.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\flechettes.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="glass_knife"
-          Schreibname="glass_knife"
-          Identifier="glass_knife.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\glass_knife.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Golgari-Thug-MtG-Art"
-          Schreibname="Golgari-Thug-MtG-Art"
-          Identifier="Golgari Thug MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Golgari Thug MtG Art.jpg"
-          Size_X="63"
-          Size_Y="44,53797"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="grand_finale"
-          Schreibname="grand_finale"
-          Identifier="grand_finale.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\grand_finale.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,39" />
-      <HauptBild
-          Name="Grand-Abolisher-MtG-Art"
-          Schreibname="Grand-Abolisher-MtG-Art"
-          Identifier="Grand Abolisher MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Grand Abolisher MtG Art.jpg"
-          Size_X="58"
-          Size_Y="40,75819"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,45" />
-      <HauptBild
-          Name="headbutt"
-          Schreibname="headbutt"
-          Identifier="headbutt.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\headbutt.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="heavy_blade"
-          Schreibname="heavy_blade"
-          Identifier="heavy_blade.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\heavy_blade.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="hemokinesis"
-          Schreibname="hemokinesis"
-          Identifier="hemokinesis.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\hemokinesis.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Hidden-Dragonslayer-Dragons-of-Tarkir-MtG-Art"
-          Schreibname="Hidden-Dragonslayer-Dragons-of-Tarkir-MtG-Art"
-          Identifier="Hidden Dragonslayer Dragons of Tarkir MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Hidden Dragonslayer Dragons of Tarkir MtG Art.jpg"
-          Size_X="63"
-          Size_Y="48,68182"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="immolate"
-          Schreibname="immolate"
-          Identifier="immolate.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\immolate.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="infernal_blade"
-          Schreibname="infernal_blade"
-          Identifier="infernal_blade.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\infernal_blade.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="iron_wave"
-          Schreibname="iron_wave"
-          Identifier="iron_wave.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\iron_wave.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Leaping-Master-MtG-Art"
-          Schreibname="Leaping-Master-MtG-Art"
-          Identifier="Leaping Master MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Leaping Master MtG Art.jpg"
-          Size_X="63"
-          Size_Y="48,68182"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Mardu-Clan-Art-01"
-          Schreibname="Mardu-Clan-Art-01"
-          Identifier="Mardu Clan Art 01.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Mardu Clan Art 01.jpg"
-          Size_X="63"
-          Size_Y="47,25"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Mardu-Woe-Reaper-Fate-Reforged-MtG-Art"
-          Schreibname="Mardu-Woe-Reaper-Fate-Reforged-MtG-Art"
-          Identifier="Mardu Woe Reaper Fate Reforged MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Mardu Woe Reaper Fate Reforged MtG Art.jpg"
-          Size_X="63"
-          Size_Y="46,03846"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Mark-for-Death-MtG-Art"
-          Schreibname="Mark-for-Death-MtG-Art"
-          Identifier="Mark for Death MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Mark for Death MtG Art.jpg"
-          Size_X="55"
-          Size_Y="40,22857"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="masterful_stab"
-          Schreibname="masterful_stab"
-          Identifier="masterful_stab.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\masterful_stab.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,39" />
-      <HauptBild
-          Name="perfected_strike"
-          Schreibname="perfected_strike"
-          Identifier="perfected_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\perfected_strike.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="poisoned_stab"
-          Schreibname="poisoned_stab"
-          Identifier="poisoned_stab.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\poisoned_stab.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="pommel_strike"
-          Schreibname="pommel_strike"
-          Identifier="pommel_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\pommel_strike.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="power_through"
-          Schreibname="power_through"
-          Identifier="power_through.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\power_through.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,39" />
-      <HauptBild
-          Name="predator"
-          Schreibname="predator"
-          Identifier="predator.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\predator.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="pummel"
-          Schreibname="pummel"
-          Identifier="pummel.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\pummel.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Puresteel-Paladin-Mtg-Art"
-          Schreibname="Puresteel-Paladin-Mtg-Art"
-          Identifier="Puresteel Paladin Mtg Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Puresteel Paladin Mtg Art.jpg"
-          Size_X="63"
-          Size_Y="46,053"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="quick_slash"
-          Schreibname="quick_slash"
-          Identifier="quick_slash.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\quick_slash.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="rampage"
-          Schreibname="rampage"
-          Identifier="rampage.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\rampage.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,37" />
-      <HauptBild
-          Name="reaper"
-          Schreibname="reaper"
-          Identifier="reaper.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\reaper.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="reckless_charge"
-          Schreibname="reckless_charge"
-          Identifier="reckless_charge.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\reckless_charge.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="riddle_with_holes"
-          Schreibname="riddle_with_holes"
-          Identifier="riddle_with_holes.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\riddle_with_holes.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="ritual_dagger"
-          Schreibname="ritual_dagger"
-          Identifier="ritual_dagger.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\ritual_dagger.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Ruthless-Ripper-MtG-Art"
-          Schreibname="Ruthless-Ripper-MtG-Art"
-          Identifier="Ruthless Ripper MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Ruthless Ripper MtG Art.jpg"
-          Size_X="55"
-          Size_Y="38,65715"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="Sagu-Archer-MtG-Artwork"
-          Schreibname="Sagu-Archer-MtG-Artwork"
-          Identifier="Sagu Archer MtG Artwork.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Sagu Archer MtG Artwork.jpg"
-          Size_X="63"
-          Size_Y="49,21875"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="scrape"
-          Schreibname="scrape"
-          Identifier="scrape.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\scrape.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Screamreach-Brawler-Dragons-of-Tarkir-MtG-Art"
-          Schreibname="Screamreach-Brawler-Dragons-of-Tarkir-MtG-Art"
-          Identifier="Screamreach Brawler Dragons of Tarkir MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Screamreach Brawler Dragons of Tarkir MtG Art.jpg"
-          Size_X="55"
-          Size_Y="40,21938"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HauptBild
-          Name="Scrounged-Scythe-Shadows-over-Innistrad-Art"
-          Schreibname="Scrounged-Scythe-Shadows-over-Innistrad-Art"
-          Identifier="Scrounged Scythe Shadows over Innistrad Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Scrounged Scythe Shadows over Innistrad Art.jpg"
-          Size_X="63"
-          Size_Y="47,47551"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="searing_blow"
-          Schreibname="searing_blow"
-          Identifier="searing_blow.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\searing_blow.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="second_wind"
-          Schreibname="second_wind"
-          Identifier="second_wind.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\second_wind.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="sever_soul"
-          Schreibname="sever_soul"
-          Identifier="sever_soul.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\sever_soul.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Shadow-Alley-Denizen-MtG-Art"
-          Schreibname="Shadow-Alley-Denizen-MtG-Art"
-          Identifier="Shadow Alley Denizen MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Shadow Alley Denizen MtG Art.jpg"
-          Size_X="63"
-          Size_Y="46,0625"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="shiv"
-          Schreibname="shiv"
-          Identifier="shiv.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\shiv.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="skewer"
-          Schreibname="skewer"
-          Identifier="skewer.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\skewer.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Skillful-Lunge-Art"
-          Schreibname="Skillful-Lunge-Art"
-          Identifier="Skillful Lunge Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Skillful Lunge Art.jpg"
-          Size_X="63"
-          Size_Y="47,25"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Slaughter-Games-Art"
-          Schreibname="Slaughter-Games-Art"
-          Identifier="Slaughter Games Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Slaughter Games Art.jpg"
-          Size_X="63"
-          Size_Y="45,7258"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="slice"
-          Schreibname="slice"
-          Identifier="slice.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\slice.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="sneaky_strike"
-          Schreibname="sneaky_strike"
-          Identifier="sneaky_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\sneaky_strike.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
       <HauptBild
           Name="Standard"
           Schreibname="Standard"
           Unzerstorbar="True"
           Identifier="Standard"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Standard"
+          FilePath="Bilder\HauptBilder\Standard"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
           Zentrum_Y="0,25" />
       <HauptBild
-          Name="Steel-of-the-Godhead-MtG-Art"
-          Schreibname="Steel-of-the-Godhead-MtG-Art"
-          Identifier="Steel of the Godhead MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Steel of the Godhead MtG Art.jpg"
-          Size_X="63"
-          Size_Y="46,0274"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="strike"
-          Schreibname="strike"
-          Identifier="strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\strike.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="strike_2"
-          Schreibname="strike"
-          Identifier="strike_2.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\strike_2.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="strike_3"
-          Schreibname="strike"
-          Identifier="strike_3.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\strike_3.png"
+          Name="sword-in-action"
+          Schreibname="sword-in-action"
+          Identifier="sword-in-action.jpg"
+          FilePath="Bilder\HauptBilder\sword-in-action.jpg"
           Size_X="58"
           Size_Y="44,08"
           Zentrum_X="0,5"
           Zentrum_Y="0,37" />
       <HauptBild
-          Name="sucker_punch"
-          Schreibname="sucker_punch"
-          Identifier="sucker_punch.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\sucker_punch.png"
-          Size_X="57"
-          Size_Y="43,32"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,36" />
-      <HauptBild
-          Name="swift_strike"
-          Schreibname="swift_strike"
-          Identifier="swift_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\swift_strike.png"
+          Name="taking-cover"
+          Schreibname="taking-cover"
+          Identifier="taking cover.jpg"
+          FilePath="Bilder\HauptBilder\taking-cover.jpg"
           Size_X="63"
-          Size_Y="47,88"
+          Size_Y="63"
           Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="sword_boomerang"
-          Schreibname="sword_boomerang"
-          Identifier="sword_boomerang.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\sword_boomerang.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="thunder_clap"
-          Schreibname="thunder_clap"
-          Identifier="thunder_clap.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\thunder_clap.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="twin_strike"
-          Schreibname="twin_strike"
-          Identifier="twin_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\twin_strike.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="unload"
-          Schreibname="unload"
-          Identifier="unload.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\unload.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="uppercut"
-          Schreibname="uppercut"
-          Identifier="uppercut.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\uppercut.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="Wandering-Champion-Fate-Reforged-MtG-Art"
-          Schreibname="Wandering-Champion-Fate-Reforged-MtG-Art"
-          Identifier="Wandering Champion Fate Reforged MtG Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\Wandering Champion Fate Reforged MtG Art.jpg"
-          Size_X="63"
-          Size_Y="46,03846"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="warcry"
-          Schreibname="warcry"
-          Identifier="warcry.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\warcry.png"
-          Size_X="63"
-          Size_Y="47,88"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="War-Priest-of-Thune-Art"
-          Schreibname="War-Priest-of-Thune-Art"
-          Identifier="War Priest of Thune Art.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\War Priest of Thune Art.jpg"
-          Size_X="63"
-          Size_Y="46,06875"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,25" />
-      <HauptBild
-          Name="whirlwind"
-          Schreibname="whirlwind"
-          Identifier="whirlwind.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\whirlwind.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,4" />
-      <HauptBild
-          Name="wild_strike"
-          Schreibname="wild_strike"
-          Identifier="wild_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\wild_strike.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
-      <HauptBild
-          Name="wild_strike_2"
-          Schreibname="wild_strike"
-          Identifier="wild_strike.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HauptBilder\wild_strike.png"
-          Size_X="60"
-          Size_Y="45,6"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,35" />
+          Zentrum_Y="0,37" />
     </Hauptbilder>
     <Hintergrundbilder
         Name="Standard"
         Schreibname="Standard"
-        Standard="Standard">
-      <HintergrundBild
-          Name="Alchemie"
-          Schreibname="Alchemie"
-          Identifier="Alchemie.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Alchemie.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
+        Standard="AngriffAktion">
       <HintergrundBild
           Name="AlchemieAktion"
           Schreibname="AlchemieAktion"
           Identifier="AlchemieAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\AlchemieAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="AlchemieAktion2"
-          Schreibname="AlchemieAktion2"
-          Identifier="AlchemieAktion2.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\AlchemieAktion2.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Angriff"
-          Schreibname="Angriff"
-          Identifier="Angriff.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Angriff.Png"
+          FilePath="Bilder\HintergrundBilder\AlchemieAktion.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4205,26 +1306,8 @@
       <HintergrundBild
           Name="AngriffAktion"
           Schreibname="AngriffAktion"
-          Identifier="AngriffAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\AngriffAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="AngriffVerteidigungAktion"
-          Schreibname="AngriffVerteidigungAktion"
-          Identifier="AngriffVerteidigungAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\AngriffVerteidigungAktion.png"
-          Size_X="63"
-          Size_Y="89,08065"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Arkanzauber"
-          Schreibname="Arkanzauber"
-          Identifier="Arkanzauber.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Arkanzauber.Png"
+          Identifier="AngriffAktion.Png"
+          FilePath="Bilder\HintergrundBilder\AngriffAktion.Png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4233,124 +1316,7 @@
           Name="ArkanZauberAktion"
           Schreibname="ArkanZauberAktion"
           Identifier="ArkanZauberAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\ArkanZauberAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="AssassineTalent"
-          Schreibname="AssassineTalent"
-          Identifier="AssassineTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\AssassineTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="AssassineTalentRahmen"
-          Schreibname="AssassineTalentRahmen"
-          Identifier="AssassineTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\AssassineTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="BarbarTalent"
-          Schreibname="BarbarTalent"
-          Identifier="BarbarTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\BarbarTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="BarbarTalentRahmen"
-          Schreibname="BarbarTalentRahmen"
-          Identifier="BarbarTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\BarbarTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="BlutmagierTalent"
-          Schreibname="BlutmagierTalent"
-          Identifier="BlutmagierTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\BlutmagierTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="BlutMagierTalentRahmen"
-          Schreibname="BlutMagierTalentRahmen"
-          Identifier="BlutMagierTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\BlutMagierTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Blutzauber"
-          Schreibname="Blutzauber"
-          Identifier="Blutzauber.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Blutzauber.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="BlutZauberAktion"
-          Schreibname="BlutZauberAktion"
-          Identifier="BlutZauberAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\BlutZauberAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="DruideTalent"
-          Schreibname="DruideTalent"
-          Identifier="DruideTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\DruideTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="DruideTalentRahmen"
-          Schreibname="DruideTalentRahmen"
-          Identifier="DruideTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\DruideTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Elementarzauber"
-          Schreibname="Elementarzauber"
-          Identifier="Elementarzauber.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Elementarzauber.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="ElementarZauberAktion"
-          Schreibname="ElementarZauberAktion"
-          Identifier="ElementarZauberAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\ElementarZauberAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="EpischGegenstandRahmen"
-          Schreibname="EpischGegenstandRahmen"
-          Identifier="EpischGegenstandRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\EpischGegenstandRahmen.png"
+          FilePath="Bilder\HintergrundBilder\ArkanZauberAktion.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4358,288 +1324,17 @@
       <HintergrundBild
           Name="Gegenstand"
           Schreibname="Gegenstand"
-          Identifier="Gegenstand.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Gegenstand.Png"
+          Identifier="GegenstandRahmen.Png"
+          FilePath="Bilder\HintergrundBilder\GegenstandRahmen.Png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
           Zentrum_Y="0,5" />
       <HintergrundBild
-          Name="GegenstandEpisch"
-          Schreibname="GegenstandEpisch"
-          Identifier="GegenstandEpisch.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\GegenstandEpisch.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="GegenstandRahmen"
-          Schreibname="GegenstandRahmen"
-          Identifier="GegenstandRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\GegenstandRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="GegenstandVerflucht"
-          Schreibname="GegenstandVerflucht"
-          Identifier="GegenstandVerflucht.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\GegenstandVerflucht.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="HexerTalent"
-          Schreibname="HexerTalent"
-          Identifier="HexerTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\HexerTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="HexerTalentRahmen"
-          Schreibname="HexerTalentRahmen"
-          Identifier="HexerTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\HexerTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="KampfmagierTalent"
-          Schreibname="KampfmagierTalent"
-          Identifier="KampfmagierTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\KampfmagierTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="KampfmagierTalentRahmen"
-          Schreibname="KampfmagierTalentRahmen"
-          Identifier="KampfmagierTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\KampfmagierTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="MagierTalent"
-          Schreibname="MagierTalent"
-          Identifier="MagierTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\MagierTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="MagierTalentRahmen"
-          Schreibname="MagierTalentRahmen"
-          Identifier="MagierTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\MagierTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Naturzauber"
-          Schreibname="Naturzauber"
-          Identifier="Naturzauber.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Naturzauber.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="NaturZauberAktion"
-          Schreibname="NaturZauberAktion"
-          Identifier="NaturZauberAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\NaturZauberAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="PaladinTalent"
-          Schreibname="PaladinTalent"
-          Identifier="PaladinTalent.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\PaladinTalent.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="PaladinTalentRahmen"
-          Schreibname="PaladinTalentRahmen"
-          Identifier="PaladinTalentRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\PaladinTalentRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Ritual"
-          Schreibname="Ritual"
-          Identifier="Ritual.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Ritual.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="RitusTalent"
-          Schreibname="RitusTalent"
-          Identifier="RitusTalent.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\RitusTalent.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Schurkerei"
-          Schreibname="Schurkerei"
-          Identifier="Schurkerei.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Schurkerei.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="SchurkereiAktion"
-          Schreibname="SchurkereiAktion"
-          Identifier="SchurkereiAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\SchurkereiAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Segenzauber"
-          Schreibname="Segenzauber"
-          Identifier="Segenzauber.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Segenzauber.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="SegenZauberAktion"
-          Schreibname="SegenZauberAktion"
-          Identifier="SegenZauberAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\SegenZauberAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Standard"
-          Schreibname="Standard"
-          Unzerstorbar="True"
-          Identifier="Standard"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Standard"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Standardadktion"
-          Schreibname="Standardadktion"
-          Identifier="Standardadktion.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Standardadktion.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="StandardAktionRahmen"
-          Schreibname="StandardAktionRahmen"
-          Identifier="StandardAktionRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\StandardAktionRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="StandardTalent"
-          Schreibname="StandardTalent"
-          Identifier="StandardTalent.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\StandardTalent.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="TalentStandard"
-          Schreibname="TalentStandard"
-          Identifier="TalentStandard.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\TalentStandard.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="VerfluchtGegenstandRahmen"
-          Schreibname="VerfluchtGegenstandRahmen"
-          Identifier="VerfluchtGegenstandRahmen.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\VerfluchtGegenstandRahmen.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Verteidigung"
-          Schreibname="Verteidigung"
-          Identifier="Verteidigung.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Verteidigung.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Verteidigung1Aktion"
-          Schreibname="Verteidigung1Aktion"
-          Identifier="Verteidigung1Aktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Verteidigung1Aktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Wunderzauber"
-          Schreibname="Wunderzauber"
-          Identifier="Wunderzauber.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Wunderzauber.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="WunderzauberAktion"
-          Schreibname="WunderzauberAktion"
-          Identifier="WunderzauberAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\WunderzauberAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="ZaubertrickAktion"
-          Schreibname="ZaubertrickAktion"
-          Identifier="ZaubertrickAktion.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\ZaubertrickAktion.png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <HintergrundBild
-          Name="Zaubetrick"
-          Schreibname="Zaubetrick"
-          Identifier="Zaubetrick.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\HintergrundBilder\Zaubetrick.Png"
+          Name="VerteidigungAktion"
+          Schreibname="VerteidigungAktion"
+          Identifier="Verteidigung2Aktion.png"
+          FilePath="Bilder\HintergrundBilder\Verteidigung2Aktion.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4648,14 +1343,13 @@
     <Rückseitenbilder
         Name="Standard"
         Schreibname="Standard"
-        Standard="Ruckseite Rot">
+        Standard="Ruckseite">
       <RuckseitenBild
-          Name="Ruckseite Rot"
-          Schreibname="Ruckseite Rot"
+          Name="Ruckseite"
+          Schreibname="Ruckseite"
           Unzerstorbar="True"
-          Identifier="Ruckseite Rot.jpg"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\RuckseitenBilder\Ruckseite Rot.jpg"
-          Artist="Ulrich Pirling"
+          Identifier="Ruckseite"
+          FilePath="Bilder\RuckseitenBilder\Ruckseite"
           Size_X="63"
           Size_Y="89,12298"
           Zentrum_X="0,5"
@@ -4664,45 +1358,12 @@
     <Textbilder
         Name="Standard"
         Schreibname="Standard"
-        Standard="Daumen Oben">
+        Standard="E1">
       <TextBild
-          Name="Daumen Oben"
-          Schreibname="Daumen Oben"
-          Unzerstorbar="True"
-          Identifier="Daumen Oben.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\Daumen Oben.png"
-          Artist="Rüstü"
-          Size_X="5"
-          Size_Y="5"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="Daumen Quer"
-          Schreibname="Daumen Quer"
-          Unzerstorbar="True"
-          Identifier="Daumen Quer.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\Daumen Quer.png"
-          Artist="Rüstü"
-          Size_X="5"
-          Size_Y="5"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="Daumen Unten"
-          Schreibname="Daumen Unten"
-          Unzerstorbar="True"
-          Identifier="Daumen Unten.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\Daumen Unten.png"
-          Artist="Rüstü"
-          Size_X="5"
-          Size_Y="5"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E0"
-          Schreibname="E0"
-          Identifier="E0.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E0.Png"
+          Name="Goldkosten"
+          Schreibname="Goldkosten"
+          Identifier="Goldkosten.png"
+          FilePath="Bilder\TextBilder\Goldkosten.png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4711,34 +1372,7 @@
           Name="E1"
           Schreibname="E1"
           Identifier="E1.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E1.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E10"
-          Schreibname="E10"
-          Identifier="E10.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E10.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E11"
-          Schreibname="E11"
-          Identifier="E11.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E11.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E12"
-          Schreibname="E12"
-          Identifier="E12.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E12.Png"
+          FilePath="Bilder\TextBilder\E1.Png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4747,7 +1381,7 @@
           Name="E2"
           Schreibname="E2"
           Identifier="E2.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E2.Png"
+          FilePath="Bilder\TextBilder\E2.Png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4756,79 +1390,7 @@
           Name="E3"
           Schreibname="E3"
           Identifier="E3.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E3.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E4"
-          Schreibname="E4"
-          Identifier="E4.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E4.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E5"
-          Schreibname="E5"
-          Identifier="E5.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E5.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E6"
-          Schreibname="E6"
-          Identifier="E6.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E6.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E7"
-          Schreibname="E7"
-          Identifier="E7.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E7.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E8"
-          Schreibname="E8"
-          Identifier="E8.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E8.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="E9"
-          Schreibname="E9"
-          Identifier="E9.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\E9.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="EX"
-          Schreibname="EX"
-          Identifier="EX.Png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\EX.Png"
-          Size_X="63"
-          Size_Y="89,1"
-          Zentrum_X="0,5"
-          Zentrum_Y="0,5" />
-      <TextBild
-          Name="Goldkosten"
-          Schreibname="Goldkosten"
-          Identifier="Goldkosten.png"
-          FilePath="C:\GitHub\TowerOfTheVampireLord\Karten\Bilder\TextBilder\Goldkosten.png"
+          FilePath="Bilder\TextBilder\E3.Png"
           Size_X="63"
           Size_Y="89,1"
           Zentrum_X="0,5"
@@ -4875,26 +1437,53 @@
           TitelArt="Rund"
           HintergrundBild="AngriffAktion"
           HintergrundBildQuer="AngriffAktion"
-          RuckseitenBild="Ruckseite Rot"
+          RuckseitenBild="Ruckseite"
           TextBild="Daumen Oben"
           RuckArt="Normal" />
       <Fraktion
-          Name="Angriff, Verteidigung"
-          Schreibname="Angriff, Verteidigung"
+          Name="Verteidigung"
+          Schreibname="Verteidigung"
           TitelArt="Rund"
-          HintergrundBild="AngriffVerteidigungAktion"
-          HintergrundBildQuer="AngriffVerteidigungAktion"
-          RuckseitenBild="Ruckseite Rot"
+          HintergrundBild="VerteidigungAktion"
+          HintergrundBildQuer="VerteidigungAktion"
+          RuckseitenBild="Ruckseite"
+          TextBild="Daumen Oben"
+          RuckArt="Normal" />
+      <Fraktion
+           Name="Zauber"
+           Schreibname="Zauber"
+           TitelArt="Rund"
+           HintergrundBild="ArkanZauberAktion"
+           HintergrundBildQuer="ArkanZauberAktion"
+           RuckseitenBild="Ruckseite"
+           TextBild="Daumen Oben"
+           RuckArt="Normal" />
+      <Fraktion
+          Name="Alchemie"
+          Schreibname="Alchemie"
+          TitelArt="Rund"
+          HintergrundBild="AlchemieAktion"
+          HintergrundBildQuer="AlchemieAktion"
+          RuckseitenBild="Ruckseite"
+          TextBild="Daumen Oben"
+          RuckArt="Normal" />
+      <Fraktion
+          Name="Gegenstand"
+          Schreibname="Gegenstand"
+          TitelArt="Rund"
+          HintergrundBild="Gegenstand"
+          HintergrundBildQuer="Gegenstand"
+          RuckseitenBild="Ruckseite"
           TextBild="Daumen Oben"
           RuckArt="Normal" />
     </Fraktionen>
     <Gesinnungen
         Name="Standard"
         Schreibname="Standard"
-        Standard="Rechtschaffen Gut">
+        Standard="Standard">
       <Gesinnung
-          Name="Rechtschaffen Gut"
-          Schreibname="Rechtschaffen Gut"
+          Name="Standard"
+          Schreibname="Standard"
           Unzerstorbar="True" />
     </Gesinnungen>
     <Karten
@@ -4902,579 +1491,95 @@
         Schreibname="Standard"
         Standard="Zuschlagen">
       <Karte
-          Name="Ansturm"
-          Schreibname="Ansturm"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Laufe bis zu \d3\d Felder.&#xD;&#xA;Füge \d1W6\d Schaden zu."
-          HauptBild="Battlewise-Hoplite-Art"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Bannschlag"
-          Schreibname="Bannschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Banne \dalle\d magischen Effekte, die auf dem Ziel liegen.&#xD;&#xA;Füge \d1W6 \cffc0c0c0Silberschaden\d\s zu."
-          HauptBild="flash_of_steel"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Befreiungsschlag"
-          Schreibname="Befreiungsschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;Du ignorierst Nahkampfbindung für eine Runde und bist nicht mehr gefangen.&#xD;&#xA;"
-          HauptBild="rampage"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Blitzschlag"
-          Schreibname="Blitzschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;"
-          HauptBild="anger"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E1::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Brutaler Schlag"
-          Schreibname="Brutaler Schlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;+\d1\d Wunde.&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;"
-          HauptBild="eviscerate"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Brutaler Schlag+"
-          Schreibname="Brutaler Schlag+"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;+\d2\d Wunde.&#xD;&#xA;Füge \d1W10\d Schaden zu.&#xD;&#xA;"
-          HauptBild="eviscerate"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Durchbohren"
-          Schreibname="Durchbohren"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA; &#xD;&#xA;Dieser Angriff ignoriert den Block des Ziels"
-          HauptBild="dagger_spray"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Fernkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Fataler Angriff"
-          Schreibname="Fataler Angriff"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Werfe \dX\d Karten ab.&#xD;&#xA;Füge \d1W10 + X\d Schaden zu.&#xD;&#xA;"
-          HauptBild="Ruthless-Ripper-MtG-Art"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Faustschlag"
-          Schreibname="Faustschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oNahkampf.\s&#xD;&#xA;\oBetäubt.\s&#xD;&#xA;Füge \d1\d Schaden zu.&#xD;&#xA;"
-          HauptBild="sucker_punch"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E1::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Gewiefter Angriff"
-          Schreibname="Gewiefter Angriff"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Spiele die oberste Karte Deines Ziehstapels, ohne ihre Energiekosten zu bezahlen, und \derschöpfe\d sie nach Ablauf ihres Effekts.&#xD;&#xA; &#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="wild_strike"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Kleiner_14"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Glückstreffer"
-          Schreibname="Glückstreffer"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oKritisch.\s&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;\oErschöpft.\s"
-          HauptBild="bludgeon"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Hinrichten"
-          Schreibname="Hinrichten"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;+\d1\d Wunde.&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="Act-of-Treason-MtG-Art"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Knaufschlag"
-          Schreibname="Knaufschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Ziehe \deine\d Karte.&#xD;&#xA;Werfe \deine\d Karte ab.&#xD;&#xA;Füge \d1W6\d Schaden zu."
-          HauptBild="pommel_strike"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Knaufschlag+"
-          Schreibname="Knaufschlag+"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Ziehe \deine\d Karte.&#xD;&#xA;Füge \d1W6\d Schaden zu."
-          HauptBild="pommel_strike"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Knaufschlag++"
-          Schreibname="Knaufschlag++"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Ziehe \deine\d Karte.&#xD;&#xA;Füge \d1W10\d Schaden zu."
-          HauptBild="pommel_strike"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Kritischer Schlag"
-          Schreibname="Kritischer Schlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oKritisch.\s&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="bash"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Miese Tricks"
-          Schreibname="Miese Tricks"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oWahnsinn.\s&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;"
-          HauptBild="finte_strike"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Miese Tricks+"
-          Schreibname="Miese Tricks+"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oWahnsinn.\s&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="finte_strike"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Miese Tricks++"
-          Schreibname="Miese Tricks++"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oWahnsinn.\s&#xD;&#xA;Füge \d1W10\d Schaden zu.&#xD;&#xA;"
-          HauptBild="finte_strike"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Parade"
-          Schreibname="Parade"
-          Fraktion="Angriff, Verteidigung"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;Erhalte \d3\d Block."
-          HauptBild="clash"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz_10"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Parade+"
-          Schreibname="Parade+"
-          Fraktion="Angriff, Verteidigung"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;Erhalte \d4\d Block."
-          HauptBild="clash"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz_10"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Parade++"
-          Schreibname="Parade++"
-          Fraktion="Angriff, Verteidigung"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W10\d Schaden zu.&#xD;&#xA;Erhalte \d5\d Block."
-          HauptBild="clash"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz_10"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Rundumschlag"
-          Schreibname="Rundumschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \dallen\d Gegnern in Reichweite \d1W6\d Schaden zu.&#xD;&#xA;"
-          HauptBild="whirlwind"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Rundumschlag+"
-          Schreibname="Rundumschlag+"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \dallen\d Gegnern in Reichweite \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="whirlwind"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Rundumschlag++"
-          Schreibname="Rundumschlag++"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \dallen\d Gegnern in Reichweite \d1W10\d Schaden zu.&#xD;&#xA;"
-          HauptBild="whirlwind"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Rüstungswucht"
-          Schreibname="Rüstungswucht"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge Schaden in Höhe Deines Blockwertes zu.&#xD;&#xA;"
-          HauptBild="body_slam"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Effekt="Schild"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Triumphschlag"
-          Schreibname="Triumphschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oKritisch.\s&#xD;&#xA;Füge \d1W20\d Schaden zu.&#xD;&#xA;Falls Du durch diesen Angriff einen Gegner tötest, erhältst Du \d5\d Energiepunkte zurück.&#xD;&#xA;"
-          HauptBild="Doom-Blade-MtG-Art"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E7::"
-          Effekt="Waffe"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Verzweifelter Angriff"
-          Schreibname="Verzweifelter Angriff"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oKritisch.\s&#xD;&#xA;Werfe \deine\d Karte ab.&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="blood_for_blood"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Wie Aus dem Lehrbuch"
-          Schreibname="Wie Aus dem Lehrbuch"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;\oKritisch.\s&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;Alle weiteren Angriffe in diesem Zug sind \dkritisch\d.&#xD;&#xA;"
-          HauptBild="perfected_strike"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Wilde Attacke"
-          Schreibname="Wilde Attacke"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Werfe \deine\d Karte ab.&#xD;&#xA;Füge \d1W8\d Schaden zu.&#xD;&#xA;"
-          HauptBild="reckless_charge"
-          HintergrundDarstellung="Common"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Wilde Attacke+"
-          Schreibname="Wilde Attacke+"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Werfe \deine\d Karte ab.&#xD;&#xA;Füge \d1W10\d Schaden zu.&#xD;&#xA;"
-          HauptBild="reckless_charge"
-          HintergrundDarstellung="Uncommon"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Wilde Attacke++"
-          Schreibname="Wilde Attacke++"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Werfe \deine\d Karte ab.&#xD;&#xA;Füge \d1W12\d Schaden zu.&#xD;&#xA;"
-          HauptBild="reckless_charge"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Standard"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E3::"
-          Modus="AlchemieKarte" />
-      <Karte
-          Name="Zauberschlag"
-          Schreibname="Zauberschlag"
-          Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
-          Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W10\d Schaden zu.&#xD;&#xA;Wirke eine Zauberkarte aus Deiner Hand auf Dein Ziel, ohne die Energiekosten des Zaubers zu bezahlen.&#xD;&#xA;\dErschöpfe\d den Zauber danach."
-          HauptBild="Screamreach-Brawler-Dragons-of-Tarkir-MtG-Art"
-          HintergrundDarstellung="Rare"
-          TextDarstellung="Kleiner_14"
-          TitelDarstellung="WeißAufSchwarz"
-          InfoDarstellung="WeißAufSchwarz"
-          BildDarstellung="Standard"
-          LayoutDarstellung="Standard"
-          Kosten="::E4::"
-          Effekt="Nahkampfwaffe"
-          Modus="AlchemieKarte" />
-      <Karte
           Name="Zuschlagen"
           Schreibname="Zuschlagen"
           Unzerstorbar="True"
           Fraktion="Angriff"
-          Gesinnung="Rechtschaffen Gut"
+          Gesinnung="Standard"
           Aufgaben="\m0,5f&#xD;&#xA;Füge \d1W6\d Schaden zu.&#xD;&#xA;"
-          HauptBild="strike_3"
-          HintergrundDarstellung="Common"
+          HauptBild="sword-in-action"
+          HintergrundDarstellung="Standard"
+          TextDarstellung="Standard"
+          TitelDarstellung="WeißAufSchwarz"
+          InfoDarstellung="WeißAufSchwarz"
+          BildDarstellung="Standard"
+          LayoutDarstellung="Standard"
+          Kosten="::E1::"
+          Modus="AlchemieKarte" />
+      <Karte
+          Name="Verteidigen"
+          Schreibname="Verteidigen"
+          Fraktion="Verteidigung"
+          Gesinnung="Standard"
+          Aufgaben="\m0,5f&#xD;&#xA;Erhalte \d3\d Block.&#xD;&#xA;"
+          HauptBild="taking-cover"
+          HintergrundDarstellung="Standard"
+          TextDarstellung="Standard"
+          TitelDarstellung="WeißAufSchwarz"
+          InfoDarstellung="WeißAufSchwarz"
+          BildDarstellung="Standard"
+          LayoutDarstellung="Standard"
+          Kosten="::E1::"
+          Modus="AlchemieKarte" />
+      <Karte
+          Name="Feuerball"
+          Schreibname="Feuerball"
+          Fraktion="Zauber"
+          Gesinnung="Standard"
+          Aufgaben="\m0,5f&#xD;&#xA;Füge \d10 \rFeuerschaden\s\d zu.&#xD;&#xA;"
+          HauptBild="fireball"
+          HintergrundDarstellung="Standard"
           TextDarstellung="Standard"
           TitelDarstellung="WeißAufSchwarz"
           InfoDarstellung="WeißAufSchwarz"
           BildDarstellung="Standard"
           LayoutDarstellung="Standard"
           Kosten="::E3::"
+          Modus="AlchemieKarte" />
+      <Karte
+          Name="Langschwert"
+          Schreibname="Langschwert"
+          Fraktion="Gegenstand"
+          Gesinnung="Standard"
+          Aufgaben="\m0,5f&#xD;&#xA;\d+1\d Schaden auf Angriffe.&#xD;&#xA;"
+          HauptBild="long-sword"
+          HintergrundDarstellung="Standard"
+          TextDarstellung="Standard"
+          TitelDarstellung="WeißAufSchwarz"
+          InfoDarstellung="WeißAufSchwarz"
+          BildDarstellung="Standard"
+          LayoutDarstellung="Standard"
+          Kosten=""
+          Modus="AlchemieKarte" />
+      <Karte
+          Name="Heiltrank"
+          Schreibname="Heiltrank"
+          Fraktion="Alchemie"
+          Gesinnung="Standard"
+          Aufgaben="\m0,5f&#xD;&#xA;Heile \d10\d Lebenspunkte.&#xD;&#xA;"
+          HauptBild="potion"
+          HintergrundDarstellung="Standard"
+          TextDarstellung="Standard"
+          TitelDarstellung="WeißAufSchwarz"
+          InfoDarstellung="WeißAufSchwarz"
+          BildDarstellung="Standard"
+          LayoutDarstellung="Standard"
+          Kosten="::E1::"
           Modus="AlchemieKarte" />
     </Karten>
     <Decks
         Name="Standard"
         Schreibname="Standard"
-        Standard="Alle Angriffe">
+        Standard="Standard Deck">
       <Deck
-          Name="Alle Angriffe"
-          Schreibname="Alle Angriffe"
-          Unzerstorbar="True">
-        1 Ansturm
-        1 Bannschlag
-        1 Befreiungsschlag
-        1 Blitzschlag
-        1 Brutaler Schlag
-        1 Brutaler Schlag+
-        1 Durchbohren
-        1 Fataler Angriff
-        1 Faustschlag
-        1 Gewiefter Angriff
-        1 Glückstreffer
-        1 Hinrichten
-        1 Knaufschlag
-        1 Knaufschlag+
-        1 Knaufschlag++
-        1 Kritischer Schlag
-        1 Miese Tricks
-        1 Miese Tricks+
-        1 Miese Tricks++
-        1 Parade
-        1 Parade+
-        1 Parade++
-        1 Rundumschlag
-        1 Rundumschlag+
-        1 Rundumschlag++
-        1 Rüstungswucht
-        1 Triumphschlag
-        1 Verzweifelter Angriff
-        1 Wie Aus dem Lehrbuch
-        1 Wilde Attacke
-        1 Wilde Attacke+
-        1 Wilde Attacke++
-        1 Zauberschlag
+          Name="Standard Deck"
+          Schreibname="Standard Deck"
+          Unzerstorbar="True" >
         1 Zuschlagen
+        1 Heiltrank
+        1 Verteidigen
+        1 Feuerball
+        1 Langschwert
       </Deck>
     </Decks>
   </Universe>
