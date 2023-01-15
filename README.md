@@ -28,6 +28,11 @@ Both examples look better when used with more suitable fonts (like Exocet or the
 To use the software just unpack the release and start
 WerwolfProgram.exe directly.
 
+## Coding
+If you want to work with the source code of this project, note that you also
+need to download the source codes of [EBookCrawler](https://github.com/Semigroup/EBookCrawler),
+[MagicCrawler](https://github.com/Semigroup/MagicCrawler) and [Assistment](https://github.com/Semigroup/Assistment)
+and add them to your project.
 
 ## Image Rights
 The image files bloody-werwolf.jpg, fireball.jpg, long-sword.jpg, peasant.jpg, potion.jpg,
