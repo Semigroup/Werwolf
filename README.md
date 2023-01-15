@@ -14,6 +14,7 @@ Alternatively, you can directly render your cards tom image files of arbitrarily
 
 When changing properties of cards (name, rules text, layout, background image, ...) those changes will be directly
 rendered, which allows for precise and fine-grained design operations.
+Additionally, all images files used by this software can be exchanged and extended by other images, which allows for total design changes depending on the kind of game you want to create.
 
 ![Example usage when generating new cards.](images/usage_tt_rpg.gif)
 
