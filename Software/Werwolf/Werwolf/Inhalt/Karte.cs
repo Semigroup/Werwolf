@@ -88,19 +88,61 @@ namespace Werwolf.Inhalt
 
         public enum KartenModus
         {
+            /// <summary>
+            /// old werwolf style
+            /// </summary>
             Werwolfkarte = 0x1,
+            /// <summary>
+            /// Dreamers-and-Wargers-Agency style
+            /// </summary>
             AktionsKarte = 0x2,
+            /// <summary>
+            /// card for 7Wonders mod
+            /// </summary>
             WondersKarte = 0x4,
+            /// <summary>
+            /// domain card for 7Wonders mod
+            /// </summary>
             WondersReichKarte = 0x8,
+            /// <summary>
+            /// global project card for 7Wonders mod
+            /// </summary>
             WonderGlobalesProjekt = 0x10,
+            /// <summary>
+            /// select domain card for 7Wonders mod
+            /// </summary>
             WondersAuswahlKarte = 0x20,
+            /// <summary>
+            /// item card for cyber sage
+            /// </summary>
             CyberWaffenKarte = 0x40,
+            /// <summary>
+            /// action card for cyber sage
+            /// </summary>
             CyberSupportKarte = 0x80,
+            /// <summary>
+            /// spell card for cyber sage
+            /// </summary>
             CyberHackKarte = 0x100,
+            /// <summary>
+            /// modern werwolf style role card
+            /// </summary>
             ModernWolfKarte = 0x200,
+            /// <summary>
+            /// modern werwolf style event card
+            /// </summary>
             ModernWolfEreignisKarte = 0x400,
+            /// <summary>
+            /// modern werwolf style sign card
+            /// </summary>
             ModernWolfZeichenKarte = 0x800,
+            /// <summary>
+            /// simple mode for making TT-RPG figures
+            /// </summary>
             RollenspielFigur = 0x1000,
+            /// <summary>
+            /// Action card for TT-RPG
+            /// </summary>
             AlchemieKarte = 0x2000,
         }
         public KartenModus Modus { get; set; }
