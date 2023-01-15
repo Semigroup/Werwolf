@@ -27,8 +27,11 @@ namespace Werwolf.Inhalt
             base.ReadIntern(Loader);
             //string dump = Loader.XmlReader.DumpInfo();
             string s = Loader.XmlReader.ReadString();
-            foreach (var item in s.Split("\r\n".ToArray(), StringSplitOptions.RemoveEmptyEntries))
+            foreach (var line in s.Split("\r\n".ToArray(), StringSplitOptions.RemoveEmptyEntries))
             {
+                var item = line.Trim();
+                if (item.Length == 0)
+                    continue;
                 int i = item.IndexOf(' ');
                 int n = int.Parse(item.Substring(0, i));
                 string name = item.Substring(i + 1, item.Length - i - 1);
