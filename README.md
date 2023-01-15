@@ -1,9 +1,29 @@
 # Werwolf
-A C# desktop application for creating card games.
+A C# desktop application for creating card games in German language.
 
+This appclication offers suitable templates for social deduction games (like Werwolf)
+and for card sets for tabletop-roleplaying games.
+However, it can also be used for cards for other kind of games.
 
-![](images/demo-tt-rpg.png)
-![](images/demo-werwolf.png)
+![Example usage when changing the rule texts of cards.](usage_werwolf.gif)
+
+This software offers a user-friendly interface for simple operations
+but also allows for complex designs and layout changes.
+
+![Example usage when generating new cards.](usage_tt_rpg.gif)
+
+After creating your cards you can generate images of your cards of arbitrary high resolution
+You can also generate pdfs with this software, which are ready to be printed.
+
+## Examples
+![Example werwolf cards generated with this software.](images/demo-werwolf.png)
+![Example action cards for a tt-rpg generated with this software.](images/demo-tt-rpg.png)
+
+Both examples look better when used with more suitable fonts (like Exocet or the Beleren font of MtG).
+
+## Usage
+To use the software just unpack the release and start
+WerwolfProgram.exe directly.
 
 
 ## Image Rights
