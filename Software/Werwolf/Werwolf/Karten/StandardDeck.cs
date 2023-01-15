@@ -47,7 +47,7 @@ namespace Werwolf.Karten
                         t.AddWort(karte.Value + "x ");
                     if (karte.Value > 0)
                     {
-                        t.AddRegex(karte.Key.Schreibname);
+                        t.AddFormat(karte.Key.Schreibname);
                         //Text.add(new StandardKarte(item.Key, Ppm));
                     }
                 }

@@ -50,7 +50,7 @@ namespace Werwolf.Inhalt
             public void AddDrawBox(DrawContainer Container)
             {
                 if (regex != null)
-                    Container.AddRegex(regex);
+                    Container.AddFormat(regex);
                 else if (Bild != null)
                     Container.Add(new WolfTextBild(Bild, Container.PreferedFont));
                 else if (Fehler)
