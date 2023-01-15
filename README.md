@@ -5,12 +5,12 @@ This appclication offers suitable templates for social deduction games (like Wer
 and for card sets for tabletop-roleplaying games.
 However, it can also be used for cards for other kind of games.
 
-![Example usage when changing the rule texts of cards.](usage_werwolf.gif)
+![Example usage when changing the rule texts of cards.](images/usage_werwolf.gif)
 
 This software offers a user-friendly interface for simple operations
 but also allows for complex designs and layout changes.
 
-![Example usage when generating new cards.](usage_tt_rpg.gif)
+![Example usage when generating new cards.](images/usage_tt_rpg.gif)
 
 After creating your cards you can generate images of your cards of arbitrary high resolution
 You can also generate pdfs with this software, which are ready to be printed.
