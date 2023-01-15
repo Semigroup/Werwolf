@@ -322,9 +322,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ressourcen\Bilder\HauptBilder\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Ressourcen\Bilder\FehlerBilder\Fehlerbild.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -335,7 +333,71 @@
     <Content Include="Ressourcen\Bilder\FehlerBilder\Nicht Gefunden.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\bloody-werwolf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Dorfbewohner.png" />
+    <Content Include="Ressourcen\Bilder\HauptBilder\fireball.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Hexe.png" />
+    <Content Include="Ressourcen\Bilder\HauptBilder\peasant.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Seher.png" />
+    <Content Include="Ressourcen\Bilder\HauptBilder\soothsayer.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\sword-in-action.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\taking-cover.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HauptBilder\Werwolf.png" />
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\AlchemieAktion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Alchemie_Bombe_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Alchemie_Oil_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Alchemie_Ritus_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Alchemie_Serum_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Amt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\AmtKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\AngriffAktion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ArkanZauberAktion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Artefakt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ArtefaktRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ArtefaktRahmen_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Besonders2RahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\BesondersRahmen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\BlutZauberAktion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\ButchHintergrund.Png">
@@ -347,19 +409,46 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Dorf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Dorf_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\DreamerHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Einzelgänger.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ElementarZauberAktion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\FaceHintergrund.Png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\FluchRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\FluchRahmen_2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Fähigkeit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Gefallen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\GefallenRahmen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\GefallenRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\GefangnisKleinRahmen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\GefangnisRahmen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\GegenstandRahmen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\GegnerHintergrund.Png">
@@ -377,28 +466,76 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Inquisition.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Inquisition2RahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\InquisitionRahmen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\MagierRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\MagierRahmen_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\MedicHintergrund.Png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\NaturZauberAktion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\PsychicHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\SegenZauberAktion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\SergeantHintergrund.Png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\TarnRahmen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Vampire.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\VampirRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Vampir_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Verfluchtes Artefakt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Verteidigung2Aktion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\WarperHintergrund.Png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\Werwolf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\WerwolfRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Werwölfe.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\WunderzauberAktion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Zauber.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ZauberRahmenKlein.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ZauberRahmen_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\HintergrundBilder\ZaubertrickAktion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\RuckseitenBilder\BlackBackside.png">
