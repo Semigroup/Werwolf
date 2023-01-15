@@ -7,13 +7,15 @@ However, it can also be used for cards for other kind of games.
 
 ![Example usage when changing the rule texts of cards.](images/usage_werwolf.gif)
 
-This software offers a user-friendly interface for simple operations
+This software has a user-friendly interface for simple operations
 but also allows for complex designs and layout changes.
+You can create games, create cards, compose decks and print your decks directly to pdf, which are ready to be printed.
+Alternatively, you can directly render your cards tom image files of arbitrarily high resolution.
+
+When changing properties of cards (name, rules text, layout, background image, ...) those changes will be directly
+rendered, which allows for precise and fine-grained design operations.
 
 ![Example usage when generating new cards.](images/usage_tt_rpg.gif)
-
-After creating your cards you can generate images of your cards of arbitrary high resolution
-You can also generate pdfs with this software, which are ready to be printed.
 
 ## Examples
 ![Example werwolf cards generated with this software.](images/demo-werwolf.png)
