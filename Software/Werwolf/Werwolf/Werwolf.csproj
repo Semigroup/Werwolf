@@ -324,7 +324,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Ressourcen\Bilder\HauptBilder\" />
-    <Folder Include="Ressourcen\Bilder\RuckseitenBilder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ressourcen\Bilder\FehlerBilder\Fehlerbild.png">
@@ -402,6 +401,9 @@
     <Content Include="Ressourcen\Bilder\HintergrundBilder\Zauber.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ressourcen\Bilder\RuckseitenBilder\BlackBackside.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Ressourcen\Bilder\TextBilder\Daumen Oben.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -409,6 +411,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Bilder\TextBilder\Daumen Unten.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\E1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\E2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\E3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ressourcen\Bilder\TextBilder\E.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Ressourcen\Settings.xml">
