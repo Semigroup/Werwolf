@@ -28,10 +28,10 @@ namespace Werwolf.Karten
 
         public Text Text { get { return (Inhalt as GeometryBox).DrawBox as Text; } }
 
-        public TitelProxy(Titel.Art Art, string regex, IFontMeasurer Font, float RandHohe, Pen RandFarbe, Brush HintergrundFarbe)
-            : base(new Text(regex, Font), RandHohe, RandFarbe, HintergrundFarbe)
+        public TitelProxy(Titel.Art Art, string regex, IFontMeasurer Font, float RandHohe, float TextHorizontalMargin, Pen RandFarbe, Brush HintergrundFarbe)
+            : base(new Text(regex, Font), RandHohe, TextHorizontalMargin, RandFarbe, HintergrundFarbe)
         {
-            Proxied = Titel.GetTitel(Art, Inhalt, RandHohe, RandFarbe, HintergrundFarbe);
+            Proxied = Titel.GetTitel(Art, Inhalt, RandHohe, TextHorizontalMargin, RandFarbe, HintergrundFarbe);
             InhaltChanged = true;
             LastRegex = regex;
             LastFont = Font;
@@ -87,6 +87,8 @@ namespace Werwolf.Karten
                 LastFont = Font;
                 InhaltChanged = true;
                 (this.Inhalt as GeometryBox).DrawBox = new Text(regex, Font);
+                (this.Inhalt as GeometryBox).LeftSpace = RandHohe + TextHorizontalMargin;
+                (this.Inhalt as GeometryBox).RightSpace = RandHohe;
                 Text.Alignment = 0.5f;
             }
         }
@@ -94,7 +96,7 @@ namespace Werwolf.Karten
         {
             if (Art != Proxied.GetArt())
             {
-                Proxied = Titel.GetTitel(Art, Inhalt, RandHohe, RandFarbe, HintergrundFarbe);
+                Proxied = Titel.GetTitel(Art, Inhalt, RandHohe, TextHorizontalMargin, RandFarbe, HintergrundFarbe);
                 InhaltChanged = true;
             }
         }

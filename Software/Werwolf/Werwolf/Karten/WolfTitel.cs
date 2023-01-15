@@ -19,6 +19,7 @@ namespace Werwolf.Karten
         private Font LastFont;
         private Titel.Art LastTitelArt;
         private float LastRandHeight;
+        private float LastRandWidth;
         private Color LastRandFarbe;
         private Color LastFarbe;
         private float LastPpm;
@@ -36,6 +37,7 @@ namespace Werwolf.Karten
                 Karte.Schreibname,
                 TitelDarstellung.FontMeasurer,
                 TitelDarstellung.Rand.Height * Faktor,
+                TitelDarstellung.Rand.Width * Faktor,
                 TitelDarstellung.RandFarbe.ToPen(Faktor / 5),
                 TitelDarstellung.Farbe.ToBrush());
             Update();
@@ -57,6 +59,7 @@ namespace Werwolf.Karten
                 && TitelDarstellung.Font.Equals(LastFont)
                 && Karte.Fraktion.TitelArt.Equals(LastTitelArt)
                 && TitelDarstellung.Rand.Height.Equals(LastRandHeight)
+                && TitelDarstellung.Rand.Width.Equals(LastRandWidth)
                 && TitelDarstellung.RandFarbe.Equals(LastRandFarbe)
                 && TitelDarstellung.Farbe.Equals(LastFarbe)
                 && Ppm.Equals(LastPpm)))
@@ -66,13 +69,15 @@ namespace Werwolf.Karten
             LastFont = TitelDarstellung.Font;
             LastTitelArt = Karte.Fraktion.TitelArt;
             LastRandHeight = TitelDarstellung.Rand.Height;
+            LastRandWidth = TitelDarstellung.Rand.Width;
             LastFarbe = TitelDarstellung.Farbe;
             LastRandFarbe = TitelDarstellung.RandFarbe;
             LastPpm = ppm;
 
             this.Titel.SetArt(Karte.Fraktion.TitelArt);
-            this.Titel.SetText(Karte.Schreibname, TitelDarstellung.FontMeasurer);
             this.Titel.RandHohe = TitelDarstellung.Rand.Height * Faktor;
+            this.Titel.TextHorizontalMargin = TitelDarstellung.Rand.Width * Faktor;
+            this.Titel.SetText(Karte.Schreibname, TitelDarstellung.FontMeasurer);
             this.Titel.RandFarbe = TitelDarstellung.RandFarbe.ToPen(Faktor / 5);
             this.Titel.HintergrundFarbe = TitelDarstellung.Farbe.ToBrush();
             this.Titel.Scaling = Ppm / Faktor;
