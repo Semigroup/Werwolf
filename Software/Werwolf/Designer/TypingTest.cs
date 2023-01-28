@@ -68,9 +68,9 @@ namespace Designer
                         {
                             int samples = Math.Max((int)(samplesPerLetter * lengths[k] / totalLength), 2);
                             PointF[] poly = arcs[k].GetPolygon(samples, 0, 1);
-                            CyberShadex.getCyberPunkDraht(poly,
+                            Shadex.getCyberPunkDraht(poly,
                                 burst, linesLinks, linesRechts, breite, radius, pen)
-                                .drawKaskade(g);
+                                .drawGraph(g);
                         }
 
                         letterBox.Offset = new PointF(letterBox.Offset.X + letterBox.InterimWidth, letterBox.Offset.Y);
