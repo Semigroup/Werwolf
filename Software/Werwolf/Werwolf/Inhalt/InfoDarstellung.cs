@@ -3,7 +3,6 @@ using System.Linq;
 using System.Xml;
 using System.Drawing;
 using Assistment.Xml;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Drawing.Geometries;
 using Assistment.Mathematik;
 using Assistment.Extensions;

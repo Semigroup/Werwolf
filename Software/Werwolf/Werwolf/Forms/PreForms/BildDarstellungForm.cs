@@ -6,7 +6,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
 using Assistment.form;
 using Assistment.Extensions;

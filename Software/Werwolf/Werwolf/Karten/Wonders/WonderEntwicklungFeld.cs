@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Werwolf.Inhalt;
+﻿using Werwolf.Inhalt;
 using Assistment.Texts;
-using Assistment.Extensions;
-using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries.Extensions;
 using System.Drawing;
 
 namespace Werwolf.Karten

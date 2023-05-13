@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 
 using Assistment.Drawing;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
 
 using Werwolf.Inhalt;
@@ -14,6 +13,7 @@ using Werwolf.Karten.Modern;
 using Werwolf.Karten.Figur;
 
 using Werwolf.Karten.Alchemie;
+using Assistment.Drawing.Geometries.Extensions;
 
 namespace Werwolf.Karten
 {

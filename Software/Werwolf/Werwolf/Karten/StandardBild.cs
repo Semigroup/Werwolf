@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
-using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries.Extensions;
 using Assistment.Texts;
 
 using Werwolf.Inhalt;

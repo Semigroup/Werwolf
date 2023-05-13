@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;
 
 using Assistment.Texts;
 using Assistment.Extensions;
-using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries.Extensions;
 
 namespace Werwolf.Forms
 {

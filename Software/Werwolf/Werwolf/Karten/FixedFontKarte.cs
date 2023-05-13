@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 
 using Assistment.Drawing;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
+using Assistment.Drawing.Geometries.Extensions;
 
 using Werwolf.Inhalt;
 

@@ -6,7 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 
 using Assistment.Extensions;
-using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries.Extensions;
 using Assistment.Texts;
 
 using Werwolf.Inhalt;

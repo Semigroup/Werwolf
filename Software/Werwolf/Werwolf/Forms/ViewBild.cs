@@ -10,7 +10,6 @@ using Werwolf.Karten;
 
 using Assistment.Texts;
 using Assistment.Extensions;
-using Assistment.Drawing.LinearAlgebra;
 
 
 namespace Werwolf.Forms

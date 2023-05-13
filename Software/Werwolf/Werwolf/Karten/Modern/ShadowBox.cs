@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assistment.Texts;
+﻿using Assistment.Texts;
 using System.Drawing;
-using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries.Extensions;
 
 namespace Werwolf.Karten.Modern
 {

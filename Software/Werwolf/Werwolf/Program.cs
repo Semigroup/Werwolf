@@ -9,7 +9,6 @@ using System.IO;
 using Assistment.Extensions;
 using Assistment.Texts;
 using Assistment.Drawing.Geometries;
-using Assistment.Drawing.LinearAlgebra;
 using System.Runtime.InteropServices;
 //using Assistment.Drawing;
 

@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using Assistment.Extensions;
 using Werwolf.Inhalt;
 using Assistment.Texts;
-using Assistment.Drawing.LinearAlgebra;
 
 namespace Werwolf.Karten
 {

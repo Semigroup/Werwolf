@@ -8,6 +8,7 @@ using Assistment.Drawing;
 using System.Drawing.Imaging;
 using Assistment.Drawing.Style;
 using Assistment.Drawing.Geometries;
+using Assistment.Drawing.Geometries.Extensions;
 
 using Assistment.Extensions;
 using Assistment.Mathematik;

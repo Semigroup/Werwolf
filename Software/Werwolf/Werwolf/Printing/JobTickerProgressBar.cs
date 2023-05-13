@@ -13,7 +13,6 @@ using Assistment.Xml;
 using Assistment.Extensions;
 using Assistment.Mathematik;
 using Assistment.PDF;
-using Assistment.Drawing.LinearAlgebra;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;

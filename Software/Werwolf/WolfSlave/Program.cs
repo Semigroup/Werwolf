@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
@@ -15,9 +9,8 @@ using Assistment.Extensions;
 using Werwolf.Inhalt;
 using Werwolf.Karten;
 using Werwolf.Printing;
-using Assistment.Drawing.LinearAlgebra;
+using Assistment.Drawing.Geometries.Extensions;
 using Assistment.Texts;
-using iTextSharp.text;
 
 namespace WolfSlave
 {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using System.Drawing;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-using Assistment.Extensions;
+using Assistment.Drawing.Geometries.Extensions;
 using Werwolf.Inhalt;
+
 namespace Werwolf.Karten.CyberAktion
 {
     public class DoppelTabTextBox : WolfBox

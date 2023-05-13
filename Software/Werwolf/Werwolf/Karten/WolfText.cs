@@ -5,9 +5,9 @@ using System.Text;
 using System.Drawing;
 
 using Assistment.Texts;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
 using Assistment.Drawing.Geometries;
+using Assistment.Drawing.Geometries.Extensions;
 using Assistment.Drawing;
 
 using Werwolf.Inhalt;

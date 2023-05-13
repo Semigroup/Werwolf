@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Werwolf;
 using Werwolf.Inhalt;
 using Werwolf.Forms;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
-using Assistment.Drawing;
 using Assistment.Drawing.Geometries;
 using Werwolf.Karten;
 using System.Drawing.Drawing2D;
+using Assistment.Drawing.Geometries.Extensions;
 
 using System.Xml.Serialization;
 using System.IO;

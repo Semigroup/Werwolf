@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Werwolf.Inhalt;
 
 using Assistment.Texts;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
 using Assistment.Drawing.Geometries;
+using Assistment.Drawing.Geometries.Extensions;
 using Assistment.Drawing;
 
 namespace Werwolf.Karten.CyberAktion

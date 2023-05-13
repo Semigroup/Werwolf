@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Drawing;
 
 using Assistment.Texts;
 using Assistment.Xml;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
+using Assistment.Drawing.Geometries.Extensions;
 
 using Werwolf.Karten;
 

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using System.IO;
-using System.Drawing.Imaging;
-using Assistment.Drawing.LinearAlgebra;
+﻿using System.Drawing;
+using Assistment.Drawing.Geometries.Extensions;
 
 using Assistment.Texts;
 

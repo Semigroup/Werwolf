@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Werwolf.Inhalt;
 using Werwolf.Karten;
 
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
 using Assistment.form;
 using Assistment.Extensions;

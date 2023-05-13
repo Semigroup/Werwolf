@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Assistment;
 using Assistment.Drawing;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Drawing.Geometries;
+using Assistment.Drawing.Geometries.Extensions;
 
 namespace Designer
 {

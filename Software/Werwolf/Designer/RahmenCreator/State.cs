@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Werwolf.Inhalt;
 using Assistment.Drawing.Geometries;
+using Assistment.Drawing.Geometries.Extensions;
 using System.Drawing;
 using System.Xml;
 using System.Xml.Serialization;
 using Assistment.Drawing;
-using Assistment.Drawing.LinearAlgebra;
 
 namespace Designer.RahmenCreator
 {

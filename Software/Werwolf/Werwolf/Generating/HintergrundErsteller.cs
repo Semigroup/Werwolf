@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using Assistment.Drawing.Style;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Extensions;
 using Assistment.Drawing;
 using Assistment.Mathematik;
 using Assistment.form;
+using Assistment.Drawing.Geometries.Extensions;
 
 namespace Werwolf.Generating
 {

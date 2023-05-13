@@ -7,7 +7,6 @@ using System.Drawing;
 
 using Assistment.Xml;
 using Assistment.Extensions;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Mathematik;
 
 namespace Werwolf.Inhalt

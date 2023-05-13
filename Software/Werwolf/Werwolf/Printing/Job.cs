@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.Windows.Interop;
 using System.Threading;
 using System.Diagnostics;
 
@@ -13,8 +10,8 @@ using Assistment.Xml;
 using Assistment.Extensions;
 using Assistment.Mathematik;
 using Assistment.PDF;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
+using Assistment.Drawing.Geometries.Extensions;
 
 using Werwolf.Inhalt;
 using Werwolf.Karten;
