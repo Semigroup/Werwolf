@@ -14,7 +14,6 @@ using Assistment.Extensions;
 using Werwolf.Inhalt;
 using Werwolf.Karten;
 using Werwolf.Printing;
-using Assistment.Drawing.LinearAlgebra;
 using Assistment.Texts;
 using Assistment.Xml;
 
