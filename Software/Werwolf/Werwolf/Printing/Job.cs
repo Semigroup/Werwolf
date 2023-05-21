@@ -47,7 +47,13 @@ namespace Werwolf.Printing
             /// file that contains necessary information for each card 
             /// (title, description, location preface, location backface, size)
             /// </summary>
-            TTSData
+            TTSData,
+            /// <summary>
+            /// No image files are created.
+            /// Instead, one json file is generated that contains information like
+            /// name, description, faction and alignment.
+            /// </summary>
+            DataSheet
         }
 
         public Deck Deck { get; set; }
@@ -241,6 +247,9 @@ namespace Werwolf.Printing
                     //ToDo: make max numbers of cards per atlas configurable
                     numberOfJobs = (int)Math.Ceiling(Deck.TotalCount() * 1f / 24);
                     break;
+                case OutputType.DataSheet:
+                    numberOfJobs = 0;
+                    break;
                 default:
                     throw new NotImplementedException("Unknown enum for OutputType: " + OutputFileType);
             }
@@ -298,6 +307,9 @@ namespace Werwolf.Printing
                 case OutputType.TTSData:
                     CreateTTSJsonFile(JobPath);
                     break;
+                case OutputType.DataSheet:
+                    CreateDataSheetJsonFile(JobPath);
+                    break;
                 default:
                     throw new NotImplementedException("Unknown enum for OutputType: " + OutputFileType);
             }
@@ -338,7 +350,76 @@ namespace Werwolf.Printing
             foreach (var item in files)
                 File.Delete(item);
         }
+        private void CreateDataSheetJsonFile(string JobPath)
+        {
+            using (TextWriter writer = File.CreateText(GetTTSJsonFileName(JobPath)))
+            {
+                writer.WriteLine("{");
+                writer.WriteLine("\"job_path\": \"" + JobPath.Replace("\\", "\\\\") + "\",");
+                writer.WriteLine("\"universe_path\": \"" + Universe.Pfad.Replace("\\", "\\\\") + "\",");
+                writer.WriteLine("\"deck_name\": \"" + Deck.Schreibname + "\",");
+                writer.WriteLine("\"cards\": {");
 
+                bool isEmpty = true;
+                foreach (var item in Deck.Karten)
+                    try
+                    {
+                        Karte card = item.Key;
+                        int count = item.Value;
+                        if (count <= 0)
+                            continue;
+
+                        //string prefacePath = MapCardNameToFileName(card, JobPath);
+                        //string backfacePath = card.Fraktion.RuckseitenBild.TotalFilePath;
+
+                        //string subtype = card.Effekt.ToString();
+                        //string geldkosten = card.Geldkosten;
+                        //string kosten = card.Kosten.ToString();
+                        //string rarity = card.HintergrundDarstellung.Schreibname;
+
+                        string name = card.Name;
+                        string title = card.Schreibname;
+                        string faction = card.Fraktion.Schreibname;
+                        string alignment = card.Gesinnung.Schreibname;
+                        string faction_rules = card.Fraktion.StandardAufgaben.GetFlatString().Replace("\r", "").Trim('\n').Replace("\n", "\\n");
+                        string special_rules = card.Aufgaben.GetFlatString().Replace("\r", "").Trim('\n').Replace("\n", "\\n");
+
+                        if (isEmpty)
+                            isEmpty = false;
+                        else
+                            writer.WriteLine(",");
+
+                        writer.WriteLine("\"" + name + "\": {");
+                        writer.WriteLine("\"title\": \"" + title + "\",");
+                        writer.WriteLine("\"faction\": \"" + faction + "\",");
+                        writer.Write("\"alignment\": \"" + alignment + "\"");
+                        if (faction_rules.Length > 0)
+                        {
+                            writer.WriteLine(",");
+                            writer.Write("\"faction_rules\": \"" + faction_rules + "\"");
+                        }
+                        if (special_rules.Length > 0)
+                        {
+                            writer.WriteLine(",");
+                            writer.Write("\"special_rules\": \"" + special_rules + "\"");
+                        }
+                        writer.WriteLine();
+                        writer.Write("}");
+                    }
+                    catch (Exception e)
+                    {
+                        writer.WriteLine();
+                        writer.WriteLine();
+                        writer.WriteLine("EXCEPTION");
+                        writer.WriteLine(e);
+                        writer.WriteLine();
+                        writer.WriteLine();
+                    }
+
+                writer.WriteLine("}");
+                writer.WriteLine("}");
+            }
+        }
         private void CreateTTSJsonFile(string JobPath)
         {
             using (TextWriter writer = File.CreateText(GetTTSJsonFileName(JobPath)))
@@ -352,7 +433,6 @@ namespace Werwolf.Printing
 
                 bool isEmpty = true;
                 foreach (var item in Deck.Karten)
-                {
                     try
                     {
                         Karte card = item.Key;
@@ -391,10 +471,13 @@ namespace Werwolf.Printing
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e + "");
+                        writer.WriteLine();
+                        writer.WriteLine();
+                        writer.WriteLine("EXCEPTION");
+                        writer.WriteLine(e);
+                        writer.WriteLine();
+                        writer.WriteLine();
                     }
-                    
-                }
 
                 writer.WriteLine("}");
                 writer.WriteLine("}");

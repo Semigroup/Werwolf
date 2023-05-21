@@ -102,6 +102,7 @@ namespace Werwolf.Forms
             DruckenJob.Invoke((MethodInvoker)delegate { DruckenJob.Enabled = false; });
             PrintButtonTTS.Invoke((MethodInvoker)delegate { PrintButtonTTS.Enabled = false; });
             button1.Invoke((MethodInvoker)delegate { button1.Enabled = false; });
+            PrintButtonDataSheet.Invoke((MethodInvoker)delegate { PrintButtonDataSheet.Enabled = false; });
 
             string JobPath = Job.Save(TargetPath);
             JobTickerProgressBar jobTickerProgressBar = new JobTickerProgressBar(progressBar1);
@@ -113,6 +114,7 @@ namespace Werwolf.Forms
             DruckenJob.Invoke((MethodInvoker)delegate { DruckenJob.Enabled = true; });
             PrintButtonTTS.Invoke((MethodInvoker)delegate { PrintButtonTTS.Enabled = true; });
             button1.Invoke((MethodInvoker)delegate { button1.Enabled = true; });
+            PrintButtonDataSheet.Invoke((MethodInvoker)delegate { PrintButtonDataSheet.Enabled = true; });
         }
 
         private void Drucken_Click(object sender, EventArgs e)
@@ -204,5 +206,15 @@ namespace Werwolf.Forms
             base.OnClosing(e);
         }
 
+        private void PrintButtonDataSheet_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = Deck.Schreibname;
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+
+            FetchJob(Job.OutputType.DataSheet, true);
+
+            Printer.RunWorkerAsync();
+        }
     }
 }
